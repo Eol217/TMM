@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lcom/google/android/gms/common/api/c;
 .implements Lcom/google/android/gms/common/api/Result;
+.implements Lcom/google/android/gms/common/api/c;
 
 
 # annotations

@@ -3,9 +3,9 @@
 .source ""
 
 # interfaces
-.implements Landroid/view/View$OnLongClickListener;
-.implements Landroid/view/View$OnHoverListener;
 .implements Landroid/view/View$OnAttachStateChangeListener;
+.implements Landroid/view/View$OnHoverListener;
+.implements Landroid/view/View$OnLongClickListener;
 
 
 # static fields

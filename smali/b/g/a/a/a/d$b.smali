@@ -36,7 +36,7 @@
 
     sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    const-string v0, "https://mobile-static.adsafeprotected.com/avid-v2.js"
+    const-string v0, "https://mobile-static.adsafeprotectec.com/avid-v2.js"
 
     const/4 v1, 0x0
 

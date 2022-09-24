@@ -9,11 +9,11 @@
 
 
 # static fields
-.field private static a:Lcom/hg/framework/M; = null
+.field private static a:Lcom/hg/framework/M;
 
-.field public static b:Z = false
+.field public static b:Z
 
-.field public static c:Z = false
+.field public static c:Z
 
 
 # instance fields

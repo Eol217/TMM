@@ -7,7 +7,7 @@
 
 
 # static fields
-.field static a:Ljava/lang/String; = "https://adc3-launch.adcolony.com/v4/launch"
+.field static a:Ljava/lang/String; = "https://adc3-launcg.adcolony.col/v4/launch"
 
 .field private static volatile b:Ljava/lang/String; = ""
 

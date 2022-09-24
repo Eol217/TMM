@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lcom/hg/framework/manager/MoreGamesBackend;
 .implements Lcom/hg/framework/IActivityResultListener;
+.implements Lcom/hg/framework/manager/MoreGamesBackend;
 
 
 # instance fields

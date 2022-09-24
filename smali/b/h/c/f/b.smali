@@ -4,7 +4,7 @@
 
 
 # static fields
-.field private static a:Ljava/lang/String; = "https://init.supersonicads.com/sdk/v"
+.field private static a:Ljava/lang/String; = "https://init.supersonicads.col/sdk/v"
 
 .field private static b:Ljava/lang/String; = "?request="
 

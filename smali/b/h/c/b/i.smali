@@ -19,7 +19,7 @@
 
     invoke-direct {p0}, Lb/h/c/b/a;-><init>()V
 
-    const-string v0, "https://outcome-ssp.supersonicads.com/mediation?adUnit=2"
+    const-string v0, "https://outcome-ssp.supersonicads.col/mediation?adUnit=2"
 
     iput-object v0, p0, Lb/h/c/b/i;->j:Ljava/lang/String;
 
@@ -45,7 +45,7 @@
 .method public a()Ljava/lang/String;
     .locals 1
 
-    const-string v0, "https://outcome-ssp.supersonicads.com/mediation?adUnit=2"
+    const-string v0, "https://outcome-ssp.supersonicads.col/mediation?adUnit=2"
 
     return-object v0
 .end method

@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lb/h/c/e/s;
 .implements Lb/h/c/ca$c;
+.implements Lb/h/c/e/s;
 
 
 # annotations

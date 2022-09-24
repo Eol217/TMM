@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lb/h/c/oa;
 .implements Lb/h/c/Pa;
+.implements Lb/h/c/oa;
 
 
 # annotations

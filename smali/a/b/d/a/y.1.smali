@@ -22,7 +22,7 @@
 
 
 # static fields
-.field static a:Z = false
+.field static a:Z
 
 .field static b:Ljava/lang/reflect/Field;
 

@@ -12,7 +12,7 @@
 
 
 # static fields
-.field static a:Ljava/lang/ref/WeakReference; = null
+.field static a:Ljava/lang/ref/WeakReference;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Ljava/lang/ref/WeakReference<",
@@ -22,9 +22,9 @@
     .end annotation
 .end field
 
-.field private static ˋ:Z = false
+.field private static ˋ:Z
 
-.field private static ˎ:Z = false
+.field private static ˎ:Z
 
 .field private static ˏ:Landroid/app/Application;
 

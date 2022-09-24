@@ -477,8 +477,6 @@
 
     move-result-object p1
 
-    invoke-virtual {p1}, Landroid/widget/Toast;->show()V
-
     :cond_1
     iget-object p1, p0, Lcom/fyber/ads/videos/a/i;->m:Lcom/fyber/ads/videos/a/i$a;
 

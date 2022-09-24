@@ -4,8 +4,8 @@
 
 # interfaces
 .implements Landroid/content/ServiceConnection;
-.implements Lcom/hg/framework/IActivityResultListener;
 .implements Lcom/hg/framework/IActivityLifecycleListener;
+.implements Lcom/hg/framework/IActivityResultListener;
 
 
 # instance fields

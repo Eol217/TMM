@@ -4,8 +4,8 @@
 
 # interfaces
 .implements Lb/g/a/a/a/d$a;
-.implements Lb/g/a/a/a/g$a;
 .implements Lb/g/a/a/a/e/b;
+.implements Lb/g/a/a/a/g$a;
 
 
 # static fields

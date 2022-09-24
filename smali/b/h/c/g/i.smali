@@ -4,7 +4,7 @@
 
 
 # static fields
-.field private static a:Z = false
+.field private static a:Z
 
 
 # direct methods
@@ -146,7 +146,7 @@
 
     move-result-object p1
 
-    const-string v1, "https://outcome-ssp.supersonicads.com/mediation?adUnit=2"
+    const-string v1, "https://outcome-ssp.supersonicads.col/mediation?adUnit=2"
 
     invoke-virtual {p1, p0, v1}, Lb/h/c/b/f;->a(Lb/h/b/b;Ljava/lang/String;)V
 

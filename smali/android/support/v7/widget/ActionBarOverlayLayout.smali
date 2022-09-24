@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Landroid/support/v7/widget/A;
 .implements La/b/d/g/p;
+.implements Landroid/support/v7/widget/A;
 
 
 # annotations

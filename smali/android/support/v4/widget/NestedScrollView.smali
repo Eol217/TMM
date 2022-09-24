@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements La/b/d/g/p;
 .implements La/b/d/g/l;
+.implements La/b/d/g/p;
 .implements La/b/d/g/r;
 
 

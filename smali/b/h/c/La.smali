@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lb/h/c/e/ba;
 .implements Lb/h/c/e/aa;
+.implements Lb/h/c/e/ba;
 
 
 # instance fields

@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements La/b/d/a/W;
 .implements La/b/d/a/V;
+.implements La/b/d/a/W;
 
 
 # instance fields

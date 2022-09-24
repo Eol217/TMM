@@ -4,8 +4,8 @@
 
 # interfaces
 .implements Landroid/support/v7/view/menu/u$a;
-.implements Landroid/view/View$OnClickListener;
 .implements Landroid/support/v7/widget/ActionMenuView$a;
+.implements Landroid/view/View$OnClickListener;
 
 
 # annotations

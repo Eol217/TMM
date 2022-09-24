@@ -3,9 +3,9 @@
 .source ""
 
 # interfaces
-.implements Lcom/hg/framework/manager/VirtualCurrencyBackend;
 .implements Lb/h/c/e/Q;
 .implements Lcom/hg/framework/IActivityLifecycleListener;
+.implements Lcom/hg/framework/manager/VirtualCurrencyBackend;
 
 
 # static fields

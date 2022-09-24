@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Landroid/support/v4/content/b$b;
 .implements Landroid/support/v4/content/b$a;
+.implements Landroid/support/v4/content/b$b;
 
 
 # annotations

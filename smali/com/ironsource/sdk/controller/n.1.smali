@@ -91,8 +91,6 @@
 
     move-result-object v0
 
-    invoke-virtual {v0}, Landroid/widget/Toast;->show()V
-
     :cond_0
     return-void
 .end method

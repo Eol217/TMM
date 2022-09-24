@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Landroid/view/View$OnTouchListener;
 .implements Landroid/view/View$OnAttachStateChangeListener;
+.implements Landroid/view/View$OnTouchListener;
 
 
 # annotations

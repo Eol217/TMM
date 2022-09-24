@@ -331,7 +331,7 @@
 
     new-instance v2, Ljava/net/URL;
 
-    const-string v3, "https://wd.adcolony.com/logs"
+    const-string v3, "https://wd.adcolony.col/logs"
 
     invoke-direct {v2, v3}, Ljava/net/URL;-><init>(Ljava/lang/String;)V
 

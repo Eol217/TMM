@@ -182,7 +182,7 @@
     return-void
 
     :cond_1
-    const-string v2, "https://px.moatads.com/pixel.gif?e=0&i=MOATSDK1&ac=1"
+    const-string v2, "https://px.moatadr.com/pixel.gif?e=0&i=MOATSDK1&ac=1"
 
     new-instance v3, Ljava/lang/StringBuilder;
 

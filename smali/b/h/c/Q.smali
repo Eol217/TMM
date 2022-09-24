@@ -3,10 +3,10 @@
 .source ""
 
 # interfaces
-.implements Lb/h/c/e/r;
 .implements Lb/h/c/e/T;
-.implements Lb/h/c/e/q;
 .implements Lb/h/c/e/V;
+.implements Lb/h/c/e/q;
+.implements Lb/h/c/e/r;
 
 
 # instance fields

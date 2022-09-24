@@ -3,9 +3,9 @@
 .source ""
 
 # interfaces
-.implements Landroid/graphics/drawable/Drawable$Callback;
 .implements La/b/d/b/a/b;
 .implements La/b/d/b/a/f;
+.implements Landroid/graphics/drawable/Drawable$Callback;
 
 
 # annotations

@@ -3,9 +3,9 @@
 .source ""
 
 # interfaces
-.implements Lcom/hg/framework/manager/SocialGamingBackend;
 .implements Lcom/google/games/GameHelper$a;
 .implements Lcom/hg/framework/IActivityResultListener;
+.implements Lcom/hg/framework/manager/SocialGamingBackend;
 
 
 # annotations

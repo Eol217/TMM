@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lb/h/d/h/a$c;
 .implements Landroid/webkit/DownloadListener;
+.implements Lb/h/d/h/a$c;
 
 
 # annotations
@@ -932,7 +932,7 @@
 
     invoke-direct {p4}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string p5, "https://www.supersonicads.com/mobile/sdk5/log?method="
+    const-string p5, "https://www.supersonicads.col/mobile/sdk5/log?method="
 
     invoke-virtual {p4, p5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -2757,7 +2757,7 @@
 
     invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v7, "https://www.supersonicads.com/mobile/sdk5/log?method="
+    const-string v7, "https://www.supersonicads.col/mobile/sdk5/log?method="
 
     invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -2888,7 +2888,7 @@
 
     new-array p2, v3, [Ljava/lang/String;
 
-    const-string v1, "https://www.supersonicads.com/mobile/sdk5/log?method=noProductType"
+    const-string v1, "https://www.supersonicads.col/mobile/sdk5/log?method=noProductType"
 
     aput-object v1, p2, v2
 
@@ -2925,7 +2925,7 @@
 
     new-array p2, v3, [Ljava/lang/String;
 
-    const-string v1, "https://www.supersonicads.com/mobile/sdk5/log?method=Bad merged params objects"
+    const-string v1, "https://www.supersonicads.col/mobile/sdk5/log?method=Bad merged params objects"
 
     aput-object v1, p2, v2
 
@@ -2979,7 +2979,7 @@
 
     new-array v1, v3, [Ljava/lang/String;
 
-    const-string v5, "https://www.supersonicads.com/mobile/sdk5/log?method=encodeAppUserId"
+    const-string v5, "https://www.supersonicads.col/mobile/sdk5/log?method=encodeAppUserId"
 
     aput-object v5, v1, v2
 
@@ -3029,7 +3029,7 @@
 
     new-array v1, v3, [Ljava/lang/String;
 
-    const-string v5, "https://www.supersonicads.com/mobile/sdk5/log?method=encodeAppKey"
+    const-string v5, "https://www.supersonicads.col/mobile/sdk5/log?method=encodeAppKey"
 
     aput-object v5, v1, v2
 
@@ -3131,7 +3131,7 @@
 
     new-array v4, v3, [Ljava/lang/String;
 
-    const-string v5, "https://www.supersonicads.com/mobile/sdk5/log?method=extraParametersToJson"
+    const-string v5, "https://www.supersonicads.col/mobile/sdk5/log?method=extraParametersToJson"
 
     aput-object v5, v4, v2
 
@@ -4448,7 +4448,7 @@
 
     new-array v4, v2, [Ljava/lang/String;
 
-    const-string v5, "https://www.supersonicads.com/mobile/sdk5/log?method=webviewLoadBlank"
+    const-string v5, "https://www.supersonicads.col/mobile/sdk5/log?method=webviewLoadBlank"
 
     aput-object v5, v4, v1
 
@@ -4589,7 +4589,7 @@
 
     new-array v0, v2, [Ljava/lang/String;
 
-    const-string v2, "https://www.supersonicads.com/mobile/sdk5/log?method=webviewLoadWithPath"
+    const-string v2, "https://www.supersonicads.col/mobile/sdk5/log?method=webviewLoadWithPath"
 
     aput-object v2, v0, v1
 
@@ -4629,7 +4629,7 @@
 
     new-array v0, v2, [Ljava/lang/String;
 
-    const-string v2, "https://www.supersonicads.com/mobile/sdk5/log?method=htmlControllerDoesNotExistOnFileSystem"
+    const-string v2, "https://www.supersonicads.col/mobile/sdk5/log?method=htmlControllerDoesNotExistOnFileSystem"
 
     aput-object v2, v0, v1
 
@@ -6225,7 +6225,7 @@
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "https://www.supersonicads.com/mobile/sdk5/log?method="
+    const-string v3, "https://www.supersonicads.col/mobile/sdk5/log?method="
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -6658,7 +6658,7 @@
 
     const/4 v2, 0x0
 
-    const-string v3, "https://www.supersonicads.com/mobile/sdk5/log?method=webviewPause"
+    const-string v3, "https://www.supersonicads.col/mobile/sdk5/log?method=webviewPause"
 
     aput-object v3, v1, v2
 
@@ -6726,7 +6726,7 @@
 
     const/4 v2, 0x0
 
-    const-string v3, "https://www.supersonicads.com/mobile/sdk5/log?method=webviewResume"
+    const-string v3, "https://www.supersonicads.col/mobile/sdk5/log?method=webviewResume"
 
     aput-object v3, v1, v2
 

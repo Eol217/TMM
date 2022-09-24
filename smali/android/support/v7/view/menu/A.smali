@@ -3,10 +3,10 @@
 .source ""
 
 # interfaces
-.implements Landroid/widget/PopupWindow$OnDismissListener;
-.implements Landroid/widget/AdapterView$OnItemClickListener;
 .implements Landroid/support/v7/view/menu/t;
 .implements Landroid/view/View$OnKeyListener;
+.implements Landroid/widget/AdapterView$OnItemClickListener;
+.implements Landroid/widget/PopupWindow$OnDismissListener;
 
 
 # instance fields

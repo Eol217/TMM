@@ -308,7 +308,7 @@
 
     if-eqz v0, :cond_1
 
-    const-string v0, "https://adc3-launch-staging.adcolony.com/v4/launch"
+    const-string v0, "https://adc3-launcg-staging.adcolony.col/v4/launch"
 
     sput-object v0, Lcom/adcolony/sdk/Lc;->a:Ljava/lang/String;
 

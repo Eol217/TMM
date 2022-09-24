@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lcom/google/android/gms/internal/ads/QR;
 .implements Lcom/google/android/gms/internal/ads/BS;
+.implements Lcom/google/android/gms/internal/ads/QR;
 .implements Ljava/util/RandomAccess;
 
 

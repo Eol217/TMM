@@ -3,9 +3,9 @@
 .source ""
 
 # interfaces
-.implements Lcom/hg/framework/manager/InputBackend;
-.implements Lcom/hg/framework/IInputListener;
 .implements Lcom/hg/framework/IActivityLifecycleListener;
+.implements Lcom/hg/framework/IInputListener;
+.implements Lcom/hg/framework/manager/InputBackend;
 
 
 # instance fields

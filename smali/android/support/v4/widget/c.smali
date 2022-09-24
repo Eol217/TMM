@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Landroid/widget/Filterable;
 .implements Landroid/support/v4/widget/d$a;
+.implements Landroid/widget/Filterable;
 
 
 # annotations

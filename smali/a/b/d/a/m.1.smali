@@ -3,9 +3,9 @@
 .source ""
 
 # interfaces
+.implements Landroid/arch/lifecycle/c;
 .implements Landroid/content/ComponentCallbacks;
 .implements Landroid/view/View$OnCreateContextMenuListener;
-.implements Landroid/arch/lifecycle/c;
 
 
 # annotations

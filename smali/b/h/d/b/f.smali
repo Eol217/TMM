@@ -3,12 +3,12 @@
 .source ""
 
 # interfaces
-.implements Lb/h/d/i;
-.implements Lb/h/d/g/a/d;
-.implements Lb/h/d/g/a/c;
+.implements Lb/h/d/e;
 .implements Lb/h/d/g/a/a;
 .implements Lb/h/d/g/a/b;
-.implements Lb/h/d/e;
+.implements Lb/h/d/g/a/c;
+.implements Lb/h/d/g/a/d;
+.implements Lb/h/d/i;
 
 
 # static fields
@@ -1289,7 +1289,7 @@
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "https://www.supersonicads.com/mobile/sdk5/log?method="
+    const-string v3, "https://www.supersonicads.col/mobile/sdk5/log?method="
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

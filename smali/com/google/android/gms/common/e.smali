@@ -9,9 +9,9 @@
     .end annotation
 .end field
 
-.field private static b:Z = false
+.field private static b:Z
 
-.field private static c:Z = false
+.field private static c:Z
 
 .field static final d:Ljava/util/concurrent/atomic/AtomicBoolean;
 

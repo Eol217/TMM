@@ -1,16 +1,13 @@
 !!brut.androlib.meta.MetaInfo
-apkFileName: TM.apk
+apkFileName: TMM.apk
 compressionType: false
 doNotCompress:
-- resources.arsc
-- png
 - assets/data/buildings/default.list
 - assets/images-1x/images/1x.available
-- jpg
+- png
 - assets/images-2x/images/2x.available
 - assets/maps/Tutorial.tmm
 - assets/maps/scenario_craftsmen.tmm
-- ogg
 isFrameworkApk: false
 packageInfo:
   forcedPackageId: '127'

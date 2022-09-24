@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Lcom/google/android/gms/internal/ads/OR;
 .implements Lcom/google/android/gms/internal/ads/BS;
+.implements Lcom/google/android/gms/internal/ads/OR;
 .implements Ljava/util/RandomAccess;
 
 

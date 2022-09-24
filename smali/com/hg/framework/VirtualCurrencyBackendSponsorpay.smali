@@ -3,9 +3,9 @@
 .source ""
 
 # interfaces
-.implements Lcom/hg/framework/manager/VirtualCurrencyBackend;
-.implements Lcom/hg/framework/IActivityResultListener;
 .implements Lcom/fyber/requesters/d;
+.implements Lcom/hg/framework/IActivityResultListener;
+.implements Lcom/hg/framework/manager/VirtualCurrencyBackend;
 
 
 # static fields

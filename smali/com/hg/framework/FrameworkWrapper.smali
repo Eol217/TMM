@@ -12,13 +12,13 @@
 
 
 # static fields
-.field private static a:Ljava/lang/String; = null
+.field private static a:Ljava/lang/String;
 
-.field private static b:Ljava/lang/String; = null
+.field private static b:Ljava/lang/String;
 
-.field private static c:Z = false
+.field private static c:Z
 
-.field private static d:Z = false
+.field private static d:Z
 
 .field private static e:Landroid/util/SparseArray;
     .annotation system Ldalvik/annotation/Signature;

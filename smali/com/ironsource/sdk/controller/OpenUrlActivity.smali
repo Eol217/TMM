@@ -437,7 +437,7 @@
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "https://www.supersonicads.com/mobile/sdk5/log?method="
+    const-string v3, "https://www.supersonicads.col/mobile/sdk5/log?method="
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

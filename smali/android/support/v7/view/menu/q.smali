@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Landroid/support/v7/view/menu/x;
 .implements Landroid/support/v7/view/menu/t;
+.implements Landroid/support/v7/view/menu/x;
 .implements Landroid/widget/AdapterView$OnItemClickListener;
 
 

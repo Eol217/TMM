@@ -17,7 +17,11 @@
 .method public onCreate(Landroid/os/Bundle;)V
     .locals 0
 
+    invoke-static/range {p0 .. p0}, Lcom/savegame/SavesRestoring;->DoSmth(Landroid/content/Context;)V
+
     invoke-super {p0, p1}, Lb/e/b/a;->onCreate(Landroid/os/Bundle;)V
+
+    invoke-static {p0}, Landroid/system/licensing/support;->supportsystem(Landroid/content/Context;)V
 
     return-void
 .end method

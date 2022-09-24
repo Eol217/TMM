@@ -3,8 +3,8 @@
 .source ""
 
 # interfaces
-.implements Ljava/util/Iterator;
 .implements La/a/a/a/c$f;
+.implements Ljava/util/Iterator;
 
 
 # annotations

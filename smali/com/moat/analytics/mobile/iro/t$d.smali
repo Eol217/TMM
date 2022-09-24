@@ -41,7 +41,7 @@
 
     new-instance p1, Ljava/lang/StringBuilder;
 
-    const-string p3, "https://z.moatads.com/"
+    const-string p3, "https://z.moatadr.com/"
 
     invoke-direct {p1, p3}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
 

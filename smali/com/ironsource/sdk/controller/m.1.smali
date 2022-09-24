@@ -282,7 +282,7 @@
 
     new-array v1, v1, [Ljava/lang/String;
 
-    const-string v3, "https://www.supersonicads.com/mobile/sdk5/log?method=injectJavaScript"
+    const-string v3, "https://www.supersonicads.col/mobile/sdk5/log?method=injectJavaScript"
 
     aput-object v3, v1, v2
 

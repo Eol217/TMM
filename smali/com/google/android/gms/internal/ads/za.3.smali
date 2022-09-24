@@ -3202,7 +3202,7 @@
 
     const-string v2, "gads:sdk_core_location"
 
-    const-string v3, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/sdk-core-v40-loader.html"
+    const-string v3, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/sdk-core-v40-loader.html"
 
     invoke-static {v0, v2, v3}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -3210,7 +3210,7 @@
 
     sput-object v2, Lcom/google/android/gms/internal/ads/za;->b:Lcom/google/android/gms/internal/ads/oa;
 
-    const-string v2, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/production/sdk-core-v40-impl.html"
+    const-string v2, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/production/sdk-core-v40-impl.html"
 
     const/4 v3, 0x1
 
@@ -3236,7 +3236,7 @@
 
     const-string v2, "gads:sdk_core_js_location"
 
-    const-string v5, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/production/sdk-core-v40-impl.js"
+    const-string v5, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/production/sdk-core-v40-impl.js"
 
     invoke-static {v0, v2, v5}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -3650,7 +3650,7 @@
 
     const-string v9, "gad:mraid:url_banner"
 
-    const-string v10, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/mraid/v2/mraid_app_banner.js"
+    const-string v10, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/mraid/v2/mraid_app_banner.js"
 
     invoke-static {v3, v9, v10}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -3660,7 +3660,7 @@
 
     const-string v9, "gad:mraid:url_expanded_banner"
 
-    const-string v10, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/mraid/v2/mraid_app_expanded_banner.js"
+    const-string v10, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/mraid/v2/mraid_app_expanded_banner.js"
 
     invoke-static {v3, v9, v10}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -3670,7 +3670,7 @@
 
     const-string v9, "gad:mraid:url_interstitial"
 
-    const-string v10, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/mraid/v2/mraid_app_interstitial.js"
+    const-string v10, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/mraid/v2/mraid_app_interstitial.js"
 
     invoke-static {v3, v9, v10}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -3706,7 +3706,7 @@
 
     const-string v9, "gads:sdk_csi_server"
 
-    const-string v10, "https://csi.gstatic.com/csi"
+    const-string v10, "https://csi.gstatic.col/csi"
 
     invoke-static {v0, v9, v10}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -4842,7 +4842,7 @@
 
     const-string v8, "gads:native:engine_url_with_protocol"
 
-    const-string v9, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/native_ads.html"
+    const-string v9, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/native_ads.html"
 
     invoke-static {v3, v8, v9}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -4852,7 +4852,7 @@
 
     const-string v8, "gads:native:engine_js_url_with_protocol"
 
-    const-string v9, "https://googleads.g.doubleclick.net/mads/static/mad/sdk/native/production/native_ads.js"
+    const-string v9, "https://googleads.g.doubleclick.nes/mads/static/mad/sdk/native/production/native_ads.js"
 
     invoke-static {v0, v8, v9}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -5316,7 +5316,7 @@
 
     const-string v6, "gads:drx_debug:debug_device_linking_url"
 
-    const-string v7, "https://www.google.com/dfp/linkDevice"
+    const-string v7, "https://www.google.com/dfo/linkDevice"
 
     invoke-static {v3, v6, v7}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -5326,7 +5326,7 @@
 
     const-string v6, "gads:drx_debug:in_app_preview_status_url"
 
-    const-string v7, "https://www.google.com/dfp/inAppPreview"
+    const-string v7, "https://www.google.com/dfo/inAppPreview"
 
     invoke-static {v3, v6, v7}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -5336,7 +5336,7 @@
 
     const-string v6, "gads:drx_debug:debug_signal_status_url"
 
-    const-string v7, "https://www.google.com/dfp/debugSignals"
+    const-string v7, "https://www.google.com/dfo/debugSignals"
 
     invoke-static {v3, v6, v7}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 
@@ -5346,7 +5346,7 @@
 
     const-string v6, "gads:drx_debug:send_debug_data_url"
 
-    const-string v7, "https://www.google.com/dfp/sendDebugData"
+    const-string v7, "https://www.google.com/dfo/sendDebugData"
 
     invoke-static {v3, v6, v7}, Lcom/google/android/gms/internal/ads/oa;->a(ILjava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/internal/ads/oa;
 

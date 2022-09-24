@@ -764,7 +764,7 @@
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v5, "https://www.supersonicads.com/mobile/sdk5/log?method="
+    const-string v5, "https://www.supersonicads.col/mobile/sdk5/log?method="
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1099,7 +1099,7 @@
 
     invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v7, "https://www.supersonicads.com/mobile/sdk5/log?method="
+    const-string v7, "https://www.supersonicads.col/mobile/sdk5/log?method="
 
     invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

@@ -32,7 +32,7 @@
 
     iget-object p1, p1, Lcom/google/android/gms/internal/ads/nl;->a:Landroid/content/Context;
 
-    const-string p2, "https://support.google.com/dfp_premium/answer/7160685#push"
+    const-string p2, "https://support.google.com/dfo_premium/answer/7160685#push"
 
     invoke-static {p2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
 
