@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE abstract-building-class SYSTEM "../.buildingclass.dtd">
+
+<abstract-building-class
+	extends="abstract-deco.xml"
+>
+	<decoration value="{deco_value}" />
+	
+	<flags>
+		<walkable enabled="true"/>
+		<connectsToStreets enabled="true"/>
+	</flags>
+
+</abstract-building-class>

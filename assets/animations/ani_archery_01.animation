@@ -1,0 +1,24 @@
+[archer_02]
+frame:	ani_archery_contest_02.0.png		0.15
+frame:	ani_archery_contest_02.1.png		0.15
+frame:	ani_archery_contest_02.2.png		0.15
+play_ambient: sfx_building_archery_contest_var1
+frame:	ani_archery_contest_02.3.png		0.15
+frame:	ani_archery_contest_02.4.png		0.15
+frame:	ani_archery_contest_02.5.png		0.15
+frame:	ani_archery_contest_02.6.png		0.15
+frame:	ani_archery_contest_02.7.png		0.15
+frame:	ani_archery_contest_02.8.png		0.15
+frame:	ani_archery_contest_02.9.png		0.15
+
+delay:	1.00	2.50
+
+next:	archer_02				1.00
+next:	archer_gone				0.10
+
+[archer_gone]
+frame:	ani_archery_contest_00.0.png		5.00
+
+next:	archer_02				1.00
+next:	archer_gone				0.10	
+

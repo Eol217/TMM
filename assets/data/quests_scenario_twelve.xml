@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: TWELVE -->
+<!--Max Prestige earned 200 -->
+
+<questdb>
+<group>
+
+<include file = "data/common-quests.xml"/>
+<include file = "data/quests_sandbox.xml"/>
+
+	<!--____________________________________________________________INTRODUCTION TO THE STORY______________________________________________________________-->
+	
+	<quest id="QUEST_INTRODUCTION_001_TWELVE_WORK" start="instant" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_INTRODUCTION_001">
+			<set-modifier name="mod_happiness" value="50" tag="strike_001_happiness"/>
+		</onStarted>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="QUEST_INTRODUCTION_002_TWELVE_WORK"/>
+		</rewards>
+	</quest>
+	
+	<quest id="QUEST_INTRODUCTION_002_TWELVE_WORK" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_INTRODUCTION_002"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="QUEST_INTRODUCTION_003_TWELVE_WORK"/>
+		</rewards>
+	</quest>
+	
+	<quest id="QUEST_INTRODUCTION_003_TWELVE_WORK" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_INTRODUCTION_003"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="QUEST_INTRODUCTION_004_TWELVE_WORK"/>
+		</rewards>
+	</quest>
+	
+	<quest id="QUEST_INTRODUCTION_004_TWELVE_WORK" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_INTRODUCTION_004"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="QUEST_INTRODUCTION_005_TWELVE_WORK"/>
+		</rewards>
+	</quest>
+	
+	<quest id="QUEST_INTRODUCTION_005_TWELVE_WORK" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_CATHEDRAL_STARTED"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="TWELVE_WORK_MAINQUEST"/>
+		</rewards>
+	</quest>
+	
+	<!--_______________________________________________________END INTRODUCTION TO THE STORY______________________________________________________________-->
+	
+	<!--__________________________________________________________________TIMER SEASONS______________________________________________________________-->
+	
+<!--In this scenario, we will have 4 phases. One for each season. During each phase, 3 big quests will be needed to be done.
+	If the player fails the quests after the timer, the scenario will fail-->
+	
+	<!--AUTUMN QUEST TIMER-->
+	<quest id="TWELVE_WORK_TIMER_AUTUMN" start="custom" visible="true" finish="instant" isKeyQuest="true" 
+		   title="T_QUESTS_TWELVE_WORK_TIMER_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_TIMER_AUTUMN_STARTED" 
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_TIMER_AUTUMN_STARTED">
+			<start-quest id="TWELVE_WORK_001" />
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="phase_one_end" value="true"/>
+			<flag-has-value key="phase_one_roads" value="true"/>
+			<flag-has-value key="phase_one_strike" value="true"/>
+			<flag-has-value key="mine_done" value="true"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_TWELVE_WORK_TIMER_SUCCESS"/>
+		<fail_condition timeout="1500" operator="and"/>
+		<onFailed>
+			<set-flag key="failed_scenario_over" value="true"/>
+		</onFailed>
+		<rewards>
+			<start-quest id="TWELVE_WORK_TIMER_AUTUMN_002"/>
+			<resource resource="prestige" amount="10"/>
+		</rewards>
+	</quest>
+	
+
+	<quest id="TWELVE_WORK_TIMER_AUTUMN_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted/>
+		<objectives timeout="3" operator="and"/>
+		<onSuccess/>
+		<rewards>
+			<start-quest id="TWELVE_QUEST_STRIKE_WINTER_INTRO"/>
+			<switch-theme theme="winter"/>
+		</rewards>
+	</quest>
+	
+	<!--WINTER QUEST TIMER-->
+	<quest id="TWELVE_WORK_TIMER_WINTER" start="custom" visible="true" finish="instant" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_WORK_TIMER_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_TIMER_STARTED" 
+		   avatar="client">
+		<start_condition timeout="6" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_TIMER_STARTED">
+			<start-quest id="TWELVE_WORK_004" />
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="weaver_done" value="true"/>
+			<flag-has-value key="sheep_are_here" value="true"/>
+			<flag-has-value key="tribune_wool_done" value="true"/>
+			<flag-has-value key="fabric_done" value="true"/>
+			<flag-has-value key="phase_two_strike" value="true"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_TWELVE_WORK_TIMER_SUCCESS"/>
+		<fail_condition timeout="1500" operator="and"/>
+		<onFailed>
+			<set-flag key="failed_scenario_over" value="true"/>
+		</onFailed>
+		<rewards>
+			<start-quest id="TWELVE_WORK_TIMER_WINTER_002"/>
+			<resource resource="prestige" amount="10"/>
+		</rewards>
+	</quest>
+	
+		
+	<quest id="TWELVE_WORK_TIMER_WINTER_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted/>
+		<objectives timeout="3" operator="and"/>
+		<onSuccess/>
+		<rewards>
+			<start-quest id="TWELVE_QUEST_SPRING_INTRO"/>
+			<switch-theme theme="spring"/>
+		</rewards>
+	</quest>
+	
+<!--SPRING QUEST TIMER-->
+	<quest id="TWELVE_WORK_TIMER_SPRING" start="custom" visible="true" finish="instant" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_WORK_TIMER_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_TIMER_STARTED" 
+		   avatar="client">
+		<start_condition timeout="10" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_TIMER_STARTED">
+			<start-quest id="TWELVE_WORK_006" />
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="cathedral_done" value="true"/>
+			<flag-has-value key="deco_done" value="true"/>
+			<flag-has-value key="barracks_here_done" value="true"/>
+			<flag-has-value key="tower_guard_ok" value="true"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_TWELVE_WORK_TIMER_SUCCESS"/>
+		<fail_condition timeout="1500" operator="and"/>
+		<onFailed>
+			<set-flag key="failed_scenario_over" value="true"/>
+		</onFailed>
+		<rewards>
+			<start-quest id="TWELVE_WORK_TIMER_SPRING_002"/>
+			<resource resource="prestige" amount="10"/>
+		</rewards>
+	</quest>
+	
+	<quest id="TWELVE_WORK_TIMER_SPRING_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted/>
+		<objectives timeout="3" operator="and"/>
+		<onSuccess/>
+		<rewards>
+			<start-quest id="TWELVE_QUEST_SUMMER_INTRO"/>
+			<switch-theme theme="summer"/>
+		</rewards>
+	</quest>
+	
+	<!--SUMMER QUEST TIMER-->
+	<quest id="TWELVE_WORK_TIMER_SUMMER" start="custom" visible="true" finish="instant" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_WORK_TIMER_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_TIMER_SUMMER_STARTED" 
+		   avatar="client">
+		<start_condition timeout="10" operator="and" />
+		<onStarted notification="T_QUESTS_TWELVE_WORK_TIMER_SUMMER_STARTED">
+			<start-quest id="TWELVE_WORK_008" />
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="tavern_done" value="true"/>
+			<flag-has-value key="bandits_done" value="true"/>
+			<flag-has-value key="festival_done" value="true"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_TWELVE_WORK_TIMER_SUMMER_SUCCESS"/>
+		<fail_condition timeout="1500" operator="and"/>
+		<onFailed>
+			<set-flag key="failed_scenario_over" value="true"/>
+		</onFailed>
+		<rewards>
+			<start-quest id="TWELVE_WORK_TIMER_SUMMER_002"/>
+			<resource resource="prestige" amount="10"/>
+		</rewards>
+	</quest>
+	
+	<quest id="TWELVE_WORK_TIMER_SUMMER_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted/>
+		<objectives timeout="3" operator="and"/>
+		<onSuccess/>
+		<rewards>
+			<set-flag key="all_tasked_are_done" value="true"/>
+		</rewards>
+	</quest>
+
+	<!--________________________________________________________________END TIMER SEASON______________________________________________________________-->
+	
+
+<!--_______________________________________________________________________MAIN QUEST_____________________________________________________________________-->
+
+	<!--The governor need to accomplished 12 works-->
+
+	<quest id="TWELVE_WORK_MAINQUEST" start="custom" visible="true" finish="instant" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_WORK_MAINQUEST_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_MAINQUEST_STARTED" 
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted>
+			<start-quest id="TWELVE_WORK_TIMER_AUTUMN" />
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="all_tasked_are_done" value="true"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_TWELVE_WORK_MAINQUEST_SUCCESS"/>
+		<fail_condition timeout="2" operator="and">
+			<flag-has-value key="failed_scenario_over" value="true"/>
+		</fail_condition>
+		<onFailed notification="T_QUESTS_TWELVE_WORK_MAINQUEST_FAILED">
+			<start-quest id="SCENARIO_FINISHED"/>
+		</onFailed>
+		<rewards>
+			<resource resource="prestige" amount="100"/>
+			<start-quest id="SCENARIO_FINISHED"/>
+		</rewards>
+	</quest>
+	
+	<!--__________________________________________________________________END MAIN QUEST_____________________________________________________________________-->
+	
+	<!--____________________________________________________________________001 WORK_____________________________________________________________________-->
+	
+	<!--The first work will be to repair the town, when the quest will start, the decay will be put down to 20 per cent.-->
+	
+		<quest id="TWELVE_WORK_001" start="custom" visible="true" finish="user" isKeyQuest="true" 
+		   title="T_GAME_REPAIRALL" 
+		   description="T_QUESTS_TWELVE_WORK_001_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_001_STARTED">
+				<set-durability type="building_residence_00" value="20"/>
+				<set-durability type="building_residence_02" value="20"/>
+				<set-durability type="building_lumberjack" value="20"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<repair type="building_residence_00" count="2"/>
+				<repair type="building_residence_02" count="1"/>
+				<repair type="building_lumberjack" count="1"/>
+			</objectives>
+			<fail_condition operator="and" timeout="2">
+				<flag-has-value key="failed_scenario_over" value="true"/>
+			</fail_condition>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_001_SUCCESS"/>
+			<rewards>
+				<start-quest id="TWELVE_WORK_002"/>
+				<resource resource="bread" amount="20"/>
+				<resource resource="coins" amount="400"/>
+			</rewards>
+		</quest>
+	
+	
+	<!--__________________________________________________________________END 001 WORK_____________________________________________________________________-->
+
+<!--_________________________________________________________________________002 WORK_____________________________________________________________________-->
+	
+	<!--2nd work is to have a population of 42 townies-->
+	
+		<quest id="TWELVE_WORK_002" start="custom" visible="true" finish="user" isKeyQuest="true" 
+		   title="T_QUESTS_TWELVE_WORK_002_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_002_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_002_STARTED"/>
+			<objectives timeout="3" operator="and">
+				<population count="42"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_002_SUCCESS"/>
+			<rewards>
+				<start-quest id="TWELVE_WORK_003"/>
+				<resource resource="prestige" amount="10"/>
+				<resource resource="coins" amount="500"/>
+			</rewards>
+		</quest>
+			
+	<!--___________________________________________________________________END 002 WORK_____________________________________________________________________-->
+	
+	<!--_____________________________________________________________________003 WORK_____________________________________________________________________-->
+	
+	<!--3rd work is to harvest for winter--> 
+	
+		<quest id="TWELVE_WORK_003" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GOOGLE_QUESTS_SUPPLIES_NAME" 
+		   description="T_QUESTS_TWELVE_WORK_003_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_003_STARTED">
+				<start-quest id="TWELVE_QUEST_ROADS"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<produce resource="corn" amount="40"/>
+				<produce resource="herbs" amount="20"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_003_SUCCESS"/>
+			<rewards>
+				<set-flag key="phase_one_end" value="true"/>
+				<resource resource="coins" amount="300"/>
+				<resource resource="tools" amount="20"/>
+			</rewards>
+		</quest>
+		
+	<!--__________________________________________________________________END 003 WORK_____________________________________________________________________-->
+	
+	<!--_______________________________________________________________QUEST 003 SIDE QUEST_______________________________________________________________-->
+	
+	<!--During the harvesting quest (003) the player will have to build a couple of roads-->
+	
+		<quest id="TWELVE_QUEST_ROADS" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN10_11_NAME_DIRT" 
+		   description="T_QUESTS_TWELVE_ROADS_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_QUESTS_TWELVE_ROADS_STARTED">
+				<start-quest id="TWELVE_QUEST_STRIKE_001"/>
+				<start-quest id="TWELVE_QUEST_MINE_001"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<street type="dirt" count="2"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_ROADS_SUCCESS"/>
+			<rewards>
+				<set-flag key="phase_one_roads" value="true"/>
+				<resource resource="coins" amount="200"/>
+				<resource resource="tools" amount="10"/>
+			</rewards>
+		</quest>
+		
+		<!--QUEST MINE-->
+		<quest id="TWELVE_QUEST_MINE_001" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN3_5_NAME" 
+		   description="T_LEGACY_MINE_DESC" 
+		   avatar="client">
+			<start_condition timeout="20" operator="and" />
+			<onStarted notification="T_LEGACY_MINE_DESC"/>
+			<objectives timeout="3" operator="and">
+				<building type="building_mine" count="1"/>
+			</objectives>
+			<onSuccess notification="T_LEGACY_MINE_SUCCESS"/>
+			<rewards>
+				<set-flag key="mine_done" value="true"/>
+				<resource resource="coins" amount="200"/>
+				<resource resource="jewelry" amount="10"/>
+<!--				<start-quest id="TWELVE_QUEST_STRIKE_001_B"/>-->
+			</rewards>
+		</quest>
+		
+		<!--strike quest--> 
+<!--		If the player doesn't complete this quest the townies will be very unhappy and they might not work as usual.
+		In the story these quests are here to evaluate the popularity of the governor-->
+		
+		<quest id="TWELVE_QUEST_STRIKE_001" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_STRIKE_001_TITLE" 
+		   description="T_QUESTS_TWELVE_STRIKE_001_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_001_STARTED">
+				<set-modifier name="mod_happiness" value="10" tag="strike_001_happiness"/>
+				<start-quest id="TWELVE_QUEST_STRIKE_001_C"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<tribute resource="corn" amount="70"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_STRIKE_001_SUCCESS_GIVE"/>
+			<rewards>
+				<set-flag key="tribune_corn_done" value="true"/>
+				<resource resource="coins" amount="100"/>
+				<resource resource="stone" amount="100"/>
+				<start-quest id="TWELVE_QUEST_STRIKE_001_B"/>
+			</rewards>
+		</quest>
+		
+		<quest id="TWELVE_QUEST_STRIKE_001_B" start="custom" visible="false" finish="user" isKeyQuest="true"
+		   avatar="client">
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="3" operator="and">
+				<flag-has-value key="tribune_corn_done" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_STRIKE_001_SUCCESS"/>
+			<rewards>
+				<set-modifier name="mod_happiness" value="50" tag="strike_001_happiness"/>
+				<set-flag key="phase_one_strike" value="true"/>
+				<set-modifier name="mod_happiness" value="50" tag="strike_001_happiness"/>
+			</rewards>
+		</quest>
+		
+		<!--Some townies will put fire to some houses because they are not happy-->
+		<quest id="TWELVE_QUEST_STRIKE_001_C" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="townie">
+			<start_condition timeout="10" operator="and"/>
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_001_FIRE_START">
+				<center-to-building target="house_strike"/>
+				<start-fire target="house_strike" state="smouldering"/>
+			</onStarted>
+			<objectives timeout="1" operator="and"/>
+			<rewards>
+				<start-quest id="TWELVE_QUEST_STRIKE_001_D"/>
+			</rewards>
+		</quest>
+		
+		<!--Some townies will put fire to some houses because they are not happy-->
+		<quest id="TWELVE_QUEST_STRIKE_001_D" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+			<start_condition timeout="3" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_001_FIRE_CLIENT"/>
+		</quest>
+
+	<!--____________________________________________________________END QUEST 003 SIDE QUEST_______________________________________________________________-->
+	
+	<!--_______________________________________________________________WINTER IS HERE____________________________________________________________-->
+	
+			<!--INTRODUCTION to winter-->
+			<!--and plague is starting-->
+		
+		<quest id="TWELVE_QUEST_STRIKE_WINTER_INTRO" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+			<start_condition timeout="10" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WINTER_INTRO">
+				<start-plague amount="3"/>
+			</onStarted>
+			<objectives timeout="5" operator="and"/>
+			<rewards>
+				<start-quest id="TWELVE_WORK_TIMER_WINTER"/>
+			</rewards>
+		</quest>
+
+		<!--_____________________________________________________________________004 WORK_____________________________________________________________________-->
+	
+<!--plague in town-->	
+		<quest id="TWELVE_WORK_004" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN_CC_C_10_TITEL" 
+		   description="T_QUESTS_TWELVE_WORK_004_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_004_STARTED">
+				<start-quest id="TWELVE_WORK_BUILD_INFIRMARY"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<purge-plague/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_004_SUCCESS"/>
+			<rewards>
+				<start-quest id="TWELVE_WORK_005"/>
+				<resource resource="coins" amount="500"/>
+			</rewards>
+		</quest>
+		
+		<quest id="TWELVE_WORK_BUILD_INFIRMARY" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_SCENARIO_2016_10_QUEST_14_NAME" 
+		   description="T_QUESTS_TWELVE_BUILD_INFIRMARY_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_BUILD_INFIRMARY_STARTED"/>
+			<objectives timeout="3" operator="and">
+				<building type="building_medicus" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_BUILD_INFIRMARY_SUCCESS"/>
+			<rewards>
+				<resource resource="brew" amount="20"/>
+				<resource resource="bread" amount="30"/>
+				<resource resource="coins" amount="250"/>
+			</rewards>
+		</quest>
+		
+	<!--__________________________________________________________________END 004 WORK_____________________________________________________________________-->
+	
+	<!--_____________________________________________________________________005 WORK_____________________________________________________________________-->
+	
+
+		<quest id="TWELVE_WORK_005" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN14_HEALER_02_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_005_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_005_STARTED">
+				<start-quest id="TWELVE_CLOTH_WINTER"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<produce resource="fabric" amount="10" />
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_005_SUCCESS"/>
+			<rewards>
+				<set-flag key="fabric_done" value="true"/>
+				<resource resource="coins" amount="150"/>
+			</rewards>
+		</quest>
+		
+		<quest id="TWELVE_CLOTH_WINTER" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN2_11_1_NAME" 
+		   description="T_QUESTS_TWELVE_CLOTH_WINTER_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_CLOTH_WINTER_STARTED">
+				<start-quest id="TWELVE_QUEST_STRIKE_002"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<building type="building_weaver" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_CLOTH_WINTER_SUCCESS"/>
+			<rewards>
+				<set-flag key="weaver_done" value="true"/>
+				<resource resource="coins" amount="210"/>
+			</rewards>
+		</quest>
+		
+		<!--strike quest--> 
+<!--		If the player doesn't complete this quest the townies will be very unhappy and they might not work as usual.
+		In the story these quests are here to evaluate the popularit<!
+If the player doesn't complete this quest the townies will be very unhappy and they might not work as usual.
+		In the story these quests are here to evaluate the popularity of the governor-->
+				
+		<quest id="TWELVE_QUEST_STRIKE_002" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_STRIKE_002_TITLE" 
+		   description="T_QUESTS_TWELVE_STRIKE_002_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_002_STARTED">
+				<start-quest id="TWELVE_SHEEP_PASTURE"/>
+				<start-quest id="TWELVE_QUEST_STRIKE_002_C"/>
+				<set-modifier name="mod_happiness" value="10" tag="strike_001_happiness"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<tribute resource="wool" amount="40"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_STRIKE_002_SUCCESS_GIVE"/>
+			<rewards>
+				<set-flag key="tribune_wool_done" value="true"/>
+				<resource resource="coins" amount="150"/>
+				<resource resource="sausage" amount="10"/>
+				<start-quest id="TWELVE_QUEST_STRIKE_002_B"/>
+			</rewards>
+		</quest>
+		
+		<quest id="TWELVE_QUEST_STRIKE_002_B" start="custom" visible="false" finish="user" isKeyQuest="true"
+		   avatar="client">
+			<start_condition timeout="10" operator="and" />
+			<objectives timeout="3" operator="and">
+				<flag-has-value key="sheep_are_here" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_STRIKE_002_SUCCESS"/>
+			<rewards>
+				<set-modifier name="mod_happiness" value="50" tag="strike_001_happiness"/>
+				<set-flag key="phase_two_strike" value="true"/>
+				<set-modifier name="mod_happiness" value="50" tag="strike_001_happiness"/>
+			</rewards>
+		</quest>
+		
+		<!--Some townies will put fire to some houses because they are not happy-->
+		<quest id="TWELVE_QUEST_STRIKE_002_C" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="townie">
+			<start_condition timeout="30" operator="and"/>
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_002_FIRE_START">
+				<center-to-building target="market_fire"/>
+				<start-fire target="market_fire" state="smouldering"/>
+			</onStarted>
+			<objectives timeout="1" operator="and"/>
+			<rewards>
+				<start-quest id="TWELVE_QUEST_STRIKE_002_D"/>
+			</rewards>
+		</quest>
+		
+		<!--Some townies will put fire to some houses because they are not happy-->
+		<quest id="TWELVE_QUEST_STRIKE_002_D" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+			<start_condition timeout="7" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_002_FIRE_CLIENT"/>
+			<objectives timeout="1" operator="and"/>
+		</quest>
+		
+		<!--SHEEP-->
+		<quest id="TWELVE_SHEEP_PASTURE" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN2_11_NAME" 
+		   description="T_QUESTS_TWELVE_SHEEP_PASTURE_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_SHEEP_PASTURE_STARTED"/>
+			<objectives timeout="3" operator="and">
+				<building type="building_sheepwalk" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_SHEEP_PASTURE_SUCCESS"/>
+			<rewards>
+				<set-flag key="sheep_are_here" value="true"/>
+				<resource resource="coins" amount="100"/>
+				<resource resource="planks" amount="30"/>
+			</rewards>
+		</quest>
+	
+		
+	<!--__________________________________________________________________END 005 WORK_____________________________________________________________________-->
+	
+	<!--_______________________________________________________________WINTER IS HERE OVER____________________________________________________________-->
+		
+	<!--_______________________________________________________________SPRING IS HERE____________________________________________________________-->
+	
+			<!--INTRODUCTION to spring-->
+		
+		<quest id="TWELVE_QUEST_SPRING_INTRO" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+			<start_condition timeout="10" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_SPRING_INTRO"/>
+			<objectives timeout="5" operator="and"/>
+			<rewards>
+				<start-quest id="TWELVE_WORK_TIMER_SPRING"/>
+			</rewards>
+		</quest>
+		
+<!--_____________________________________________________________________006 WORK_____________________________________________________________________-->
+	
+<!--BUILD A CATHEDRALE-->
+	
+		<quest id="TWELVE_WORK_006" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_WORK_006_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_006_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_006_STARTED"/>
+			<objectives timeout="3" operator="and">
+				<building type="building_cathedral" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_006_SUCCESS"/>
+			<rewards>
+				<set-flag key="cathedral_done" value="true"/>
+				<start-quest id="TWELVE_WORK_007"/>
+				<resource resource="coins" amount="1000"/>
+				<resource resource="prestige" amount="15"/>
+				<resource resource="tools" amount="30"/>
+			</rewards>
+		</quest>
+		
+	<!--__________________________________________________________________END 006 WORK_____________________________________________________________________-->
+	
+	<!--_____________________________________________________________________007 WORK_____________________________________________________________________-->
+	
+<!--Organise a festival for the spring-->
+	
+		<quest id="TWELVE_WORK_007" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_DECORATION_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_007_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_007_STARTED"/>
+			<objectives timeout="3" operator="and">
+				<building type="deco_1x1_seasonal_field_01" count="2"/>
+				<building type="deco_2x2_littlemarket" count="1"/>
+				<building type="deco_3x3_washing" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_007_SUCCESS"/>
+			<rewards>
+				<start-quest id="TWELVE_QUEST_STRIKE_003"/>
+				<set-flag key="deco_done" value="true"/>
+				<resource resource="coins" amount="800"/>
+			</rewards>
+		</quest>
+		
+		<!--strike quest--> 
+<!--		If the player doesn't complete this quest the townies will be very unhappy and they might not work as usual.
+		In the story these quests are here to evaluate the popularit If the player doesn't complete this quest the townies will be very unhappy and they might not work as usual.
+		In the story these quests are here to evaluate the popularity of the governor-->
+
+		
+		<quest id="TWELVE_QUEST_STRIKE_003" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_01_TITLE" 
+		   description="T_QUESTS_TWELVE_STRIKE_003_STARTED" 
+		   avatar="client">
+			<start_condition timeout="3" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_003_STARTED">
+				<start-quest id="TWELVE_QUEST_STRIKE_003_C"/>
+				<set-modifier name="mod_happiness" value="10" tag="strike_001_happiness"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<building type="building_barracks" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_STRIKE_003_SUCCESS"/>
+			<rewards>
+				<set-flag key="barracks_here_done" value="true"/>
+				<resource resource="coins" amount="220"/>
+				<set-modifier name="mod_happiness" value="50" tag="strike_001_happiness"/>
+				<set-modifier name="mod_happiness" value="50" tag="strike_001_happiness"/>
+			</rewards>
+		</quest>
+		
+
+		<quest id="TWELVE_QUEST_STRIKE_003_C" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="bandit">
+			<start_condition timeout="30" operator="and"/>
+			<onStarted notification="T_QUESTS_TWELVE_STRIKE_003_BANDIT_START">
+				<bandit-attack amount="3" intention="lay_fire"/>
+			</onStarted>
+			<objectives timeout="1" operator="and"/>
+			<rewards>
+				<start-quest id="TWELVE_QUEST_STRIKE_003_D"/>
+			</rewards>
+		</quest>
+		
+		<quest id="TWELVE_QUEST_STRIKE_003_D" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN14_HEALER_08_TITLE" 
+		   description="T_QUESTS_TWELVE_GUARD_STARTED" 
+		   avatar="client">
+			<start_condition timeout="7" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_GUARD_STARTED"/>
+			<objectives timeout="1" operator="and">
+				<building type="building_watchtower" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_GUARD_SUCCESS"/>
+			<rewards>
+				<set-flag key="tower_guard_ok" value="true"/>
+				<resource resource="weapons" amount="10"/>
+				<resource resource="armor" amount="10"/>
+			</rewards>
+		</quest>
+		
+	<!--__________________________________________________________________END 007 WORK_____________________________________________________________________-->
+	
+	<!--_______________________________________________________________SUMMER IS HERE____________________________________________________________-->
+	
+			<!--INTRODUCTION to summer-->
+		
+		<quest id="TWELVE_QUEST_SUMMER_INTRO" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+			<start_condition timeout="10" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_SUMMER_INTRO"/>
+			<objectives timeout="5" operator="and"/>
+			<rewards>
+				<start-quest id="TWELVE_WORK_TIMER_SUMMER"/>
+			</rewards>
+		</quest>
+		
+	<!--_____________________________________________________________________008 WORK_____________________________________________________________________-->
+	
+<!--Build a pub-->
+	
+		<quest id="TWELVE_WORK_008" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_TWELVE_WORK_008_TITLE" 
+		   description="T_QUESTS_TWELVE_WORK_008_STARTED" 
+		   avatar="client">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_008_STARTED"/>
+			<objectives timeout="3" operator="and">
+				<building type="building_beertent" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_008_SUCCESS"/>
+			<rewards>
+				<set-flag key="tavern_done" value="true"/>
+				<start-quest id="TWELVE_WORK_SPAWN_BANDIT_CAMP"/>
+				<resource resource="coins" amount="200"/>
+				<resource resource="juice" amount="10"/>
+				<resource resource="brew" amount="10"/>
+			</rewards>
+		</quest>
+		
+	<!--__________________________________________________________________END 008 WORK_____________________________________________________________________-->
+	
+	<!--_____________________________________________________________________009 WORK_____________________________________________________________________-->
+	
+<!--Beat the bandits-->
+
+		<quest id="TWELVE_WORK_SPAWN_BANDIT_CAMP" start="custom" visible="false" finish="instant" isKeyQuest="true">
+			<start_condition timeout="2" operator="and" />
+			<onStarted>
+				<spawn-bandit-camp count="1" upgrade_level="0"/>
+			</onStarted>
+			<objectives timeout="2" operator="and"/>
+			<onSuccess/>
+			<rewards>
+				<start-quest id="TWELVE_WORK_009"/>
+			</rewards>
+		</quest>
+	
+		<quest id="TWELVE_WORK_009" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SANDBOX_TRIBUTE_09" 
+		   description="T_QUESTS_TWELVE_WORK_009_STARTED" 
+		   avatar="client">
+			<start_condition timeout="3" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_009_STARTED"/>
+			<objectives timeout="3" operator="and">
+				<destroy-building target="building_banditcamp" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_009_SUCCESS"/>
+			<rewards>
+				<set-flag key="bandits_done" value="true"/>
+				<start-quest id="TWELVE_WORK_010"/>
+				<resource resource="coins" amount="600"/>
+				<resource resource="tools" amount="20"/>
+			</rewards>
+		</quest>
+		
+	<!--__________________________________________________________________END 009 WORK_____________________________________________________________________-->
+	
+	<!--_____________________________________________________________________010 WORK_____________________________________________________________________-->
+	
+<!--Theater-->
+	
+		<quest id="TWELVE_WORK_010" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_SCENARIO_2016_FESTIVITIES_QUEST01_NAME" 
+		   description="T_QUESTS_TWELVE_WORK_010_STARTED" 
+		   avatar="client">
+			<start_condition timeout="2" operator="and" />
+			<onStarted notification="T_QUESTS_TWELVE_WORK_010_STARTED"/>
+			<objectives timeout="2" operator="and">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_TWELVE_WORK_010_SUCCESS"/>
+			<rewards>
+				<set-flag key="festival_done" value="true"/>
+				<resource resource="coins" amount="350"/>
+			</rewards>
+		</quest>
+		
+	<!--__________________________________________________________________END 010 WORK_____________________________________________________________________-->
+	
+
+		<!--___________________________________________________________END OF THE SCENARIO_________________________________________________________________________-->
+
+	<quest visible="false" id="SCENARIO_FINISHED" 
+		 start="custom" finish="instant">
+		<start_condition timeout="2" operator="and"/>
+		<objectives timeout="1" operator="and">
+			<flag-has-value key="all_tasked_are_done" value="true"/>
+		</objectives>
+		<fail_condition operator="and" timeout="2">
+			<flag-has-value key="failed_scenario_over" value="true"/>
+		</fail_condition>
+		<onFailed>
+			<scenario-failed/>
+			<start-quest id="METASTART"/>
+		</onFailed>
+		<rewards >
+			<scenario-finished />
+			<start-quest id="METASTART"/>
+		</rewards>
+	</quest>
+
+	<quest id="METASTART" start="custom" visible="false"   >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+		<start_condition timeout="5"/>
+		<objectives timeout="1"/>
+		<rewards>
+			<start-quest id="SANDBOX_QUEST_META"/>
+			<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+			<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+			<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			<!--TODO season is not looping perfectly-->
+			<set-season season="autumn"/>
+		</rewards>
+	</quest>
+
+	<!-- STORM -->
+	<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+		</objectives>
+		<fail_condition timeout="2"  operator="and"/>
+		<rewards>
+			<lightningstrike topLeftX="38" topLeftY="45" bottomRightX="82" bottomRightY="83" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+		</rewards>
+	</quest>
+	<!-- STORM END -->
+
+</group>
+</questdb>

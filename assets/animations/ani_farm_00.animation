@@ -1,0 +1,124 @@
+[hahn_sit_roof]
+frame:	ani_farm_00.0.png		4.00
+
+delay:	1.00	10.00
+
+next:	hahn_fly_down			0.75
+next:	hahn_cry_roof			0.75
+next:	hahn_sit_roof			1.00
+
+
+[hahn_cry_roof]
+frame:	ani_farm_00.1.png		0.10
+play_ambient: sfx_buildings_farm
+frame:	ani_farm_00.2.png		1.00
+frame:	ani_farm_00.3.png		0.10
+frame:	ani_farm_00.4.png		1.50
+
+delay:	1.50	2.50
+
+next:	hahn_sit_roof			1.00
+next:	hahn_fly_down			0.75
+
+[hahn_fly_down]
+frame:	ani_farm_00.5.png		0.10
+frame:	ani_farm_00.6.png		0.20
+frame:	ani_farm_00.7.png		0.10
+frame:	ani_farm_00.8.png		0.10
+frame:	ani_farm_00.9.png		0.10
+frame:	ani_farm_00.10.png		0.50
+frame:	ani_farm_00.11.png		0.10
+frame:	ani_farm_00.12.png		0.10
+frame:	ani_farm_00.13.png		0.10
+frame:	ani_farm_00.14.png		0.10
+frame:	ani_farm_00.15.png		0.10
+frame:	ani_farm_00.16.png		0.10
+frame:	ani_farm_00.17.png		0.10
+frame:	ani_farm_00.18.png		0.10
+frame:	ani_farm_00.19.png		0.10
+frame:	ani_farm_00.20.png		0.10
+frame:	ani_farm_00.21.png		0.10
+frame:	ani_farm_00.22.png		0.50
+
+delay:	0.50	1.50
+
+next:	hahn_right_down			1.00
+next:	hahn_left_down			1.00
+next:	hahn_tomid_down			0.75
+
+
+[hahn_right_down]
+frame:	ani_farm_00.22.png		0.50
+
+delay:	0.50	1.50
+
+next:	hahn_right_down			1.00
+next:	hahn_left_down			1.00
+next:	hahn_tomid_down			0.75
+
+[hahn_left_down]
+frame:	ani_farm_00.23.png		0.10
+frame:	ani_farm_00.24.png		0.50
+
+delay:	0.50	1.50
+
+next:	hahn_right_down			1.00
+next:	hahn_left_down			1.00
+next:	hahn_tomid_down			0.75
+
+
+[hahn_tomid_down]
+frame:	ani_farm_00.25.png		0.20
+frame:	ani_farm_00.26.png		0.20
+frame:	ani_farm_00.27.png		0.20
+frame:	ani_farm_00.28.png		0.50
+
+delay:	0.50	1.50
+
+next: hahn_mid1
+
+[hahn_mid1]
+frame:	ani_farm_00.28.png		1.00
+frame:	ani_farm_00.29.png		0.50
+
+delay:	0.50	1.50
+
+next: hahn_mid1				0.75
+next: hahn_mid2				1.00
+next: hahn_fly_up			0.50
+
+
+[hahn_mid2]
+frame:	ani_farm_00.30.png		0.20
+frame:	ani_farm_00.31.png		0.20
+frame:	ani_farm_00.32.png		0.20
+frame:	ani_farm_00.33.png		0.20
+frame:	ani_farm_00.34.png		0.20
+frame:	ani_farm_00.35.png		0.50
+
+delay:	1.50	2.50
+
+next: hahn_mid1				0.75
+next: hahn_mid2				0.50
+next: hahn_fly_up			1.00
+
+
+
+[hahn_fly_up]
+frame:	ani_farm_00.36.png		0.10
+frame:	ani_farm_00.37.png		0.10
+frame:	ani_farm_00.38.png		0.10
+frame:	ani_farm_00.39.png		0.10
+frame:	ani_farm_00.40.png		0.10
+frame:	ani_farm_00.41.png		0.10
+frame:	ani_farm_00.42.png		0.10
+frame:	ani_farm_00.43.png		0.10
+frame:	ani_farm_00.44.png		0.10
+frame:	ani_farm_00.0.png		1.50
+
+delay:	1.50	2.50
+
+
+next:	hahn_cry_roof			0.75
+next:	hahn_sit_roof			1.00
+

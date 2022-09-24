@@ -1,0 +1,763 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- "warridden" scenario 15
+	200 prestige earned
+-->
+
+<questdb>
+    
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+    
+	<group avatar="client" > <!-- ALL -->
+              
+		<quest id="supportwar1" isKeyQuest="true" title="T_GAME_QUEST_SCEN15_01_TITLE_NEW" description="T_GAME_QUEST_SCEN15_01_START_NEW" start="instant" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_01_START_NEW">
+				<start-quest id="buildbasic8"/>
+				<start-quest id="helppop13"/>
+				<set-modifier name="mod_happiness" tag="map" value="50"/>
+				
+			</onStarted>
+
+			<start_condition timeout="8" operator="and"/>
+
+			<objectives timeout="3" operator="and" >
+				<flag-has-value key="win" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_complete" value="true"/>
+                <flag-has-value key="win" value="false"/>
+			</fail_condition>
+            
+            <onSuccess notification="T_GAME_QUEST_SCEN15_01_SUCCESS" >
+                <set-flag key="scenario_complete" value="true" />
+            </onSuccess>
+            
+			<rewards>
+				<resource amount="50" resource="prestige"/>
+                <start-quest id="SCENARIO_FINISHED" />
+			</rewards>
+		</quest>
+
+		<!-- empty quest as end condition, containing the end dialogue & start scenario finish or fail-->
+        <!-- No longer needed quest -->
+		<quest id="questline_finished" start="custom" visible="false" avatar="knight" repeatable="no">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<flag-has-value key="win" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="win" value="false"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN15_01_SUCCESS"/>
+
+			<onFailed notification="T_GAME_QUEST_SCEN15_01_FAIL_NEW">
+				<!-- <set-quest-state id="supportwar1" state="failed"/> -->
+				<start-quest id="SCENARIO_FAILED"/>
+			</onFailed>
+
+			<rewards>
+				<start-quest id="SCENARIO_FINISHED"/>
+			</rewards>
+		</quest>
+
+		<!-- check for win conditions & set "win" flag-->
+		<quest id="checkforwin" avatar="knight" start="custom" visible="false">
+			<objectives timeout="1" operator="and">
+				<!--check if everything for the military has been completed-->
+				<flag-has-value key="fabric" value="true"/>
+				<flag-has-value key="weapon" value="true"/>
+				<flag-has-value key="food" value="true"/>
+			</objectives>
+			<fail_condition timeout="4" operator="and"/>
+
+            <onFailed notification="T_GAME_QUEST_SCEN15_01_FAIL_NEW">
+                <start-quest id="SCENARIO_FAILED" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="win" value="true"/>
+			</rewards>
+		</quest>
+
+		<!-- CHOICE 1-->
+     
+		<quest id="needfabric2" isKeyQuest="true" title="T_GAME_QUEST_SCEN15_02_TITLE" description="T_GAME_QUEST_SCEN15_02_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_02_START">
+				<start-quest id="buildweaver9"/>
+				<start-quest id="needclothpop14"/>
+			</onStarted>
+
+			<start_condition timeout="15" operator="and"/>
+
+			<fail_condition timeout="1200" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="25" resource="fabric"/>
+				<tribute amount="15" resource="planks"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN15_02_SUCCESS"/>
+
+			<onFailed notification="T_GAME_QUEST_SCEN15_02_FAIL">
+				<start-quest id="questline_finished"/>
+			</onFailed>
+
+			<rewards>
+				<set-flag key="fabric" value="true"/>
+				<resource amount="450" resource="coins"/>
+				<resource amount="5" resource="prestige"/>
+
+				<start-quest id="needweapon3"/>
+				<!--<start-quest id="thanks-quest_fabrics"/>-->
+			</rewards>
+		</quest>
+ 
+		<quest id="needclothpop14" isKeyQuest="false" title="T_GAME_QUEST_SCEN15_14_TITLE" description="T_GAME_QUEST_SCEN15_14_START_2" start="custom" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_14_START_2">
+                <start-quest id="needclothpop14_remover" />
+            </onStarted>
+
+			<start_condition timeout="20" operator="and">
+				<flag-has-value key="scenario_complete" value="false"/>
+            </start_condition>
+
+			<fail_condition timeout="1200" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<produce amount="15" resource="cloths"/>
+			</objectives>
+
+			<onSuccess>
+				<set-modifier name="mod_happiness" tag="map" value="65"/>
+                <set-quest-state id="needclothpop14_remover" state="failed" />
+			</onSuccess>
+
+			<onFailed >
+				<set-modifier name="mod_rest" tag="map" value="85"/>
+                <start-quest id="needclothpop14_fail_text" />
+				<!--<set-quest-state id="helppop_condition" state="failed"/>-->
+			</onFailed>
+
+			<rewards>
+				<set-flag key="clothpop" value="true"/>
+				<resource amount="15" resource="wood"/>
+				<resource amount="10" resource="stone"/>
+				<start-quest id="thanks-quest_clothes"/>
+			</rewards>
+		</quest>
+        
+        <quest id="needclothpop14_remover" start="custom" finish="instant" visible="false" repeatable="no" >
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="scenario_complete" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="needclothpop14" state="failed" />
+            </rewards>
+        </quest>
+        
+        <quest id="needclothpop14_fail_text" start="custom" finish="instant" visible="false" avatar="farmer">           
+			<objectives timeout="1" operator="and">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_14_FAIL"/>
+		</quest>
+        
+		<quest id="thanks-quest_clothes" start="custom" finish="instant" visible="false" avatar="farmer">           
+			<objectives timeout="1" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_14_SUCCESS"/>
+		</quest>
+        
+		<!-- CHOICE 2-->
+         
+		<quest id="needweapon3" isKeyQuest="true" title="T_GAME_QUEST_SCEN15_03_TITLE" description="T_GAME_QUEST_SCEN15_03_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_03_START">
+				<start-quest id="buildweapon10"/>
+				<start-quest id="needtoolpop15"/>
+			</onStarted>
+                           
+			<start_condition timeout="20" operator="and"/>
+            
+			<fail_condition timeout="1800" operator="and"/>
+                        
+			<objectives timeout="1" operator="and">
+				<tribute amount="20" resource="weapons"/>
+			</objectives>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN15_03_FAIL">
+				<start-quest id="questline_finished"/>
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="weapon" value="true"/>
+				<resource amount="750" resource="coins"/>
+				<resource amount="10" resource="prestige"/>
+				<start-quest id="thanks-quest_weapons" />
+				<start-quest id="needfood4"/>
+			</rewards>
+		</quest>
+        
+		<quest id="thanks-quest_weapons" start="custom" finish="instant" visible="false" avatar="knight">
+			<objectives timeout="2" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_03_SUCCESS"/>  
+		</quest>
+        
+		<quest id="needtoolpop15" isKeyQuest="false" title="T_GAME_QUEST_SCEN15_15_TITLE" description="T_GAME_QUEST_SCEN15_15_START" start="custom" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_15_START">
+                <start-quest id="needtoolpop15_remover" />
+            </onStarted>
+                           
+			<start_condition timeout="30" operator="and">
+				<flag-has-value key="scenario_complete" value="false"/>
+            </start_condition>
+            
+			<fail_condition timeout="1500" operator="and"/>
+                        
+			<objectives timeout="3" operator="and">
+				<tribute amount="25" resource="tools"/>
+			</objectives>
+            
+			<onSuccess>
+				<set-modifier name="mod_effort" tag="map" value="125"/>
+                <set-quest-state id="needtoolpop15_remover" state="failed" />
+			</onSuccess>
+            
+			<onFailed >
+				<set-modifier name="mod_effort" tag="map" value="75"/>
+                <start-quest id="needtoolpop15_fail_text" />
+<!--				<start-quest id="questline_finished"/>-->
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="toolspop" value="true"/>
+				<resource amount="10" resource="planks"/>
+				<resource amount="15" resource="corn"/>
+				<start-quest id="thanks-quest_tools"/>
+			</rewards>
+		</quest>
+        
+        <quest id="needtoolpop15_remover" start="custom" finish="instant" visible="false" repeatable="no" >
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="scenario_complete" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="needtoolpop15" state="failed" />
+            </rewards>
+        </quest>
+        
+        <quest id="needtoolpop15_fail_text" start="custom" finish="instant" visible="false" avatar="farmer">           
+			<objectives timeout="1" operator="and">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_15_FAIL"/>
+		</quest>
+        
+		<quest id="thanks-quest_tools" start="custom" finish="instant" visible="false" avatar="farmer">
+			<objectives timeout="2" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_15_SUCCESS"/> 
+		</quest>
+        
+		<!-- CHOICE 3-->
+        
+		<quest id="needfood4" isKeyQuest="true" title="T_GAME_QUEST_SCEN15_04_TITLE" description="T_GAME_QUEST_SCEN15_04_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_04_START">
+				<start-quest id="buildbaker11"/>
+				<start-quest id="needfoodpop16"/>
+			</onStarted>
+                           
+			<start_condition timeout="20" operator="and"/>
+			            
+			<fail_condition timeout="1200" operator="and"/>
+                        
+			<objectives timeout="1" operator="and">
+				<tribute amount="25" resource="bread"/>
+				<tribute amount="25" resource="meat"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN15_04_SUCCESS"/>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN15_04_FAIL">
+				<start-quest id="checkforwin"/>
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="food" value="true"/>
+				<resource amount="550" resource="coins"/>
+				<resource amount="15" resource="prestige"/>
+				<start-quest id="checkforwin"/>
+			</rewards>
+		</quest>
+      
+		<quest id="needfoodpop16" isKeyQuest="false" title="T_GAME_QUEST_SCEN15_16_TITLE" description="T_GAME_QUEST_SCEN15_16_START" start="custom" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_16_START">
+                <start-quest id="needfoodpop16_remover" />
+            </onStarted>
+                           
+			<start_condition timeout="30" operator="and">
+				<flag-has-value key="scenario_complete" value="false"/>
+            </start_condition>
+            
+			<fail_condition timeout="1250" operator="and"/>
+                        
+			<objectives timeout="3" operator="and">
+				<tribute amount="15" resource="bread"/>
+				<tribute amount="20" resource="fish"/>
+			</objectives>
+            
+			<onSuccess>
+				<set-modifier name="mod_consumption_rate_food" tag="map" value="100"/>
+                <set-quest-state id="needfoodpop16_remover" state="failed" />
+			</onSuccess>
+            
+			<onFailed >
+				<set-modifier name="mod_consumption_rate_food" tag="map" value="125"/>
+                <start-quest id="needfoodpop16_fail_text" />
+				<!--				<set-quest-state id="helppop_condition" state="failed"/>-->
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="foodpop" value="true"/>
+				<resource amount="10" resource="stone"/>
+				<resource amount="20" resource="prestige"/>
+				<start-quest id="thanks-quest_food2"/>
+			</rewards>
+		</quest>
+        
+        <quest id="needfoodpop16_remover" start="custom" finish="instant" visible="false" repeatable="no" >
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="scenario_complete" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="needfoodpop16" state="failed" />
+            </rewards>
+        </quest>
+        
+        <quest id="needfoodpop16_fail_text" start="custom" finish="instant" visible="false" avatar="farmer">           
+			<objectives timeout="1" operator="and">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_16_FAIL"/>
+		</quest>
+        
+		<quest id="thanks-quest_food2" start="custom" finish="instant" visible="false" avatar="farmer">
+			<objectives timeout="2" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_16_SUCCESS"/>   
+		</quest>
+          
+		<!-- Build up economy buildings-->
+          
+		<quest id="buildbasic8" isKeyQuest="true" title="T_GAME_QUEST_SCEN15_08_TITLE" description="T_GAME_QUEST_SCEN15_08_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_08_START"/>
+
+			<start_condition timeout="15" operator="and"/>
+                        
+			<objectives timeout="3" operator="and">
+				<building count="1" type="building_sawmill"/>
+				<building count="1" type="building_hunters_cabin"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN15_08_SUCCESS"/>
+            
+			<fail_condition timeout="900"  operator="and"/>
+            
+			<onFailed>
+				<start-quest id="needfabric2"/>
+			</onFailed>
+            
+			<rewards>
+				<resource amount="350" resource="coins"/>
+				<resource amount="20" resource="meat"/>
+				<start-quest id="needfabric2"/>
+			</rewards>
+		</quest>
+        
+		<quest id="buildweaver9" title="T_GAME_QUEST_SCEN15_09_TITLE" description="T_GAME_QUEST_SCEN15_09_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_09_START" />
+                           
+			<start_condition timeout="10" operator="or_not">
+				<building count="1" type="building_sheepwalk"/>
+				<building count="1" type="building_weaver"/>
+			</start_condition>
+                        
+			<objectives timeout="3" operator="and">
+				<building count="1" type="building_sheepwalk"/>
+				<building count="1" type="building_weaver"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN15_09_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="450" resource="coins"/>
+				<resource amount="15" resource="wool"/>
+			</rewards>
+            
+            <fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario_complete" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="buildweapon10" title="T_GAME_QUEST_SCEN15_10_TITLE" description="T_GAME_QUEST_SCEN15_10_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_10_START" />
+                           
+			<start_condition timeout="10" operator="or_not">
+				<building count="1" type="building_blacksmith"/>
+				<building count="1" type="building_armory"/>
+			</start_condition>
+                        
+			<objectives timeout="3"  operator="and">
+				<building count="1" type="building_blacksmith"/>
+				<building count="1" type="building_armory"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN15_10_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="15" resource="coal"/>
+				<resource amount="10" resource="ore"/>
+			</rewards>
+            
+            <fail_condition timeout="1" operator="and" >    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>
+		</quest>
+        
+		<quest id="buildbaker11" title="T_GAME_QUEST_SCEN15_11_TITLE" description="T_GAME_QUEST_SCEN15_11_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_11_START" />
+
+			<start_condition timeout="10" operator="or_not">
+				<building count="2" type="building_hunters_cabin"/>
+				<building count="1" type="building_bakery"/>
+			</start_condition>
+                        
+			<objectives timeout="3" operator="and">
+				<building count="1" type="building_bakery"/>
+				<building count="2" type="building_hunters_cabin"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN15_11_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="250" resource="coins"/>
+				<resource amount="15" resource="flour"/>
+			</rewards>
+            
+            <fail_condition timeout="1"  operator="and" >    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>
+		</quest>
+        
+		<!--        Riot questline-->
+        
+		<quest id="preventriot17" title="T_GAME_QUEST_SCEN15_17_TITLE_NEW" description="T_GAME_QUEST_SCEN15_17_START" start="instant" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_17_START">
+				<set-modifier name="mod_happiness" tag="map" value="75"/>
+				<set-modifier name="mod_consumption_rate_food" tag="map" value="115"/>
+				<set-modifier name="mod_merchant_buy_tradegoods" tag="map" value="150"/>
+                <start-quest id="preventriot17_remover"/>
+			</onStarted>
+                           
+			<start_condition timeout="45" operator="and"/>
+            
+			<fail_condition operator="and_not" timeout="29">
+				<happyness value="100"/>
+			</fail_condition>
+                        
+			<objectives timeout="3" operator="and">
+                <flag-has-value key="win" value="true" />
+                <flag-has-value key="scenario_complete" value="true" />
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN15_17_SUCCESS">
+				<set-modifier name="mod_happiness" tag="map" value="85"/>
+			</onSuccess>
+            
+			<onFailed >
+                <set-quest-state id="preventriot17_remover" state="failed" />
+                <start-quest id="preventriot17_fail" />
+			</onFailed>
+            
+			<rewards>
+                <set-quest-state id="preventriot17_remover" state="failed" />
+				<resource amount="35" resource="prestige"/>
+			</rewards>
+		</quest>
+        
+        <quest id="preventriot17_remover" start="custom" finish="instant" visible="false" repeatable="no" >
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="win" value="false" />
+                <flag-has-value key="scenario_complete" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="preventriot17" state="failed" />
+            </rewards>
+        </quest>
+        
+        <quest id="preventriot17_fail" start="custom" finish="instant" visible="false" avatar="farmer">           
+			<objectives timeout="1"  operator="and">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <fail_condition timeout="2"  operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_17_FAIL">
+                <start-quest id="fire18"/>
+				<start-quest id="tavern19"/>
+				<set-modifier name="mod_happiness" tag="map" value="65"/>
+            </onSuccess>
+		</quest>
+        
+		<quest id="riotwarning" start="instant" finish="instant" avatar="farmer" visible="false" repeatable="custom">
+
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="1" operator="and" >
+				<quest-done id="preventriot17"/>
+			</objectives>
+            
+			<fail_condition operator="and_not" timeout="2">
+				<happyness value="75"/>
+			</fail_condition>
+           
+			<onFailed notification="T_GAME_QUEST_SCEN15_17_1_FAIL">
+				<start-quest id="riotwarning"/>
+			</onFailed>
+
+		</quest>
+        
+		<quest id="fire18" start="custom" visible="false" repeatable="custom">
+		
+			<onStarted>
+				<start-fire amount="1" state="burning"/>
+			</onStarted>
+                           
+			<start_condition timeout="180"  operator="and">
+				<flag-has-value key="scenario_complete" value="false"/>
+            </start_condition>
+            
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="endfire" value="true"/>
+                <flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                        
+			<objectives timeout="1" operator="and">
+				<purge-fire/>
+			</objectives>
+            
+			<rewards>
+				<start-quest id="fire18"/>
+			</rewards>
+		</quest>
+
+		<quest id="tavern19" title="T_GAME_QUEST_SCEN6_8_NAME" description="T_GAME_QUEST_SCEN15_19_START" start="custom" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_19_START"/>
+                           
+			<start_condition timeout="200"  operator="and">
+				<flag-has-value key="scenario_complete" value="false"/>
+            </start_condition>
+                        
+			<objectives timeout="3"  operator="and">
+				<building count="1" type="building_tavern"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN15_19_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="15" resource="brew"/>
+				<resource amount="15" resource="juice"/>
+				<start-quest id="barrack20"/>
+			</rewards>
+            
+            <fail_condition timeout="1" operator="and" >    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>
+		</quest>
+        
+		<quest id="barrack20" title="T_GAME_QUEST_SCEN13_16_TITLE" description="T_GAME_QUEST_SCEN15_20_START" start="custom" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_20_START"/>
+
+			<start_condition timeout="60"  operator="and">
+				<flag-has-value key="scenario_complete" value="false"/>
+            </start_condition>
+
+			<objectives timeout="3"  operator="and">
+				<building count="1" type="building_barracks"/>
+				<building count="1" type="building_watchtower"/>
+			</objectives>
+
+			<rewards>
+				<resource amount="10" resource="meat"/>
+				<resource amount="10" resource="juice"/>
+				<start-quest id="condition_endriot22"/>
+			</rewards>
+            
+            <fail_condition timeout="1" operator="and" >    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>
+		</quest>
+        
+		<quest id="condition_endriot22" start="custom" finish="instant" visible="false" avatar="farmer">
+		
+			<start_condition timeout="90" operator="and">
+				<flag-has-value key="scenario_complete" value="false"/>
+            </start_condition>
+            
+			<onStarted>
+				<start-fire amount="1" state="smouldering"/>
+			</onStarted>
+
+			<objectives timeout="1" operator="and"/>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN15_22_SUCCESS"/>
+            
+			<rewards>
+				<set-flag key="endfire" value="true"/>
+			</rewards>
+		</quest>
+
+		<!--helper-quests below-->
+
+
+		<!--helper quest to check if helppop13 is won or lost-->
+		<!--		<quest id="helppop_condition" start="instant" visible="false">
+
+			<start_condition timeout="1">
+				<quest-done id="checkforwin"/>
+			</start_condition>
+
+			<fail_condition timeout="5" operator="or">
+				<flag-has-value key="clothpop" value="false"/>
+				<flag-has-value key="toolspop" value="false"/>
+				<flag-has-value key="foodpop" value="false"/>
+			</fail_condition>
+
+			<objectives timeout="5" operator="and">
+				<flag-has-value key="clothpop" value="true"/>
+				<flag-has-value key="toolspop" value="true"/>
+				<flag-has-value key="foodpop" value="true"/>
+			</objectives>
+
+			<onFailed>
+				<set-quest-state id="helppop13" state="failed"/>
+			</onFailed>
+
+		</quest>-->
+        
+		<quest id="helppop13" isKeyQuest="false" title="T_GAME_QUEST_SCEN15_13_TITLE" description="T_GAME_QUEST_SCEN15_13_START" start="custom" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN15_13_START"/>
+
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="5" operator="and">               
+				<flag-has-value key="clothpop" value="true"/>
+				<flag-has-value key="toolspop" value="true"/>
+				<flag-has-value key="foodpop" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="3" operator="and" >
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+			
+			<onSuccess notification="T_GAME_QUEST_SCEN15_13_SUCCESS"/>
+            
+			<onFailed>
+				<start-quest id="helppop13_fail" />
+			</onFailed>
+            
+			<rewards>
+				<resource amount="35" resource="prestige"/>
+			</rewards>
+		</quest>
+        
+		<quest id="helppop13_fail" start="custom" finish="instant" visible="false" avatar="farmer">           
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="win" value="true" />
+			</objectives>
+			<fail_condition timeout="2" operator="and"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN15_13_FAIL"/>
+		</quest>
+          
+		<!--        Scenario Endings-->
+
+		<quest id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" start="custom" visible="false" finish="instant" ticket="false" >
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards >
+				<set-merchant state="available"/>
+				<set-modifier name="mod_rest" tag="map" value="100"/>
+				<set-modifier name="mod_consumption_rate_food" tag="map" value="100"/>
+				<set-modifier name="mod_happiness" tag="map" value="100"/>
+				<set-modifier name="mod_effort" tag="map" value="100"/>
+				<set-modifier name="mod_merchant_buy_tradegoods" tag="map" value="100"/>
+                
+				<start-quest id="METASTART"/>
+				<scenario-finished/>
+			</rewards>
+
+		</quest>
+        
+		<quest id="SCENARIO_FAILED" start="custom" visible="false" finish="instant" ticket="false" >
+			<start_condition timeout="2" operator="and"/>
+           
+			<rewards >
+				<set-merchant state="available"/>
+				<set-modifier name="mod_rest" tag="map" value="100"/>
+				<set-modifier name="mod_consumption_rate_food" tag="map" value="100"/>
+				<set-modifier name="mod_happiness" tag="map" value="100"/>
+				<set-modifier name="mod_effort" tag="map" value="100"/>
+				<set-modifier name="mod_merchant_buy_tradegoods" tag="map" value="100"/>
+                
+				<start-quest id="METASTART"/>
+				<set-flag key="scenario_complete" value="true" />
+				<scenario-failed />
+			</rewards>
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"  ticket="false"  >
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+			<start_condition timeout="5" operator="and"/>		
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+		<!-- STORM --> 
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2"  operator="and"/>
+			<rewards>
+				<lightningstrike topLeftX="56" topLeftY="53" bottomRightX="100" bottomRightY="87" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->  
+    
+	</group>
+</questdb>
+

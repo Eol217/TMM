@@ -1,0 +1,415 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- "The Kings disease" scenario 14
+
+-->
+
+<questdb>
+    
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+		
+	<group avatar="client">
+
+		<quest id="SCENARIO_START" visible="false" start="instant" avatar="client">
+			<start_condition timeout="2"/>
+			<objectives timeout="1"/>
+			<rewards>
+				<set-modifier name="mod_event_plague_timeout" tag="map" value="20"/>
+				<set-modifier name="mod_happiness" tag="map" value="80"/>
+				<set-modifier name="mod_merchant_buy_tradegoods" tag="map" value="120"/>
+				<start-plague amount="3"/>
+				<start-quest id="SCENARIO_MAINQUEST" />
+				<start-quest id="SCEN14_HEALER_01"/>
+			</rewards>
+		</quest>
+        
+		<!-- MAINQUEST (FIND A CURE FOR THE KING!)-->
+       
+		<quest id="SCENARIO_MAINQUEST" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_01_TITLE" description="T_GAME_QUEST_SCEN14_01_START" start="custom"  avatar="client" >
+	                        
+			<start_condition timeout="5"/>
+            
+			<onStarted notification="T_GAME_QUEST_SCEN14_01_START" />
+           
+			<objectives timeout="3">
+				<quest-done id="SCEN14_CLIENT_06"/>
+				<quest-done id="SCEN14_HEALER_06"/>
+				<quest-done id="SCEN14_HEALER_07"/>
+			</objectives>
+            
+			<fail_condition timeout="4200"/>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN14_01_FAILED">
+				<set-resource resource="coins"  building="building_hq" value="0"/>
+				<start-quest id="SCEN14_FAILED" />
+			</onFailed>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_01_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="prestige" amount="100"/>
+				<start-quest id="SCEN14_END" />
+			</rewards>
+		</quest>
+ 
+		<quest id="SCEN14_CLIENT_01A" visible="false" title="T_GAME_QUEST_SCEN14_01A_TITLE" description="T_GAME_QUEST_SCEN14_01A_START" start="custom"  avatar="client" >
+	                        
+			<start_condition timeout="3"/>
+			<onStarted notification="T_GAME_QUEST_SCEN14_01A_START"/>
+			<objectives timeout="5"/>
+		</quest>
+     
+		<quest id="SCEN14_CLIENT_02" visible="true" title="T_GAME_QUEST_SCEN14_02_TITLE_NEW" description="T_GAME_QUEST_SCEN14_02_START_NEW" start="custom"  avatar="client" >
+	                        
+			<start_condition timeout="20"/>
+            
+			<onStarted notification="T_GAME_QUEST_SCEN14_02_START_NEW"/>
+                
+			<objectives timeout="5">
+				<building count="1" type="building_monestary"/>
+				<building count="1" type="building_hopsfarm"/>
+			</objectives>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_02_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="coins" amount="250"/>
+				<resource resource="tools" amount="15"/>
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+            
+		</quest>
+    
+		<quest id="SCEN14_CLIENT_03" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_03_TITLE" description="T_GAME_QUEST_SCEN14_03_START" start="custom"  avatar="client" >
+	                        
+			<start_condition timeout="1"/>
+            
+			<onStarted notification="T_GAME_QUEST_SCEN14_03_START"/>
+                
+			<objectives timeout="5">
+				<building type="building_pigfarm" count="1"/>
+			</objectives>
+             
+			<rewards>
+				<resource resource="stone" amount="20"/>
+				<start-quest id="SCEN14_HEALER_06"/>
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+            
+		</quest>
+        
+		<quest id="SCEN14_CLIENT_06" visible="false"  start="custom"  avatar="client" >
+	                        
+			<start_condition timeout="10"/>
+            
+			<objectives timeout="5"/>
+			<onSuccess notification="T_GAME_QUEST_SCEN14_06_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="prestige" amount="20"/>
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+            
+		</quest>
+     
+		<!-- rasputin questpart-->
+     
+		<quest id="SCEN14_HEALER_01" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_01_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_01_START" start="custom"  avatar="medicus" >
+	                        
+			<start_condition timeout="25"/>
+            
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_01_START" />
+            
+			<objectives timeout="5">
+				<tribute resource="herbs" amount="30"/>
+			</objectives>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_01_SUCCESS"/>
+            
+			<fail_condition timeout="500"/>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN14_HEALER_01_FAILED">
+				<start-quest id="SCEN14_HEALER_02" />
+				<start-plague amount="6"/>
+				<set-modifier name="mod_effort" tag="map" value="80"/>
+			</onFailed>
+             
+			<rewards>
+				<resource resource="juice" amount="10"/>
+				<set-modifier name="mod_effort" tag="map" value="120"/>
+				<start-quest id="SCEN14_HEALER_02" />
+			</rewards>
+		</quest>
+        
+		<quest id="SCEN14_HEALER_02" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_02_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_02_START" start="custom"  finish="instant" avatar="medicus" >
+
+			<start_condition timeout="15"/>
+            
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_02_START" />
+             
+			<objectives timeout="5">
+				<tribute resource="fabric"  amount="20"/>
+			</objectives>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_02_SUCCESS"/>
+            
+			<fail_condition timeout="420"/>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN14_HEALER_02_FAILED">
+				<start-plague amount="5" />
+				<start-quest id="SCEN14_CLIENT_01A" />
+				<start-quest id="SCEN14_HEALER_04"/>
+			</onFailed>
+             
+			<rewards>
+				<resource resource="bread" amount="15"/>
+				<resource resource="fish" amount="15"/>
+				<start-quest id="SCEN14_CLIENT_01A" />
+				<start-quest id="SCEN14_HEALER_04"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCEN14_HEALER_04" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_04_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_04_START" start="custom"  avatar="medicus" finish="instant" >
+	                        
+			<start_condition timeout="10"/>
+                        
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_04_START">
+				<start-quest id="SCEN14_CLIENT_02"/>
+			</onStarted>
+            
+			<objectives timeout="5">
+				<tribute resource="brew" amount="20"/>
+			</objectives>
+            
+			<fail_condition timeout="900"/>
+        
+			<onFailed notification="T_GAME_QUEST_SCEN14_HEALER_02_FAILED" >
+				<start-plague amount="6"/>
+				<start-quest id="SCEN14_CLIENT_ADVISE" />
+				<start-quest id="SCEN14_HEALER_05"/>
+			</onFailed>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_04_SUCCESS"/>
+			
+			<rewards>
+				<resource resource="coal" amount="15"/>
+				<resource resource="coins" amount="150"/>
+				<start-quest id="SCEN14_CLIENT_ADVISE" />
+				<start-quest id="SCEN14_HEALER_05"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCEN14_CLIENT_ADVISE" visible="false"  description="T_GAME_QUEST_SCEN14_02A_START" start="custom"  avatar="client" finish="instant" >
+	                        
+			<start_condition timeout="10"/>
+            <onStarted notification="T_GAME_QUEST_SCEN14_02A_START" />
+            <objectives timeout="5"/>
+		</quest>
+        
+		<quest id="SCEN14_HEALER_05" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_05_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_05_START" start="custom"  avatar="medicus" >
+	                        
+			<start_condition timeout="15"/>
+           
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_05_START" >
+				<start-quest id="SCEN14_CLIENT_03"/>
+			</onStarted>
+            
+			<objectives timeout="5">
+				<tribute resource="pig" amount="12"/>
+			</objectives>
+            
+			<fail_condition timeout="420"/>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN14_HEALER_05_FAILED">
+				<!-- Start plague event -->
+				<start-plague amount="5" />
+				<start-quest id="SCEN14_HEALER_08" />
+			</onFailed>
+              
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_05_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="herbs" amount="16"/>
+				<start-quest id="SCEN14_HEALER_08" />
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+
+		</quest>
+        
+		<quest id="SCEN14_HEALER_06" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_06_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_06_START" start="custom"  avatar="medicus" >
+	                        
+			<start_condition timeout="15"/>
+           
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_06_START"/>
+			<objectives timeout="5">
+				<tribute resource="coins" amount="1000"/>
+			</objectives>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_06_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="planks" amount="22"/>
+				<start-quest id="SCEN14_HEALER_07" />
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+            
+		</quest>
+         
+		<quest id="SCEN14_HEALER_07" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_07_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_07_START" start="custom"  avatar="medicus" >
+	                        
+			<start_condition timeout="15"/>
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_07_START" />
+            
+			<objectives timeout="5">
+				<tribute resource="cloths" amount="28"/>
+			</objectives>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_07_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="jewelry" amount="10"/>
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+            
+		</quest>
+         
+		<quest id="SCEN14_HEALER_08" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_08_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_08_START" start="custom"  avatar="medicus" >
+	                        
+			<start_condition timeout="5">
+				<quest-done id="SCEN14_HEALER_07"/>
+			</start_condition>
+           
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_08_START" />
+            
+			<objectives timeout="5">
+				<building type="building_watchtower" count="1"/>
+			</objectives>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_08_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="coins" amount="280"/>
+				<start-quest id="SCEN14_HEALER_09" />
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+            
+		</quest>
+        
+		<quest id="SCEN14_HEALER_09" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_HEALER_09_TITLE" description="T_GAME_QUEST_SCEN14_HEALER_09_START" start="custom"  avatar="medicus" >
+	                        
+			<start_condition timeout="5"/>
+           
+			<onStarted notification="T_GAME_QUEST_SCEN14_HEALER_09_START" />
+            
+			<objectives timeout="5">
+				<tribute resource="gold" amount="30"/>
+			</objectives>
+             
+			<onSuccess notification="T_GAME_QUEST_SCEN14_HEALER_09_SUCCESS"/>
+             
+			<rewards>
+				<resource resource="fish" amount="3"/>
+				<resource resource="wool" amount="5"/>
+				<start-quest id="SCEN14_CLIENT_06" />
+			</rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="questline_finished" value="true" />
+            </fail_condition>
+            
+		</quest>
+
+		<!-- Scenario End -->
+                 
+		<quest id="SCEN14_END" start="custom" finish="instant" description="T_GAME_QUEST_SCEN14_END_SUCCESS" visible="false" avatar="medicus">
+		        
+			<start_condition timeout="3" />
+
+			<objectives timeout="1">
+				<quest-done id="SCEN14_CLIENT_06"/>
+				<quest-done id="SCEN14_HEALER_06"/>
+				<quest-done id="SCEN14_HEALER_07"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN14_END_SUCCESS"/>
+			<rewards>
+				<set-modifier name="mod_event_plague_timeout" tag="map" value="100"/>
+				<set-modifier name="mod_happiness" tag="map" value="100"/>
+				<set-modifier name="mod_merchant_buy_tradegoods" tag="map" value="100"/>
+				<set-modifier name="mod_effort" tag="map" value="100"/>
+				<start-quest id="METASTART"/>
+				<scenario-finished/>
+                <set-flag key="questline_finished" value="true" />
+			</rewards>
+
+		</quest>
+                 
+		<quest id="SCEN14_FAILED" start="custom" finish="instant" visible="false" avatar="medicus">
+		        
+			<start_condition timeout="10" />
+                       
+			<objectives timeout="1"/>
+            
+			<rewards>
+				<set-modifier name="mod_event_plague_timeout" tag="map" value="100"/>
+				<set-modifier name="mod_happiness" tag="map" value="100"/>
+				<set-modifier name="mod_merchant_buy_tradegoods" tag="map" value="100"/>
+				<set-modifier name="mod_effort" tag="map" value="100"/>
+				<start-quest id="METASTART"/>
+				<scenario-failed/>
+                <set-flag key="questline_finished" value="true" />
+			</rewards>
+                        
+		</quest>
+                               
+		<quest id="METASTART" start="custom" visible="false"   >
+			
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+			<start_condition timeout="5"/>
+			<objectives timeout="1"/>
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards>
+                <lightningstrike topLeftX="48" topLeftY="74" bottomRightX="87" bottomRightY="106" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+
+	</group>
+</questdb>
+

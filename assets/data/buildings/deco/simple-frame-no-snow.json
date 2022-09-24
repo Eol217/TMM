@@ -1,0 +1,16 @@
+{
+	"layers": [
+		{
+			"sprite": {
+				"theme": {
+					"": null,
+					"*": "{typeId}.png"
+				}
+			},
+			"transition": null,
+			"anchor": "bottom",
+			"touchable": true
+
+		}
+	]
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:a0205f7e8aa9d640b8cfbf2025360612:4089843e3d7150ecbd6d07a0bac3931a:b9cd4e7dc4af576839c0e8504ceca25a$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="bars.png" width="32" height="256">
+    <sprite n="context_decay_01" x="8" y="141" w="7" h="53" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="context_gold_01" x="8" y="195" w="7" h="53" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="happy_bar" x="16" y="118" w="8" h="119" pX="0.5" pY="0.5" oX="4" oY="4" oW="127" oH="16" r="y"/>
+    <sprite n="loading_bar" x="1" y="1" w="11" h="139" pX="0.5" pY="0.5" oX="3" oY="31" oW="145" oH="45" r="y"/>
+    <sprite n="loading_bar_new" x="1" y="141" w="6" h="112" pX="0.5" pY="0.5" oX="2" oY="2" oW="116" oH="10" r="y"/>
+    <sprite n="loading_bg_new" x="13" y="1" w="10" h="116" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="mood_tax_bar_invisible" x="8" y="249" w="3" h="3" pX="0.5" pY="0.5" oX="0" oY="0" oW="127" oH="16"/>
+    <sprite n="science_bar" x="25" y="1" w="5" h="118" pX="0.5" pY="0.5" oX="2" oY="2" oW="120" oH="11" r="y"/>
+    <sprite n="xp_bar" x="25" y="120" w="5" h="118" pX="0.5" pY="0.5" oX="0" oY="2" oW="120" oH="12" r="y"/>
+</TextureAtlas>

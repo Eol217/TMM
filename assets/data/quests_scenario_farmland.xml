@@ -1,0 +1,464 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- "farmland" scenario 16
+	180 prestige earned
+-->
+
+<questdb>
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+    
+	<group avatar="client">
+
+		<quest id="suppagriculture1" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_01_TITLE" description="T_GAME_QUEST_SCEN16_01_START" start="instant" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_01_START">
+				<start-quest id="tributewheat2" />
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<quest-done id="tributejuice6"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_01_SUCCESS"/>
+
+			<rewards>
+				<resource amount="80" resource="prestige"/>
+				<start-quest id="SCENARIO_FINISHED"/>
+			</rewards>
+		</quest>
+
+		<quest id="tributewheat2" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_4_NAME" description="T_GAME_QUEST_SCEN16_02_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_02_START"/>
+
+			<start_condition timeout="20" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<construct count="2" type="building_farm"/>
+				<tribute amount="150" resource="corn"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_02_SUCCESS"/>
+
+			<rewards>
+				<resource amount="150" resource="coins"/>
+				<resource amount="6" resource="prestige"/>
+				<start-quest id="wheatdisease8"/>
+				<start-quest id="tributewheat2_2"/>
+			</rewards>
+		</quest>
+
+		<quest id="tributewheat2_2" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_02_2_TITLE" description="T_GAME_QUEST_SCEN16_02_2_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_02_2_START"/>
+
+			<start_condition timeout="90" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<tribute amount="100" resource="corn"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_02_2_SUCCESS"/>
+
+			<rewards>
+				<resource amount="550" resource="coins"/>
+				<resource amount="22" resource="prestige"/>
+				<start-quest id="tributemeat4"/>
+				<start-quest id="illness9" />
+			</rewards>
+		</quest>
+
+		<quest id="warehousematerials3" title="T_GAME_QUEST_SCEN16_03_TITLE" description="T_GAME_QUEST_SCEN16_03_START" start="instant" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_03_START"/>
+
+			<start_condition timeout="30" operator="and">
+				<stock amount="100" resource="corn"/>
+			</start_condition>
+
+			<objectives timeout="2" operator="and">
+				<tribute amount="40" resource="wood"/>
+				<tribute amount="35" resource="planks"/>
+				<tribute amount="80" resource="stone"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_03_SUCCESS"/>
+
+			<rewards>
+				<resource amount="22" resource="fish"/>
+				<resource amount="14" resource="flour"/>
+			</rewards>
+            <fail_condition timeout="1"  operator="and">    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>    
+	
+		</quest>
+
+		<quest id="tributemeat4" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_04_TITLE" description="T_GAME_QUEST_SCEN16_04_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_04_START"/>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building count="2" type="building_hunters_cabin"/>
+				<tribute amount="25" resource="meat"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_04_SUCCESS"/>
+
+			<rewards>
+				<resource amount="250" resource="coins"/>
+				<resource amount="10" resource="prestige"/>
+				<start-quest id="illness9"/>
+				<start-quest id="wilddesease10"/>
+				<start-quest id="tributemeat4_1"/>
+			</rewards>
+		</quest>
+
+		<quest id="tributemeat4_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_04_1_TITLE_NEW" description="T_GAME_QUEST_SCEN16_04_1_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_04_1_START"/>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<quest-done id="illness9"/>
+				<tribute amount="25" resource="meat"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_04_1_SUCCESS"/>
+
+			<rewards>
+				<resource amount="400" resource="coins"/>
+				<resource amount="22" resource="prestige"/>
+				<start-quest id="tributecloth5"/>
+			</rewards>
+		</quest>
+        
+		<quest id="tributecloth5" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_05_TITLE" description="T_GAME_QUEST_SCEN16_05_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_05_START"/>
+
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="16" resource="brew"/>
+				<tribute amount="18" resource="juice"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_05_SUCCESS"/>
+
+			<rewards>
+				<resource amount="350" resource="coins"/>
+				<resource amount="14" resource="prestige"/>
+				<start-quest id="tributejuice6"/>
+			</rewards>
+		</quest>
+
+		<quest id="tributejuice6" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_06_TITLE" description="T_GAME_QUEST_SCEN16_06_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_06_START"/>
+
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="25" resource="sausage"/>
+				<tribute amount="15" resource="bread"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_06_SUCCESS"/>
+
+			<rewards>
+				<resource amount="500" resource="coins"/>
+				<resource amount="14" resource="prestige"/>
+			</rewards>
+		</quest>
+        
+		<quest id="wheatdisease8" start="custom" visible="false" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_08_START">
+		<!--	<set-game-state state="draught" enable="true"/>  replaced with disallow -->
+				<disallow key="cornfield_1x1_growth" />
+				<set-enable-trade lock="true" resource="corn"/>
+				<set-enable-trade lock="true" resource="flour"/>
+				<set-enable-trade lock="true" resource="bread"/>
+                <start-quest id="GAME_STATE_TICKET_NO_WEAT" />
+				<set-resource resource="corn" value="0" />
+			</onStarted>
+
+			<start_condition timeout="45" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<start-quest id="merchantannounce12"/>
+			</rewards>
+		</quest>
+		
+		<quest id="wheatdisease8_old_savegame" start="instant" visible="false" repeatable="no" finish="instant" >
+			<objectives timeout="1" operator="and">
+				<quest-done id="wheatdisease8" />
+				<flag-has-value key="scenario_complete" value="false" />
+			</objectives>
+			<fail_condition timeout="2"  operator="and"/>
+			<rewards >
+				<disallow key="cornfield_1x1_growth" />
+			</rewards>
+		</quest>
+		
+		<quest id="illness9" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_09_TITLE" description="T_GAME_QUEST_SCEN16_09_START" start="custom" avatar="medicus">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_09_START">
+				<start-plague amount="3"/>
+			</onStarted>
+
+			<start_condition timeout="25" operator="and">
+				<!--<quest-done id="tributewheat2_2"/>-->
+			</start_condition>
+
+			<objectives timeout="1" operator="and">
+				<building count="1" type="building_medicus"/>
+				<purge-plague/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_09_SUCCESS"/>
+
+			<rewards>
+				<resource amount="250" resource="coins"/>
+				<resource amount="16" resource="flour"/>
+			</rewards>
+		</quest>
+
+		<quest id="wilddesease10" start="custom" visible="false" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_10_START">
+		<!--	<set-game-state state="animals-sick" enable="true"/> -->
+				<disallow key="animal_spawn" />
+                <start-quest id="GAME_STATE_TICKET_NO_ANIMALS" />
+			</onStarted>
+
+			<start_condition timeout="25" operator="and"/>
+
+			<rewards>
+				<start-quest id="pigfarm11"/>
+			</rewards>
+		</quest>
+		
+		<quest id="wilddesease10_old_savegame" start="instant" visible="false" repeatable="no" finish="instant" >
+			<objectives timeout="1" operator="and">
+				<quest-done id="wilddesease10" />
+				<flag-has-value key="scenario_complete" value="false" />
+			</objectives>
+			<fail_condition timeout="2"  operator="and"/>
+			<rewards >
+				<disallow key="animal_spawn" />
+			</rewards>
+		</quest>
+		
+		<quest id="pigfarm11" title="T_GAME_QUEST_SCEN16_11_TITLE" description="T_GAME_QUEST_SCEN16_11_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_11_START"/>
+			
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<building count="1" type="building_pigfarm"/>
+				<building count="1" type="building_butcher"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_11_SUCCESS"/>
+
+			<rewards>
+				<resource amount="18" resource="stone"/>
+				<resource amount="12" resource="fish"/>
+			</rewards>
+            
+            <fail_condition timeout="1"  operator="and">    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>    
+
+		</quest>
+
+		<quest id="merchantannounce12" start="custom" visible="false" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_12_MERCHANT">
+				<set-merchant state="available"/>
+			</onStarted>
+
+			<start_condition timeout="45" operator="and"/>
+
+			<rewards>
+				<start-quest id="tradewheat12"/>
+			</rewards>
+		</quest>
+
+		<quest id="tradewheat12" title="T_GAME_QUEST_SCEN16_12_TITLE" description="T_GAME_QUEST_SCEN16_12_START" start="custom" repeatable="custom" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_12_START"/>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<tribute amount="35" resource="stone"/>
+				<flag-has-value key="scenario_complete" value="false" />
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_12_SUCCESS"/>
+
+			<rewards>
+				<resource amount="40" resource="corn"/>
+				<start-quest id="tradewheat12_delay"/>
+				<set-merchant state="unavailable"/>
+			</rewards>
+            
+            <fail_condition timeout="1"  operator="and">    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>    
+		</quest>
+        
+        <quest id="tradewheat12_delay" visible="false" finish="instant" start="custom" repeatable="custom" >
+            <objectives timeout="60"  operator="and"/>
+            <fail_condition timeout="1"  operator="and">
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>
+            <rewards >
+                <start-quest id="tradewheat12_1" />
+            </rewards>
+        </quest>
+        
+		<quest id="tradewheat12_1" title="T_GAME_QUEST_SCEN16_12_1_TITLE" description="T_GAME_QUEST_SCEN16_12_1_START" start="custom" repeatable="custom" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_12_1_START">
+				<set-merchant state="available"/>
+			</onStarted>
+            <!-- Replaced with a delay quest to prevent notes from appearing after scenario is already finished
+			<start_condition timeout="60"/>
+            -->
+			<objectives timeout="3" operator="and">
+				<tribute amount="25" resource="ore"/>
+				<flag-has-value key="scenario_complete" value="false" />
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_12_1_SUCCESS"/>
+
+			<rewards>
+				<resource amount="35" resource="corn"/>
+				<start-quest id="tradewheat12_2_delay"/>
+				<set-merchant state="unavailable"/>
+			</rewards>
+            
+            <fail_condition timeout="1"  operator="and">    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>    
+		</quest>
+        
+        <quest id="tradewheat12_2_delay" visible="false" finish="instant" start="custom" repeatable="custom" >
+            <objectives timeout="90"  operator="and"/>
+            <fail_condition timeout="1"  operator="and">
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>
+            <rewards >
+                <start-quest id="tradewheat12_2" />
+            </rewards>
+        </quest>
+        
+		<quest id="tradewheat12_2" title="T_GAME_QUEST_SCEN16_12_2_TITLE" description="T_GAME_QUEST_SCEN16_12_2_START" start="custom" repeatable="custom" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_12_2_START">
+				<set-merchant state="available"/>
+			</onStarted>
+            <!-- Replaced with a delay quest to prevent notes from appearing after scenario is already finished
+			<start_condition timeout="90"/>
+            -->
+			<objectives timeout="3" operator="and">
+				<tribute amount="15" resource="gold"/>
+				<flag-has-value key="scenario_complete" value="false" />
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN16_12_2_SUCCESS"/>
+
+			<rewards>
+				<resource amount="25" resource="corn"/>
+				<set-merchant state="unavailable"/>
+                <start-quest id="tradewheat12_2_delay" />
+			</rewards>
+            
+            <fail_condition timeout="1"  operator="and">    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>    
+		</quest>
+        
+        <quest id="GAME_STATE_TICKET_NO_WEAT" visible="false" finish="instant" start="custom"  >
+            <objectives timeout="1"  operator="and">
+                <flag-has-value key="scenario_complete" value="true" />
+            </objectives>
+            <ticket title="T_GAME_WARNING_FIELDS_DROUGHT" type="negative"/>
+        </quest>
+        
+        <quest id="GAME_STATE_TICKET_NO_ANIMALS" visible="false" finish="instant" start="custom"  >
+            <objectives timeout="1"  operator="and">
+                <flag-has-value key="scenario_complete" value="true" />
+            </objectives>
+            <ticket title="T_MOD_MAP_MODIFIER_ANIMALS_DIE" type="negative"/>
+        </quest>
+        
+		<quest id="SCENARIO_FINISHED" start="custom" visible="false"  >
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards >
+				<set-merchant state="available"/>
+				<start-quest id="METASTART"/>
+				<scenario-finished />  
+                <set-flag key="scenario_complete" value="true" />
+		<!--    <set-game-state state="draught" enable="false"/> -->
+        <!--    <set-game-state state="animals-sick" enable="false"/> -->
+				<allow key="cornfield_1x1_growth" />
+				<allow key="animal_spawn" />
+                <set-merchant state="available"/>
+                <set-enable-trade lock="false" resource="corn"/>
+				<set-enable-trade lock="false" resource="flour"/>
+				<set-enable-trade lock="false" resource="bread"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"   >
+			
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+			
+			<rewards>
+                <set-season season="summer" />
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1"  operator="and">
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2"  operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="68" topLeftY="70" bottomRightX="107" bottomRightY="107" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+    
+	</group>
+</questdb>
+

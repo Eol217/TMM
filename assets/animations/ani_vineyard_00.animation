@@ -1,0 +1,12 @@
+[work]
+
+frame-delay: 0.2
+
+frame:	ani_vineyard_00.0.png
+play_ambient: sfx_buildings_juicer
+frame:	ani_vineyard_00.1.png
+frame:	ani_vineyard_00.2.png
+frame:	ani_vineyard_00.3.png
+
+
+next:	work

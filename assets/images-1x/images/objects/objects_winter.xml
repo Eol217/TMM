@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:86affe680db34b5da76f3b9fbf02d9a0:e569c6b2881136b806f04a97c88012e4:dea008092af36184dead3f86cbaf0e0d$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="objects_winter.png" width="256" height="1024">
+    <sprite n="ambient_1x1_grass_00" x="142" y="115" w="14" h="14" pX="0.5" pY="0.5" oX="11" oY="3" oW="32" oH="32">
+        <vertices>25 17 11 17 11 3 25 3</vertices>
+        <verticesUV>156 129 142 129 142 115 156 115</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_grass_01" x="50" y="77" w="12" h="12" pX="0.5" pY="0.5" oX="4" oY="0" oW="32" oH="32">
+        <vertices>16 12 4 12 4 0 16 0</vertices>
+        <verticesUV>62 89 50 89 50 77 62 77</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_grass_02" x="124" y="226" w="24" h="19" pX="0.5" pY="0.5" oX="3" oY="1" oW="32" oH="34">
+        <vertices>27 20 3 20 3 1 27 1</vertices>
+        <verticesUV>148 245 124 245 124 226 148 226</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_grass_03" x="1" y="991" w="23" h="20" pX="0.5" pY="0.5" oX="7" oY="5" oW="32" oH="44">
+        <vertices>30 25 7 25 7 5 30 5</vertices>
+        <verticesUV>24 1011 1 1011 1 991 24 991</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_grass_04" x="42" y="746" w="17" h="20" pX="0.5" pY="0.5" oX="7" oY="0" oW="32" oH="34">
+        <vertices>24 20 7 20 7 0 24 0</vertices>
+        <verticesUV>59 766 42 766 42 746 59 746</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_mushroom_00" x="96" y="1" w="29" h="17" pX="0.5" pY="0.5" oX="0" oY="0" oW="32" oH="33">
+        <vertices>29 17 0 17 0 0 29 0</vertices>
+        <verticesUV>125 18 96 18 96 1 125 1</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_mushroom_01" x="151" y="433" w="10" h="11" pX="0.5" pY="0.5" oX="14" oY="8" oW="32" oH="33">
+        <vertices>24 19 14 19 14 8 24 8</vertices>
+        <verticesUV>161 444 151 444 151 433 161 433</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_mushroom_02" x="28" y="238" w="21" h="21" pX="0.5" pY="0.5" oX="2" oY="0" oW="32" oH="33">
+        <vertices>23 4 14 21 2 9 12 0 19 0</vertices>
+        <verticesUV>49 242 40 259 28 247 38 238 45 238</verticesUV>
+        <triangles>0 3 4 1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_stone_00" x="56" y="343" w="14" h="11" pX="0.5" pY="0.5" oX="5" oY="5" oW="32" oH="32">
+        <vertices>19 16 5 16 5 5 19 5</vertices>
+        <verticesUV>70 354 56 354 56 343 70 343</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_stone_01" x="207" y="1" w="16" h="12" pX="0.5" pY="0.5" oX="13" oY="1" oW="32" oH="32">
+        <vertices>29 13 13 13 13 1 29 1</vertices>
+        <verticesUV>223 13 207 13 207 1 223 1</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_stone_02" x="27" y="157" w="11" h="9" pX="0.5" pY="0.5" oX="13" oY="6" oW="32" oH="32">
+        <vertices>24 15 13 15 13 6 24 6</vertices>
+        <verticesUV>38 166 27 166 27 157 38 157</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ambient_1x1_stone_03" x="61" y="1" w="25" h="13" pX="0.5" pY="0.5" oX="4" oY="2" oW="32" oH="32">
+        <vertices>29 15 11 15 4 8 10 2 29 2</vertices>
+        <verticesUV>86 14 68 14 61 7 67 1 86 1</verticesUV>
+        <triangles>1 3 4 1 2 3 0 1 4</triangles>
+    </sprite>
+    <sprite n="deco_1x1_avenue_tree_00" x="46" y="401" w="37" h="75" pX="0.5" pY="0.5" oX="0" oY="6" oW="38" oH="85">
+        <vertices>28 20 37 63 0 81 1 46 14 6</vertices>
+        <verticesUV>74 415 83 458 46 476 47 441 60 401</verticesUV>
+        <triangles>0 1 3 1 2 3 0 3 4</triangles>
+    </sprite>
+    <sprite n="deco_1x1_avenue_tree_01" x="149" y="222" w="37" h="64" pX="0.5" pY="0.5" oX="0" oY="17" oW="38" oH="85">
+        <vertices>37 63 0 81 1 17 29 17</vertices>
+        <verticesUV>186 268 149 286 150 222 178 222</verticesUV>
+        <triangles>0 2 3 0 1 2</triangles>
+    </sprite>
+    <sprite n="deco_1x1_avenue_tree_02" x="143" y="377" w="38" h="55" pX="0.5" pY="0.5" oX="0" oY="15" oW="38" oH="85">
+        <vertices>31 26 38 70 15 70 0 63 11 15</vertices>
+        <verticesUV>174 388 181 432 158 432 143 425 154 377</verticesUV>
+        <triangles>0 2 3 0 1 2 0 3 4</triangles>
+    </sprite>
+    <sprite n="deco_1x1_seasonal_field_00" x="148" y="1" w="32" h="19" pX="0.5" pY="0.5" oX="3" oY="26" oW="37" oH="60">
+        <vertices>35 45 3 45 3 26 35 26</vertices>
+        <verticesUV>180 20 148 20 148 1 180 1</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="deco_1x1_seasonal_field_01" x="28" y="627" w="32" h="19" pX="0.5" pY="0.5" oX="3" oY="26" oW="37" oH="60">
+        <vertices>35 45 3 45 3 26 35 26</vertices>
+        <verticesUV>60 646 28 646 28 627 60 627</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="deco_1x1_seasonal_field_02" x="17" y="503" w="32" h="19" pX="0.5" pY="0.5" oX="3" oY="26" oW="37" oH="60">
+        <vertices>35 45 3 45 3 26 35 26</vertices>
+        <verticesUV>49 522 17 522 17 503 49 503</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="deco_1x1_seasonal_field_03" x="71" y="348" w="32" h="18" pX="0.5" pY="0.5" oX="3" oY="26" oW="37" oH="60">
+        <vertices>35 44 3 44 3 26 35 26</vertices>
+        <verticesUV>103 366 71 366 71 348 103 348</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_00.0" x="179" y="369" w="38" h="51" pX="0.5" pY="0.5" oX="5" oY="1" oW="44" oH="67">
+        <vertices>43 52 7 52 5 18 22 1</vertices>
+        <verticesUV>217 420 181 420 179 386 196 369</verticesUV>
+        <triangles>0 2 3 0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_1x1_01.0" x="204" y="144" w="21" h="16" pX="0.5" pY="0.5" oX="8" oY="34" oW="44" oH="67">
+        <vertices>29 50 8 50 8 34 29 34</vertices>
+        <verticesUV>225 160 204 160 204 144 225 144</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_03.0" x="1" y="823" w="24" h="33" pX="0.5" pY="0.5" oX="9" oY="18" oW="44" oH="67">
+        <vertices>33 51 9 51 9 18 33 18</vertices>
+        <verticesUV>25 856 1 856 1 823 25 823</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_10.0" x="78" y="446" w="41" h="47" pX="0.5" pY="0.5" oX="1" oY="9" oW="44" oH="67">
+        <vertices>28 14 42 45 31 56 1 41 11 9</vertices>
+        <verticesUV>105 451 119 482 108 493 78 478 88 446</verticesUV>
+        <triangles>1 2 3 0 1 3 0 3 4</triangles>
+    </sprite>
+    <sprite n="forest_1x1_11.0" x="1" y="63" w="23" h="25" pX="0.5" pY="0.5" oX="12" oY="28" oW="44" oH="67">
+        <vertices>35 44 12 53 13 28</vertices>
+        <verticesUV>24 79 1 88 2 63</verticesUV>
+        <triangles>0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_1x1_13.0" x="31" y="711" w="31" h="34" pX="0.5" pY="0.5" oX="10" oY="17" oW="44" oH="67">
+        <vertices>26 21 41 51 10 51 10 17</vertices>
+        <verticesUV>47 715 62 745 31 745 31 711</verticesUV>
+        <triangles>0 1 2 0 2 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_20.0" x="52" y="468" w="32" h="41" pX="0.5" pY="0.5" oX="10" oY="16" oW="44" oH="67">
+        <vertices>42 35 42 50 24 57 10 43 23 16</vertices>
+        <verticesUV>84 487 84 502 66 509 52 495 65 468</verticesUV>
+        <triangles>0 1 2 0 2 3 0 3 4</triangles>
+    </sprite>
+    <sprite n="forest_1x1_21.0" x="70" y="79" w="24" h="34" pX="0.5" pY="0.5" oX="10" oY="32" oW="44" oH="67">
+        <vertices>34 44 10 66 22 32</vertices>
+        <verticesUV>94 91 70 113 82 79</verticesUV>
+        <triangles>0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_1x1_23.0" x="1" y="857" w="26" h="28" pX="0.5" pY="0.5" oX="14" oY="24" oW="44" oH="67">
+        <vertices>40 52 14 52 14 24 40 24</vertices>
+        <verticesUV>27 885 1 885 1 857 27 857</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_30.0" x="209" y="255" w="27" h="59" pX="0.5" pY="0.5" oX="13" oY="2" oW="44" oH="75">
+        <vertices>33 14 40 61 13 61 13 20 20 2</vertices>
+        <verticesUV>229 267 236 314 209 314 209 273 216 255</verticesUV>
+        <triangles>0 1 3 1 2 3 0 3 4</triangles>
+    </sprite>
+    <sprite n="forest_1x1_31.0" x="131" y="2" w="17" h="22" pX="0.5" pY="0.5" oX="14" oY="37" oW="44" oH="75">
+        <vertices>31 58 14 59 22 37</vertices>
+        <verticesUV>148 23 131 24 139 2</verticesUV>
+        <triangles>0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_1x1_33.0" x="1" y="666" w="24" h="45" pX="0.5" pY="0.5" oX="14" oY="16" oW="44" oH="75">
+        <vertices>38 61 14 61 14 16 38 16</vertices>
+        <verticesUV>25 711 1 711 1 666 25 666</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_40.0" x="148" y="315" w="33" h="61" pX="0.5" pY="0.5" oX="7" oY="0" oW="44" oH="75">
+        <vertices>40 61 7 61 7 0 40 0</vertices>
+        <verticesUV>181 376 148 376 148 315 181 315</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_41.0" x="1" y="915" w="27" h="23" pX="0.5" pY="0.5" oX="10" oY="38" oW="44" oH="75">
+        <vertices>37 61 10 61 10 38 37 38</vertices>
+        <verticesUV>28 938 1 938 1 915 28 915</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_43.0" x="224" y="1" w="28" h="50" pX="0.5" pY="0.5" oX="9" oY="9" oW="44" oH="75">
+        <vertices>37 59 9 59 9 9 37 9</vertices>
+        <verticesUV>252 51 224 51 224 1 252 1</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_50.0" x="111" y="377" w="32" h="61" pX="0.5" pY="0.5" oX="9" oY="3" oW="44" oH="75">
+        <vertices>41 60 16 64 9 6 30 3</vertices>
+        <verticesUV>143 434 118 438 111 380 132 377</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_51.0" x="214" y="398" w="21" h="55" pX="0.5" pY="0.5" oX="15" oY="10" oW="44" oH="75">
+        <vertices>30 65 15 56 23 11 36 10</vertices>
+        <verticesUV>229 453 214 444 222 399 235 398</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_53.0" x="26" y="666" w="21" h="44" pX="0.5" pY="0.5" oX="14" oY="15" oW="44" oH="75">
+        <vertices>35 59 14 59 14 15 35 15</vertices>
+        <verticesUV>47 710 26 710 26 666 47 666</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_60.0" x="73" y="398" w="43" h="52" pX="0.5" pY="0.5" oX="1" oY="5" oW="44" oH="67">
+        <vertices>31 8 44 42 34 57 11 50 1 13 16 5</vertices>
+        <verticesUV>103 401 116 435 106 450 83 443 73 406 88 398</verticesUV>
+        <triangles>3 4 5 1 2 3 0 1 3 0 3 5</triangles>
+    </sprite>
+    <sprite n="forest_1x1_61.0" x="1" y="600" w="26" h="46" pX="0.5" pY="0.5" oX="12" oY="6" oW="44" oH="67">
+        <vertices>38 52 12 52 12 31 38 31 19 10 16 10 16 6 19 6</vertices>
+        <verticesUV>27 646 1 646 1 625 27 625 8 604 5 604 5 600 8 600</verticesUV>
+        <triangles>1 2 3 0 1 3 5 6 7 4 5 7</triangles>
+    </sprite>
+    <sprite n="forest_1x1_63.0" x="1" y="712" w="29" h="38" pX="0.5" pY="0.5" oX="8" oY="12" oW="44" oH="67">
+        <vertices>37 50 8 50 8 12 37 12</vertices>
+        <verticesUV>30 750 1 750 1 712 30 712</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_70.0" x="1" y="886" w="24" h="28" pX="0.5" pY="0.5" oX="12" oY="24" oW="44" oH="67">
+        <vertices>36 52 12 52 12 24 36 24</vertices>
+        <verticesUV>25 914 1 914 1 886 25 886</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_71.0" x="1" y="154" w="22" h="16" pX="0.5" pY="0.5" oX="12" oY="36" oW="44" oH="67">
+        <vertices>34 52 12 52 12 36 34 36</vertices>
+        <verticesUV>23 170 1 170 1 154 23 154</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_73.0" x="163" y="433" w="19" h="22" pX="0.5" pY="0.5" oX="14" oY="28" oW="44" oH="67">
+        <vertices>33 50 14 50 14 28 33 28</vertices>
+        <verticesUV>182 455 163 455 163 433 182 433</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_80.0" x="183" y="421" w="34" h="50" pX="0.5" pY="0.5" oX="8" oY="3" oW="44" oH="67">
+        <vertices>42 53 8 52 8 3 31 3</vertices>
+        <verticesUV>217 471 183 470 183 421 206 421</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_81.0" x="191" y="62" w="24" h="34" pX="0.5" pY="0.5" oX="13" oY="32" oW="44" oH="67">
+        <vertices>37 43 14 66 13 32</vertices>
+        <verticesUV>215 73 192 96 191 62</verticesUV>
+        <triangles>0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_1x1_83.0" x="1" y="552" w="28" h="47" pX="0.5" pY="0.5" oX="9" oY="5" oW="44" oH="67">
+        <vertices>31 16 37 52 10 52 9 5</vertices>
+        <verticesUV>23 563 29 599 2 599 1 552</verticesUV>
+        <triangles>0 1 2 0 2 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_90.0" x="1" y="506" w="31" h="44" pX="0.5" pY="0.5" oX="13" oY="14" oW="44" oH="67">
+        <vertices>44 48 13 58 13 14</vertices>
+        <verticesUV>32 540 1 550 1 506</verticesUV>
+        <triangles>0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_1x1_91.0" x="1" y="939" w="22" h="27" pX="0.5" pY="0.5" oX="13" oY="24" oW="44" oH="67">
+        <vertices>35 51 13 51 13 24 35 24</vertices>
+        <verticesUV>23 966 1 966 1 939 23 939</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_1x1_93.0" x="188" y="256" w="18" h="21" pX="0.5" pY="0.5" oX="15" oY="29" oW="44" oH="67">
+        <vertices>33 50 15 50 15 29 33 29</vertices>
+        <verticesUV>206 277 188 277 188 256 206 256</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_2x2_00.0" x="1" y="80" w="75" h="79" pX="0.5" pY="0.5" oX="2" oY="3" oW="77" oH="93">
+        <vertices>64 25 77 61 56 82 2 71 10 19 39 3</vertices>
+        <verticesUV>63 102 76 138 55 159 1 148 9 96 38 80</verticesUV>
+        <triangles>0 1 2 3 4 0 3 0 2 0 4 5</triangles>
+    </sprite>
+    <sprite n="forest_2x2_01.0" x="68" y="148" w="69" h="77" pX="0.5" pY="0.5" oX="4" oY="4" oW="77" oH="93">
+        <vertices>73 26 73 77 4 81 4 4</vertices>
+        <verticesUV>137 170 137 221 68 225 68 148</verticesUV>
+        <triangles>0 1 2 0 2 3</triangles>
+    </sprite>
+    <sprite n="forest_2x2_02.0" x="40" y="365" w="65" h="34" pX="0.5" pY="0.5" oX="2" oY="43" oW="77" oH="93">
+        <vertices>65 52 67 63 45 77 7 73 2 58 19 43</vertices>
+        <verticesUV>103 374 105 385 83 399 45 395 40 380 57 365</verticesUV>
+        <triangles>3 4 5 2 3 5 0 1 2 0 2 5</triangles>
+    </sprite>
+    <sprite n="forest_2x2_03.0" x="74" y="84" w="70" h="74" pX="0.5" pY="0.5" oX="1" oY="7" oW="77" oH="93">
+        <vertices>61 28 71 63 44 81 1 71 25 7</vertices>
+        <verticesUV>134 105 144 140 117 158 74 148 98 84</verticesUV>
+        <triangles>0 2 3 0 1 2 0 3 4</triangles>
+    </sprite>
+    <sprite n="forest_2x2_10.0" x="138" y="119" w="68" h="74" pX="0.5" pY="0.5" oX="8" oY="5" oW="77" oH="93">
+        <vertices>65 19 76 61 58 79 9 76 8 33 42 5</vertices>
+        <verticesUV>195 133 206 175 188 193 139 190 138 147 172 119</verticesUV>
+        <triangles>0 1 2 2 3 4 0 2 4 0 4 5</triangles>
+    </sprite>
+    <sprite n="forest_2x2_11.0" x="60" y="1" w="76" h="82" pX="0.5" pY="0.5" oX="0" oY="0" oW="77" oH="93">
+        <vertices>72 45 76 60 54 82 13 74 14 32 30 14 2 3 0 3 0 0 2 0</vertices>
+        <verticesUV>132 46 136 61 114 83 73 75 74 33 90 15 62 4 60 4 60 1 62 1</verticesUV>
+        <triangles>0 1 2 2 3 4 0 2 4 0 4 5 7 8 9 6 7 9</triangles>
+    </sprite>
+    <sprite n="forest_2x2_12.0" x="47" y="295" w="60" h="51" pX="0.5" pY="0.5" oX="16" oY="32" oW="77" oH="93">
+        <vertices>76 60 53 83 16 71 16 48 69 32</vertices>
+        <verticesUV>107 323 84 346 47 334 47 311 100 295</verticesUV>
+        <triangles>0 3 4 1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_2x2_13.0" x="118" y="44" w="72" h="69" pX="0.5" pY="0.5" oX="2" oY="15" oW="77" oH="93">
+        <vertices>74 32 74 70 28 84 2 58 35 15</vertices>
+        <verticesUV>190 61 190 99 144 113 118 87 151 44</verticesUV>
+        <triangles>2 3 4 0 1 2 0 2 4</triangles>
+    </sprite>
+    <sprite n="forest_2x2_20.0" x="1" y="156" w="66" h="82" pX="0.5" pY="0.5" oX="11" oY="3" oW="77" oH="93">
+        <vertices>77 71 40 85 11 74 14 28 77 3</vertices>
+        <verticesUV>67 224 30 238 1 227 4 181 67 156</verticesUV>
+        <triangles>0 3 4 1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="forest_2x2_21.0" x="1" y="1" w="71" h="88" pX="0.5" pY="0.5" oX="6" oY="5" oW="77" oH="93">
+        <vertices>77 93 72 93 72 89 77 89 77 24 77 74 34 85 6 65 17 27 58 5</vertices>
+        <verticesUV>72 89 67 89 67 85 72 85 72 20 72 70 29 81 1 61 12 23 53 1</verticesUV>
+        <triangles>1 2 3 0 1 3 4 5 8 6 7 8 5 6 8 4 8 9</triangles>
+    </sprite>
+    <sprite n="forest_2x2_22.0" x="155" y="8" w="68" h="45" pX="0.5" pY="0.5" oX="0" oY="35" oW="77" oH="93">
+        <vertices>68 52 68 67 39 80 0 71 40 35</vertices>
+        <verticesUV>223 25 223 40 194 53 155 44 195 8</verticesUV>
+        <triangles>2 3 4 0 1 2 0 2 4</triangles>
+    </sprite>
+    <sprite n="forest_2x2_23.0" x="183" y="177" w="64" h="74" pX="0.5" pY="0.5" oX="10" oY="12" oW="77" oH="93">
+        <vertices>72 30 74 65 40 86 10 71 16 29 52 12</vertices>
+        <verticesUV>245 195 247 230 213 251 183 236 189 194 225 177</verticesUV>
+        <triangles>0 1 4 2 3 4 1 2 4 0 4 5</triangles>
+    </sprite>
+    <sprite n="forest_2x2_30.0" x="178" y="63" w="60" h="79" pX="0.5" pY="0.5" oX="7" oY="3" oW="77" oH="93">
+        <vertices>67 73 34 82 7 53 55 3</vertices>
+        <verticesUV>238 133 205 142 178 113 226 63</verticesUV>
+        <triangles>0 2 3 0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_2x2_31.0" x="104" y="320" w="43" h="56" pX="0.5" pY="0.5" oX="17" oY="22" oW="77" oH="93">
+        <vertices>56 43 56 78 18 78 17 30 60 33 49 22 60 22</vertices>
+        <verticesUV>143 341 143 376 105 376 104 328 147 331 136 320 147 320</verticesUV>
+        <triangles>0 1 2 0 2 3 4 5 6</triangles>
+    </sprite>
+    <sprite n="forest_2x2_32.0" x="112" y="3" w="65" h="48" pX="0.5" pY="0.5" oX="10" oY="35" oW="77" oH="93">
+        <vertices>38 83 10 60 75 54 30 39 27 39 27 35 30 35</vertices>
+        <verticesUV>140 51 112 28 177 22 132 7 129 7 129 3 132 3</verticesUV>
+        <triangles>0 1 2 4 5 6 3 4 6</triangles>
+    </sprite>
+    <sprite n="forest_2x2_33.0" x="103" y="261" w="44" h="66" pX="0.5" pY="0.5" oX="19" oY="18" oW="77" oH="93">
+        <vertices>63 71 25 84 19 47 54 18</vertices>
+        <verticesUV>147 314 109 327 103 290 138 261</verticesUV>
+        <triangles>0 2 3 0 1 2</triangles>
+    </sprite>
+    <sprite n="forest_2x2_40.0" x="1" y="307" w="57" h="74" pX="0.5" pY="0.5" oX="14" oY="10" oW="77" oH="93">
+        <vertices>54 28 71 65 40 84 14 65 23 10</vertices>
+        <verticesUV>41 325 58 362 27 381 1 362 10 307</verticesUV>
+        <triangles>0 1 2 0 2 3 0 3 4</triangles>
+    </sprite>
+    <sprite n="forest_2x2_41.0" x="1" y="431" w="49" h="73" pX="0.5" pY="0.5" oX="20" oY="11" oW="77" oH="93">
+        <vertices>56 28 69 75 20 84 22 11</vertices>
+        <verticesUV>37 448 50 495 1 504 3 431</verticesUV>
+        <triangles>0 1 2 0 2 3</triangles>
+    </sprite>
+    <sprite n="forest_2x2_42.0" x="93" y="224" w="54" h="61" pX="0.5" pY="0.5" oX="20" oY="32" oW="77" oH="93">
+        <vertices>74 61 25 93 20 45 48 36 45 36 45 32 48 32</vertices>
+        <verticesUV>147 253 98 285 93 237 121 228 118 228 118 224 121 224</verticesUV>
+        <triangles>0 1 2 4 5 6 3 4 6</triangles>
+    </sprite>
+    <sprite n="forest_2x2_43.0" x="1" y="371" w="56" h="69" pX="0.5" pY="0.5" oX="17" oY="19" oW="77" oH="93">
+        <vertices>73 54 41 88 17 60 27 19</vertices>
+        <verticesUV>57 406 25 440 1 412 11 371</verticesUV>
+        <triangles>0 1 2 0 2 3</triangles>
+    </sprite>
+    <sprite n="forest_2x2_50.0" x="44" y="230" w="53" h="70" pX="0.5" pY="0.5" oX="15" oY="14" oW="77" oH="93">
+        <vertices>57 15 68 71 30 84 15 39 27 14</vertices>
+        <verticesUV>86 231 97 287 59 300 44 255 56 230</verticesUV>
+        <triangles>1 2 3 0 1 3 0 3 4</triangles>
+    </sprite>
+    <sprite n="forest_2x2_51.0" x="1" y="229" w="55" h="78" pX="0.5" pY="0.5" oX="15" oY="1" oW="77" oH="93">
+        <vertices>61 40 70 79 26 78 15 1</vertices>
+        <verticesUV>47 268 56 307 12 306 1 229</verticesUV>
+        <triangles>0 1 2 0 2 3</triangles>
+    </sprite>
+    <sprite n="forest_2x2_52.0" x="209" y="355" w="38" h="42" pX="0.5" pY="0.5" oX="26" oY="36" oW="77" oH="93">
+        <vertices>64 78 26 78 26 50 64 50 49 39 46 39 46 36 49 36</vertices>
+        <verticesUV>247 397 209 397 209 369 247 369 232 358 229 358 229 355 232 355</verticesUV>
+        <triangles>1 2 3 0 1 3 5 6 7 4 5 7</triangles>
+    </sprite>
+    <sprite n="forest_2x2_53.0" x="182" y="315" w="40" h="53" pX="0.5" pY="0.5" oX="23" oY="25" oW="77" oH="93">
+        <vertices>63 78 23 78 23 25 63 25</vertices>
+        <verticesUV>222 368 182 368 182 315 222 315</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ice_var_01" x="1" y="647" w="53" h="18" pX="0.5" pY="0.5" oX="6" oY="8" oW="64" oH="34">
+        <vertices>59 26 6 26 6 8 59 8</vertices>
+        <verticesUV>54 665 1 665 1 647 54 647</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ice_var_02" x="139" y="194" w="48" h="24" pX="0.5" pY="0.5" oX="9" oY="7" oW="64" oH="34">
+        <vertices>33 31 9 7 57 7</vertices>
+        <verticesUV>163 218 139 194 187 194</verticesUV>
+        <triangles>0 1 2</triangles>
+    </sprite>
+    <sprite n="ice_var_03" x="1" y="751" w="40" h="25" pX="0.5" pY="0.5" oX="17" oY="0" oW="64" oH="31">
+        <vertices>57 25 17 25 17 0 57 0</vertices>
+        <verticesUV>41 776 1 776 1 751 41 751</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ice_var_04" x="176" y="472" w="51" h="26" pX="0.5" pY="0.5" oX="5" oY="3" oW="64" oH="34">
+        <vertices>56 17 44 29 5 29 28 3 42 3</vertices>
+        <verticesUV>227 486 215 498 176 498 199 472 213 472</verticesUV>
+        <triangles>1 3 4 1 2 3 0 1 4</triangles>
+    </sprite>
+    <sprite n="ice_var_05" x="1" y="597" w="48" h="23" pX="0.5" pY="0.5" oX="7" oY="3" oW="64" oH="34">
+        <vertices>55 7 45 26 7 26 10 17 47 3</vertices>
+        <verticesUV>49 601 39 620 1 620 4 611 41 597</verticesUV>
+        <triangles>1 3 4 1 2 3 0 1 4</triangles>
+    </sprite>
+    <sprite n="ice_var_06" x="1" y="800" w="36" h="22" pX="0.5" pY="0.5" oX="18" oY="3" oW="64" oH="31">
+        <vertices>54 25 18 25 18 3 54 3</vertices>
+        <verticesUV>37 822 1 822 1 800 37 800</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="ice_var_07" x="148" y="278" w="60" h="36" pX="0.5" pY="0.5" oX="1" oY="0" oW="64" oH="36">
+        <vertices>61 36 2 36 1 10 26 0 61 0</vertices>
+        <verticesUV>208 314 149 314 148 288 173 278 208 278</verticesUV>
+        <triangles>0 3 4 1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="water_var_01" x="1" y="967" w="25" h="23" pX="0.5" pY="0.5" oX="17" oY="7" oW="64" oH="34">
+        <vertices>42 30 17 30 17 7 42 7</vertices>
+        <verticesUV>26 990 1 990 1 967 26 967</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="water_var_02" x="107" y="438" w="54" h="32" pX="0.5" pY="0.5" oX="8" oY="0" oW="64" oH="34">
+        <vertices>62 18 20 32 8 15 30 0 44 0</vertices>
+        <verticesUV>161 456 119 470 107 453 129 438 143 438</verticesUV>
+        <triangles>1 3 4 1 2 3 0 1 4</triangles>
+    </sprite>
+    <sprite n="water_var_03" x="121" y="471" w="54" h="28" pX="0.5" pY="0.5" oX="4" oY="2" oW="64" oH="34">
+        <vertices>58 30 4 30 4 2 58 2</vertices>
+        <verticesUV>175 499 121 499 121 471 175 471</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+    <sprite n="water_var_04" x="1" y="777" w="40" h="22" pX="0.5" pY="0.5" oX="17" oY="5" oW="64" oH="34">
+        <vertices>57 27 17 27 17 5 57 5</vertices>
+        <verticesUV>41 799 1 799 1 777 41 777</verticesUV>
+        <triangles>1 2 3 0 1 3</triangles>
+    </sprite>
+</TextureAtlas>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<questdb>
+	<group avatar="client">
+
+		<!--		<quest id="start-seasons" start="custom" repeatable="instant" visible="false" finish="instant" >
+			
+			<start_condition timeout="5"/>
+
+			<onStarted notification="XXX:DEBUG: season tags removed!">
+				<remove-modifier-by-tag tag="summer_tags"/>
+				<remove-modifier-by-tag tag="winter_tags"/>
+				<remove-modifier-by-tag tag="autumn_tags"/>
+				<remove-modifier-by-tag tag="spring_tags"/>
+			</onStarted>
+
+			<objectives timeout="3"/>
+
+			<onSuccess notification="XXXDEBUG: SEAONAL QUESTS STARTED!">
+				<start-quest id="spring-quest"/>
+				<start-quest id="summer-quest"/>
+				<start-quest id="autumn-quest"/>
+				<start-quest id="winter-quest"/>
+			</onSuccess>
+		</quest>-->
+        
+        <quest id="check_for_season" start="instant" visible="false" finish="instant" repeatable="custom" title="debug check_season">
+            <objectives timeout="1" operator="or">
+                <season season="spring" />
+                <season season="summer" />
+                <season season="autumn" />
+                <season season="winter" />
+            </objectives>
+            <rewards >
+                <set-flag key="season_map" value="true" />
+                <start-quest id="check_for_theme" />
+            </rewards>
+        </quest>
+        
+        <quest id="check_for_theme" start="custom" visible="false" finish="instant" repeatable="custom" title="debug check_theme" >
+            <objectives timeout="1" >
+                <season season="none" />
+            </objectives>
+            <rewards >
+                <set-flag key="season_map" value="false" />
+                <start-quest id="check_for_season" />
+            </rewards>
+        </quest>
+        
+        <quest id="season_spring" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+				<season season="spring"/>
+                <flag-has-value key="season_map" value="true" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_decoration" tag="season_spring" value="125"/>
+				<set-modifier name="mod_production_building_fishing_lodge" tag="season_spring" value="115"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <season season="spring" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_spring"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="false" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="season_spring"/>
+            </onFailed>
+        </quest>
+        
+        <quest id="theme_spring" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+                <theme theme="spring" />
+                <flag-has-value key="season_map" value="false" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_decoration" tag="season_spring" value="125"/>
+				<set-modifier name="mod_production_building_fishing_lodge" tag="season_spring" value="115"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <theme theme="spring" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_spring"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="true" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="season_spring"/>
+            </onFailed>
+        </quest>
+        
+        <quest id="season_summer" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+				<season season="summer"/>
+                <flag-has-value key="season_map" value="true" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_water" tag="season_summer" value="125"/>
+				<set-modifier name="mod_production_building_hopsfarm" tag="season_summer" value="115"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <season season="summer" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_summer"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="false" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="season_summer"/>
+            </onFailed>
+        </quest>
+        
+        <quest id="theme_summer" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+                <theme theme="summer" />
+                <flag-has-value key="season_map" value="false" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_water" tag="season_summer" value="125"/>
+				<set-modifier name="mod_production_building_hopsfarm" tag="season_summer" value="115"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <theme theme="summer" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_summer"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="true" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="season_summer"/>
+            </onFailed>
+        </quest>
+        
+        <quest id="season_autumn" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+				<season season="autumn"/>
+                <flag-has-value key="season_map" value="true" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_food" tag="season_autumn" value="125"/>
+				<set-modifier name="mod_production_building_winefarm" tag="season_autumn" value="115"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <season season="autumn" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_autumn"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="false" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="season_autumn"/>
+            </onFailed>
+        </quest>
+        
+        <quest id="theme_autumn" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+				<theme theme="autumn" />
+                <flag-has-value key="season_map" value="false" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_food" tag="season_autumn" value="125"/>
+				<set-modifier name="mod_production_building_winefarm" tag="season_autumn" value="115"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <theme theme="autumn" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_autumn"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="true" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="season_autumn"/>
+            </onFailed>
+        </quest>
+        
+        <quest id="season_winter" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+				<season season="winter"/>
+                <flag-has-value key="season_map" value="true" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_clothes" tag="season_winter" value="120" />
+                <set-modifier name="mod_production_building_lumberjack" tag="season_winter" value="110" />
+                
+                <set-trade-costs-group name="growables_resources" buy="120" sell="120" tag="season_winter"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <season season="winter" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_winter"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="false" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="season_winter"/>
+            </onFailed>
+            <ticket title="T_GAME_WARNING_FIELDS_WINTER" type="negative" />
+        </quest>
+        
+        <quest id="theme_winter" start="instant" repeatable="instant" visible="false" finish="instant" >
+            <start_condition timeout="1" operator="and" >
+                <theme theme="winter" />
+                <flag-has-value key="season_map" value="false" />
+			</start_condition>
+            <onStarted>
+				<set-modifier name="mod_consumption_rate_clothes" tag="season_winter" value="120" />
+                <set-modifier name="mod_production_building_lumberjack" tag="season_winter" value="110" />
+                
+                <set-trade-costs-group name="growables_resources" buy="120" sell="120" tag="season_winter"/>
+			</onStarted>
+            <objectives timeout="1" operator="and_not">
+                <theme theme="winter" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="season_winter"/>
+            </rewards>
+            <fail_condition timeout="1" >
+                <flag-has-value key="season_map" value="true" />
+            </fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="winter_tags"/>
+            </onFailed>
+            <ticket title="T_GAME_WARNING_FIELDS_WINTER" type="negative" />
+        </quest>
+
+	</group>
+</questdb>

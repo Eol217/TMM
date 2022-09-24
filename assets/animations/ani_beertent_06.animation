@@ -1,0 +1,30 @@
+[barkeep]
+
+visible:	1
+
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+frame:	ani_beertent_06.0.png		0.15
+frame:	ani_beertent_06.1.png		0.15
+
+delay:	1.0	10.0
+
+next:	barkeep			1.0

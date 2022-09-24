@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:6bb8703009b503328cc757d5b47bfc50:c5233af2086763982f0fb2baa103c67b:f377df62a31e1905f0a323c6fd91d4cd$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="menu.png" width="128" height="256">
+    <sprite n="but_facebook" x="65" y="1" w="38" h="38" pX="0.5" pY="0.5"/>
+    <sprite n="but_googleplus" x="65" y="40" w="38" h="38" pX="0.5" pY="0.5"/>
+    <sprite n="but_instagram" x="65" y="79" w="38" h="38" pX="0.5" pY="0.5"/>
+    <sprite n="but_newspage" x="65" y="118" w="38" h="38" pX="0.5" pY="0.5"/>
+    <sprite n="but_twitter" x="65" y="157" w="38" h="38" pX="0.5" pY="0.5"/>
+    <sprite n="but_youtube" x="1" y="196" w="38" h="38" pX="0.5" pY="0.5"/>
+    <sprite n="changelog_deco_military" x="1" y="1" w="63" h="177" pX="0.5" pY="0.5" r="y"/>
+</TextureAtlas>

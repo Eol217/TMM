@@ -1,0 +1,274 @@
+[transporter]
+
+// frame-delay: 4.8
+
+
+frame:	ani_well_00.0.png		0.2
+frame:	ani_well_00.1.png		0.1
+frame:	ani_well_00.2.png		0.5
+frame:	ani_well_00.3.png		0.1
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var1
+play_ambient_chance: 0.2
+
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+
+frame:	ani_well_00.6.png		0.2
+frame:	ani_well_00.7.png		0.5
+frame:	ani_well_00.8.png		0.2
+frame:	ani_well_00.9.png		0.1
+frame:	ani_well_00.10.png		0.2
+
+end
+
+
+[craftsman]
+
+// frame-delay: 4.8
+
+
+frame:	ani_well_00.0.png		0.2
+frame:	ani_well_00.1.png		0.1
+frame:	ani_well_00.2.png		0.5
+frame:	ani_well_00.3.png		0.1
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var2
+play_ambient_chance: 0.2
+
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+frame:	ani_well_00.4.png		0.2
+frame:	ani_well_00.5.png		0.2
+
+frame:	ani_well_00.6.png		0.2
+frame:	ani_well_00.7.png		0.5
+frame:	ani_well_00.8.png		0.2
+frame:	ani_well_00.9.png		0.1
+frame:	ani_well_00.10.png		0.2
+
+end
+
+
+[female_01]
+
+// frame-delay: 4.8
+
+
+frame:	ani_well_01.0.png		0.2
+frame:	ani_well_01.1.png		0.1
+frame:	ani_well_01.2.png		0.5
+frame:	ani_well_01.3.png		0.1
+frame:	ani_well_01.4.png		0.2
+frame:	ani_well_01.5.png		0.2
+frame:	ani_well_01.4.png		0.2
+frame:	ani_well_01.5.png		0.2
+frame:	ani_well_01.4.png		0.2
+frame:	ani_well_01.5.png		0.2
+frame:	ani_well_01.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var3
+play_ambient_chance: 0.2
+
+frame:	ani_well_01.5.png		0.2
+frame:	ani_well_01.4.png		0.2
+frame:	ani_well_01.5.png		0.2
+frame:	ani_well_01.4.png		0.2
+frame:	ani_well_01.5.png		0.2
+
+frame:	ani_well_01.6.png		0.2
+frame:	ani_well_01.7.png		0.5
+frame:	ani_well_01.8.png		0.2
+frame:	ani_well_01.9.png		0.1
+frame:	ani_well_01.10.png		0.2
+
+end
+
+
+[female_02]
+
+// frame-delay: 4.8
+
+
+frame:	ani_well_03.0.png		0.2
+frame:	ani_well_03.1.png		0.1
+frame:	ani_well_03.2.png		0.5
+frame:	ani_well_03.3.png		0.1
+frame:	ani_well_03.4.png		0.2
+frame:	ani_well_03.5.png		0.2
+frame:	ani_well_03.4.png		0.2
+frame:	ani_well_03.5.png		0.2
+frame:	ani_well_03.4.png		0.2
+frame:	ani_well_03.5.png		0.2
+frame:	ani_well_03.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var1
+play_ambient_chance: 0.3
+
+frame:	ani_well_03.5.png		0.2
+frame:	ani_well_03.4.png		0.2
+frame:	ani_well_03.5.png		0.2
+frame:	ani_well_03.4.png		0.2
+frame:	ani_well_03.5.png		0.2
+
+frame:	ani_well_03.6.png		0.2
+frame:	ani_well_03.7.png		0.5
+frame:	ani_well_03.8.png		0.2
+frame:	ani_well_03.9.png		0.1
+frame:	ani_well_03.10.png		0.2
+
+end
+
+
+[miller]
+
+// frame-delay: 4.8
+
+
+frame:	ani_well_02.0.png		0.2
+frame:	ani_well_02.1.png		0.1
+frame:	ani_well_02.2.png		0.5
+frame:	ani_well_02.3.png		0.1
+frame:	ani_well_02.4.png		0.2
+frame:	ani_well_02.5.png		0.2
+frame:	ani_well_02.4.png		0.2
+frame:	ani_well_02.5.png		0.2
+frame:	ani_well_02.4.png		0.2
+frame:	ani_well_02.5.png		0.2
+frame:	ani_well_02.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var2
+play_ambient_chance: 0.3
+
+frame:	ani_well_02.5.png		0.2
+frame:	ani_well_02.4.png		0.2
+frame:	ani_well_02.5.png		0.2
+frame:	ani_well_02.4.png		0.2
+frame:	ani_well_02.5.png		0.2
+
+frame:	ani_well_02.6.png		0.2
+frame:	ani_well_02.7.png		0.5
+frame:	ani_well_02.8.png		0.2
+frame:	ani_well_02.9.png		0.1
+frame:	ani_well_02.10.png		0.2
+
+end
+
+[monk]
+
+// frame-delay: 4.8
+
+
+frame:	ani_well_04.0.png		0.2
+frame:	ani_well_04.1.png		0.1
+frame:	ani_well_04.2.png		0.5
+frame:	ani_well_04.3.png		0.1
+frame:	ani_well_04.4.png		0.2
+frame:	ani_well_04.5.png		0.2
+frame:	ani_well_04.4.png		0.2
+frame:	ani_well_04.5.png		0.2
+frame:	ani_well_04.4.png		0.2
+frame:	ani_well_04.5.png		0.2
+frame:	ani_well_04.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var3
+play_ambient_chance: 0.2
+
+frame:	ani_well_04.5.png		0.2
+frame:	ani_well_04.4.png		0.2
+frame:	ani_well_04.5.png		0.2
+frame:	ani_well_04.4.png		0.2
+frame:	ani_well_04.5.png		0.2
+
+frame:	ani_well_04.6.png		0.2
+frame:	ani_well_04.7.png		0.5
+frame:	ani_well_04.8.png		0.2
+frame:	ani_well_04.9.png		0.1
+frame:	ani_well_04.10.png		0.2
+
+end
+
+[farmer]
+
+// frame-delay: 4.8
+
+frame:	ani_well_05.0.png		0.2
+frame:	ani_well_05.1.png		0.1
+frame:	ani_well_05.2.png		0.5
+frame:	ani_well_05.3.png		0.1
+frame:	ani_well_05.4.png		0.2
+frame:	ani_well_05.5.png		0.2
+frame:	ani_well_05.4.png		0.2
+frame:	ani_well_05.5.png		0.2
+frame:	ani_well_05.4.png		0.2
+frame:	ani_well_05.5.png		0.2
+frame:	ani_well_05.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var1
+play_ambient_chance: 0.2
+
+frame:	ani_well_05.5.png		0.2
+frame:	ani_well_05.4.png		0.2
+frame:	ani_well_05.5.png		0.2
+frame:	ani_well_05.4.png		0.2
+frame:	ani_well_05.5.png		0.2
+
+frame:	ani_well_05.6.png		0.2
+frame:	ani_well_05.7.png		0.5
+frame:	ani_well_05.8.png		0.2
+frame:	ani_well_05.9.png		0.1
+frame:	ani_well_05.10.png		0.2
+
+end
+
+[craftsman_firefighter]
+
+// frame-delay: 4.8
+
+frame:	ani_well_06.0.png		0.2
+frame:	ani_well_06.1.png		0.1
+frame:	ani_well_06.2.png		0.5
+frame:	ani_well_06.3.png		0.1
+frame:	ani_well_06.4.png		0.2
+frame:	ani_well_06.5.png		0.2
+frame:	ani_well_06.4.png		0.2
+frame:	ani_well_06.5.png		0.2
+frame:	ani_well_06.4.png		0.2
+frame:	ani_well_06.5.png		0.2
+frame:	ani_well_06.4.png		1.0
+
+play_ambient: sfx_buildings_butcher_kettle_wash_var2
+play_ambient_chance: 0.2
+
+frame:	ani_well_06.5.png		0.2
+frame:	ani_well_06.4.png		0.2
+frame:	ani_well_06.5.png		0.2
+frame:	ani_well_06.4.png		0.2
+frame:	ani_well_06.5.png		0.2
+
+frame:	ani_well_06.6.png		0.2
+frame:	ani_well_06.7.png		0.5
+frame:	ani_well_06.8.png		0.2
+frame:	ani_well_06.9.png		0.1
+frame:	ani_well_06.10.png		0.2
+
+end
+

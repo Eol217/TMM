@@ -1,0 +1,91 @@
+[random_direction]
+
+next:	mirrored_on
+next:	mirrored_off
+
+[mirrored_on]
+flip_x	1
+
+next: random_animation
+
+[mirrored_off]
+flip_x	0
+
+next: random_animation
+
+[random_animation]
+
+next:	look1	1
+next:	look3	1
+next:	bark1	0.3
+next:	bark2	0.3
+next:	bark3	0.3
+
+[look1]
+
+dog_idle.0.png	0.5
+
+delay: 0.5	2.5	
+
+next:	random_direction
+
+[look3]
+
+dog_idle.10.png	0.5
+
+delay: 0.5	2.5
+
+next:	random_direction
+
+[bark1]
+
+dog_idle.0.png	0.5
+
+play_ambient: sfx_environment_dog_1 
+play_ambient_chance: 0.5
+
+dog_idle.1.png	0.1
+dog_idle.0.png	0.1
+dog_idle.1.png	0.1
+dog_idle.0.png	0.1
+dog_idle.1.png	0.1
+dog_idle.0.png	0.5
+
+delay: 0.5	2.5
+
+next:	random_direction
+
+[bark2]
+
+dog_idle.0.png	0.5
+
+play_ambient: sfx_environment_dog_3	 
+play_ambient_chance: 0.5
+dog_idle.11.png	0.1
+dog_idle.10.png	0.1
+dog_idle.11.png	0.1
+dog_idle.10.png	0.1
+dog_idle.11.png	0.1
+dog_idle.10.png	0.5
+
+delay: 0.5	2.5
+
+next:	random_direction
+
+[bark3]
+
+dog_idle.0.png	0.5
+
+play_ambient: sfx_environment_dog_2 
+play_ambient_chance: 0.5
+
+dog_idle.11.png	0.1
+dog_idle.10.png	0.1
+dog_idle.11.png	0.1
+dog_idle.10.png	0.1
+dog_idle.11.png	0.1
+dog_idle.10.png	0.5
+
+delay: 0.5	2.5
+
+next:	random_direction

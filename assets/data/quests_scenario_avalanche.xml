@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: Avalanche -->
+<!-- prestige: 180 -->
+      
+<questdb>  
+    <group avatar="client" >
+        <include file = "data/common-quests.xml"/>
+        <include file = "data/quests_sandbox.xml"/>
+        <include file = "data/quests_helper_avalanche.xml" />
+        
+<!-- Main Quest-->   
+        <quest id="MAIN_00" isKeyQuest="true" avatar="king" start="instant" title="T_SCENARIO_2016_06_MAIN_00_NAME" description="T_SCENARIO_2016_06_MAIN_00_DESC" >
+            <onStarted >
+                <start-quest id="AVALANCHE_INITIALIZER" />
+                <start-quest id="INTRO_00" />
+                <set-flag key="scenario_over" value="false" />
+				<set-enable-trade lock="true" resource="gold"/>
+				<set-enable-trade lock="true" resource="iron"/>
+            </onStarted>
+            <objectives timeout="3" operator="and">
+                <quest-done id="QUEST_10" />
+                <quest-done id="QUEST_04" />
+                <quest-done id="QUEST_SIDE_07" />
+                <quest-done id="QUEST_SIDE_06" />
+                <flag-has-value key="mines_destroyed" value="false" />
+            </objectives>
+            <rewards>
+                <set-flag key="scenario_over" value="true" />
+                <start-quest id="scenario-finished" />
+                <start-quest id="AVALANCHE_REMOVE" />
+                <resource amount="70" resource="prestige" />
+            </rewards>
+            <onSuccess notification="T_SCENARIO_2016_06_MAIN_00_END" />
+        </quest>
+<!-- Avalanche Intro -->
+        <quest id="INTRO_00" visible="false" start="custom" finish="instant" >
+            <objectives timeout="1" operator="and"/>
+            <rewards>
+                <center-to-building target="campos_00" />
+                <start-quest id="INTRO_015"/>
+            </rewards>
+        </quest>    
+        <quest id="INTRO_015" visible="false" start="custom" repeatable="no" finish="instant" >
+            <objectives timeout="1" operator="and" />
+            <rewards>
+                <avalanche topLeftX="55" topLeftY="73" bottomRightX="74" bottomRightY="97" minValue="-2" maxValue="-1" destroyOnNoDurability="true" avalancheSize="2" startOrientation="topRight" />
+                <set-durabilitychange topLeftX="55" topLeftY="73" bottomRightX="74" bottomRightY="97" minValue="-60" maxValue="-50" destroyOnNoDurability="true" />
+                <start-quest id="INTRO_01"/>
+                <start-quest id="SANDBOX_AVALANCHE_TICKET" />
+            </rewards>
+			<ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" notification-sound="disasters/sfx_avalanche_going_down" />
+        </quest>
+        <quest id="INTRO_01" visible="false" start="custom" repeatable="no" finish="instant" >
+            <start_condition timeout="1" operator="and" />
+            <rewards>
+                <center-to-building target="campos_01" />
+                <start-quest id="INTRO_02"/>
+            </rewards>
+        </quest>
+        <quest id="INTRO_02" visible="false" start="custom" finish="instant" >
+            <start_condition timeout="1" operator="and" />
+            <rewards>
+                <avalanche topLeftX="41" topLeftY="94" bottomRightX="68" bottomRightY="120" minValue="-30" maxValue="-20" destroyOnNoDurability="true" avalancheSize="4" startOrientation="topLeft" />
+                <start-fire amount="1" state="smouldering" target="building_warehouse" />
+                <start-quest id="INTRO_03"/>
+            </rewards>
+			<ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" notification-sound="disasters/sfx_avalanche_going_down" />
+        </quest>
+        <quest id="INTRO_03" visible="false" start="custom" finish="instant" >
+            <start_condition timeout="3" operator="and" />
+            <onSuccess notification="T_SCENARIO_2016_06_INTRO_01_DESC"/>
+            <rewards>
+                <start-quest id="QUEST_00"/>
+            </rewards>
+            
+        </quest>
+<!-- /Avalanche Intro -->
+<!-- Quests -->
+        <quest id="QUEST_00" start="custom" description="T_SCENARIO_2016_06_QUEST_00_DESC" title="T_SCENARIO_2016_06_QUEST_00_NAME">
+            <start_condition timeout="2" operator="and" />
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_00_DESC" >
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <repair type="building_warehouse" count="1" />
+            </objectives>
+            <rewards >
+                <resource amount="250" resource="coins" />
+                <start-quest id="QUEST_01" />
+            </rewards>
+            <fail_condition timeout="40" operator="and" />
+            <onFailed >
+                <destruct-building count="1" type="building_warehouse" />
+                <start-quest id="QUEST_01" />
+            </onFailed>
+        </quest>
+        <quest id="QUEST_01" isKeyQuest="true" start="custom" repeatable="no" title="T_SCENARIO_2016_06_QUEST_01_NAME" description="T_SCENARIO_2016_06_QUEST_01_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_01_DESC" >
+                <start-quest id="QUEST_SIDE_02" />
+                <start-quest id="QUEST_025" />
+                <start-quest id="QUEST_KEEP_MINE_ALIVE_01" />
+            </onStarted>
+            <start_condition timeout="7" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <building count="1" type="building_sawmill"/>
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_02" />
+                <resource amount="10" resource="planks" />
+                <resource amount="5" resource="prestige" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_02" isKeyQuest="true" start="custom" title="T_SCENARIO_2016_06_QUEST_02_NAME" description="T_SCENARIO_2016_06_QUEST_02_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_02_DESC" >
+                <start-quest id="QUEST_BANDIT_01" />
+                <start-quest id="QUEST_BANDIT_03" />
+                <start-quest id="QUEST_BANDIT_04" />
+            </onStarted>
+            <start_condition timeout="3" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <produce amount="20" resource="ore" />
+                <produce amount="20" resource="nuggets" />
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_03" />
+                <start-quest id="QUEST_05" />
+                <resource amount="20" resource="stone" />
+                <resource amount="5" resource="prestige" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_025" visible="false" start="custom" finish="instant"> <!-- Cooldown Quest -->
+            <objectives timeout="17" operator="and" />
+            <rewards>
+                <start-quest id="QUEST_AVALANCHE_00" />
+                <start-quest id="QUEST_AVALANCHE_01" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_03" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN3_5_1_NAME" description="T_SCENARIO_2016_06_QUEST_03_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_03_DESC" />
+            <start_condition timeout="3" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <building count="1" type="building_mint"/>
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_04" />
+                <start-quest id="QUEST_06" />
+                <resource amount="15" resource="coal" />
+                <resource amount="5" resource="prestige" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_04" isKeyQuest="true" start="custom" title="T_SCENARIO_2016_06_QUEST_04_NAME" description="T_SCENARIO_2016_06_QUEST_04_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_04_DESC" >
+                <start-quest id="QUEST_10" />
+            </onStarted>
+            <start_condition timeout="3" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <tribute amount="225" resource="iron" />
+            </objectives>
+            <rewards>
+                <set-flag key="tribute_iron_done" value="true" />
+                <resource amount="20" resource="prestige" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_05" finish="instant" start="custom" visible="false"> <!-- quest for  start condition replacement -->
+            <objectives timeout="350" operator="and_not">
+                <building count="7" type="building_mine" />
+				<flag-has-value key="mines_destroyed" value="true" />
+            </objectives>
+            <rewards >
+                <start-quest id="QUEST_05_2" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_05_2" start="custom" title="T_SCENARIO_2016_06_QUEST_KEEP_MINE_ALIVE_02_NAME" description="T_SCENARIO_2016_06_QUEST_05_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_05_DESC" />
+            <objectives timeout="1" operator="and" >
+                <construct count="2" type="building_mine" />
+            </objectives>
+            <rewards>
+                <resource amount="10" resource="prestige" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_06" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN_CC_62_TITEL" description="T_SCENARIO_2016_06_QUEST_06_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_06_DESC" />
+            <start_condition timeout="12" operator="and" />
+            <objectives timeout="1"  operator="and">
+                <building count="1" type="building_coaler" />
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_SIDE_06" />
+                <resource amount="15" resource="coal" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_10" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SANDBOX_TRIBUTE" description="T_SCENARIO_2016_06_QUEST_10_DESC" repeatable="no" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_10_DESC" />
+            <start_condition timeout="25" operator="or">
+                <produce amount="90" resource="iron" />
+                <stock amount="95" resource="iron" />
+                <flag-has-value key="tribute_iron_done" value="true" />
+            </start_condition>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="135" resource="gold" />
+            </objectives>
+            <rewards>
+                <resource amount="20" resource="prestige" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_SIDE_02" isKeyQuest="true" avatar="farmer" start="custom" title="T_GAME_QUEST_SANDBOX_TRIBUTE_03" description="T_SCENARIO_2016_06_QUEST_SIDE_02_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_02_DESC" />
+            <start_condition timeout="15" operator="or">
+                <construction-started include_constructed="true" count="1" type="building_sawmill" />
+                <building count="1" type="building_sawmill" />
+            </start_condition>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="25" resource="wood" />
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_SIDE_03" />
+                <resource amount="275" resource="coins" />
+                <resource amount="15" resource="stone" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_SIDE_025" isKeyQuest="true" avatar="farmer" start="custom" title="T_GAME_TUTORIAL_QUEST_NAME_CHURCH" description="T_SCENARIO_2016_06_QUEST_SIDE_025_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_025_DESC" />
+            <start_condition timeout="40" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <building count="1" type="building_church" />
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_SIDE_04" />
+                <start-quest id="QUEST_SIDE_07" />
+                <resource amount="325" resource="coins" />
+                <resource amount="5" resource="tools" />
+                <start-quest id="REDUCE_AVALANCHE_WARNING" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_SIDE_03" isKeyQuest="true" avatar="farmer" start="custom" title="T_GAME_QUEST_SCEN10_11_NAME" description="T_SCENARIO_2016_06_QUEST_SIDE_03_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_03_DESC" />
+            <start_condition timeout="45" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <street count="3" type="stone" />
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_SIDE_025" />
+                <resource amount="325" resource="coins" />
+                <resource amount="20" resource="corn" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_SIDE_04" finish="instant" start="custom" visible="false" > <!-- start condition replacement quest -->
+            <objectives timeout="60" operator="and_not" >
+                <stock amount="1" resource="bread" />
+            </objectives>
+            <rewards >
+                <start-quest id="QUEST_SIDE_04_2" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_SIDE_04_2" avatar="farmer" start="custom" title="T_SCENARIO_2016_06_QUEST_SIDE_04_NAME" description="T_SCENARIO_2016_06_QUEST_SIDE_04_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_04_DESC" >
+                <start-quest id="QUEST_SIDE_045" />
+                <set-modifier name="mod_production_building_mine" tag="map" value="80" />
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="15" resource="bread" />
+            </objectives>
+            <rewards>
+                <start-quest id="QUEST_SIDE_05" />
+                <start-quest id="QUEST_BANDIT_02" />
+                <resource amount="275" resource="coins" />
+                <resource amount="15" resource="herbs" />
+                <remove-modifier-by-tag tag="map" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_SIDE_045" start="custom" title="T_GAME_TUTORIAL_QUEST_NAME_8" description="T_SCENARIO_2016_06_QUEST_SIDE_045_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_045_DESC" />
+            <start_condition timeout="14" operator="and"/>
+            <objectives timeout="1" operator="and" >
+                <building count="1" type="building_market" />
+            </objectives>
+            <rewards>
+                <resource amount="20" resource="corn" />
+                <resource amount="350" resource="coins" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_SIDE_05" avatar="farmer" start="custom" title="T_GAME_QUEST_SCEN15_14_TITLE" description="T_SCENARIO_2016_06_QUEST_SIDE_05_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_05_DESC" />
+            <start_condition timeout="45" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <produce amount="10" resource="cloths" />
+            </objectives>
+            <rewards>
+                <resource amount="10" resource="prestige" />
+                <start-quest id="QUEST_BANDIT_05" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_SIDE_06" isKeyQuest="true" avatar="farmer" start="custom" title="T_GAME_QUEST_SCEN15_15_TITLE" description="T_SCENARIO_2016_06_QUEST_SIDE_06_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_06_DESC" />
+            <start_condition timeout="50" operator="and" >
+                <building count="1" type="building_mint" />
+            </start_condition>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="10" resource="tools" />
+            </objectives>
+            <rewards>
+                <resource amount="10" resource="prestige" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_SIDE_07" isKeyQuest="true" avatar="farmer" start="custom" title="T_GAME_QUEST_SCEN_9_NAME" description="T_SCENARIO_2016_06_QUEST_SIDE_07_DESC" >
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_SIDE_07_DESC" />
+            <start_condition timeout="60" operator="and" />
+            <objectives timeout="1" operator="and" >
+                <happyness type="deco" value="80" />
+            </objectives>
+            <rewards>
+                <resource amount="10" resource="prestige" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_KEEP_MINE_ALIVE_01" isKeyQuest="true" start="custom" visible="false" finish="instant" repeatable="custom">
+            <objectives timeout="1" operator="and_not">
+                <building count="3" type="building_mine" />
+            </objectives>
+            <rewards >
+                <set-flag key="mines_destroyed" value="true" />
+                <start-quest id="QUEST_KEEP_MINE_ALIVE_02" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_KEEP_MINE_ALIVE_02" description="T_SCENARIO_2016_06_QUEST_KEEP_MINE_ALIVE_02_DESC" title="T_SCENARIO_2016_06_QUEST_KEEP_MINE_ALIVE_02_NAME" isKeyQuest="true" start="custom" visible="true" finish="instant" repeatable="custom">
+            <onStarted notification="T_SCENARIO_2016_06_QUEST_KEEP_MINE_ALIVE_02_DESC" />
+            <objectives timeout="1" operator="and" >
+                <construct count="2" type="building_mine" />
+            </objectives>
+            <rewards >
+                <set-flag key="mines_destroyed" value="false" />
+                <start-quest id="QUEST_KEEP_MINE_ALIVE_01" />
+                <resource amount="100" resource="coins" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_01" avatar="bandit" start="custom" visible="false" >
+            <start_condition timeout="1" operator="and">
+                <produce amount="40" resource="nuggets" />
+				<flag-has-value key="scenario_over" value="false" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_06_BANDIT_01_DESC" />
+            <objectives timeout="1" operator="and" />
+            <rewards >
+                <start-quest id="QUEST_AVALANCHE_BANDIT" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_02" avatar="bandit" start="custom" description="T_SCENARIO_2016_06_BANDIT_02_DESC" title="T_SCENARIO_2016_06_BANDIT_02_NAME" >
+            <start_condition timeout="240" operator="and" >
+				<flag-has-value key="scenario_over" value="false" />
+			</start_condition>
+            <onStarted notification="T_SCENARIO_2016_06_BANDIT_02_DESC" >
+                <start-quest id="QUEST_BANDIT_02_REMOVER" />
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="30" resource="bread" />
+            </objectives>
+            <fail_condition timeout="400" operator="and" />
+            <onFailed >
+                <start-quest id="QUEST_BANDIT_025" />
+                <set-flag key="BANDIT_02_REMOVER" value="true" />
+            </onFailed>
+            <rewards >
+                <resource amount="50" resource="coins" />
+                <start-quest id="REDUCE_AVALANCHE_WARNING" />
+                <set-flag key="BANDIT_02_REMOVER" value="true" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_02_REMOVER" start="custom" visible="false" finish="instant" >
+            <objectives timeout="2" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="QUEST_BANDIT_02" state="failed" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="BANDIT_02_REMOVER" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_025" avatar="bandit" start="custom" visible="false" repeatable="custom" >
+            <objectives timeout="2" operator="and" />
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+            <onSuccess notification="T_SCENARIO_2016_06_BANDIT_025_DESC" />
+            <rewards>
+                <start-quest id="QUEST_AVALANCHE_BANDIT" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_03" avatar="bandit" start="custom" description="T_SCENARIO_2016_06_BANDIT_03_DESC" title="T_SCENARIO_2016_06_BANDIT_02_NAME" >
+            <start_condition timeout="60" operator="and">
+                <stock amount="97" resource="iron" />
+				<flag-has-value key="scenario_over" value="false" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_06_BANDIT_03_DESC" >
+                <start-quest id="QUEST_BANDIT_03_REMOVER" />
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="20" resource="tools" />
+            </objectives>
+            <fail_condition timeout="360" operator="and" />
+            <onFailed >
+                <start-quest id="QUEST_BANDIT_025" />
+                <set-flag key="BANDIT_03_REMOVER" value="true" />
+            </onFailed>
+            <rewards >
+                <resource amount="75" resource="coins" />
+                <start-quest id="REDUCE_AVALANCHE_WARNING" />
+                <set-flag key="BANDIT_03_REMOVER" value="true" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_03_REMOVER" start="custom" visible="false" finish="instant" >
+            <objectives timeout="2" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="QUEST_BANDIT_03" state="failed" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="BANDIT_03_REMOVER" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_04" avatar="bandit" start="custom" description="T_SCENARIO_2016_06_BANDIT_04_DESC" title="T_SCENARIO_2016_06_BANDIT_02_NAME" >
+            <start_condition timeout="60" operator="and">
+                <stock amount="60" resource="gold" />
+				<flag-has-value key="scenario_over" value="false" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_06_BANDIT_04_DESC" >
+                <start-quest id="QUEST_BANDIT_04_REMOVER" />
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="10" resource="jewelry" />
+            </objectives>
+            <fail_condition timeout="360" operator="and"/>
+            <onFailed >
+                <start-quest id="QUEST_BANDIT_025" />
+                <set-flag key="BANDIT_04_REMOVER" value="true" />
+            </onFailed>
+            <rewards >
+                <resource amount="100" resource="coins" />
+                <start-quest id="REDUCE_AVALANCHE_WARNING" />
+                <set-flag key="BANDIT_04_REMOVER" value="true" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_04_REMOVER" start="custom" visible="false" finish="instant" >
+            <objectives timeout="2" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="QUEST_BANDIT_04" state="failed" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="BANDIT_04_REMOVER" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_05" avatar="bandit" start="custom" description="T_SCENARIO_2016_06_BANDIT_05_DESC" title="T_SCENARIO_2016_06_BANDIT_02_NAME" >
+            <start_condition timeout="16" operator="and">
+                <produce amount="20" resource="cloths" />
+				<flag-has-value key="scenario_over" value="false" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_06_BANDIT_05_DESC" >
+                <start-quest id="QUEST_BANDIT_05_REMOVER" />
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <tribute amount="30" resource="cloths" />
+            </objectives>
+            <fail_condition timeout="360" operator="and" />
+            <onFailed >
+                <start-quest id="QUEST_BANDIT_025" />
+                <set-flag key="BANDIT_05_REMOVER" value="true" />
+            </onFailed>
+            <rewards >
+                <resource amount="150" resource="coins" />
+                <start-quest id="REDUCE_AVALANCHE_WARNING" />
+                <set-flag key="BANDIT_05_REMOVER" value="true" />
+            </rewards>
+        </quest>
+        
+        <quest id="QUEST_BANDIT_05_REMOVER" start="custom" visible="false" finish="instant" >
+            <objectives timeout="2" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </objectives>
+            <rewards >
+                <set-quest-state id="QUEST_BANDIT_05" state="failed" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="BANDIT_05_REMOVER" value="true" />
+            </fail_condition>
+        </quest>
+                
+        <quest id="QUEST_AVALANCHE_00" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <random chance="70" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards >
+                <start-quest id="QUEST_AVALANCHE_LEFTSIDE" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_AVALANCHE_MIDDLE" />
+            </onFailed>
+        </quest>
+        <quest id="QUEST_AVALANCHE_LEFTSIDE" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <random chance="60" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards >
+                <start-quest id="QUEST_AVALANCHE_LEFT" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_AVALANCHE_TOPLEFT" />
+            </onFailed>
+        </quest>
+        
+        <quest id="QUEST_AVALANCHE_LEFT" start="custom" finish="instant" visible="false" repeatable="custom"> <!-- Quest which launch an Avalanche -->
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="Avalanche_launched" value="true" />
+            </objectives>
+            <onSuccess notification="T_SCENARIO_2016_06_QUEST_AVALANCHE_00_DESC" >
+                <start-quest id="SANDBOX_AVALANCHE_TICKET" />
+            </onSuccess>
+            <rewards >
+                <!-- Left Avalanche -->
+                <avalanche topLeftX="41" topLeftY="94" bottomRightX="68" bottomRightY="120" minValue="-50" maxValue="-30" destroyOnNoDurability="true" avalancheSize="4" startOrientation="topLeft" />
+                <set-flag key="Avalanche_launched" value="false" />
+                <start-quest id="QUEST_AVALANCHE_00" /> 
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_AVALANCHE_TOPLEFT" start="custom" finish="instant" visible="false" repeatable="custom"> <!-- Quest which launch an Avalanche -->
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="Avalanche_launched" value="true" />
+            </objectives>
+            <onSuccess notification="T_SCENARIO_2016_06_QUEST_AVALANCHE_00_DESC" >
+                <start-quest id="SANDBOX_AVALANCHE_TICKET" />
+            </onSuccess>
+            <rewards >
+                <!-- TopLeft Avalanche -->
+                <avalanche topLeftX="9" topLeftY="71" bottomRightX="43" bottomRightY="96" minValue="-50" maxValue="-30" destroyOnNoDurability="true" avalancheSize="4" startOrientation="topLeft" />
+                <set-flag key="Avalanche_launched" value="false" />
+                <start-quest id="QUEST_AVALANCHE_00" /> 
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_AVALANCHE_MIDDLE" start="custom" finish="instant" visible="false" repeatable="custom"> <!-- Quest which launch an Avalanche -->
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="Avalanche_launched" value="true" />
+            </objectives>
+            <onSuccess notification="T_SCENARIO_2016_06_QUEST_AVALANCHE_00_DESC" >
+                <start-quest id="SANDBOX_AVALANCHE_TICKET" />
+            </onSuccess>
+            <rewards >
+                <!-- Middle Avalanche -->
+                <avalanche topLeftX="55" topLeftY="73" bottomRightX="74" bottomRightY="97" minValue="-80" maxValue="-50" destroyOnNoDurability="true" avalancheSize="2" startOrientation="topRight" />
+                <set-flag key="Avalanche_launched" value="false" />
+                <start-quest id="QUEST_AVALANCHE_00" /> 
+            </rewards>
+            <fail_condition timeout="1"  operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_AVALANCHE_BANDIT" start="custom" finish="instant" visible="false" repeatable="custom"> <!-- Quest which launch an Avalanche -->
+            <objectives timeout="2" operator="and"/>
+            <rewards >
+                <!-- Launch TopLeft Avalanche -->
+                <avalanche topLeftX="9" topLeftY="71" bottomRightX="43" bottomRightY="96" minValue="-80" maxValue="-70" destroyOnNoDurability="true" avalancheSize="4" startOrientation="topLeft" />
+                <start-quest id="QUEST_AVALANCHE_BANDIT_02" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        <quest id="QUEST_AVALANCHE_BANDIT_02" start="custom" finish="instant" visible="false" repeatable="custom"> <!-- Quest which launch an Avalanche -->
+            <objectives timeout="4" operator="and"/>
+            <rewards >
+                <!-- Launch Left Avalanche -->
+                <avalanche topLeftX="41" topLeftY="94" bottomRightX="68" bottomRightY="120" minValue="-80" maxValue="-70" destroyOnNoDurability="true" avalancheSize="4" startOrientation="topLeft" />
+            </rewards>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_AVALANCHE_01" start="custom" finish="instant" repeatable="custom" visible="false" >
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </objectives>
+            <fail_condition timeout="120" operator="and" /> <!-- 210 -->
+            <onFailed >
+                <start-quest id="AVALANCHE_CONTROLLER_RANDOM_INCREASE" />
+                <start-quest id="QUEST_AVALANCHE_02" />
+            </onFailed>
+        </quest>
+        
+        <quest id="QUEST_AVALANCHE_02" start="custom" finish="instant" repeatable="custom" visible="false" > <!-- this Quest acts as a little delay -->
+            <start_condition timeout="2" operator="and" />
+            <onStarted >
+                <start-quest id="QUEST_AVALANCHE_01" />
+            </onStarted>
+        </quest>
+        
+        <quest id="REDUCE_AVALANCHE_WARNING" start="custom" finish="instant" visible="false" > 
+            <start_condition timeout="8" operator="and" />
+            <onStarted >
+                <start-quest id="STATE_CHANGE_NO" />
+            </onStarted>
+        </quest>
+<!-- /Quests -->
+                
+<!-- Scenario End quest-->   
+        <quest id="scenario-finished" start="custom" visible="false" >
+            <start_condition timeout="4" operator="and"/>
+            <objectives timeout="1" operator="and"/>
+            <rewards>
+                <scenario-finished/>
+                <start-quest id="sandbox_start"/>
+                <remove-modifier-by-tag tag="map" />
+				<set-enable-trade lock="false" resource="gold"/>
+				<set-enable-trade lock="false" resource="iron"/>
+            </rewards>
+        </quest>         
+                                                   
+        <quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START" visible="false" >
+            <onStarted notification="T_GAME_SANDBOX_START"/>
+            <start_condition timeout="8" operator="and"/>
+            <objectives timeout="1" operator="and"/>
+            <rewards>
+                <set-season season="winter"/>
+                <start-quest id="SANDBOX_QUEST_META"/>
+                <start-quest id="SANDBOX_QUEST_META_DISASTER"/>	
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+                <set-flag key="sandbox_map_has_avalanche" value="true" />
+            </rewards>
+        </quest>         
+        
+<!-- SANDBOX AVALANCHE-->
+        <quest id="SANDBOX_AVALANCHE_LAUNCHER" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <onStarted >
+                <start-quest id="SANDBOX_AVALANCHE_TICKET" />
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <random chance="66" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards >
+                <start-quest id="SANDBOX_AVALANCHE_1" />
+            </rewards>
+            <onFailed >
+                <start-quest id="SANDBOX_AVALANCHE_0" />
+            </onFailed>
+        </quest>
+        <quest id="SANDBOX_AVALANCHE_TICKET" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" />
+            <ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" notification-sound="disasters/sfx_avalanche_going_down" />
+        </quest>
+        <quest id="SANDBOX_AVALANCHE_1" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <random chance="50" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards >
+                <start-quest id="SANDBOX_AVALANCHE_11" />
+            </rewards>
+            <onFailed >
+                <start-quest id="SANDBOX_AVALANCHE_10" />
+            </onFailed>
+        </quest>
+        <quest id="SANDBOX_AVALANCHE_11" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <random chance="50" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards>
+                <avalanche topLeftX="41" topLeftY="94" bottomRightX="68" bottomRightY="120" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="4" startOrientation="topLeft" />
+            </rewards>
+            <onFailed>
+                <avalanche topLeftX="41" topLeftY="94" bottomRightX="68" bottomRightY="120" minValue="-30" maxValue="-20" destroyOnNoDurability="true" avalancheSize="4" startOrientation="topLeft" />
+            </onFailed>
+        </quest>     
+        <quest id="SANDBOX_AVALANCHE_10" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <random chance="50" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards>
+                <avalanche topLeftX="9" topLeftY="71" bottomRightX="43" bottomRightY="96" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="4" startOrientation="topLeft" />
+            </rewards>
+            <onFailed>
+                <avalanche topLeftX="9" topLeftY="71" bottomRightX="43" bottomRightY="96" minValue="-30" maxValue="-20" destroyOnNoDurability="true" avalancheSize="4" startOrientation="topLeft" />
+            </onFailed>
+        </quest>  
+        <quest id="SANDBOX_AVALANCHE_0" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <random chance="50" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards>
+                <avalanche topLeftX="55" topLeftY="73" bottomRightX="74" bottomRightY="97" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="2" startOrientation="topRight" />
+            </rewards>
+            <onFailed>
+                <avalanche topLeftX="55" topLeftY="73" bottomRightX="74" bottomRightY="97" minValue="-30" maxValue="-20" destroyOnNoDurability="true" avalancheSize="2" startOrientation="topRight" />
+            </onFailed>
+        </quest>
+<!-- SANDBOX AVALANCHE END -->
+
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="65" topLeftY="63" bottomRightX="95" bottomRightY="97" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+    </group>
+</questdb>
+

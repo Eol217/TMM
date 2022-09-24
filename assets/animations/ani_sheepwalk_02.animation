@@ -1,0 +1,133 @@
+
+[random_start]
+
+next:	sheep_stand_0			1
+next:	sheep_stand_1			1
+next:	sheep_stand_2			1
+next:	sheep_walk_left_1		1
+next:	sheep_walk_left_2		1
+next:	sheep_stand_3			1
+next:	sheep_walk_back_0		1
+next:	sheep_stand_4			1
+next:	sheep_eat_1			1
+next:	sheep_turn				1
+
+
+
+[sheep_stand_0]
+frame:	ani_sheepwalk_02.00.png		2.00
+
+delay:	0.50	3.00
+
+next:	sheep_walk_left_1			0.75
+next:	sheep_stand_1			1.00
+
+[sheep_stand_1]
+frame:	ani_sheepwalk_02.01.png		2.00
+
+delay:	3.00	10.00
+
+next:	sheep_walk_left_1		0.75
+next:	sheep_stand_0			1.00
+
+[sheep_walk_left_1]
+frame:	ani_sheepwalk_02.02.png		0.1
+frame:	ani_sheepwalk_02.03.png		0.1
+frame:	ani_sheepwalk_02.04.png		0.1
+frame:	ani_sheepwalk_02.05.png		0.1
+frame:	ani_sheepwalk_02.06.png		0.1
+frame:	ani_sheepwalk_02.07.png		0.1
+
+
+next:	sheep_stand_2			0.75
+next:	sheep_walk_left_2		1.00
+
+
+[sheep_stand_2]
+frame:	ani_sheepwalk_02.07.png		2.00
+
+delay:	3.00	10.00
+
+
+next:	sheep_eat_0				0.75
+next:	sheep_stand_2			0.75
+next:	sheep_walk_left_2		1
+
+[sheep_eat_0]
+frame:	ani_sheepwalk_02.08.png		2.00
+
+delay:	1.00	5.00
+
+
+next:	sheep_stand_2			1
+next:	sheep_walk_left_2		0.5
+
+
+[sheep_walk_left_2]
+
+frame:	ani_sheepwalk_02.09.png		0.1
+frame:	ani_sheepwalk_02.10.png		0.1
+frame:	ani_sheepwalk_02.11.png		0.1
+frame:	ani_sheepwalk_02.12.png		0.1
+frame:	ani_sheepwalk_02.13.png		0.1
+
+next:	sheep_stand_3			1.00
+next:	sheep_walk_back_0		1.00
+
+
+[sheep_stand_3]
+frame:	ani_sheepwalk_02.13.png		2.00
+
+delay:	3.00	10.00
+
+next:	sheep_stand_3			0.75
+next:	sheep_walk_back_0		1.00
+
+[sheep_walk_back_0]
+
+frame:	ani_sheepwalk_02.14.png		0.1
+frame:	ani_sheepwalk_02.15.png		0.1
+frame:	ani_sheepwalk_02.16.png		0.1
+frame:	ani_sheepwalk_02.17.png		0.1
+frame:	ani_sheepwalk_02.18.png		0.1
+frame:	ani_sheepwalk_02.19.png		0.1
+frame:	ani_sheepwalk_02.20.png		0.1
+frame:	ani_sheepwalk_02.21.png		0.1
+frame:	ani_sheepwalk_02.22.png		0.5
+
+delay:	1.00	10.00
+
+next:	sheep_stand_4			1.00
+next:	sheep_eat_1		1.00
+
+
+[sheep_stand_4]
+frame:	ani_sheepwalk_02.22.png		2.00
+play_ambient: sfx_buildings_pasture
+
+delay:	3.00	10.00
+
+
+next:	sheep_eat_1				0.75
+next:	sheep_stand_4			0.75
+next:	sheep_turn				1
+
+[sheep_eat_1]
+frame:	ani_sheepwalk_02.23.png		2.00
+
+delay:	1.00	3.00
+
+
+next:	sheep_eat_1				0.75
+next:	sheep_turn				0.75
+next:	sheep_stand_4			1
+
+
+[sheep_turn]
+frame:	ani_sheepwalk_02.24.png		0.2
+frame:	ani_sheepwalk_02.25.png		0.1
+
+
+next:	sheep_stand_0				1
+
+

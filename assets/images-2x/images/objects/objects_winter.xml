@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:89eac6c5e960f86a38429d7ccb1bcb42:0cc29c4d27f6302bcf821c44f1b7a731:dea008092af36184dead3f86cbaf0e0d$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="objects_winter.png" width="512" height="1024">
+    <sprite n="ambient_1x1_grass_00" x="290" y="149" w="25" h="27" pX="0.5" pY="0.5" oX="24" oY="6" oW="64" oH="64"/>
+    <sprite n="ambient_1x1_grass_01" x="287" y="289" w="21" h="20" pX="0.5" pY="0.5" oX="10" oY="1" oW="64" oH="64" r="y"/>
+    <sprite n="ambient_1x1_grass_02" x="258" y="773" w="35" h="45" pX="0.5" pY="0.5" oX="7" oY="4" oW="64" oH="68" r="y"/>
+    <sprite n="ambient_1x1_grass_03" x="258" y="819" w="35" h="43" pX="0.5" pY="0.5" oX="16" oY="12" oW="64" oH="87" r="y"/>
+    <sprite n="ambient_1x1_grass_04" x="1" y="991" w="38" h="32" pX="0.5" pY="0.5" oX="15" oY="0" oW="64" oH="68" r="y"/>
+    <sprite n="ambient_1x1_mushroom_00" x="431" y="795" w="30" h="55" pX="0.5" pY="0.5" oX="2" oY="2" oW="64" oH="66" r="y"/>
+    <sprite n="ambient_1x1_mushroom_01" x="145" y="123" w="18" h="19" pX="0.5" pY="0.5" oX="29" oY="17" oW="64" oH="66"/>
+    <sprite n="ambient_1x1_mushroom_02" x="40" y="991" w="27" h="29" pX="0.5" pY="0.5" oX="13" oY="2" oW="64" oH="66"/>
+    <sprite n="ambient_1x1_stone_00" x="145" y="163" w="17" h="25" pX="0.5" pY="0.5" oX="11" oY="12" oW="64" oH="63" r="y"/>
+    <sprite n="ambient_1x1_stone_01" x="287" y="310" w="19" h="28" pX="0.5" pY="0.5" oX="28" oY="4" oW="64" oH="63" r="y"/>
+    <sprite n="ambient_1x1_stone_02" x="145" y="189" w="17" h="19" pX="0.5" pY="0.5" oX="28" oY="11" oW="64" oH="63" r="y"/>
+    <sprite n="ambient_1x1_stone_03" x="290" y="212" w="23" h="40" pX="0.5" pY="0.5" oX="16" oY="4" oW="64" oH="63" r="y"/>
+    <sprite n="deco_1x1_avenue_tree_00" x="245" y="361" w="66" h="117" pX="0.5" pY="0.5" oX="4" oY="23" oW="75" oH="170"/>
+    <sprite n="deco_1x1_avenue_tree_01" x="244" y="479" w="66" h="104" pX="0.5" pY="0.5" oX="4" oY="36" oW="75" oH="170"/>
+    <sprite n="deco_1x1_avenue_tree_02" x="199" y="659" w="95" h="66" pX="0.5" pY="0.5" oX="4" oY="45" oW="75" oH="170" r="y"/>
+    <sprite n="deco_1x1_seasonal_field_00" x="126" y="299" w="35" h="61" pX="0.5" pY="0.5" oX="7" oY="53" oW="74" oH="120" r="y"/>
+    <sprite n="deco_1x1_seasonal_field_01" x="294" y="823" w="61" h="34" pX="0.5" pY="0.5" oX="7" oY="54" oW="74" oH="120"/>
+    <sprite n="deco_1x1_seasonal_field_02" x="356" y="853" w="61" h="34" pX="0.5" pY="0.5" oX="7" oY="54" oW="74" oH="120"/>
+    <sprite n="deco_1x1_seasonal_field_03" x="294" y="858" w="61" h="34" pX="0.5" pY="0.5" oX="7" oY="53" oW="74" oH="120"/>
+    <sprite n="forest_1x1_00.0" x="455" y="121" w="55" h="87" pX="0.5" pY="0.5" oX="16" oY="13" oW="88" oH="134"/>
+    <sprite n="forest_1x1_01.0" x="74" y="939" w="28" h="39" pX="0.5" pY="0.5" oX="17" oY="70" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_03.0" x="1" y="873" w="64" h="45" pX="0.5" pY="0.5" oX="19" oY="36" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_10.0" x="450" y="209" w="61" h="74" pX="0.5" pY="0.5" oX="16" oY="26" oW="88" oH="134"/>
+    <sprite n="forest_1x1_11.0" x="290" y="253" w="23" h="35" pX="0.5" pY="0.5" oX="27" oY="73" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_13.0" x="462" y="844" w="47" h="58" pX="0.5" pY="0.5" oX="22" oY="42" oW="88" oH="134"/>
+    <sprite n="forest_1x1_20.0" x="368" y="795" w="62" h="57" pX="0.5" pY="0.5" oX="26" oY="40" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_21.0" x="145" y="209" w="16" h="20" pX="0.5" pY="0.5" oX="40" oY="78" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_23.0" x="462" y="747" w="48" h="53" pX="0.5" pY="0.5" oX="30" oY="50" oW="88" oH="134"/>
+    <sprite n="forest_1x1_30.0" x="121" y="535" w="108" h="48" pX="0.5" pY="0.5" oX="27" oY="12" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_31.0" x="145" y="143" w="18" h="19" pX="0.5" pY="0.5" oX="35" oY="96" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_33.0" x="196" y="726" w="87" h="46" pX="0.5" pY="0.5" oX="29" oY="33" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_40.0" x="1" y="529" w="119" h="64" pX="0.5" pY="0.5" oX="15" oY="2" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_41.0" x="1" y="939" w="43" h="51" pX="0.5" pY="0.5" oX="21" oY="78" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_43.0" x="1" y="671" w="98" h="53" pX="0.5" pY="0.5" oX="19" oY="19" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_50.0" x="311" y="564" w="109" h="49" pX="0.5" pY="0.5" oX="26" oY="11" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_51.0" x="1" y="725" w="91" h="31" pX="0.5" pY="0.5" oX="36" oY="23" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_53.0" x="90" y="768" w="85" h="39" pX="0.5" pY="0.5" oX="30" oY="32" oW="88" oH="150" r="y"/>
+    <sprite n="forest_1x1_60.0" x="1" y="757" w="88" h="66" pX="0.5" pY="0.5" oX="12" oY="14" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_61.0" x="295" y="723" w="88" h="51" pX="0.5" pY="0.5" oX="24" oY="14" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_63.0" x="170" y="836" w="72" h="54" pX="0.5" pY="0.5" oX="18" oY="26" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_70.0" x="294" y="893" w="53" h="45" pX="0.5" pY="0.5" oX="26" oY="49" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_71.0" x="45" y="939" w="28" h="42" pX="0.5" pY="0.5" oX="25" oY="74" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_73.0" x="126" y="256" w="36" h="42" pX="0.5" pY="0.5" oX="29" oY="57" oW="88" oH="134"/>
+    <sprite n="forest_1x1_80.0" x="100" y="710" w="95" h="57" pX="0.5" pY="0.5" oX="17" oY="7" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_81.0" x="290" y="177" w="24" h="34" pX="0.5" pY="0.5" oX="30" oY="77" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_83.0" x="384" y="747" w="77" h="47" pX="0.5" pY="0.5" oX="22" oY="23" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_90.0" x="356" y="888" w="53" h="46" pX="0.5" pY="0.5" oX="27" oY="48" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_91.0" x="243" y="863" w="50" h="41" pX="0.5" pY="0.5" oX="27" oY="50" oW="88" oH="134" r="y"/>
+    <sprite n="forest_1x1_93.0" x="68" y="982" w="34" h="39" pX="0.5" pY="0.5" oX="31" oY="59" oW="88" oH="134"/>
+    <sprite n="forest_2x2_00.0" x="1" y="123" w="143" h="132" pX="0.5" pY="0.5" oX="12" oY="12" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_01.0" x="317" y="130" w="132" h="126" pX="0.5" pY="0.5" oX="12" oY="26" oW="154" oH="185"/>
+    <sprite n="forest_2x2_02.0" x="455" y="1" w="55" h="119" pX="0.5" pY="0.5" oX="12" oY="94" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_03.0" x="314" y="257" w="124" h="118" pX="0.5" pY="0.5" oX="12" oY="33" oW="154" oH="185"/>
+    <sprite n="forest_2x2_10.0" x="164" y="149" w="125" h="123" pX="0.5" pY="0.5" oX="22" oY="29" oW="154" oH="185"/>
+    <sprite n="forest_2x2_11.0" x="164" y="1" w="152" h="147" pX="0.5" pY="0.5" oX="0" oY="0" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_12.0" x="439" y="284" w="72" h="113" pX="0.5" pY="0.5" oX="34" oY="80" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_13.0" x="1" y="256" w="124" h="100" pX="0.5" pY="0.5" oX="23" oY="50" oW="154" oH="185"/>
+    <sprite n="forest_2x2_20.0" x="317" y="1" w="137" h="128" pX="0.5" pY="0.5" oX="26" oY="23" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_21.0" x="1" y="1" w="162" h="121" pX="0.5" pY="0.5" oX="33" oY="23" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_22.0" x="410" y="672" w="101" h="74" pX="0.5" pY="0.5" oX="33" oY="81" oW="154" oH="185"/>
+    <sprite n="forest_2x2_23.0" x="312" y="376" w="117" h="115" pX="0.5" pY="0.5" oX="28" oY="44" oW="154" oH="185"/>
+    <sprite n="forest_2x2_30.0" x="1" y="357" w="121" h="89" pX="0.5" pY="0.5" oX="38" oY="33" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_31.0" x="430" y="398" w="81" h="108" pX="0.5" pY="0.5" oX="38" oY="45" oW="154" oH="185"/>
+    <sprite n="forest_2x2_32.0" x="176" y="773" w="81" h="62" pX="0.5" pY="0.5" oX="48" oY="72" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_33.0" x="1" y="594" w="98" h="76" pX="0.5" pY="0.5" oX="44" oY="54" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_40.0" x="123" y="449" w="120" h="85" pX="0.5" pY="0.5" oX="42" oY="35" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_41.0" x="1" y="447" w="121" h="81" pX="0.5" pY="0.5" oX="46" oY="35" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_42.0" x="421" y="592" w="89" h="79" pX="0.5" pY="0.5" oX="46" oY="66" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_43.0" x="100" y="634" w="98" h="75" pX="0.5" pY="0.5" oX="46" oY="54" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_50.0" x="163" y="273" w="123" h="87" pX="0.5" pY="0.5" oX="43" oY="32" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_51.0" x="123" y="361" w="121" h="87" pX="0.5" pY="0.5" oX="43" oY="32" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_52.0" x="226" y="584" w="81" h="74" pX="0.5" pY="0.5" oX="53" oY="73" oW="154" oH="185" r="y"/>
+    <sprite n="forest_2x2_53.0" x="308" y="646" w="101" h="76" pX="0.5" pY="0.5" oX="48" oY="52" oW="154" oH="185" r="y"/>
+    <sprite n="ice_var_01" x="308" y="614" w="104" h="31" pX="0.5" pY="0.5" oX="13" oY="18" oW="128" oH="67"/>
+    <sprite n="ice_var_02" x="431" y="851" w="30" h="51" pX="0.5" pY="0.5" oX="41" oY="15" oW="128" oH="67" r="y"/>
+    <sprite n="ice_var_03" x="1" y="824" w="78" h="48" pX="0.5" pY="0.5" oX="34" oY="0" oW="128" oH="61"/>
+    <sprite n="ice_var_04" x="294" y="775" w="73" h="47" pX="0.5" pY="0.5" oX="36" oY="8" oW="128" oH="67"/>
+    <sprite n="ice_var_05" x="427" y="553" w="83" h="38" pX="0.5" pY="0.5" oX="21" oY="12" oW="128" oH="67"/>
+    <sprite n="ice_var_06" x="80" y="850" w="69" h="40" pX="0.5" pY="0.5" oX="38" oY="7" oW="128" oH="61"/>
+    <sprite n="ice_var_07" x="311" y="492" w="115" h="71" pX="0.5" pY="0.5" oX="6" oY="0" oW="128" oH="71"/>
+    <sprite n="water_var_01" x="462" y="801" w="48" h="42" pX="0.5" pY="0.5" oX="35" oY="16" oW="128" oH="67"/>
+    <sprite n="water_var_02" x="427" y="507" w="83" h="45" pX="0.5" pY="0.5" oX="31" oY="1" oW="128" oH="67"/>
+    <sprite n="water_var_03" x="121" y="584" w="104" h="49" pX="0.5" pY="0.5" oX="10" oY="8" oW="128" oH="67"/>
+    <sprite n="water_var_04" x="90" y="808" w="79" h="41" pX="0.5" pY="0.5" oX="35" oY="11" oW="128" oH="67"/>
+</TextureAtlas>

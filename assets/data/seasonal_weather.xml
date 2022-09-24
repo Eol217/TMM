@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<questdb>
+
+	<group>
+
+		<quest id="WEATHER_MANAGER_START" start="instant" visible="false" repeatable="no" finish="instant">
+			<start_condition timeout="5" >
+				<flag-has-value key="weather_disabled" value="false" />
+			</start_condition>
+
+			<objectives timeout="1"/>
+			<rewards>
+				<start-quest id="QUEST_WEATHER_REPEATER"/>
+			</rewards>
+		</quest>
+
+		<!-- Cooldown after weather effect -->
+
+		<quest id="QUEST_WEATHER_COOLDOWN" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<weather-set-intensity type="thunderstorm" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="default"/>
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="snow" intensity="default"/>
+			</onStarted>
+			<objectives timeout="212" />
+
+			<!-- after cooldown: start from the beginning!-->
+			<rewards >
+				<start-quest id="QUEST_WEATHER_REPEATER" />
+				<remove-modifier-by-tag tag="weather_rain" />
+			</rewards>
+			<fail_condition operator="and" timeout="1" >
+				<flag-has-value key="weather_disabled" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_WEATHER_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom">
+			<!-- Repeater after cooldown -->
+			<!--<onStarted notification="XXX DEBUG: Weather repeater started!"/>-->
+			<objectives timeout="6" >
+				<flag-has-value key="weather_disabled" value="false" />
+				<!-- Use this flag to disable the weather-->
+			</objectives>
+
+			<rewards >
+				<start-quest id="QUEST_CHANCE_CLOUDY" />
+<!--				<set-flag key="special_weather_running" value="true" />-->
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_CHANCE_CLOUDY" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="7" />
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="CHOOSE_CLOUDY_A" />
+			</rewards>
+			<onFailed>
+				<start-quest id="QUEST_CHANCE_RAIN" />
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_CHANCE_RAIN" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="3" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="CHOOSE_RAIN_A" />
+			</rewards>
+			<onFailed >
+				<start-quest id="QUEST_CHANCE_THUNDERSTORM" />
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_CHANCE_THUNDERSTORM" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="3" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="THUNDERSTORM_CHECK_NOWINTER_SEASON" />
+			</rewards>
+			<onFailed >
+				<start-quest id="QUEST_CHANCE_SNOW" />
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_CHANCE_SNOW" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="18" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="SNOW_CHECK_NOWINTER_SEASON" />
+			</rewards>
+			<onFailed >
+				<start-quest id="QUEST_WEATHER_REPEATER"/>
+			</onFailed>
+		</quest>
+		<!-- add new weather chances here!-->
+
+		<!-- SEASON CHECK quests -->
+
+		<quest id="SNOW_CHECK_NOWINTER_SEASON" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1">
+				<season season="winter"/>
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="CHOOSE_SNOW_A" />
+			</rewards>
+			<onFailed >
+				<start-quest id="SNOW_CHECK_NOWINTER_THEME" />
+			</onFailed>
+		</quest>
+
+		<quest id="SNOW_CHECK_NOWINTER_THEME" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<theme theme="winter"/>
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="CHOOSE_SNOW_A" />
+			</rewards>
+			<onFailed >
+				<start-quest id="QUEST_WEATHER_REPEATER" />
+			</onFailed>
+		</quest>
+
+		<quest id="THUNDERSTORM_CHECK_NOWINTER_SEASON" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" operator="or">
+				<season season="spring"/>
+				<season season="summer"/>
+				<season season="autumn"/>
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="CHOOSE_THUNDERSTORM_A" />
+			</rewards>
+			<onFailed >
+				<start-quest id="THUNDERSTORM_CHECK_NOWINTER_THEME" />
+			</onFailed>
+		</quest>
+
+		<quest id="THUNDERSTORM_CHECK_NOWINTER_THEME" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" operator="or" >
+				<theme theme="spring"/>
+				<theme theme="summer"/>
+				<theme theme="autumn"/>
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="CHOOSE_THUNDERSTORM_A" />
+			</rewards>
+			<onFailed >
+				<start-quest id="QUEST_WEATHER_REPEATER" />
+			</onFailed>
+		</quest>
+
+		<!-- Chooser quests -->
+
+		<quest id="CHOOSE_CLOUDY_A" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="5" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="CLOUDY_0" />
+			</rewards>
+			<onFailed >
+				<start-quest id="CHOOSE_CLOUDY_B" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_CLOUDY_B" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="7" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="CLOUDY_1" />
+			</rewards>
+			<onFailed >
+				<start-quest id="CLOUDY_2" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_RAIN_A" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="5" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="RAIN_1" />
+				<weather-set-intensity type="snow" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="light"/>
+			</rewards>
+			<onFailed >
+				<start-quest id="CHOOSE_RAIN_B" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_RAIN_B" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="5" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<weather-set-intensity type="snow" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<start-quest id="RAIN_2" />
+			</rewards>
+			<onFailed >
+				<start-quest id="CHOOSE_RAIN_C" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_RAIN_C" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="5" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<weather-set-intensity type="snow" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<start-quest id="RAIN_3" />
+			</rewards>
+			<onFailed >
+				<weather-set-intensity type="snow" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<start-quest id="RAIN_4" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_THUNDERSTORM_A" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="4" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<weather-set-intensity type="snow" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="light"/>
+				<start-quest id="THUNDERSTORM_1" />
+			</rewards>
+			<onFailed >
+				<weather-set-intensity type="cloudyness" intensity="light"/>
+				<start-quest id="CHOOSE_THUNDERSTORM_B" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_THUNDERSTORM_B" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="3" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<weather-set-intensity type="snow" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<start-quest id="THUNDERSTORM_2" />
+			</rewards>
+			<onFailed >
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<weather-set-intensity type="snow" intensity="default"/>
+				<start-quest id="THUNDERSTORM_3" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_SNOW_A" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="8" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="SNOW_1" />
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="light"/>
+			</rewards>
+			<onFailed >
+				<start-quest id="CHOOSE_SNOW_B" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_SNOW_B" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="3" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="SNOW_2" />
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="medium"/>
+			</rewards>
+			<onFailed >
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<start-quest id="CHOOSE_SNOW_C" />
+			</onFailed>
+		</quest>
+
+		<quest id="CHOOSE_SNOW_C" visible="false" start="custom" finish="instant" repeatable="custom">
+			<objectives timeout="1" >
+				<random chance="2" />
+			</objectives>
+			<fail_condition timeout="2"/>
+			<rewards>
+				<start-quest id="SNOW_3" />
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+			</rewards>
+			<onFailed  >
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="snow" intensity="medium"/>
+				<start-quest id="SNOW_4" />
+			</onFailed>
+		</quest>
+
+		<!-- WEATHER Quests -->
+
+		<quest id="CLOUDY_0" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<onStarted >
+				<weather-set-intensity type="cloudyness" intensity="light"/>
+			</onStarted>
+			<objectives timeout="49"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+			</onSuccess>
+		</quest>
+
+		<quest id="CLOUDY_1" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<onStarted >
+				<weather-set-intensity type="cloudyness" intensity="medium"/>
+			</onStarted>
+			<objectives timeout="91"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+			</onSuccess>
+		</quest>
+		<quest id="CLOUDY_2" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<onStarted>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+			</onStarted>
+			<objectives timeout="65"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+			</onSuccess>
+		</quest>
+		<quest id="THUNDERSTORM_1" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="4"/>
+
+			<onStarted>
+				<set-flag key="sandbox_enable_lightningstrikes" value="true"/>
+				<weather-set-intensity type="rain" intensity="medium"/>
+				<weather-set-intensity type="thunderstorm" intensity="light"/>
+				<set-modifier name="mod_decay" tag="weather_storm" value="125" />
+			</onStarted>
+			<objectives timeout="95"/>
+			<onSuccess>
+				<set-flag key="sandbox_enable_lightningstrikes" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_storm" />
+			</onSuccess>
+			<rewards >
+				<set-modifier name="mod_production_building_farm" tag="weather_rain" value="120" />
+			</rewards>
+		</quest>
+
+		<quest id="THUNDERSTORM_2" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="12"/>
+
+			<onStarted >
+				<weather-set-intensity type="rain" intensity="light"/>
+				<weather-set-intensity type="thunderstorm" intensity="light"/>
+				<set-modifier name="mod_decay" tag="weather_storm" value="125" />
+			</onStarted>
+			<objectives timeout="129"/>
+			<onSuccess>
+				<set-flag key="sandbox_enable_lightningstrikes" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_storm" />
+			</onSuccess>
+			<rewards >
+				<set-modifier name="mod_production_building_farm" tag="weather_rain" value="120" />
+			</rewards>
+		</quest>
+
+		<quest id="THUNDERSTORM_3" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="7"/>
+			<onStarted >
+				<set-flag key="sandbox_enable_lightningstrikes" value="true"/>
+				<weather-set-intensity type="rain" intensity="heavy"/>
+				<weather-set-intensity type="thunderstorm" intensity="heavy"/>
+				<set-modifier name="mod_decay" tag="weather_storm" value="125" />
+			</onStarted>
+			<objectives timeout="84"/>
+			<onSuccess>
+				<set-flag key="sandbox_enable_lightningstrikes" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_storm" />
+			</onSuccess>
+			<rewards >
+				<set-modifier name="mod_production_building_farm" tag="weather_rain" value="120" />
+			</rewards>
+		</quest>
+
+		<quest id="RAIN_1" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="8"/>
+			<onStarted >
+				<weather-set-intensity type="rain" intensity="light"/>
+                <set-modifier name="mod_decay" tag="weather_rain" value="110" />
+			</onStarted>
+			<objectives timeout="110"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+                <remove-modifier-by-tag tag="weather_rain" />
+			</onSuccess>
+            <rewards >
+                <set-modifier name="mod_production_building_farm" tag="weather_rain" value="110" />
+            </rewards>
+		</quest>
+
+		<quest id="RAIN_2" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="10"/>
+			<onStarted >
+				<weather-set-intensity type="rain" intensity="medium"/>
+                <set-modifier name="mod_decay" tag="weather_rain" value="115" />
+			</onStarted>
+			<objectives timeout="57"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+                <remove-modifier-by-tag tag="weather_rain" />
+			</onSuccess>
+            <rewards >
+                <set-modifier name="mod_production_building_farm" tag="weather_rain" value="115" />
+            </rewards>
+		</quest>
+
+		<quest id="RAIN_3" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="6"/>
+			<onStarted >
+				<weather-set-intensity type="rain" intensity="medium"/>
+                <set-modifier name="mod_decay" tag="weather_rain" value="120" />
+			</onStarted>
+			<objectives timeout="89"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+                <remove-modifier-by-tag tag="weather_rain" />
+			</onSuccess>
+            <rewards >
+                <set-modifier name="mod_production_building_farm" tag="weather_rain" value="120" />
+            </rewards>
+		</quest>
+
+		<quest id="RAIN_4" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="3"/>
+			<onStarted >
+				<weather-set-intensity type="rain" intensity="heavy"/>
+				<set-modifier name="mod_decay" tag="weather_rain" value="120" />
+			</onStarted>
+			<objectives timeout="115"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_rain" />
+			</onSuccess>
+            <rewards >
+				<set-modifier name="mod_production_building_farm" tag="weather_rain" value="120" />
+            </rewards>
+		</quest>
+
+		<quest id="SNOW_1" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="5"/>
+			<onStarted >
+				<weather-set-intensity type="snow" intensity="light"/>
+				<set-modifier name="mod_walking_speed" tag="weather_snow" value="90" />
+			</onStarted>
+			<objectives timeout="61"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onSuccess>
+			<fail_condition timeout="1" operator="or">
+				<season season="spring" />
+				<theme theme="spring" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="sandbox_enable_snowstorm" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onFailed>
+		</quest>
+
+		<quest id="SNOW_2" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="6"/>
+
+			<onStarted >
+				<weather-set-intensity type="snow" intensity="light"/>
+				<set-modifier name="mod_walking_speed" tag="weather_snow" value="90" />
+			</onStarted>
+			<objectives timeout="72"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onSuccess>
+			<fail_condition timeout="1" operator="or">
+				<season season="spring" />
+				<theme theme="spring" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="sandbox_enable_snowstorm" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onFailed>
+		</quest>
+
+		<quest id="SNOW_3" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="8"/>
+
+			<onStarted>
+				<weather-set-intensity type="snow" intensity="medium"/>
+				<set-modifier name="mod_walking_speed" tag="weather_snow" value="90" />
+			</onStarted>
+			<objectives timeout="46"/>
+			<onSuccess>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onSuccess>
+			
+			<fail_condition timeout="1" operator="or">
+				<season season="spring" />
+				<theme theme="spring" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="sandbox_enable_snowstorm" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onFailed>
+		</quest>
+
+		<quest id="SNOW_4" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+<!--			<ticket title="T_SANDBOX_SNOWSTORM_TICKET" notification-sound="/disasters/amb_snowstorm" type="negative"/>-->
+
+			<start_condition timeout="4"/>
+			
+			<onStarted>
+				<weather-set-intensity type="snow" intensity="heavy"/>
+				<set-flag key="sandbox_enable_snowstorm" value="true"/>
+				<set-modifier name="mod_decay" tag="weather_snow" value="120" />
+				<set-modifier name="mod_walking_speed" tag="weather_snow" value="80" />
+			</onStarted>
+
+			<objectives timeout="95"/>
+
+			<onSuccess>
+				<set-flag key="sandbox_enable_snowstorm" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onSuccess>
+			
+			<fail_condition timeout="1" operator="or">
+				<season season="spring" />
+				<theme theme="spring" />
+			</fail_condition>
+			
+			<onFailed >
+				<set-flag key="sandbox_enable_snowstorm" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+				<remove-modifier-by-tag tag="weather_snow" />
+			</onFailed>
+			
+		</quest>
+	</group>
+</questdb>
+

@@ -1,0 +1,61 @@
+[random_start]
+
+next:	fish_swim_0		1
+next:	fish_jump_0		1
+
+
+[fish_swim_0]
+
+frame-delay: 0.1
+
+frame:	ani_fish_00.00.png
+frame:	ani_fish_00.01.png
+frame:	ani_fish_00.02.png
+frame:	ani_fish_00.03.png
+frame:	ani_fish_00.04.png
+frame:	ani_fish_00.05.png
+frame:	ani_fish_00.06.png
+frame:	ani_fish_00.07.png
+frame:	ani_fish_00.08.png
+frame:	ani_fish_00.09.png
+frame:	ani_fish_00.10.png
+frame:	ani_fish_00.11.png
+frame:	ani_fish_00.12.png
+frame:	ani_fish_00.13.png
+frame:	ani_fish_00.14.png
+
+next:	null				1
+
+
+[null]
+
+frame-delay: 0.1
+
+frame:	ani_fish_03.0.png
+
+
+delay:	5.00	10.00
+
+next:	random_start	1
+
+[fish_jump_0]
+
+frame-delay: 0.1
+
+frame:	ani_fish_02.00.png
+frame:	ani_fish_02.01.png
+frame:	ani_fish_02.02.png
+frame:	ani_fish_02.03.png
+frame:	ani_fish_02.04.png
+frame:	ani_fish_02.05.png
+frame:	ani_fish_02.06.png
+frame:	ani_fish_02.07.png
+frame:	ani_fish_02.08.png
+frame:	ani_fish_02.09.png
+frame:	ani_fish_02.10.png
+frame:	ani_fish_02.11.png
+
+
+frame:	ani_fish_03.0.png
+
+next:	null					1

@@ -1,0 +1,61 @@
+[random_start]
+
+next:	armory_idle			1.00
+next:	armory_idle2				1.00
+
+[armory_idle]
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var1
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var2
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+
+delay:	0.5	2
+
+next:	armory_idle			1.00
+next:	armory_idle2				1.00
+
+
+[armory_idle2]
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var3
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var4
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var1
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var2
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var3
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+frame:	ani_armory_00.1.png		0.20
+frame:	ani_armory_00.2.png		0.20
+play_ambient: sfx_buildings_armory_single_hit_var4
+frame:	ani_armory_00.3.png		0.20
+frame:	ani_armory_00.0.png		0.20
+
+delay:	0.5	2
+
+next:	armory_idle			1.00
+next:	armory_idle2				1.00

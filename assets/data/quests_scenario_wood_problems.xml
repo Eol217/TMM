@@ -1,0 +1,1413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: Cutted Woods -->
+<!-- prestige: 205 -->
+
+<questdb>
+    <group avatar="client">
+		<include file = "data/common-quests.xml"/>
+		<include file = "data/quests_sandbox.xml"/>
+<!--
+    <allow key="building_lumberjack"/>
+    <disallow key="buildings"/>
+    <highlight key="BTN_HUD_SPEEDUP" mode="normal"/>
+-->
+<!-- New modifier: Stop Wood Respawn  <set-modifier name="" tag="map" value="110"/>    -->      
+  
+<!-- Szenario Start Quest -->
+        <quest id="SCENARIO_CW_QUEST_START" visible="false" start="instant" finish="instant">
+            <objectives timeout="1"/>
+            <rewards>
+                <disallow key="building_lumberjack"/> <!-- prevent player for spending wood before he can get wood -->
+                <disallow key="forest_1x1"/>
+                <disallow key="forest_2x2"/>
+                <set-enable-trade lock="true" resource="planks"/>
+                <start-quest id="SCENARIO_CW_QUEST_MAIN_10"/>
+                <start-quest id="SCENARIO_CW_QUEST_20"/>
+                <start-quest id="SCENARIO_COUNTER_THIEF_1"/>
+				<set-modifier name="mod_production_building_lumberjack" tag="map" value="20"/>
+            </rewards>
+        </quest>
+        
+<!-- Main Quest: Finish the wood delivery and merchant questline and --> 
+        <quest id="SCENARIO_CW_QUEST_MAIN_10" avatar="king" title="T_GAME_QUEST_SCEN_CW_MAIN_10_NAME" description="T_GAME_QUEST_SCEN_CW_MAIN_10_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_MAIN_10_DESC" >
+               <start-quest id="SCENARIO_CW_QUEST_30"/>
+            </onStarted>
+
+            <start_condition timeout="1"/>
+               
+            <objectives timeout="3">
+                <quest-done id="SCENARIO_CW_QUEST_70"/>
+                <quest-done id="SCENARIO_CW_QUEST_M_40"/>
+                <!--
+                <quest-done id="SCENARIO_CW_QUEST_R_50"/>
+                -->
+            </objectives>
+                    
+            <onSuccess notification="T_GAME_QUEST_SCEN_CW_MAIN_10_END"/>
+            <rewards>     
+                <set-flag key="SzenarioFinished" value="true"/> <!-- stops repeating trade Quests -->
+                <resource resource="prestige" amount="75" />
+                <start-quest id="scenario-finished"/>
+            </rewards>
+        </quest>
+        
+<!-- Main Quest ends -->
+<!-- <set-flag key="rebuilt" value="true"/> -->
+  
+<!-- Red Questline Start: Build population -->
+    <!--
+        <quest id="SCENARIO_CW_QUEST_R_10" avatar="king" title="T_GAME_QUEST_SCEN2_9_NAME" description="T_GAME_QUEST_SCEN_CW_R_10_DESC" start="custom" isKeyQuest="true">                                   
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_R_10_DESC" />
+            
+            <start_condition timeout="5"/>
+            
+            <objectives timeout="1">
+                <building count="6" type="building_residence_00" />
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="5" />
+                <start-quest id="SCENARIO_CW_QUEST_R_20"/>
+            </rewards>       
+        </quest>
+
+        <quest id="SCENARIO_CW_QUEST_R_20"  avatar="king" title="T_GAME_QUEST_SCEN7_GUY_1_NAME" description="T_GAME_QUEST_SCEN_CW_R_20_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_R_20_DESC"/>
+                           
+            <start_condition timeout="5"/>
+            
+            <objectives timeout="1">
+                <building count="12" type="building_residence_00" />
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="8" />
+                <start-quest id="SCENARIO_CW_QUEST_R_30"/>
+            </rewards>       
+        </quest>    
+        
+        <quest id="SCENARIO_CW_QUEST_R_30"  avatar="king" title="T_GAME_QUEST_SCEN_CW_R_30_NAME" description="T_GAME_QUEST_SCEN_CW_R_30_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_R_30_DESC" />
+                           
+            <start_condition timeout="5"/>
+            
+            <objectives timeout="1">
+                <population count="80" />
+                <happyness value="150"/>
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="10" />
+            </rewards>       
+        </quest>   
+    -->
+<!-- Red Quest ends -->
+ 
+<!-- Green Questline Start: Build economy-->
+    <!-- Removed Quests
+        <quest id="SCENARIO_CW_QUEST_10" title="T_GAME_QUEST_SCEN_CW_10_NAME" description="T_GAME_QUEST_SCEN_CW_10_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_10_DESC" />
+            
+            <start_condition timeout="5"/>
+            
+            <objectives timeout="1">
+                <construct count="1" type="building_well" />
+            </objectives>
+                            
+            <rewards>
+                <resource resource="prestige" amount="5" />
+                <resource amount="12" resource="fish"/>
+                <resource amount="11" resource="stone"/>
+                <start-quest id="SCENARIO_CW_QUEST_20"/>
+            </rewards>
+        </quest>
+    /Removed Quests -->
+        <quest id="SCENARIO_CW_QUEST_20" title="T_GAME_TUTORIAL_QUEST_NAME_1" description="T_GAME_QUEST_SCEN_CW_20_DESC" start="custom" >
+            
+            <start_condition timeout="2400" >
+                <flag-has-value key="SzenarioFinished" value="false" />
+            </start_condition>
+            
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_20_DESC" >
+                <allow key="building_lumberjack"/>
+                <center-to-building target="cameratree" />
+            </onStarted>
+            
+            <objectives timeout="1">
+                <construct count="1" type="building_lumberjack" />
+            </objectives>
+                            
+            <rewards>
+                <resource resource="prestige" amount="20" />
+                <resource amount="20" resource="wood"/>
+            </rewards>    
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>   
+        </quest>
+
+    
+        <quest id="SCENARIO_CW_QUEST_30" title="T_GAME_QUEST_SCEN_CW_30_NAME" description="T_GAME_QUEST_SCEN_CW_30_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_30_DESC" >
+                <highlight-building building="building_lumberjack" highlight="true" />
+            </onStarted>              
+                
+            <start_condition timeout="3"/>
+            
+            <objectives timeout="1">
+                <destroy-building count="3" target="building_lumberjack" />
+            </objectives>
+            
+            <onSuccess>
+                <highlight-building building="building_lumberjack" highlight="false"/>
+            </onSuccess> 
+            
+            <rewards>     
+                <resource resource="coins" amount="150" />
+                <resource resource="cloths" amount="6" />
+                <start-quest id="SCENARIO_CW_QUEST_35"/>
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_35" title="T_GAME_QUEST_SCEN2_3_NAME" description="T_GAME_QUEST_SCEN_CW_35_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_35_DESC" >
+                <start-quest id="SCENARIO_CW_QUEST_B_START_01"/> <!-- Starts the "easy" Trade Quests -->
+            </onStarted>              
+                
+            <start_condition timeout="3"/>
+            
+            <objectives timeout="1">
+                <stock amount="35" resource="wood" />
+            </objectives>
+            
+            <rewards>     
+                <resource resource="coins" amount="250" />
+                <resource resource="stone" amount="10" />
+                <start-quest id="SCENARIO_CW_QUEST_M_10"/> <!-- Starts Blue Questline -->
+            </rewards>       
+        </quest>
+
+        <quest id="SCENARIO_CW_QUEST_40" title="T_GAME_QUEST_SCEN_CW_40_NAME" description="T_GAME_QUEST_SCEN_CW_40_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_40_DESC" />
+            
+            <start_condition timeout="12"/>
+            
+            <objectives timeout="1">
+                <assign count="1" trigger="is_assigned" type="building_sawmill" />
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="coins" amount="150" />
+                <resource amount="12" resource="wood"/>
+                <start-quest id="SCENARIO_CW_QUEST_45"/>
+                <set-flag key="AllTrades" value="true"/> <!-- Enables all Trade Quests -->
+            </rewards>       
+        </quest>
+
+        <quest id="SCENARIO_CW_QUEST_45" title="T_GAME_QUEST_SCEN_CW_45_NAME" avatar="king" description="T_GAME_QUEST_SCEN_CW_45_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_45_DESC" />
+            
+            <start_condition timeout="3"/>
+            
+            <objectives timeout="1">
+                <tribute amount="50" resource="planks" />
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="15" />
+                <start-quest id="SCENARIO_CW_QUEST_50"/>
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_50" title="T_GAME_QUEST_SCEN_CW_45_NAME" description="T_GAME_QUEST_SCEN_CW_50_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_50_DESC" />
+            
+            <start_condition timeout="3"/>
+            
+            <objectives timeout="1">
+                <tribute amount="75" resource="planks" />
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="15" />
+                <start-quest id="SCENARIO_CW_QUEST_60"/>
+            </rewards>       
+        </quest>
+    
+        <quest id="SCENARIO_CW_QUEST_60" title="T_GAME_QUEST_SCEN_CW_45_NAME" description="T_GAME_QUEST_SCEN_CW_60_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_60_DESC" />
+            
+            <start_condition timeout="3"/>
+            
+            <objectives timeout="1">
+                <tribute amount="100" resource="planks" />
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="20" />
+                <start-quest id="SCENARIO_CW_QUEST_70" />
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_70" avatar="bandit" title="T_GAME_QUEST_SCEN_CW_70_NAME" description="T_GAME_QUEST_SCEN_CW_70_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_70_DESC" />
+            
+            <start_condition timeout="15"/>
+            
+            <objectives timeout="1">
+                <tribute amount="3000" resource="coins" />
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="25" />
+            </rewards>       
+        </quest>
+<!-- Green Questline ends -->
+ 
+
+<!-- Blue Questline starts: Trading with the Merc -->       
+        <quest id="SCENARIO_CW_QUEST_M_10"  title="T_GAME_TUTORIAL_QUEST_NAME_8" description="T_GAME_QUEST_SCEN_CW_M_10_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_M_10_DESC" >              
+            </onStarted>
+                
+            <start_condition timeout="2"/>
+            
+            <objectives timeout="1">
+                <building count="1" type="building_market"/>
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="coins" amount="200" />
+                <start-quest id="SCENARIO_CW_QUEST_M_20"/>
+                <set-flag key="AllTrades" value="true"/> <!-- Enables all Trade Quests -->
+            </rewards>       
+        </quest>
+        
+       <quest id="SCENARIO_CW_QUEST_M_20" avatar="merchant" title="T_GAME_QUEST_SCEN_CW_M_20_NAME" description="T_GAME_QUEST_SCEN_CW_M_20_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_M_20_DESC" >
+                <start-quest id="SCENARIO_CW_QUEST_C_START_01" />
+            </onStarted>
+            
+            <start_condition timeout="4"/>
+            
+            <objectives timeout="1">
+                <buy-resource  amount="30" resource="wood"/>
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="10" />
+                <start-quest id="SCENARIO_CW_QUEST_M_30"/>
+            </rewards>       
+        </quest>
+        
+       <quest id="SCENARIO_CW_QUEST_M_30" avatar="merchant" title="T_GAME_QUEST_SCEN_CW_M_30_NAME" description="T_GAME_QUEST_SCEN_CW_M_30_DESC" start="custom" isKeyQuest="true">
+           <onStarted notification="T_GAME_QUEST_SCEN_CW_M_30_DESC" >
+               <start-quest id="SCENARIO_CW_QUEST_40"/>
+           </onStarted>
+            
+            <start_condition timeout="4"/>
+            
+            <objectives timeout="1">
+                <building count="1" type="building_tradeguild"/>
+            </objectives>
+                            
+            <rewards>     
+                <resource resource="prestige" amount="10" />
+                <start-quest id="SCENARIO_CW_QUEST_M_40"/>
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_M_40" avatar="merchant" title="T_GAME_QUEST_SCEN_CW_M_40_NAME" description="T_GAME_QUEST_SCEN_CW_M_40_DESC" start="custom" isKeyQuest="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_CW_M_40_DESC" />
+            
+            <start_condition timeout="4"/>
+            
+            <objectives timeout="1">
+                <auto-trade-buy-created resource="wood" amount="1" />
+            </objectives>
+            
+            <onSuccess notification="T_GAME_QUEST_SCEN_CW_M_40_END" />
+            <rewards>     
+                <resource resource="prestige" amount="15" />
+            </rewards>       
+        </quest>
+        
+<!-- Blue Questline ends -->                  
+                              
+
+<!-- Random Switch Quests start (helper) -->
+    <!-- The farmer quests are now following a linear questline instead of random quests 
+    
+        <quest id="SCENARIO_SWITCH_B_SECURITY" title="B-SECURITY" start ="custom" visible="false" finish="instant" repeatable="custom">
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <flag-has-value key="TradeRunningB" value="false"/>
+                <flag-has-value key="SzenarioFinished" value="false"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+            
+            <rewards>
+                <set-flag key="TradeRunningB" value="true" /> 
+                <start-quest id="SCENARIO_SWITCH_B_COOLDOWN"/>
+            </rewards>
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_B_COOLDOWN" title="B-COOLDOWN" start="custom" visible="false" finish="instant" repeatable="custom">
+            <start_condition timeout="70"/> 
+            
+            <objectives timeout="1" /> 
+
+            <rewards>     
+                <start-quest id="SCENARIO_SWITCH_B_1"/>
+                <set-flag key="TradeRunningB" value="false" />   
+            </rewards>  
+        </quest>
+        
+
+        <quest id="SCENARIO_SWITCH_B_1" title="B-1" start="custom" visible="false" finish="instant" repeatable="custom" >             
+            <start_condition timeout="70"/> 
+
+            <objectives timeout="1" > 
+                <random chance="60"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_SWITCH_B_01"/> 
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_SWITCH_B_10"/> 
+            </rewards>       
+        </quest>
+
+        <quest id="SCENARIO_SWITCH_B_10" title="B-10" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_SWITCH_B_0100"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_SWITCH_B_1000"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_B_01" title="B-01" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_SWITCH_B_0001"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_SWITCH_B_0010"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_B_1000" title="B-1000" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_B_20"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_B_10"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_B_0100" title="B-0100" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_B_40"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_B_30"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_B_0010" title="B-0010" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_B_60"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_B_50"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_B_0001" title="B-0001" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_B_80"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_B_70"/>  
+            </rewards>       
+        </quest>
+    -->
+    
+    <!-- Bandit -->
+    
+    <!-- no longer needed, because the cooldown quest now repeats itself and the tradequests dont start new tradequests
+    <quest id="SCENARIO_SWITCH_C_SECURITY" title="C-SECURITY" start ="custom" visible="false" finish="instant" repeatable="custom">
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <flag-has-value key="TradeRunningC" value="false"/>
+                <flag-has-value key="SzenarioFinished" value="false"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+            
+            <rewards>
+                <set-flag key="TradeRunningC" value="true" />
+                <start-quest id="SCENARIO_SWITCH_C_COOLDOWN"/>
+            </rewards>
+        </quest>
+    -->
+        <quest id="SCENARIO_SWITCH_C_COOLDOWN" start="custom" visible="false" finish="instant" repeatable="custom">
+            <start_condition timeout="450"/> <!-- Cooldown for Trade-Quests, should be over 300 (duration for failing bandit quests) -->
+            
+            <objectives timeout="1" > 
+            </objectives>
+
+            <rewards>  
+                <start-quest id="SCENARIO_SWITCH_C_1"/>
+                <start-quest id="SCENARIO_SWITCH_C_COOLDOWN" />
+            </rewards>  
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+        </quest>
+        
+        
+        <quest id="SCENARIO_SWITCH_C_1" start="custom" visible="false" finish="instant" repeatable="custom" >             
+            <start_condition timeout="1"/>
+
+            <objectives timeout="1" > 
+                <random chance="60"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_SWITCH_C_01"/>  <!-- Advanced Trades -->
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_SWITCH_C_10"/> <!-- Easy Trades -->
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_C_10" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="5"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_SWITCH_C_0100"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_SWITCH_C_1000"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_C_01" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="7"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_SWITCH_C_0001"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_SWITCH_C_0010"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_C_1000" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_C_20"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_C_10"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_C_0100" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_C_40"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_C_30"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_C_0010" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_C_60"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_C_50"/>  
+            </rewards>       
+        </quest>
+        
+        <quest id="SCENARIO_SWITCH_C_0001" start="custom" visible="false" finish="instant" repeatable="custom" >
+                
+            <start_condition timeout="1"/>
+            
+            <objectives timeout="1" >
+                <random chance="50"/>
+            </objectives>
+            
+            <fail_condition timeout="2" />
+        
+            <onFailed >
+                 <start-quest id="SCENARIO_CW_QUEST_C_80"/>      
+            </onFailed>
+                 
+            <rewards>     
+                <start-quest id="SCENARIO_CW_QUEST_C_70"/>  
+            </rewards>       
+        </quest>
+        
+    <!-- no longer needed quests
+        <quest id="SCENARIO_CW_QUEST_START_01_COOLDOWN" avatar="farmer" finish="instant" start="custom" visible="false" repeatable="no">
+            <start_condition timeout="1" />
+            
+            <onStarted >
+                <set-flag key="TradeBandit" value="true" />
+                <set-flag key="TradeFarmer" value="true" />
+            </onStarted>
+ 
+            <objectives timeout="1" >
+                <flag-has-value key="TradeNextStarted" value="false" />
+            </objectives>
+            
+            <rewards >
+                <set-flag key="TradeNextStarted" value="true" /> 
+                <start-quest id="SCENARIO_CW_QUEST_C_START_02" />
+                <set-flag key="TradeBandit" value="false" />
+                <set-flag key="TradeFarmer" value="false" />
+            </rewards>
+        </quest>   
+        
+        <quest id="SCENARIO_CW_QUEST_START_02_COOLDOWN" avatar="farmer" finish="instant" start="custom" visible="false" repeatable="no">
+            <start_condition timeout="1" />
+            
+            <onStarted >
+                <set-flag key="TradeBandit" value="true" />
+                <set-flag key="TradeFarmer" value="true" />
+            </onStarted>
+            
+            <objectives timeout="1" >
+                <flag-has-value key="RandomTradesStarted" value="false" />
+            </objectives>
+            
+            <rewards >
+                <set-flag key="RandomTradesStarted" value="true" /> 
+                <start-quest id="SCENARIO_SWITCH_C_SECURITY" /> 
+                <start-quest id="SCENARIO_SWITCH_B_SECURITY" /> 
+            </rewards>
+        </quest> 
+    -->
+    
+<!-- Switch end -->
+
+<!-- Optional Trading Quests (randomly choosen) -->    
+        <quest id="SCENARIO_CW_QUEST_B_START_01" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_START_01_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_START_01_DESC" >
+                <!--
+                <start-quest id="SCENARIO_CW_QUEST_C_START_01" />
+                <set-flag key="TradeFarmer" value="false" />
+                <set-flag key="TradeBandit" value="false" />
+                -->
+            </onStarted>
+            
+            <start_condition timeout="4" />
+            
+            <objectives timeout="1">
+                <tribute amount="5" resource="fish" />
+            </objectives>
+
+            <rewards>
+                <resource amount="12" resource="wood"/>
+                <start-quest id="SCENARIO_CW_QUEST_B_START_02" />
+            </rewards>
+
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+
+        </quest>
+       
+        <quest id="SCENARIO_CW_QUEST_B_START_02" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_START_02_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_START_02_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="8" />
+            
+            <objectives timeout="1">
+                <tribute amount="20" resource="stone" />
+            </objectives>
+            
+            <rewards>
+                <resource amount="9" resource="wood"/>
+                <!--
+                <start-quest id="SCENARIO_CW_QUEST_START_02_COOLDOWN" />
+                -->
+                <start-quest id="SCENARIO_CW_QUEST_B_30" />
+            </rewards>
+           
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+       
+        </quest>
+        <!--
+        <quest id="SCENARIO_CW_QUEST_B_10" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_10_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_10_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="5" />
+            
+            <objectives timeout="1">
+                <tribute amount="12" resource="fish" />
+            </objectives>
+            
+            <fail_condition timeout="240" />
+            
+            <onFailed >
+                <start-quest id="SCENARIO_CW_QUEST_B_20"/>
+            </onFailed>
+            
+            <rewards>
+                <resource amount="12" resource="wood"/>
+                <resource amount="6" resource="planks"/>
+                <start-quest id="SCENARIO_CW_QUEST_B_80"/>
+            </rewards>
+        </quest>
+        -->
+        <quest id="SCENARIO_CW_QUEST_B_20" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_20_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_20_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="8" />
+            
+            <objectives timeout="1">
+                <tribute amount="35" resource="stone" />
+            </objectives>
+            <!--
+            <fail_condition timeout="240" />
+            
+            <onFailed >
+                <start-quest id="SCENARIO_SWITCH_C_SECURITY"/>
+            </onFailed>
+            -->
+            <rewards>
+                <resource amount="10" resource="wood"/>
+                <start-quest id="SCENARIO_CW_QUEST_B_60"/>
+            </rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_B_30" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_30_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_30_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="12" />
+            
+            <objectives timeout="1">
+                <tribute amount="35" resource="corn" />
+            </objectives>
+            <!--
+            <fail_condition timeout="240" />
+            
+            <onFailed >
+                <start-quest id="SCENARIO_SWITCH_C_SECURITY"/>
+            </onFailed>
+            -->
+            <rewards>
+                <resource amount="14" resource="wood"/>
+                <resource amount="7" resource="planks"/>
+                <start-quest id="SCENARIO_CW_QUEST_B_40"/>
+            </rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_B_40" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_40_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_40_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="8" />
+            
+            <objectives timeout="1">
+                <tribute amount="25" resource="wool" />
+            </objectives>
+            <!--
+            <fail_condition timeout="240" />
+            
+            <onFailed >
+                <start-quest id="SCENARIO_SWITCH_C_SECURITY"/>
+            </onFailed>
+            -->
+            <rewards>
+                <resource amount="12" resource="wood"/>
+                <resource amount="6" resource="planks"/>
+                <start-quest id="SCENARIO_CW_QUEST_B_20"/>
+            </rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_B_50" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_50_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_50_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="8" />
+            
+            <objectives timeout="1">
+                <tribute amount="15" resource="skins" />
+            </objectives>
+            <!--
+            <fail_condition timeout="240" />
+            
+            <onFailed >
+                <start-quest id="SCENARIO_SWITCH_C_SECURITY"/>
+            </onFailed>
+            -->
+            <rewards>
+                <resource amount="14" resource="wood"/>
+                <resource amount="7" resource="planks"/>
+                <start-quest id="SCENARIO_CW_QUEST_B_80"/>
+            </rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_B_60" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_60_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_60_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="8" />
+            
+            <objectives timeout="1">
+                <tribute amount="17" resource="herbs" />
+            </objectives>
+            <!--
+            <fail_condition timeout="240" />
+            
+            <onFailed >
+                <start-quest id="SCENARIO_SWITCH_C_SECURITY"/>
+            </onFailed>
+            -->
+            <rewards>
+                <resource amount="16" resource="wood"/>
+                <resource amount="8" resource="planks"/>
+                <start-quest id="SCENARIO_CW_QUEST_B_50"/>
+            </rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_B_70" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_70_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_70_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="8" />
+            
+            <objectives timeout="1">
+                <tribute amount="10" resource="tools"/>
+            </objectives>
+            <!--
+            <fail_condition timeout="240" />
+            
+            <onFailed >
+                <start-quest id="SCENARIO_SWITCH_C_SECURITY"/>
+            </onFailed>
+            -->
+            <rewards>
+                <resource amount="20" resource="wood"/>
+                <resource amount="10" resource="planks"/>
+                <!--
+                <start-quest id="SCENARIO_SWITCH_B_SECURITY"/>
+                -->
+            </rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="SzenarioFinished" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="SCENARIO_CW_QUEST_B_80" avatar="farmer" title="SCENARIO_CW_QUEST_B_NAME" description="SCENARIO_CW_QUEST_B_80_DESC" start="custom">
+            <onStarted notification="SCENARIO_CW_QUEST_B_80_DESC" >
+            </onStarted>
+            
+            <start_condition timeout="24" />
+            
+            <objectives timeout="1">
+                <tribute amount="13" resource="meat" />
+            </objectives>
+            <!--
+            <fail_condition timeout="240" />
+            
+			<onFailed >
+				<start-quest id="SCENARIO_SWITCH_C_SECURITY"/>
+			</onFailed>
+			-->
+			<rewards>
+				<resource amount="18" resource="wood"/>
+				<resource amount="9" resource="planks"/>
+				<start-quest id="SCENARIO_CW_QUEST_B_70"/>
+			</rewards>
+            
+			<fail_condition timeout="1" >
+				<flag-has-value key="SzenarioFinished" value="true" />
+			</fail_condition>
+		</quest>
+        
+        
+		<!-- Thief -->
+		<quest id="SCENARIO_CW_QUEST_C_START_01" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" description="SCENARIO_CW_QUEST_C_START_01_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_START_01_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="16" />
+            
+			<objectives timeout="1">
+				<tribute amount="8" resource="fish" />
+			</objectives>
+            
+			<rewards>
+				<resource amount="10" resource="wood"/>
+				<resource amount="5" resource="planks"/>
+				<!--
+				<start-quest id="SCENARIO_CW_QUEST_START_01_COOLDOWN" />
+				-->
+				<start-quest id="SCENARIO_CW_QUEST_C_START_02" />
+			</rewards>
+
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="ThiefCounter" value="true" />
+				<start-quest id="SCENARIO_CW_QUEST_C_START_02" />
+			</onFailed>
+
+		</quest>
+
+        
+		<quest id="SCENARIO_CW_QUEST_C_START_02" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" description="SCENARIO_CW_QUEST_C_START_02_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_START_02_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="150" />
+            
+			<objectives timeout="1">
+				<tribute amount="30" resource="stone" />
+			</objectives>
+            
+			<rewards>
+				<resource amount="12" resource="wood"/>
+				<resource amount="6" resource="planks"/>
+				<start-quest id="SCENARIO_SWITCH_C_COOLDOWN" />
+			</rewards>
+
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="ThiefCounter" value="true" />
+				<start-quest id="SCENARIO_SWITCH_C_COOLDOWN" />
+			</onFailed>
+
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_10" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_10_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_10_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="13" resource="fish" />
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="ThiefCounter" value="true" />
+				<set-flag key="TradeIsRunning" value="false" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="14" resource="wood"/>
+				<resource amount="7" resource="planks"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_20" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_20_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_20_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="35" resource="stone" />
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="ThiefCounter" value="true" />
+				<set-flag key="TradeIsRunning" value="false" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="12" resource="wood"/>
+				<resource amount="6" resource="planks"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_30" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_30_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_30_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="35" resource="corn" />
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="TradeIsRunning" value="false" />
+				<set-flag key="ThiefCounter" value="true" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="14" resource="wood"/>
+				<resource amount="7" resource="planks"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_40" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_40_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_40_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="25" resource="wool" />
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="TradeIsRunning" value="false" />
+				<set-flag key="ThiefCounter" value="true" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="16" resource="wood"/>
+				<resource amount="8" resource="planks"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_50" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_50_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_50_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="15" resource="skins" />
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="TradeIsRunning" value="false" />
+				<set-flag key="ThiefCounter" value="true" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="14" resource="wood"/>
+				<resource amount="7" resource="planks"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_60" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_60_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_60_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="17" resource="herbs" />
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="TradeIsRunning" value="false" />
+				<set-flag key="ThiefCounter" value="true" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="16" resource="wood"/>
+				<resource amount="8" resource="planks"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_70" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_70_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_70_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="10" resource="tools"/>
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="TradeIsRunning" value="false" />
+				<set-flag key="ThiefCounter" value="true" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="18" resource="wood"/>
+				<resource amount="9" resource="planks"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_CW_QUEST_C_80" avatar="bandit" title="SCENARIO_CW_QUEST_C_NAME" repeatable="custom" description="SCENARIO_CW_QUEST_C_80_DESC" start="custom" >
+			<onStarted notification="SCENARIO_CW_QUEST_C_80_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" />
+            
+			<objectives timeout="1">
+				<tribute amount="15" resource="meat"/>
+			</objectives>
+            
+			<fail_condition timeout="300" />
+            
+			<onFailed >
+				<set-flag key="TradeIsRunning" value="false" />
+				<set-flag key="ThiefCounter" value="true" />
+			</onFailed>
+            
+			<rewards>
+				<set-flag key="TradeIsRunning" value="false" />
+				<resource amount="20" resource="wood"/>
+				<resource amount="10" resource="planks"/>
+			</rewards>
+		</quest>
+        
+        
+        
+        
+        
+          
+        
+		<!-- Thief Counter Quests starts // if player fails to trade with the thief 3 times, they will start an attack -->
+		<quest id="SCENARIO_COUNTER_THIEF_1" avatar="bandit" start ="custom" visible="false" finish="instant" repeatable="custom">
+			<start_condition timeout="1"/>
+            
+			<objectives timeout="1" >
+				<flag-has-value key="ThiefCounter" value="true"/>
+			</objectives>
+            
+			<onSuccess notification="SCENARIO_THIEF_FAIL" />
+
+			<rewards>
+				<set-flag key="ThiefCounter" value="false" />
+				<start-quest id="SCENARIO_COUNTER_THIEF_2"/>
+			</rewards>
+            
+			<fail_condition timeout="1" >
+				<flag-has-value key="SzenarioFinished" value="true" />
+			</fail_condition>
+		</quest>
+ 
+		<quest id="SCENARIO_COUNTER_THIEF_2" avatar="bandit" start ="custom" visible="false" finish="instant" repeatable="custom">
+			<start_condition timeout="1"/>
+            
+			<objectives timeout="1" >
+				<flag-has-value key="ThiefCounter" value="true"/>
+			</objectives>
+            
+			<onSuccess notification="SCENARIO_THIEF_FAIL" />
+            
+			<rewards>
+				<set-flag key="ThiefCounter" value="false" />
+				<start-quest id="SCENARIO_COUNTER_THIEF_3"/>
+			</rewards>
+            
+			<fail_condition timeout="1" >
+				<flag-has-value key="SzenarioFinished" value="true" />
+			</fail_condition>
+		</quest>
+        
+		<quest id="SCENARIO_COUNTER_THIEF_3" avatar="bandit" start ="custom" visible="false" finish="instant" repeatable="custom">
+			<start_condition timeout="1"/>
+            
+			<objectives timeout="1" >
+				<flag-has-value key="ThiefCounter" value="true"/>
+			</objectives>
+            
+			<rewards>
+				<set-flag key="ThiefCounter" value="false" />
+				<start-quest id="SCENARIO_COUNTER_THIEF_1"/>
+				<start-quest id="SCENARIO_COUNTER_THIEF_END"/>
+			</rewards>
+            
+			<fail_condition timeout="1" >
+				<flag-has-value key="SzenarioFinished" value="true" />
+			</fail_condition>
+		</quest>
+            
+		<quest id="SCENARIO_COUNTER_THIEF_END" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<start_condition timeout="1" />
+            
+			<objectives timeout="1" >
+				<flag-has-value key="ThiefDifficultyUp" value="true" />
+			</objectives>
+            
+			<fail_condition timeout="2"/>
+            
+			<rewards >
+				<start-quest id="SCENARIO_COUNTER_THIEF_END_HARD"/>
+			</rewards>
+            
+			<onFailed >
+				<start-quest id="SCENARIO_COUNTER_THIEF_END_EASY"/>
+			</onFailed>
+		</quest>
+            
+		<quest id="SCENARIO_COUNTER_THIEF_END_EASY" start ="custom" avatar="bandit" visible="false" finish="instant" repeatable="custom" description="SCENARIO_COUNTER_THIEF_END_DESC">
+			<onStarted notification="SCENARIO_COUNTER_THIEF_END_DESC" >
+				<bandit-attack count="1" source="outside" intention="steal" resource="wood" />
+				<bandit-attack count="1" source="outside" intention="steal" resource="planks" />
+			</onStarted>
+            
+			<start_condition timeout="1"/>
+            
+			<objectives timeout="1" >
+				<raid-successful count="1" />
+			</objectives>
+            
+			<fail_condition timeout="1" >
+				<raid-defeated count="1" />
+			</fail_condition>
+            
+			<onSuccess notification="SCENARIO_COUNTER_THIEF_END_SUCCESS" >
+				<set-flag key="ThiefDifficultyUp" value="false" />
+			</onSuccess>
+			<onFailed notification="SCENARIO_COUNTER_THIEF_END_FAILED" >
+				<set-flag key="ThiefDifficultyUp" value="true" />
+			</onFailed>
+            
+			<rewards />
+		</quest>
+        
+		<quest id="SCENARIO_COUNTER_THIEF_END_HARD" start ="custom" avatar="bandit" visible="false" finish="instant" repeatable="custom" description="SCENARIO_COUNTER_THIEF_END_DESC">
+			<onStarted notification="SCENARIO_COUNTER_THIEF_END_DESC" >
+				<bandit-attack count="1" source="outside" intention="steal" resource="wood" />
+				<bandit-attack count="1" source="outside" intention="steal" resource="planks" />
+				<bandit-attack count="1" source="outside" intention="lay_fire" target="building_sawmill" />
+				<bandit-attack count="1" source="outside" intention="lay_fire" />
+			</onStarted>
+            
+			<start_condition timeout="1"/>
+            
+			<objectives timeout="1" >
+				<raid-successful count="1" />
+			</objectives>
+            
+			<fail_condition timeout="1" >
+				<raid-defeated count="1" />
+			</fail_condition>
+            
+			<onSuccess notification="SCENARIO_COUNTER_THIEF_END_SUCCESS" >
+				<set-flag key="ThiefDifficultyUp" value="false" />
+			</onSuccess>
+			<onFailed notification="SCENARIO_COUNTER_THIEF_END_FAILED" >
+				<set-flag key="ThiefDifficultyUp" value="true" />
+			</onFailed>
+            
+			<rewards />
+		</quest>
+		<!-- Thief Counter Quests ends -->
+
+		<!-- Scenario End quest-->
+                  
+		<quest id="scenario-finished" start="custom" visible="false" >
+			
+			<start_condition timeout="5"/>
+                        
+			<objectives timeout="1"/>
+            
+			<rewards>
+				<scenario-finished/>
+				<allow key="building_lumberjack"/>
+				<allow key="forest_1x1"/>
+				<allow key="forest_2x2"/>
+				<set-enable-trade lock="false" resource="planks"/>
+				<set-modifier name="mod_production_building_lumberjack" tag="map" value="100" />
+				<start-quest id="sandbox_start"/>
+			</rewards>
+		</quest>
+                 
+                                                   
+		<quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START" visible="false" >
+			
+			<onStarted notification="T_GAME_SANDBOX_START"/>
+                           
+			<start_condition timeout="5"/>
+              
+			<objectives timeout="1"/>
+           
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards>
+                <lightningstrike topLeftX="41" topLeftY="53" bottomRightX="92" bottomRightY="102" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+	</group>
+</questdb>
+

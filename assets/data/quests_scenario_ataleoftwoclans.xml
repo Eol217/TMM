@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<!-- A tale of two clans scenario -->
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group avatar="client">
+		<quest id="INTRO" isKeyQuest="false" start="instant" visible="false" avatar="client">
+			<start_condition timeout="1" operator="and"/>
+
+			<onStarted>
+				<disallow key="hopfield_1x1_growth"/>
+				<disallow key="building_mine"/>
+				<disallow key="building_weaver"/>
+				<disallow key="building_tailor"/>
+				<disallow key="building_vineyard"/>
+				<disallow key="vinefield_1x1"/>
+				<disallow key="building_winefarm"/>
+				<disallow key="building_monestary"/>
+				<disallow key="building_tanner"/>
+				<set-trade-costs sell="50" resource="bread"/>
+				<set-trade-costs sell="50" resource="cloths"/>
+				<set-enable-trade resource="fish" lock="false"/>
+				<set-enable-trade resource="hops" lock="true"/>
+				<set-trade-costs resource="jewelry" buy="2200"/>
+				<set-trade-costs resource="weapons" buy="2200"/>
+				<set-modifier name="mod_happiness" value="50" tag="happiness_adjustment"/>
+				<set-modifier name="mod_taxes" value="50" tag="startingmodifier"/>
+			</onStarted>
+			<!-- intro part of quest. Advisor says hello -->
+
+			<objectives timeout="1"/>
+			<onSuccess >
+				<start-quest id="MAINQUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="START_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_START_STARTED"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_START_SUCCESS">
+				<start-quest id="BUILD_FORESTHUT"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="START_ZERO" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_START_ZERO_STARTED"/>
+			<onSuccess>
+				<start-quest id="START_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="BUILD_FORESTHUT" isKeyQuest="true" start="custom" title="T_GAME_TUTORIAL_QUEST_NAME_1" description="T_QUESTS_SCENARIO_TWOCLANS_BUILD_FORESTHUT_STARTED" visible="true" avatar="client">
+			<start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_FORESTHUT_STARTED"/>
+			<objectives timeout="3">
+				<building type="building_lumberjack" count="2"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_FORESTHUT_SUCCESS">
+				<start-quest id="NEGOCIATION_TABLE_HELPER_QUEST"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="wood" amount="20"/>
+				<resource resource="planks" amount="10"/>
+				<start-quest id="PRODUCE_PLANKS"/>
+			</rewards>
+		</quest>
+
+		<quest id="BUILD_WAREHOUSE" isKeyQuest="false" start="custom" title="T_GAME_QUEST_SCEN8_10_NAME" description="T_QUESTS_SCENARIO_TWOCLANS_BUILD_WAREHOUSE_STARTED" visible="true" avatar="merchant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_WAREHOUSE_STARTED"/>
+			<objectives timeout="3">
+				<building type="building_warehouse" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_WAREHOUSE_SUCCESS"/>
+			<rewards>
+				<resource resource="coins" amount="300"/>
+				<start-quest id="HELPER_QUEST_FIGHT"/>
+			</rewards>
+		</quest>
+
+		<quest id="BUILDING_ARMORY" isKeyQuest="false" start="custom" title="T_GAME_QUEST_SCEN12_10_TITLE_2" description="T_QUESTS_SCENARIO_TWOCLANS_BUILDING_ARMORY_STARTED" visible="true" avatar="client">
+			<start_condition timeout="25" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_BUILDING_ARMORY_STARTED"/>
+			<objectives timeout="3">
+				<building type="building_armory" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_BUILDING_ARMORY_SUCCESS"/>
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+		</quest>
+
+		<quest id="BUILD_GOLDSMITH" isKeyQuest="false" start="custom" title="T_GAME_QUEST_SCEN3_10_NAME" description="T_QUESTS_SCENARIO_TWOCLANS_QUEST_BUILD_GOLDSMITH_STARTED" visible="true" avatar="client">
+			<start_condition timeout="25" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_BUILD_GOLDSMITH_STARTED"/>
+			<objectives timeout="3">
+				<building type="building_goldsmith" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_BUILD_GOLDSMITH_SUCCESS"/>
+			<rewards>
+				<resource resource="coins" amount="300"/>
+			</rewards>
+		</quest>
+
+		<quest id="BUILD_MINE" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN3_5_NAME" description="T_QUESTS_SCENARIO_TWOCLANS_BUILD_MINE_STARTED" visible="true" avatar="client">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_MINE_STARTED"/>
+			<objectives timeout="3">
+				<building type="building_mine" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_MINE_SUCCESS"/>
+			<rewards>
+				<resource resource="ore" amount="20"/>
+				<start-quest id="QUEST_RETURN_FIGHT"/>
+			</rewards>
+		</quest>
+
+		<quest id="BUILD_MARKET" isKeyQuest="true" start="custom" title="T_GAME_TUTORIAL_QUEST_NAME_8" description="T_QUESTS_SCENARIO_TWOCLANS_QUEST_BUILD_MARKET_STARTED" visible="true" avatar="client">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_BUILD_MARKET_STARTED"/>
+			<objectives timeout="3">
+				<building type="building_market" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_BUILD_MARKET_SUCCESS">
+				<set-flag key="Objective_market" value="true"/>
+				<allow key="building_monestary"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="planks" amount="5"/>
+				<start-quest id="CHECK_FOR_MARKET_AND_PLANKS"/>
+				<set-modifier name="mod_happiness" value="60" tag="happiness_adjustment"/>
+			</rewards>
+		</quest>
+
+		<quest id="NEGOCIATION_TABLE_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_NEGOCIATION_TABLE_HELPER_QUEST_STARTED">
+				<start-quest id="BUILD_MARKET"/>
+			</onStarted>
+		</quest>
+
+		<quest id="BUILD_FAIRGROUND" isKeyQuest="true" start="custom" title="T_SCENARIO_2016_FESTIVITIES_QUEST01_NAME" description="T_QUESTS_SCENARIO_TWOCLANS_BUILD_FAIRGROUND_STARTED" visible="true" avatar="client">
+			<start_condition timeout="10" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_FAIRGROUND_STARTED"/>
+			<objectives timeout="3">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_BUILD_FAIRGROUND_SUCCESS">
+				<set-flag key="Objective_FAIREGROUND" value="true"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="coins" amount="200"/>
+				<resource resource="prestige" amount="25"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIBUTE_BREW" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_BREW_TITLE" description="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_BREW_STARTED" visible="true" avatar="client">
+			<start_condition timeout="30" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_BREW_STARTED"/>
+			<objectives timeout="3">
+				<tribute resource="brew" amount="12"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_BREW_SUCCESS"/>
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+				<start-quest id="TAVERN_HAPPINESS"/>
+				<start-quest id="THANKS_EFFORT_HELPER_QUEST"/>
+				<start-quest id="BUILD_FAIRGROUND"/>
+				<set-modifier name="mod_happiness" value="90" tag="happiness_adjustment"/>
+			</rewards>
+		</quest>
+
+		<quest id="THANKS_EFFORT_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="townie" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_THANKS_EFFORT_HELPER_QUEST_STARTED"/>
+		</quest>
+
+		<quest id="QUEST_RETURN_FIGHT" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_RETURN_FIGHT_STARTED"/>
+			<rewards>
+				<start-quest id="GRANDSON_HELPER_QUEST"/>
+			</rewards>
+		</quest>
+
+		<quest id="WREATH_OF_GODS" isKeyQuest="true" start="custom" visible="false" avatar="oldwoman" finish="instant">
+			<start_condition timeout="3"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_WREATH_OF_GODS_STARTED" >
+				<center-to-building target="collapsing_mine"/>
+				<weather-set-intensity type="rain" intensity="heavy"/>
+				<weather-set-intensity type="thunderstorm" intensity="heavy"/>
+				<set-modifier name="mod_decay" tag="weather_storm" value="125" />
+			</onStarted>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_WREATH_OF_GODS_SUCCESS">
+				<lightningstrike topLeftX="70" topLeftY="116" bottomRightX="72" bottomRightY="118" minValue="-100" maxValue="-100" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+				<remove-modifier-by-tag tag="weather_storm" />
+				<start-quest id="IN_THE_MINE"/>
+			</onSuccess>
+			<rewards>
+				<set-flag key="weather_disabled" value="false"/>
+				<start-quest id="QUEST_WEATHER_COOLDOWN"/>
+			</rewards>
+		</quest>
+
+		<quest id="HELPER_QUEST_BLOODY_KNIGHT" isKeyQuest="true" start="custom" visible="false" avatar="monk" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_HELPER_QUEST_BLOODY_KNIGHT_STARTED">
+				<start-quest id="SWORD_OUT"/>
+			</onStarted>
+		</quest>
+
+		<quest id="HELPER_QUEST_FIGHT" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="10" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_HELPER_QUEST_FIGHT_STARTED">
+				<start-quest id="HELPER_QUEST_BLOODY_KNIGHT"/>
+			</onStarted>
+		</quest>
+
+		<quest id="SWORD_OUT" isKeyQuest="true" start="custom" visible="false" avatar="soldier" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_SWORD_OUT_STARTED"/>
+			<rewards>
+				<start-quest id="WREATH_OF_GODS"/>
+			</rewards>
+		</quest>
+
+		<quest id="IN_THE_MINE" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_IN_THE_MINE_STARTED"/>
+			<onSuccess>
+				<start-quest id="TRIBUTE_TO_SAVE"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="PEACE_MONK_KNIGHT_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="20" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_PEACE_MONK_KNIGHT_HELPER_QUEST_STARTED"/>
+			<rewards>
+				<set-modifier name="mod_happiness" value="80" tag="happiness_adjustment"/>
+			</rewards>
+		</quest>
+
+		<quest id="GRANDSON_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="oldwoman" finish="instant">
+			<start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_GRANDSON_HELPER_QUEST_STARTED"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_GRANDSON_HELPER_QUEST_SUCCESS">
+				<start-quest id="NOT_YOU_HELPER_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="NOT_YOU_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="monk" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_NOT_YOU_HELPER_QUEST_STARTED"/>
+			<onSuccess>
+				<start-quest id="OF_COURSE_HELPER_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="OF_COURSE_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="soldier" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_OF_COURSE_HELPER_QUEST_STARTED"/>
+			<onSuccess>
+				<start-quest id="TRIBUTE_SWORD"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="OK_I_HELP_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="soldier" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_OK_I_HELP_HELPER_QUEST_STARTED"/>
+			<rewards>
+				<start-quest id="BUILDING_ARMORY"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIBUTE_SWORD" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_SWORD_TITLE" description="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_SWORD_STARTED" visible="true" avatar="monk">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_SWORD_STARTED">
+				<start-quest id="OK_I_HELP_HELPER_QUEST"/>
+			</onStarted>
+			<objectives timeout="3">
+				<tribute resource="weapons" amount="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_SWORD_SUCCESS">
+				<start-quest id="TRIBUTE_JEWELRY"/>
+				<start-quest id="BUILD_GOLDSMITH"/>
+				<start-quest id="CURE_FOR_FRIEND_HELPER_QUEST"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="gold" amount="2"/>
+				<start-quest id="PEACE_MONK_KNIGHT_HELPER_QUEST"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIBUTE_JEWELRY" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_JEWELRY_TITLE" description="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_JEWELRY_STARTED" visible="true" avatar="soldier">
+			<start_condition timeout="15" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_JEWELRY_STARTED"/>
+			<objectives timeout="5">
+				<tribute resource="jewelry" amount="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_TRIBUTE_JEWELRY_SUCCESS"/>
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="PRODUCE_PLANKS" isKeyQuest="true" start="custom" title="T_SCENARIO_BESIEGEMENT_SIDEQUEST_01_NAME" description="T_QUESTS_SCENARIO_TWOCLANS_PRODUCE_PLANKS_STARTED" visible="true" avatar="townie">
+			<start_condition timeout="10" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_PRODUCE_PLANKS_STARTED"/>
+			<objectives timeout="3">
+				<produce resource="planks" amount="20"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_PRODUCE_PLANKS_SUCCESS">
+				<set-flag key="Objective_planks" value="true"/>
+				<set-flag key="weather_disabled" value="true"/>
+				<weather-set-intensity type="cloudy" intensity="heavy"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+				<resource resource="meat" amount="5"/>
+				<start-quest id="CHECK_FOR_MARKET_AND_PLANKS"/>
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_FOR_MARKET_AND_PLANKS" isKeyQuest="true" start="instant" visible="false" avatar="client">
+			<start_condition timeout="10" operator="and"/>
+			<objectives timeout="2">
+				<flag-has-value key="Objective_market" value="true"/>
+				<flag-has-value key="Objective_planks" value="true"/>
+			</objectives>
+			<rewards>
+				<start-quest id="BUILD_WAREHOUSE"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIBUTE_TO_SAVE" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_TO_SAVE_TITLE" description="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_TO_SAVE_STARTED" visible="true" avatar="client">
+			<start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_TO_SAVE_STARTED"/>
+			<objectives timeout="3">
+				<tribute resource="wood" amount="30"/>
+				<tribute resource="tools" amount="20"/>
+				<tribute resource="planks" amount="10"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_TRIBUTE_TO_SAVE_SUCCESS">
+				<allow key="building_mine"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="BUILD_MINE"/>
+				<resource resource="prestige" amount="5"/>
+				<resource resource="nuggets" amount="2"/>
+				<set-modifier name="mod_happiness" value="70" tag="happiness_adjustment"/>
+			</rewards>
+		</quest>
+
+		<quest id="DELIVER_THE_INGREDIENTS" isKeyQuest="true" start="custom" visible="false" avatar="medicus">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_DELIVER_THE_INGREDIENTS_STARTED"/>
+			<objectives timeout="1"/>
+			<rewards>
+				<start-quest id="DELIVER_THE_INGREDIENTS_2"/>
+			</rewards>
+		</quest>
+
+		<quest id="DELIVER_THE_INGREDIENTS_2" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_TWOCLANS_DELIVER_THE_INGREDIENTS_TITLE" description="T_QUESTS_SCENARIO_TWOCLANS_DELIVER_THE_INGREDIENTS_STARTED_2" visible="true" avatar="medicus">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_DELIVER_THE_INGREDIENTS_STARTED_2"/>
+			<objectives timeout="1">
+				<tribute resource="bread" amount="10"/>
+				<tribute resource="fish" amount="10"/>
+				<tribute resource="herbs" amount="10"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_DELIVER_THE_INGREDIENTS_SUCCESS">
+				<set-flag key="Objective_8" value="true"/>
+				<allow key="hopfield_1x1_growth"/>
+				<set-enable-trade resource="hops" lock="false"/>
+				<start-quest id="HOPS_TIMER"/>
+				<start-quest id="TRIBUTE_BREW"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="coins" amount="500"/>
+				<resource resource="gold" amount="2"/>
+			</rewards>
+		</quest>
+
+		<quest id="CURE_FOR_FRIEND_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="soldier" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_CURE_FOR_FRIEND_STARTED"/>
+			<onSuccess>
+				<start-quest id="NEVER_VISIT_HELPER_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="NEVER_VISIT_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="medicus" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_NEVER_VISIT_HELPER_QUEST_STARTED"/>
+			<onSuccess>
+				<start-quest id="YOUR_SWORD_HELPER_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="YOUR_SWORD_HELPER_QUEST" isKeyQuest="true" start="custom" visible="false" avatar="soldier" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_YOUR_SWORD_HELPER_QUEST_STARTED"/>
+			<onSuccess>
+				<start-quest id="DELIVER_THE_INGREDIENTS"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="HOPS_TIMER" isKeyQuest="true" start="custom" visible="false" avatar="monk">
+			<start_condition timeout="21" operator="and"/>
+			<onStarted >
+				<center-to-building target="hops_back"/>
+			</onStarted>
+			<objectives timeout="1"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_QUEST_HOPS_BACK_SUCCESS"/>
+		</quest>
+
+		<quest id="TAVERN_HAPPINESS" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_TWOCLANS_TAVERN_HAPPINESS_TITLE" description="T_QUESTS_SCENARIO_TWOCLANS_TAVERN_HAPPINESS_STARTED" visible="true" avatar="medicus">
+			<start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_TAVERN_HAPPINESS_STARTED"/>
+			<objectives timeout="5" operator="and">
+				<happyness value="100" type="tavern_complete"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_TWOCLANS_TAVERN_HAPPINESS_SUCCESS">
+				<set-flag key="Objective_TAVERN_HAPPINESS" value="true"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="prestige" amount="25"/>
+			</rewards>
+		</quest>
+
+		<quest id="MAINQUEST" isKeyQuest="true" start="custom"  title="T_QUESTS_SCENARIO_TWOCLANS_MAINQUEST_TITLE" description="T_QUESTS_SCENARIO_TWOCLANS_MAINQUEST_STARTED" visible="true" avatar="client" >
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_TWOCLANS_MAINQUEST_STARTED" >
+				<start-quest id="START_ZERO"/>
+			</onStarted>
+			<!-- intro part of quest. Advisor says hello -->
+			<objectives timeout="1">
+				<flag-has-value key="Objective_FAIREGROUND" value="true"/>
+				<flag-has-value key="Objective_TAVERN_HAPPINESS" value="true"/>
+			</objectives>
+			<rewards>
+				<start-quest id="SCENARIO_FINISHED"/>
+				<resource resource="prestige" amount="200"/>
+			</rewards>
+		</quest>
+
+		<quest visible="false" id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" description="T_GAME_QUEST_SCEN_FINISHED_DESC" start="custom">
+
+			<start_condition timeout="5" operator="and"/>
+			<onStarted >
+				<scenario-finished />
+				<remove-modifier-by-tag tag="quest" />
+				<allow key="building_weaver"/>
+				<allow key="building_tailor"/>
+				<allow key="building_vineyard"/>
+				<allow key="vinefield_1x1"/>
+				<allow key="building_winefarm"/>
+				<allow key="building_monestary"/>
+				<allow key="building_tanner"/>
+				<!--TODO Trade cost back to normal-->
+				<set-trade-costs resource="jewelry" buy="47"/>
+				<set-trade-costs resource="weapons" buy="45"/>
+				<set-modifier name="mod_happiness" value="100" tag="happiness_adjustment"/>
+				<set-modifier name="mod_taxes" value="100" tag="startingmodifier"/>
+			</onStarted>
+			<objectives timeout="5" operator="and"/>
+			<onSuccess notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+			<rewards >
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-season season="autumn"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+		<!-- STORM -->
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2"  operator="and"/>
+			<rewards>
+				<lightningstrike topLeftX="38" topLeftY="45" bottomRightX="82" bottomRightY="83" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->
+
+	</group>
+</questdb>
+

@@ -1,0 +1,18 @@
+{
+	"layers": [
+		{
+			"animation": {
+				"theme": {
+					"": null,
+					"*": "{typeId}"
+				}
+			},
+
+			"transition":null,
+			"fps": 10,
+			"anchor": "bottom",
+			"touchable": true
+		}
+		
+	]
+}

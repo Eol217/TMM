@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: LATE FALL -->
+<!-- Max Prestige earned: 200 -->
+<questdb>
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+	<!--
+	<group avatar="farmer">
+		<quest id="test-1" title="test quest" description="my magic test quest" start="instant">
+			<objectives operator="and_not" timeout="15">
+				<stock resource="stone" amount="20" />
+				<stock resource="tools" amount="20" />
+			</objectives>
+
+			<fail_condition timeout="20">
+				<construct type="building_residence_00" count="2" />
+			</fail_condition>
+
+			<onSuccess notification="on success notification">
+				<start-quest id="test-success" />
+			</onSuccess>
+
+			<onFailed>
+				<start-quest id="test-failed" />
+				<set-merchant state="disabled" />
+				<destruct-building type="building_residence_00" count="3" />
+			</onFailed>
+
+			<rewards>
+				<resource resource="meat" amount="50" />
+			</rewards>
+		</quest>
+
+		<quest id="test-success" title="test success quest" description="the quest was successful" start="custom" >
+			<objectives timeout="1">
+				<construct type="building_lumberjack" count="1" />
+			</objectives>
+		</quest>
+
+		<quest id="test-failed" title="test failed quest" description="the quest has failed" start="custom" >
+			<objectives timeout="1">
+				<construct type="building_lumberjack" count="1" />
+			</objectives>
+		</quest>
+	</group>
+	-->
+<!--
+	
+	<group avatar="knight">
+		<quest id="enter-summer" title="waiting for the summer" start="instant" repeatable="true" >
+			<objectives timeout="1">
+				<season season="summer" />
+			</objectives>
+
+			<onSuccess notification="my lord, it's summer" />
+		</quest>
+
+		<quest id="enter-autumn" title="waiting for the autumn" start="instant" repeatable="true" >
+			<objectives timeout="1">
+				<season season="autumn" />
+			</objectives>
+
+			<onSuccess notification="my lord, it's autumn" />
+		</quest>
+
+		<quest id="enter-winter" title="waiting for the winter" start="instant" repeatable="true" >
+			<objectives timeout="1">
+				<season season="winter" />
+			</objectives>
+
+			<onSuccess notification="my lord, it's winter" />
+		</quest>
+
+		<quest id="enter-spring" title="waiting for the spring" start="instant" repeatable="true" >
+			<objectives timeout="1">
+				<season season="spring" />
+			</objectives>
+
+					<onSuccess notification="my lord, it's spring" />
+			</quest>
+	</group>
+	-->   
+    	<!--TESTQUEST TO INSTANTLY FINISH THE QUEST-->
+ <group>
+		<quest id="MAIN_00" avatar="king" start="instant" visible="true" isKeyQuest="true" title="DEBUG:FINISH QUEST" description="DEBUG:FINISH" >
+			<onStarted notification="DEBUG:FINISH"/>
+            <objectives timeout="1" operator="and">
+                <tribute amount="25000" resource="coins" />
+            </objectives>
+            <rewards>
+                <scenario-finished/>
+            </rewards>
+        </quest>
+		
+   
+		<quest id="testmap_show_modifier" isKeyQuest="true" title="Show Modifier Quest" start="instant" repeatable="custom">
+			<rewards >
+				<set-flag key="show_modifier" value="true" />
+				<start-quest id="setting_modifier"/>
+				<start-quest id="testmap_hide_modifier"/>
+			</rewards>
+		</quest>
+		<quest id="testmap_hide_modifier" isKeyQuest="true" title="Hide Modifier Quest" start="custom" repeatable="custom">
+			<rewards >
+				<set-flag key="show_modifier" value="false" />
+				<start-quest id="testmap_show_modifier"/>
+			</rewards>
+		</quest>	
+        <quest id="setting_modifier" isKeyQuest="true" title="Show all modifier" start="custom" finish="user" visible="false" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="show_modifier" value="true" />
+			</objectives>
+            <rewards >
+                <set-modifier name="mod_consumption_rate_food" tag="quest" value="90" />
+                <set-modifier name="mod_consumption_rate_clothes" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_jewels" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_church" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_tavern" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_jousting" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_market" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_decoration" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_idle" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_home" tag="quest" value="90" />
+				<set-modifier name="mod_consumption_rate_water" tag="quest" value="90" />
+	
+				<set-modifier name="mod_decay" tag="quest" value="90" />
+				<set-modifier name="mod_happiness" tag="quest" value="90" />
+				<set-modifier name="mod_taxes" tag="quest" value="90" />
+				<set-modifier name="mod_effort" tag="quest" value="90" />
+				<set-modifier name="mod_rest" tag="quest" value="90" />
+				<set-modifier name="mod_merchant_sell_tradegoods" tag="quest" value="90" />
+				<set-modifier name="mod_merchant_buy_tradegoods" tag="quest" value="90" />
+				<set-modifier name="mod_event_bandit_cooldown" tag="quest" value="90" />
+				<set-modifier name="mod_walking_speed" tag="quest" value="90" />
+				<set-modifier name="mod_guards_consumption_rate" tag="quest" value="90" />
+				<set-modifier name="mod_guards_charge_speed" tag="quest" value="90" />
+				<set-modifier name="mod_guards_recovery_time" tag="quest" value="90" />
+				<set-modifier name="mod_strike_chance" tag="quest" value="90" />
+				<set-modifier name="mod_event_fire_water_effect" tag="quest" value="90" />
+				<set-modifier name="mod_building_range_firetower" tag="quest" value="90" />
+				<set-modifier name="mod_production_building_farm" tag="quest" value="90" />
+				
+				<set-modifier name="mod_event_fire_chance" tag="quest" value="90" />
+				<set-modifier name="mod_event_fire_timeout" tag="quest" value="90" />
+				<set-modifier name="mod_event_plague_timeout" tag="quest" value="90" />
+				<set-modifier name="mod_event_plague_chance" tag="quest" value="90" />
+				
+<!--				<set-modifier name="mod_seasonal_parties_enabled" tag="quest" value="90" />-->
+            </rewards>
+			<fail_condition timeout="2" operator="and" >
+				<flag-has-value key="show_modifier" value="false" />
+			</fail_condition>
+        </quest>
+		<!--
+		<quest id="testmap_show_disaster" isKeyQuest="true" title="Show Disaster Quest" start="instant" repeatable="custom">
+			<rewards >
+				<set-flag key="show_disaster" value="true" />
+				<start-quest id="testmap_hide_disaster"/>
+				
+				<start-quest id="testmap_disaster_achievement" />
+			</rewards>
+		</quest>
+		<quest id="testmap_hide_disaster" isKeyQuest="true" title="Hide Disaster Quest" start="custom" repeatable="custom">
+			<rewards >
+				<set-flag key="show_disaster" value="false" />
+				<start-quest id="testmap_show_disaster"/>
+			</rewards>
+		</quest>
+		-->	
+		<quest id="testmap_disaster_achievement" isKeyQuest="true" title="Enable Disaster Achievement" start="instant" repeatable="instant" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="show_disaster" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="achievement_disaster_fire" value="true" />
+				<set-flag key="achievement_disaster_draught" value="true" />
+				<set-flag key="achievement_disaster_plague" value="true" />
+				<set-flag key="achievement_disaster_animals" value="true" />
+				<set-flag key="achievement_disaster_bandits" value="true" />
+				<set-flag key="achievement_disaster_avalanche" value="true" />
+				<set-flag key="achievement_disaster_lightning" value="true" />
+				<set-flag key="achievement_disaster_snowstorm" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" >
+				<flag-has-value key="show_disaster" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="testmap_banditattack" title="4 Bandit Attackwave" start="instant" repeatable="instant" >
+			<objectives timeout="1" operator="and" >
+				<building count="1" type="building_hopsfarm" />
+			</objectives>
+			<rewards >
+				<bandit-attack intention="lay_fire" count="4" target="building_hopsfarm" source="camp" />
+			</rewards>
+		</quest>
+		
+		<quest id="testmap_plague" title="The plague is coming!" start="instant" repeatable="instant" >
+			<rewards >
+				<start-plague amount="200" /> 
+			</rewards>
+		</quest>
+		
+		<quest id="start_coverage" title="Start Coverage" start="instant" repeatable="instant" >
+			<objectives timeout="1" operator="and">
+				<tribute resource="tools" amount="1" />
+			</objectives>
+			<rewards >
+				<start-quest id="have_fire_coverage" />
+				<start-quest id="have_fire_coverage_2" />
+				<start-quest id="have_military_coverage" />
+				<start-quest id="have_military_coverage_2" />
+			</rewards>
+		</quest>	
+		<quest id="have_fire_coverage" title="Coverage Fire" start="custom" repeatable="custom" >
+			<objectives timeout="2" operator="and" >
+				<coverage coverage="80" type="firefighters" />
+			</objectives>
+		</quest>
+		<quest id="have_fire_coverage_2" title="Coverage Fire 2" start="custom" repeatable="custom" >
+			<objectives timeout="2" operator="and" >
+				<coverage coverage="85" type="firefighters" />
+			</objectives>
+		</quest>
+		
+		<quest id="have_military_coverage" title="Coverage Military" start="custom" repeatable="custom" >
+			<objectives timeout="2" operator="and" >
+				<coverage coverage="80" type="military" />
+			</objectives>
+		</quest>
+		<quest id="have_military_coverage_2" title="Coverage Military 2" start="custom" repeatable="custom" >
+			<objectives timeout="2" operator="and" >
+				<coverage coverage="85" type="military" />
+			</objectives>
+		</quest>
+
+		<quest id="BurnJuggler" title="Burn, my, Juggler camp!" start="instant" repeatable="instant" >
+			<rewards >
+				<start-fire amount="1" state="burning" target="building_jugglercamp" />
+				<start-fire amount="1" state="burning" target="building_archerycontest" />
+			</rewards>
+		</quest>
+		
+		<quest id="LetItRain" title="Let it rain!" start="instant" repeatable="instant" >
+			<rewards >
+				<start-quest id="CHOOSE_RAIN_C" />
+			</rewards>
+		</quest>
+		
+		<quest id="Start_snowstorm" title="Start Snowstorm" start="instant" repeatable="instant" visible="true" >
+			
+			<objectives timeout="1" operator="and">
+				<tribute amount="5" resource="prestige"	/>
+			</objectives>
+			
+			<rewards >
+				<start-quest id="SNOWSTORM_TEST" />
+			</rewards>
+		</quest>
+		
+		
+		
+		<quest id="SNOWSTORM_TEST" start="custom" finish="instant"  repeatable="custom" visible="false" avatar="client">
+	
+			<start_condition timeout="4" operator="or">
+				<theme theme="winter"/>
+				<season season="winter"/>
+			</start_condition>
+			
+			<onStarted>
+				<weather-set-intensity type="snow" intensity="heavy"/>
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+			</onStarted>
+
+			<objectives timeout="90"/>
+			
+			<fail_condition timeout="1" operator="or">
+				<season season="spring" />
+				<theme theme="spring" />
+			</fail_condition>
+			<onSuccess>
+				<weather-set-intensity type="snow" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="default"/>
+			</onSuccess>
+		</quest>
+		
+		
+        <quest id="lightningstrike" title="lightningstrike" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="lightningstrike-with-delay" />
+			</rewards>
+		</quest>
+
+        <quest id="format_quest_oneliner" title="Dieses Quest hat 1 Zeile" start="instant" repeatable="instant" isKeyQuest="true" >
+            <objectives timeout="1" operator="and">
+                <construct count="1" type="building_well" />
+            </objectives>
+            <rewards >
+                <resource amount="1" resource="fish" />
+                <resource amount="1" resource="coins" />
+                <resource amount="1" resource="planks" />
+            </rewards>
+        </quest>
+        
+        <quest id="format_quest_twoliner" title="Dieses Quest muss ganz viel nutzlosen Text haben, damit es in 2 Zeilen angezeigt wird. Dabei sollte hoffentlich das Format nicht kaputt gehen!" start="instant" repeatable="instant" isKeyQuest="true" >
+            <objectives timeout="1" operator="and">
+                <construct count="1" type="building_well" />
+            </objectives>
+            <rewards >
+                <resource amount="1" resource="fish" />
+                <resource amount="1" resource="coins" />
+                <resource amount="1" resource="planks" />
+            </rewards>
+        </quest>
+        
+        <quest id="format_quest_threeliner" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris usw." start="instant" repeatable="instant" isKeyQuest="true" >
+            <objectives timeout="1" operator="and">
+                <construct count="1" type="building_well" />
+            </objectives>
+            <rewards >
+                <resource amount="1" resource="fish" />
+                <resource amount="1" resource="coins" />
+                <resource amount="1" resource="planks" />
+            </rewards>
+        </quest>
+        
+        <quest id="lightningstrike-with-delay" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+                <lightningstrike topLeftX="74" topLeftY="51" bottomRightX="90" bottomRightY="70" minValue="-30" maxValue="-50" 
+                        destroyOnNoDurability="true" produceFire="true" targetCountMin="2" targetCountMax="4" />
+			</rewards>
+		</quest>
+        
+        <quest id="demomap_damage_my_city" title="Damage my city to 10%!" start="instant" repeatable="custom" >
+            <rewards >
+                <set-durability value="100" />
+                <set-durabilitychange topLeftX="0" topLeftY="0" bottomRightX="150" bottomRightY="150"
+                        destroyOnNoDurability="false" minValue="-90" maxValue="-90" />
+                <lightningstrike topLeftX="0" topLeftY="0" bottomRightX="150" bottomRightY="105" minValue="0" maxValue="0" 
+                        destroyOnNoDurability="false" produceFire="false" targetCountMin="100" targetCountMax="100" />
+                <start-quest id="demomap_repair_my_city" />
+            </rewards>
+        </quest>
+        <quest id="demomap_repair_my_city" title="Repair my city!" start="custom" repeatable="custom" >
+            <rewards >
+                <set-durability value="100" />
+                <lightningstrike topLeftX="0" topLeftY="0" bottomRightX="150" bottomRightY="105" minValue="0" maxValue="0" 
+                        destroyOnNoDurability="false" produceFire="false" targetCountMin="100" targetCountMax="100" />
+                <start-quest id="demomap_damage_my_city" />
+                <start-quest id="demomap_damage_my_city_complete" />
+            </rewards>
+        </quest>
+        <quest id="demomap_damage_my_city_complete" title="Damage my city to 0%!" start="instant" repeatable="custom" >
+            <rewards >
+                <set-durability value="0" />
+                <lightningstrike topLeftX="0" topLeftY="0" bottomRightX="150" bottomRightY="105" minValue="0" maxValue="0" 
+                        destroyOnNoDurability="false" produceFire="false" targetCountMin="100" targetCountMax="100" />
+                <start-quest id="demomap_repair_my_city" />
+            </rewards>
+        </quest>
+        
+        <quest id="avalanche-TL" title="avalanche-TL" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="avalanche-tl-with-delay" />
+			</rewards>
+		</quest>
+        
+        <quest id="avalanche-tl-with-delay" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+                <avalanche topLeftX="92" topLeftY="76" bottomRightX="103" bottomRightY="82" minValue="-50" maxValue="-50" 
+                destroyOnNoDurability="true" avalancheSize="3" startOrientation="topLeft" />
+            </rewards>
+			<ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" notification-sound="disasters/sfx_avalanche_going_down" icon="notification_alert.png" />
+		</quest>
+        
+        <quest id="avalanche-TR" title="avalanche-TR" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="avalanche-tr-with-delay" />
+			</rewards>
+		</quest>
+        
+        <quest id="avalanche-tr-with-delay" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+                <avalanche topLeftX="98" topLeftY="77" bottomRightX="102" bottomRightY="81" minValue="-50" maxValue="-50" 
+                destroyOnNoDurability="true" avalancheSize="3" startOrientation="topRight" />
+            </rewards>
+			<ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" notification-sound="disasters/sfx_avalanche_going_down" icon="notification_alert.png" />
+		</quest>
+	</group>
+
+	<!-- XP quests -->
+	<group>
+		<quest id="test-xp-250" title="get 250 xp" start="instant" repeatable="instant">
+			<rewards>
+				<xp value="250" />
+			</rewards>
+		</quest>
+
+		<quest id="test-xp-1000" title="get 1.000 xp" start="instant" repeatable="instant">
+			<rewards>
+				<xp value="1000" />
+			</rewards>
+		</quest>
+
+		<quest id="test-xp-5000" title="get 5.000 xp" start="instant" repeatable="instant">
+			<rewards>
+				<xp value="5000" />
+			</rewards>
+		</quest>
+
+		<quest id="test-xp-50000" title="get 50.000 xp" start="instant" repeatable="instant">
+			<rewards>
+				<xp value="50000" />
+			</rewards>
+		</quest>
+	</group>
+
+	<!-- switch seasons -->
+	<group>
+		<quest id="test-summer" title="the summer is coming" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="timeout-set-season-summer" />
+			</rewards>
+		</quest>
+
+		<quest id="test-winter" title="the winter is coming" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="timeout-set-season-winter" />
+			</rewards>
+		</quest>
+	</group>
+
+	<group>
+		<quest id="test-autumn" title="the autumn is coming" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="timeout-set-season-autumn" />
+			</rewards>
+		</quest>
+
+		<quest id="test-spring" title="the spring is coming" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="timeout-set-season-spring" />
+			</rewards>
+		</quest>
+	</group>
+	<!-- switch themes -->
+	<group>
+		<quest id="test-summer-theme" title="switch summer theme" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="timeout-set-theme-summer" />
+			</rewards>
+		</quest>
+
+		<quest id="test-winter-theme" title="switch winter theme" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="timeout-set-theme-winter" />
+			</rewards>
+		</quest>
+	</group>
+
+	<group>
+		<quest id="timeout-set-season-spring" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+				<set-season season="spring" />
+			</rewards>
+		</quest>
+
+		<quest id="timeout-set-season-autumn" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+				<set-season season="autumn" />
+			</rewards>
+		</quest>
+	</group>
+	<group>
+		<quest id="timeout-set-season-summer" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+				<set-season season="summer" />
+			</rewards>
+		</quest>
+
+		<quest id="timeout-set-season-winter" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+				<set-season season="winter" />
+			</rewards>
+		</quest>
+
+		<quest id="timeout-set-theme-summer" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+				<set-season season="none" />
+				<switch-theme theme="summer" />
+			</rewards>
+		</quest>
+
+		<quest id="timeout-set-theme-winter" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="3" operator="and"/>
+			<rewards>
+				<set-season season="none" />
+				<switch-theme theme="winter" />
+			</rewards>
+		</quest>
+	</group>
+
+	<group>
+		<quest id="ignite-buildings" title="Praise the great Fire Lord" start="instant" repeatable="instant" >
+			<objectives timeout="1" operator="and">
+				<tribute resource="prestige" amount="5" />
+			</objectives>
+
+			<rewards>
+				<start-quest id="timeout-ignite-buildings" />
+				<set-flag key="random_flag" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="timeout-ignite-buildings" start="custom" visible="false" repeatable="custom" >
+			<start_condition timeout="6" operator="and"/>
+
+			<onStarted>
+				<!--ignite-building count="500" /-->
+				<start-fire amount="500" state="smouldering"/>
+			</onStarted>
+			
+			<onSuccess notification="The Fire Lord is pleased with your offering! The world shall burn!" />
+		</quest>
+		
+		<quest id="sell-wood-for-no-wood" title="sell resources" start="instant" visible="true" repeatable="no" >
+			<start_condition timeout="0" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<sell-resource amount="10" resource="wood"/>
+                
+			</objectives>
+			
+			<rewards>
+				<set-enable-trade lock="true" resource="wood"/>
+				<start-quest id="wuut"/>
+				<set-enable-trade resource="wood" lock="true"/>
+			</rewards>
+		</quest>
+		
+		<quest id="wuut" title="BY FIRE BE PURGED!" start="custom" visible="true" repeatable="custom" >
+			<start_condition timeout="0" operator="and" />
+			
+			<onStarted>
+				<start-fire amount="1000" state="smouldering"/>
+			</onStarted>
+
+			<objectives timeout="1" operator="and">
+				<purge-fire/>
+			</objectives>
+			
+			<rewards>
+				<!--				<start-quest id="wuut2"/>-->
+			</rewards>
+		</quest>
+
+		<quest id="plaguequest1" title="Start plague" start="instant" visible="true" repeatable="instant">
+			<start_condition timeout="1" operator="and"/>
+			
+			<onStarted>
+				<highlight key="BTN_BOOK_TAB_TRASH" mode="normal"/>
+				<!--				<enable-hint hint="contextmenu" text="lol" avatar="farmer" />-->
+			</onStarted>
+
+			<objectives timeout="1" operator="and">
+				<!--coverage type="firefighters" /-->
+				<soldiers-in-town count="1"/>
+			</objectives>
+			
+			<rewards>
+				<start-plague amount="1000"/>
+				<start-quest id="plaguequest2"/>
+			</rewards>
+		</quest>
+
+		<quest id="test-draught" title="start draught prices" start="instant" repeatable="instant" >
+			<rewards>
+				<start-quest id="start-draught" />
+			</rewards>
+		</quest>
+
+		<quest id="start-draught" title="Start draught prices 2" start="custom" visible="true" repeatable="custom">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<onStarted>
+				<!-- <set-game-state state="draught" enable="true"/> -->
+				<disallow key="cornfield_1x1_growth" />				
+				<disallow key="hopfield_1x1_growth" />	
+				<disallow key="vinefield_1x1_growth" />	
+				<set-trade-costs-group name="growables_resources" buy="1000" sell="1000" tag="draught_resources"/>
+			</onStarted>
+
+			<objectives timeout="30" operator="and" />
+
+			<rewards>
+				<remove-modifier-by-tag tag="draught_resources"/>
+			<!--	<set-game-state state="draught" enable="false"/> -->
+				<allow key="cornfield_1x1_growth" />				
+				<allow key="hopfield_1x1_growth" />	
+				<allow key="vinefield_1x1_growth" />	
+				<start-quest id="bad_times_2"/>
+			</rewards>
+		</quest>
+
+		<quest id="plaguequest2" title="Heal town" start="custom" visible="true" repeatable="custom">
+
+			<start_condition timeout="1" />
+
+			<objectives timeout="1">
+				<purge-plague/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="100"/>
+			</rewards>
+		</quest>
+
+		
+		<quest id="bad_times_2" title="Make animals die!" start="custom" visible="true" repeatable="custom">
+			<start_condition timeout="0" />
+			
+			<onStarted>
+			<!--	<set-game-state state="animals-sick" enable="true"/> -->
+				<disallow key="animal_spawn" />				
+			</onStarted>
+
+			<objectives timeout="1">
+				<tribute resource="coins" amount="1"/>
+			</objectives>
+			
+			<rewards>
+			<!--	<set-game-state state="animals-sick" enable="false"/> -->
+				<allow key="animal_spawn" />		
+				<start-quest id="bad_times_3"/>
+			</rewards>
+		</quest>
+		
+		<quest id="bad_times_3" title="cam move" start="custom" visible="true" repeatable="custom">
+			<start_condition timeout="0" />
+			
+			<onStarted>
+				<center-to-building target="dealer"/>
+			</onStarted>
+
+			<objectives timeout="1">
+				<tribute resource="coins" amount="1"/>
+			</objectives>
+
+			<rewards>
+				<center-to-building target="dealer2"/>
+				<!--				<start-quest id="bad_times_4"/>-->
+			</rewards>
+		</quest>
+		<!--
+		<quest id="bad_times_4" title=" set trade-costs: expensive herbs!" start="custom" visible="true" repeatable="custom">
+			<start_condition timeout="0" />
+			
+			<onStarted>
+				<set-trade-costs resource="herbs" buy="10000" sell="1"/>
+			</onStarted>
+
+			<objectives timeout="1">
+				<tribute resource="coins" amount="1"/>
+			</objectives>
+			
+			<rewards>
+				<set-trade-costs resource="herbs" buy="100" sell="100"/>
+			</rewards>
+		</quest>
+		-->
+		<quest id="start_bandit_questline" title="start_bandit_questline" 
+			   start="instant" visible="true" repeatable="no">
+			<start_condition timeout="0" />
+			
+			<onStarted>
+			</onStarted>
+
+			<objectives timeout="1">
+			</objectives>
+			
+			<rewards>
+				<start-quest id="save_dealer_again"/>
+				<enable-bandits enable="false"/>
+				<spawn-bandit-camp count="10" upgrade_level="0"/>
+				<start-quest id="raid_main_house"/>
+			</rewards>
+		</quest>
+		
+		<quest id="save_dealer_again" title="save the dealer" start="custom" visible="true"
+			   repeatable="no">
+			<start_condition timeout="1" />
+
+			<objectives timeout="20">
+				<construct type="building_farm_x2" count="1"/>
+			</objectives>
+
+			<rewards>
+				<resource resource="prestige" amount="1000" />
+			</rewards>
+			<onSuccess notification="you defended the farmer">
+				
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="1"/>
+			</onSuccess>
+			<onFailed notification="you failed to defend the farmer">
+				
+			</onFailed>
+		</quest>
+		
+		<quest id="raid_main_house" title="to battle!" start="custom" visible="true" 
+			   repeatable="no">
+			<start_condition timeout="10" />
+			
+			<onStarted>
+				<bandit-attack intention="steal" target="building_hq" resource="bread" amount="50" count="10"/> 
+			</onStarted>
+
+			<objectives timeout="1">
+				<destroy-building target="building_banditcamp" count="2"/>
+			</objectives>
+	
+			<rewards>
+				<resource resource="prestige" amount="100" />
+			</rewards>
+
+		</quest>
+
+		
+		<quest id="defend_main_house" title="dont let them take the goods" start="instant" visible="true" 
+			   repeatable="no">
+			<start_condition timeout="10" />
+			
+			<onStarted>
+			
+			</onStarted>
+
+			<objectives timeout="1">
+				<raid-successful target="building_hq" count="1"/>
+			</objectives>
+			
+			<onSuccess notification="they raided our hq!!">
+				<remove-modifier-by-tag tag="quest"/>
+					<set-modifier name="mod_seasonal_parties_enabled" tag="quest" value="100" />
+			</onSuccess>
+			
+			
+		</quest>
+		
+		<quest id="highlight_begin" title="test highlights" start="instant" visible="true" repeatable="no">
+			<start_condition timeout="1" />
+			<rewards xp="auto">
+				<start-quest id="highlight"/>
+			</rewards>
+		</quest>
+		
+		<quest id="you_dont_know_flag" start="instant" visible="false" repeatable="no">
+			<start_condition timeout="1" />
+			<objectives timeout="1">
+				<flag-has-value key="random_flag" value="true"/>
+			</objectives>
+			<rewards xp="auto">
+				<highlight-building building="building_hq" highlight="true"/>
+			</rewards>
+		</quest>
+		
+		<quest id="highlight" start="custom" visible="true" 
+			   repeatable="no">
+			<start_condition timeout="1" />
+			
+			<onStarted>
+				<highlight key="BTN_CONTEXTMENU_OK" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_ERASE" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_REPAIR" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_INSTANT" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_WORKING" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_STALK" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_1" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_2" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_3" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_4" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_UPGRADE_BUILDING" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_INFO" mode="normal"/>
+			</onStarted>
+
+			<objectives timeout="1">
+			</objectives>
+			
+			<onSuccess/>
+			
+			
+		</quest>
+		
+
+		
+	</group>
+</questdb>
+

@@ -1,0 +1,90 @@
+
+avalanche_01.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+avalanche_01
+  rotate: false
+  xy: 2, 8
+  size: 372, 238
+  orig: 376, 238
+  offset: 0, 0
+  index: -1
+smoke_01
+  rotate: false
+  xy: 1624, 42
+  size: 86, 98
+  orig: 120, 106
+  offset: 0, 8
+  index: -1
+smoke_02
+  rotate: false
+  xy: 1880, 142
+  size: 117, 104
+  orig: 120, 106
+  offset: 3, 0
+  index: -1
+smoke_03
+  rotate: false
+  xy: 1624, 142
+  size: 254, 104
+  orig: 254, 104
+  offset: 0, 0
+  index: -1
+wave_01
+  rotate: true
+  xy: 1010, 2
+  size: 244, 152
+  orig: 244, 163
+  offset: 0, 3
+  index: -1
+wave_02
+  rotate: true
+  xy: 1318, 2
+  size: 244, 151
+  orig: 244, 163
+  offset: 0, 4
+  index: -1
+wave_03
+  rotate: true
+  xy: 534, 2
+  size: 244, 155
+  orig: 244, 163
+  offset: 0, 8
+  index: -1
+wave_04
+  rotate: true
+  xy: 376, 2
+  size: 244, 156
+  orig: 244, 163
+  offset: 0, 7
+  index: -1
+wave_05
+  rotate: true
+  xy: 851, 8
+  size: 238, 157
+  orig: 244, 163
+  offset: 6, 6
+  index: -1
+wave_06
+  rotate: true
+  xy: 691, 8
+  size: 238, 158
+  orig: 244, 163
+  offset: 6, 5
+  index: -1
+wave_07
+  rotate: true
+  xy: 1471, 2
+  size: 244, 151
+  orig: 244, 163
+  offset: 0, 4
+  index: -1
+wave_08
+  rotate: true
+  xy: 1164, 2
+  size: 244, 152
+  orig: 244, 163
+  offset: 0, 3
+  index: -1

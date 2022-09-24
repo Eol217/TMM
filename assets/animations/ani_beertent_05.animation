@@ -1,0 +1,43 @@
+[random_start]
+
+next:	dancingcouple			1.00
+next:	dancingcouple_gone			0.10
+
+[dancingcouple]
+visible:	1
+
+frame:	ani_beertent_05.0.png		0.2
+play_ambient: sfx_townies_chatter_female_complaining_2
+play_ambient_chance:  0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.2.png		0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.0.png		0.2
+frame:	ani_beertent_05.2.png		0.2
+frame:	ani_beertent_05.2.png		0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.0.png		0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.2.png		0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.0.png		0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.2.png		0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.0.png		0.2
+frame:	ani_beertent_05.1.png		0.2
+frame:	ani_beertent_05.2.png		0.2
+play_ambient: sfx_townies_chatter_male_miller_humming_2
+play_ambient_chance:  0.05
+
+delay:	0.50	2.00
+
+next:	dancingcouple			1.00
+next:	dancingcouple_gone			0.10
+
+[dancingcouple_gone]
+visible: 0
+delay:	2.0     5.0
+
+next:	dancingcouple			1.00
+next:	dancingcouple_gone			0.10

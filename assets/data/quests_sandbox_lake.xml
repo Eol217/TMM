@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group avatar="girl">
+		<quest id="SANDBOX_STARTQUEST" title="Welcome to sandbox mode." description="T_GAME_QUEST_SANDBOX_TRIBUTE_DESC_03" start="instant" finish="instant" visible="false" >
+			<start_condition timeout="2"/>
+			<onSuccess  notification="T_GAME_QUEST_SANDBOX_TRIBUTE_DESC_03"/>
+			<objectives timeout="2"/>
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_MILITARY_IF_ENABLED" />
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+ 			</rewards>
+		</quest>
+    
+        <quest id="SANDBOX_START_VALUES" start="instant" visible="false" finish="instant" repeatable="custom" >
+            <rewards>
+                <set-flag key="sandbox_map_has_avalanche" value="false" />
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+            </rewards>
+        </quest>
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards>
+                <lightningstrike topLeftX="74" topLeftY="50" bottomRightX="132" bottomRightY="115" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->      
+
+	</group>
+  
+</questdb>

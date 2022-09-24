@@ -1,0 +1,542 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- "girls desires" scenario 
+	x prestige earned
+-->
+
+<questdb>
+    
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+	<group avatar="client">
+              
+		<quest id="fullfillwishes" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_01_TITLE" description="T_GAME_QUEST_DESIRES_01_START" start="instant" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_01_START">
+				<start-quest id="buildmarket"/>
+				<start-quest id="buildbakery"/>
+				<enable-bandits enable="false"/>
+				<set-modifier name="mod_effort" tag="map" value="79"/>
+			</onStarted>
+                           
+			<start_condition timeout="5"/>
+                        
+			<objectives timeout="1">
+				<flag-has-value key="questsuccess" value="true"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_01_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="60" resource="prestige"/>
+				<start-quest id="SCENARIO_FINISHED"/>
+                <set-flag key="scenario_complete" value="true" />
+			</rewards>
+		</quest>
+        
+		<quest id="buildmarket" isKeyQuest="true" title="T_GAME_TUTORIAL_QUEST_NAME_8" description="T_GAME_QUEST_DESIRES_19_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_19_START"/>
+                           
+			<start_condition timeout="45"/>
+                        
+			<objectives timeout="1">
+				<building count="1" type="building_market"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_19_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="350" resource="coins"/>
+				<resource amount="8" resource="prestige"/>
+                
+				<start-quest id="clothwish"/>
+				<start-quest id="growpop"/>
+			</rewards>
+		</quest>
+        
+		<quest id="buildbakery" title="T_GAME_QUEST_SCEN6_4_NAME" description="T_GAME_QUEST_DESIRES_20_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_20_START"/>
+                           
+			<start_condition timeout="15" operator="and_not">
+				<building count="1" type="building_bakery"/>
+			</start_condition>
+                        
+			<objectives timeout="1">
+				<building count="1" type="building_bakery"/>
+				<produce amount="10" resource="bread"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_20_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="150" resource="coins"/>
+				<resource amount="20" resource="flour"/>
+			</rewards>
+            
+            <fail_condition timeout="1" >    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>  
+		</quest>
+        
+		<quest id="clothwish" title="T_GAME_QUEST_SCEN7_GIRL_4_NAME" description="T_GAME_QUEST_DESIRES_02_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_02_START"/>
+                           
+			<start_condition timeout="90" operator="and_not">
+				<building count="1" type="building_tailor"/>
+			</start_condition>
+                        
+			<objectives timeout="1">
+				<building count="1" type="building_tailor"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_02_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="400" resource="coins"/>
+				<resource amount="25" resource="wool"/>
+			</rewards>
+            
+            <fail_condition timeout="1" >    
+                <flag-has-value key="scenario_complete" value="true" />
+            </fail_condition>  
+		</quest>
+        
+		<quest id="growpop" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_03_TITLE" description="T_GAME_QUEST_DESIRES_03_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_03_START"/>
+                           
+			<start_condition timeout="30"/>
+                        
+			<objectives timeout="1">
+				<population count="50"/>
+			</objectives>
+            
+			<rewards>
+				<resource amount="15" resource="sausage"/>
+				<resource amount="2" resource="prestige"/>
+                
+				<start-quest id="banditannounce"/>
+			</rewards>
+		</quest>
+        
+		<!--activate bandits and start banditquestline-->
+		<quest id="banditannounce" isKeyQuest="true" title="title" description="T_GAME_QUEST_DESIRES_04_START" start="custom" visible="false" avatar="bandit">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_04_START"/>
+            <!-- Removed unnecessary start condition, because it could be exploited     
+                 
+			<start_condition timeout="120">
+				<building count="1" type="building_market"/>
+				<population count="50"/>
+			</start_condition>
+            -->            
+			<objectives timeout="120"/>
+            
+			<rewards>
+				<enable-bandits enable="any"/>
+				<start-quest id="buildtower"/>
+			</rewards>
+		</quest>
+ 
+		<quest id="buildtower" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_16_TITLE" description="T_GAME_QUEST_DESIRES_05_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_05_START"/>
+                           
+			<start_condition timeout="15"/>
+                        
+			<objectives timeout="1">
+				<building count="1" type="building_barracks"/>
+				<building count="1" type="building_watchtower"/>
+			</objectives>
+            
+			<rewards>
+				<resource amount="15" resource="armor"/>
+				<resource amount="8" resource="prestige"/>
+                
+				<start-quest id="banditcoins"/>
+				<start-quest id="girlcoins"/>
+				<start-quest id="improvemoral"/>
+                <start-quest id="banditactivate" />
+			</rewards>
+		</quest>
+        
+		<quest id="banditactivate" title="title" description="T_GAME_QUEST_DESIRES_06_START" visible="false" start="custom" avatar="bandit">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_06_START">
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="75"/>
+			</onStarted>
+                           
+			<start_condition timeout="1">
+				<quest-done id="buildtower"/>
+                <!--
+				<building type="building_watchtower" count="1"/>
+                -->
+			</start_condition>
+                        
+			<objectives timeout="60"/>
+            
+			<rewards>
+				<bandit-attack count="2"/>
+			</rewards>
+		</quest>
+
+		<quest id="improvemoral" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_08_TITLE" description="T_GAME_QUEST_DESIRES_08_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_08_START"/>
+                           
+			<start_condition timeout="25"/>
+                        
+			<objectives timeout="1">
+                
+				<produce amount="10" resource="brew"/>
+				<produce amount="15" resource="sausage"/>
+                
+			</objectives>
+            
+			<fail_condition timeout="1">
+				<quest-done id="fullfillwishes"/>
+			</fail_condition>
+                        
+			<rewards>
+				<resource amount="350" resource="coins"/>
+				<resource amount="5" resource="prestige"/>
+				<start-quest id="improvestrength"/>
+			</rewards>
+		</quest>
+        
+		<quest id="improvestrength" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_09_TITLE" description="T_GAME_QUEST_DESIRES_09_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_09_START"/>
+                           
+			<start_condition timeout="25"/>
+                        
+			<objectives timeout="1">
+				<produce amount="10" resource="armor"/>
+				<produce amount="15" resource="weapons"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_09_SUCCESS"/>
+            
+			<fail_condition timeout="1">
+				<quest-done id="fullfillwishes"/>
+			</fail_condition>
+            
+			<rewards>
+				<resource amount="150" resource="coins"/>
+				<resource amount="40" resource="brew"/>
+			</rewards>
+		</quest>
+        
+		<quest id="banditcoins" isKeyQuest="true" title="T_GAME_QUEST_MIL_TUT_05_TITLE" description="T_GAME_QUEST_DESIRES_10_START" start="custom" avatar="bandit">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_10_START"/>
+			<start_condition timeout="45">
+				<!--                <quest-done id="destroycamp"/>-->
+			</start_condition>
+                        
+			<objectives timeout="1">
+				<tribute amount="1500" resource="coins"/>
+			</objectives>
+            
+			<fail_condition timeout="1">
+				<flag-has-value key="quest_banditcoins_failed" value="true" />
+			</fail_condition>
+
+			<onFailed notification="T_GAME_QUEST_DESIRES_10_FAIL">
+				<bandit-attack amount="2" intention="steal" resource="coins"/>
+				<bandit-attack amount="1" intention="lay_fire"/>
+			</onFailed>
+
+			<rewards>
+                <set-flag key="quest_girlcoins_failed" value="true" />
+				<start-quest id="bandit_note"/>
+				<resource amount="1" resource="stone"/>				
+                <start-quest id="set_bandit_modifier_01" />
+				<start-quest id="happywish"/>
+			</rewards>
+		</quest>
+        
+        <quest id="set_bandit_modifier_01" visible="false" start="custom" finish="instant">
+            <objectives timeout="1">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <rewards >
+                <set-modifier name="mod_event_bandit_cooldown" tag="map" value="125"/>
+            </rewards>
+            <fail_condition timeout="2" />
+        </quest>
+        <quest id="set_bandit_modifier_02" visible="false" start="custom" finish="instant">
+            <objectives timeout="1">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <rewards >
+                <set-modifier name="mod_event_bandit_cooldown" tag="map" value="150"/>
+            </rewards>
+            <fail_condition timeout="2" />
+        </quest>
+        <quest id="set_bandit_modifier_03" visible="false" start="custom" finish="instant">
+            <objectives timeout="1">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <rewards >
+                <set-modifier name="mod_happiness" tag="map" value="75"/>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="50"/>
+            </rewards>
+            <fail_condition timeout="2" />
+        </quest>
+        <quest id="set_bandit_modifier_04" visible="false" start="custom" finish="instant">
+            <objectives timeout="1">
+                <flag-has-value key="scenario_complete" value="false" />
+            </objectives>
+            <rewards >
+                <set-modifier name="mod_event_bandit_cooldown" tag="map" value="25"/>
+            </rewards>
+            <fail_condition timeout="2" />
+        </quest>
+        
+		<quest id="bandit_note" isKeyQuest="true" visible="false" start="custom" avatar="bandit" finish="instant">
+			<start_condition timeout="3"/>        
+			<objectives timeout="1"/>
+			<onSuccess notification="T_GAME_QUEST_DESIRES_10_SUCCESS"/>
+		</quest>
+        
+		<quest id="girlcoins" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_11_TITLE" description="T_GAME_QUEST_DESIRES_11_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_11_START">
+				<set-merchant state="available"/>
+			</onStarted>
+
+			<start_condition timeout="55"/>
+
+			<objectives timeout="1">
+				<buy-resource amount="30" resource="cloths"/>
+			</objectives>
+
+			<fail_condition timeout="1">
+                <flag-has-value key="quest_girlcoins_failed" value="true" />
+			</fail_condition>
+
+			<rewards>
+                <set-flag key="quest_banditcoins_failed" value="true" />
+				<resource amount="6" resource="bread"/>
+				<resource amount="3" resource="prestige"/>
+                <start-quest id="set_bandit_modifier_03" />
+				<start-quest id="happywish"/>
+			</rewards>
+		</quest>
+      
+		<quest id="bandit_failed_1" visible="false" start="custom" avatar="bandit" finish="instant">
+			<start_condition timeout="3"/>
+			<objectives timeout="1"/>
+			<rewards>
+				<set-flag key="quest_banditcoins_failed" value="true" />
+			</rewards>
+		</quest>
+         
+		<quest id="girl_failed_1" visible="false" start="custom" avatar="girl" finish="instant">
+			<onStarted/>
+			<start_condition timeout="3"/>
+			<objectives timeout="1"/>
+			<rewards>
+				<set-flag key="quest_banditcoins_failed" value="true" />
+			</rewards>
+		</quest>
+        
+		<quest id="happywish" isKeyQuest="true" title="T_GAME_QUEST_SCEN10_7_NAME" description="T_GAME_QUEST_DESIRES_12_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_12_START"/>
+     
+			<start_condition timeout="30"/>
+
+			<objectives timeout="3">
+				<happyness type="entertainment" value="100"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_12_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="250" resource="coins"/>
+				<resource amount="12" resource="prestige"/>
+				<start-quest id="banditgold"/>
+				<start-quest id="girlgold"/>
+			</rewards>
+		</quest>
+        
+		<quest id="banditgold" title="T_GAME_QUEST_MIL_TUT_05_TITLE" description="T_GAME_QUEST_DESIRES_13_START" start="custom" avatar="bandit">
+			<onStarted notification="T_GAME_QUEST_DESIRES_13_START">
+                <start-quest id="banditgold_remover" />
+            </onStarted>
+			<start_condition timeout="45" />
+			<objectives timeout="1">
+				<tribute amount="25" resource="gold"/>
+			</objectives>
+			<fail_condition timeout="1200"/>
+			<onSuccess notification="T_GAME_QUEST_DESIRES_13_SUCCESS" />
+			<onFailed notification="T_GAME_QUEST_DESIRES_13_FAIL">
+				<bandit-attack amount="2" intention="steal" resource="coins"/>
+				<bandit-attack amount="1" intention="lay_fire"/>
+			</onFailed>
+			<rewards>
+				<set-flag key="quest_girlgold_failed" value="true" />
+				<resource amount="5" resource="water"/>
+                <start-quest id="set_bandit_modifier_02" />
+				<bandit-attack amount="2" intention="steal" resource="coins"/>
+				<bandit-attack amount="1" intention="lay_fire"/>
+				<start-quest id="breadwish"/>
+			</rewards>
+		</quest>
+        
+        <quest id="banditgold_remover" start="custom" finish="instant" visible="false" >
+            <objectives timeout="1" >
+                <flag-has-value key="quest_banditgold_failed" value="true" />
+            </objectives>
+            <fail_condition timeout="1" >
+                <flag-has-value key="quest_girlgold_failed" value="true" />
+            </fail_condition>
+            <rewards >
+                <set-quest-state id="banditgold" state="failed" />
+            </rewards>
+        </quest>
+        
+		<quest id="girlgold" isKeyQuest="true" title="T_GAME_QUEST_SCEN10_17_NAME" description="T_GAME_QUEST_DESIRES_15_START" start="custom" avatar="girl">
+			<onStarted notification="T_GAME_QUEST_DESIRES_15_START"/>   
+			<start_condition timeout="50"/>        
+			<objectives timeout="1">
+				<building count="1" type="building_goldsmith"/>
+				<produce amount="10" resource="jewelry"/>
+			</objectives>
+			<onSuccess notification="T_GAME_QUEST_DESIRES_15_SUCCESS">
+			</onSuccess>
+            <fail_condition timeout="1" >
+                <flag-has-value key="quest_girlgold_failed" value="true" />
+            </fail_condition>
+			<rewards>
+				<set-flag key="quest_banditgold_failed" value="true" />
+				<resource amount="12" resource="cloths"/>
+				<resource amount="6" resource="prestige"/>
+                <start-quest id="set_bandit_modifier_04" />
+				<start-quest id="breadwish"/>
+			</rewards>
+		</quest>
+
+		<quest id="bandit_failed_2" visible="false" start="custom" avatar="bandit" finish="instant">
+			<start_condition timeout="3"/>
+			<objectives timeout="1"/>
+			<rewards>
+                <set-flag key="quest_banditgold_failed" value="true" />
+			</rewards>
+		</quest>
+         
+		<quest id="girl_failed_2" visible="false" start="custom" avatar="girl" finish="instant">
+			<start_condition timeout="3"/>        
+			<objectives timeout="1"/>
+			<rewards>
+                <set-flag key="quest_girlgold_failed" value="true" />
+			</rewards>
+		</quest>
+        
+        
+		<quest id="breadwish" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_06_TITLE_2" description="T_GAME_QUEST_DESIRES_16_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_16_START"/>
+                           
+			<start_condition timeout="25"/>
+                        
+			<objectives timeout="1">
+				<tribute amount="15" resource="juice"/>
+				<tribute amount="15" resource="bread"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_16_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="300" resource="coins"/>
+				<resource amount="18" resource="prestige"/>
+				<start-quest id="banditattack2"/>
+			</rewards>
+		</quest>
+        
+		<quest id="banditattack2" isKeyQuest="true" title="title" description="T_GAME_QUEST_DESIRES_17_START" visible="false" start="custom" avatar="bandit">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_17_START">
+				<bandit-attack amount="2" intention="steal"/>
+				<bandit-attack amount="2" intention="lay_fire"/>
+			</onStarted>
+                           
+			<start_condition timeout="10">
+				<quest-done id="improvestrength"/>
+			</start_condition>
+                        
+			<objectives timeout="1"/>
+            
+			<rewards>
+				<spawn-bandit-camp upgrade_level="1" count="2"/>
+				<start-quest id="destroycamp"/>
+			</rewards>
+		</quest>
+        
+		<quest id="destroycamp" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_10_TITLE" description="T_GAME_QUEST_DESIRES_18_START" start="custom" avatar="girl">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_18_START">
+				<!--                <set-flag key="norespawn" value="true"/>-->
+			</onStarted>
+                           
+			<start_condition timeout="5"/>
+                        
+			<objectives timeout="1">
+				<destroy-building count="2" target="building_banditcamp"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_DESIRES_18_SUCCESS"/>
+            
+			<rewards>
+				<resource amount="35" resource="prestige"/>
+				<set-flag key="questsuccess" value="true"/>				<!-- TODO: FIX => USE QUEST_DONE-->
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" start="custom" visible="false"  >
+			<onStarted>
+                <remove-modifier-by-tag tag="map" />
+			</onStarted>
+			<start_condition timeout="30"/>
+			<objectives timeout="1"/>
+			<rewards >
+				<set-merchant state="available"/>
+				<start-quest id="METASTART"/>
+				<scenario-finished />
+			</rewards>
+		</quest>
+                                                                                
+		<quest id="METASTART" start="custom" visible="false"   >
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>  
+			<start_condition timeout="5"/>      
+			<objectives timeout="1"/>
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards>
+                <lightningstrike topLeftX="74" topLeftY="46" bottomRightX="107" bottomRightY="86" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+    
+	</group>
+</questdb>
+

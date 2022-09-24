@@ -1,0 +1,27 @@
+[wave]
+
+frame:	book_1_ru_turn.4.png	0.15
+frame:	book_1_ru_turn.5.png	0.15
+frame:	book_1_ru_turn.6.png	0.15
+frame:	book_1_ru_turn.7.png	0.15
+frame:	book_1_ru_turn.0.png	0.15
+frame:	book_1_ru_turn.1.png	0.15
+frame:	book_1_ru_turn.2.png	0.15
+frame:	book_1_ru_turn.3.png	0.15
+frame:	book_1_ru_turn.4.png	0.15
+frame:	book_1_ru_turn.5.png	0.15
+frame:	book_1_ru_turn.6.png	0.15
+frame:	book_1_ru_turn.7.png	0.15
+frame:	book_1_ru_turn.0.png	0.15
+frame:	book_1_ru_turn.1.png	0.15
+frame:	book_1_ru_turn.2.png	0.15
+frame:	book_1_ru_turn.3.png	0.15
+
+delay: 1.5
+
+next:	wave			1
+
+
+
+
+

@@ -1,0 +1,121 @@
+[random_direction]
+
+next:	mirrored_on
+next:	mirrored_off
+
+[mirrored_on]
+flip_x	1
+
+next: random_animation
+
+[mirrored_off]
+flip_x	0
+
+next: random_animation
+
+[random_animation]
+
+next:	look1
+next:	look2
+next:	look3
+next:	lick1
+next:	lick2
+next:	lick3
+
+[look1]
+
+cat_idle.0.png	0.5
+
+delay: 0.5	2.5	
+
+next:	random_direction
+
+[look2]
+
+cat_walk_1.2.png	0.5
+
+delay: 0.5	2.5
+
+next:	random_direction
+
+[look3]
+
+cat_walk_3.3.png	0.5
+
+delay: 0.5	2.5
+
+next:	random_direction
+
+[lick1]
+
+play_ambient: sfx_environment_cat_1 
+play_ambient_chance: 0.5
+cat_idle.0.png	0.5
+cat_idle.1.png	0.1
+
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+
+cat_idle.1.png	0.1
+cat_idle.0.png	0.5
+
+
+delay: 0.5	2.5
+
+next:	random_direction
+
+[lick2]
+
+play_ambient: sfx_environment_cat_2 
+play_ambient_chance: 0.5
+cat_idle.0.png	0.5
+cat_idle.1.png	0.1
+
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+
+cat_idle.1.png	0.1
+cat_idle.0.png	0.5
+
+delay: 0.5	2.5
+
+next:	random_direction
+
+[lick3]
+
+play_ambient: sfx_environment_cat_3 
+play_ambient_chance: 0.5
+cat_idle.3.png	0.5
+cat_idle.1.png	0.1
+
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+cat_idle.3.png	0.3
+cat_idle.2.png	0.3
+
+cat_idle.2.png	0.1
+cat_idle.3.png	0.5
+
+
+delay: 0.5	2.5
+
+next:	random_direction

@@ -1,0 +1,48 @@
+[random_start]
+
+next:	stand			1
+next:	wallowing			1
+
+
+
+[stand]
+frame:	ani_pigfarm_02.0.png		2.00
+
+
+delay:	1.00	10.00
+
+next:	stand			1
+next:	wallowing			1
+
+
+
+[wallowing_in]
+frame:	ani_pigfarm_02.1.png		0.15
+
+
+next:	wallowing			1
+
+[wallowing]
+frame:	ani_pigfarm_02.2.png		0.15
+frame:	ani_pigfarm_02.3.png		0.15
+frame:	ani_pigfarm_02.4.png		0.15
+play_ambient: sfx_environment_pig_var4
+frame:	ani_pigfarm_02.3.png		0.15
+frame:	ani_pigfarm_02.2.png		0.15
+frame:	ani_pigfarm_02.3.png		0.15
+frame:	ani_pigfarm_02.4.png		0.15
+frame:	ani_pigfarm_02.3.png		0.15
+frame:	ani_pigfarm_02.2.png		0.15
+frame:	ani_pigfarm_02.3.png		0.15
+frame:	ani_pigfarm_02.4.png		0.15
+frame:	ani_pigfarm_02.3.png		0.15
+
+next:	wallowing			1
+next:	wallowing_out		1
+
+[wallowing_out]
+frame:	ani_pigfarm_02.2.png		0.15
+frame:	ani_pigfarm_02.1.png		0.15
+
+
+next:	stand			1

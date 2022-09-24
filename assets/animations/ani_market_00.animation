@@ -1,0 +1,113 @@
+[random_start]
+
+next:	fem_booth			1
+next:	fem_to_mid			1
+next:	fem_to_next			1
+next:	fem_to_first		1
+next:	fem_booth_2			1
+next:	fem_back			1
+next:	fem_to_seccond		1
+
+
+[fem_booth]
+frame:	ani_market_00.0.png		2.00
+
+
+delay:	1.00	5.00
+
+next:	fem_to_mid			1
+next:	fem_to_seccond		1
+
+
+
+[fem_to_mid]
+
+frame:	ani_market_00.1.png		0.1
+frame:	ani_market_00.2.png		0.1
+frame:	ani_market_00.3.png		0.1
+frame:	ani_market_00.4.png		0.1
+frame:	ani_market_00.5.png		0.1
+frame:	ani_market_00.6.png		0.1
+frame:	ani_market_00.7.png		0.1
+frame:	ani_market_00.8.png		0.1
+
+delay:	5.00	8.00
+
+next:	fem_to_next			1
+next:	fem_to_first		1
+
+[fem_to_next]
+
+frame:	ani_market_00.15.png		0.1
+frame:	ani_market_00.16.png		0.1
+frame:	ani_market_00.17.png		0.1
+frame:	ani_market_00.18.png		0.1
+frame:	ani_market_00.19.png		0.1
+frame:	ani_market_00.20.png		0.1
+frame:	ani_market_00.21.png		1
+
+
+delay:	0.10	3.00
+
+next:	fem_booth_2			1
+
+[fem_to_first]
+
+frame:	ani_market_00.9.png		0.1
+frame:	ani_market_00.10.png		0.1
+frame:	ani_market_00.11.png		0.1
+frame:	ani_market_00.12.png		0.1
+frame:	ani_market_00.13.png		0.1
+frame:	ani_market_00.14.png		0.1
+
+
+delay:	0.20	2.0
+
+next:	fem_booth			1
+
+[fem_booth_2]
+
+frame:	ani_market_00.22.png		1
+delay:	0.20	2.0
+
+frame:	ani_market_00.21.png		1
+delay:	0.20	2.0
+
+frame:	ani_market_00.23.png		1
+delay:	0.20	2.0
+
+frame:	ani_market_00.22.png		1
+delay:	0.20	2.0
+
+
+next:	fem_back			1
+
+[fem_back]
+
+frame:	ani_market_00.22.png		0.1
+frame:	ani_market_00.24.png		0.1
+frame:	ani_market_00.25.png		0.1
+frame:	ani_market_00.26.png		0.1
+frame:	ani_market_00.27.png		0.1
+frame:	ani_market_00.28.png		2
+
+
+delay:	1.00	5.00
+
+next:	fem_to_seccond			0.85
+next:	fem_to_mid				0.85
+next:	fem_booth				1
+
+[fem_to_seccond]
+
+frame:	ani_market_00.29.png		0.1
+frame:	ani_market_00.30.png		0.1
+frame:	ani_market_00.31.png		0.1
+frame:	ani_market_00.32.png		0.1
+frame:	ani_market_00.33.png		0.1
+frame:	ani_market_00.34.png		0.1
+frame:	ani_market_00.21.png		1
+
+delay:	0.20	2.0
+
+next:	fem_booth_2			1

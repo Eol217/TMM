@@ -1,0 +1,32 @@
+# Resource Name;Field_Buy_Percentage_Change_Per_Unit;Field_Sell_Percentage_Change_Per_Unit;Field_Percentage_Min;Field_Percentage_Max
+# This field is for specifing the resource;;;;
+wood;1;-1;25;200
+stone;1;-1;25;200
+water;1;-1;25;200
+fish;1;-1;25;200
+wool;1;-1;25;200
+ore;1.5;-0.9;30;250
+nuggets;1.5;-0.9;30;250
+corn;1.5;-0.9;30;250
+grapes;1.5;-0.9;30;250
+juice;1.5;-0.9;30;250
+herbs;1.5;-0.9;30;250
+planks;2;-0.8;35;300
+fabric;2;-0.8;35;300
+coal;2;-0.8;35;300
+flour;2;-0.8;35;300
+skins;2;-0.8;35;300
+hops;2;-0.8;35;300
+pig;2;-0.8;35;300
+gold;2.5;-0.7;40;350
+iron;2.5;-0.7;40;350
+bread;2.5;-0.7;40;350
+meat;2.5;-0.7;40;350
+leather;2.5;-0.7;40;350
+brew;2.5;-0.7;40;350
+tools;3;-0.6;45;400
+cloths;3;-0.6;45;400
+sausage;3;-0.6;45;400
+jewelry;4;-0.5;50;500
+armor;4;-0.5;50;500
+weapons;4;-0.5;50;500

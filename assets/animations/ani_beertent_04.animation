@@ -1,0 +1,40 @@
+[random_start]
+
+next:	guy_lower_left			1.00
+next:	guy_lower_left_gone			0.10
+
+[guy_lower_left]
+visible:	1
+frame:	ani_beertent_04.0.png		0.1
+frame:	ani_beertent_04.1.png		0.1
+frame:	ani_beertent_04.2.png		0.1
+play_ambient: sfx_buildings_beertent_burp_03
+play_ambient_chance:  0.2
+frame:	ani_beertent_04.3.png		0.3
+frame:	ani_beertent_04.4.png		0.1
+frame:	ani_beertent_04.5.png		0.1
+play_ambient: sfx_buildings_beertent_drink_08
+play_ambient_chance:  0.2
+frame:	ani_beertent_04.6.png		0.1
+frame:	ani_beertent_04.7.png		0.3
+frame:	ani_beertent_04.8.png		0.1
+frame:	ani_beertent_04.7.png		0.3
+frame:	ani_beertent_04.8.png		0.1
+frame:	ani_beertent_04.7.png		0.3
+frame:	ani_beertent_04.8.png		0.1
+frame:	ani_beertent_04.9.png		0.1
+frame:	ani_beertent_04.10.png		0.1
+play_ambient: sfx_buildings_beertent_put_down_05
+
+delay:	1.00	4.00
+
+next:	guy_lower_left			1.00
+next:	guy_lower_left_gone			0.10
+
+[guy_lower_left_gone]
+visible: 0
+delay:	2.0     5.0
+
+next:	guy_lower_left			1.00
+next:	guy_lower_left_gone			0.10
+

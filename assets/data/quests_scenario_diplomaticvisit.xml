@@ -1,0 +1,1743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<!-- Aglos scenario -->
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group>
+
+		<quest id="INTRO" isKeyQuest="false" start="instant" visible="false" avatar="client">
+			<start_condition timeout="10" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_THE_QUEEN_STARTED"/>
+			<!-- intro part of quest. Advisor says hello -->
+			<objectives timeout="1"/>
+			<onSuccess >
+				<start-quest id="MAINQUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="JUST_IN_TIME" isKeyQuest="true" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_JUST_IN_TIME_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_JUST_IN_TIME_STARTED" start="custom" avatar="client" finish="user">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_JUST_IN_TIME_STARTED">
+			</onStarted>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="3" operator="and">
+				<flag-has-value key="translator_is_found" value="true"/>
+				<flag-has-value key="trade_guild_is_here" value="true"/>
+			</objectives>
+			<fail_condition timeout="1800" operator="and">
+			</fail_condition>
+			<onFailed notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_JUST_IN_TIME_FAILED" >
+				<set-flag key="diplomatic_failed" value="true"/>
+				<start-quest id="END_SCENARIO_KING"/>
+			</onFailed>
+			<onSuccess/>
+			<rewards>
+				<!-- <start-quest id="QUEEN_ARRIVED"/> -->
+				<resource amount="15" resource="prestige"/>
+			</rewards>
+		</quest>
+
+		<!--______________________________________________________________BANDIT QUESTS___________________________________________________________________-->
+
+
+		<quest id="BUILD_MILITARY" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN13_16_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MILITARY_STARTED" visible="true" avatar="knight" >
+			<!--Knight advice the player to build some troops-->
+			<start_condition timeout="10" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MILITARY_STARTED"/>
+			<objectives timeout="2">
+				<building type="building_barracks" count="1"/>
+				<building type="building_watchtower" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MILITARY_SUCCESS"/>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="armor" amount="5"/>
+				<resource resource="weapons" amount="5"/>
+			</rewards>
+		</quest>
+
+		<!--_____________________________________________________________END BANDIT QUESTS___________________________________________________________________-->
+
+
+
+		<!--_______________________________________________________PHASE I : FIND THE TRANSLATOR___________________________________________________________________-->
+
+		<quest id="ASK_THE_BUTCHER" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--Helper quest to introduce the butcher-->
+			<start_condition timeout="15" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_BUTCHER_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="ASK_THE_BUTCHER_02"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="ASK_THE_BUTCHER_02" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--Helper quest to introduce the butcher-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_BUTCHER_STARTED_02"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="TRADE_GUILD"/>
+				<!--				<start-quest id="BUTCHER_FOCUS"/>-->
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="BUTCHER_FOCUS" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--Helper quest for the camera movement-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted>
+				<center-to-building target="building_butcher"/>
+			</onStarted>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="BUTCHER_TASKS_01"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="BUTCHER_TASKS_01" isKeyQuest="true" start="custom" visible="false" avatar="miller" >
+			<!--Helper quest to introduce the butcher-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_BUTCHER_TASKS_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="BUTCHER_TASKS_02"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="BUTCHER_TASKS_02" isKeyQuest="true" start="custom" visible="false" avatar="miller" >
+			<!--Helper quest to introduce the butcher-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_BUTCHER_TASKS_STARTED_02"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="BUTCHER_TASKS_03"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="BUTCHER_TASKS_03" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN14_03_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_BUTCHER_TASKS_STARTED_03" visible="true" avatar="miller" >
+			<!--The butcher need something before answer-->
+			<!--On success, he will answer-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_BUTCHER_TASKS_STARTED_03"/>
+			<objectives timeout="3">
+				<building type="building_pigfarm" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ANSWER_FROM_THE_BUTCHER_STARTED">
+				<!--				<start-quest id="OLDLADY_FOCUS_01"/>-->
+			</onSuccess>
+			<rewards>
+				<start-quest id="OLDLADY_FOCUS_01"/>
+				<resource resource="coins" amount="335"/>
+				<resource resource="tools" amount="10"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="TRADE_GUILD" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN_CW_M_30_NAME" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRADEGUILD_STARTED" visible="true" avatar="client" finish="user">
+			<!--The player need to build a trad guild-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRADEGUILD_STARTED">
+				<start-quest id="BUTCHER_FOCUS"/>
+			</onStarted>
+			<objectives timeout="2" operator="and">
+				<building type="building_tradeguild" count="1"/>				
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRADEGUILD_SUCCESS">
+				<set-flag key="trade_guild_is_here" value="true"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="coins" amount="400"/>
+				<resource resource="prestige" amount="3"/>
+				<!-- <start-quest id="TRADE_GUILD_DESTROYED"/> -->
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="OLDLADY_FOCUS_01" isKeyQuest="true" start="custom" visible="false" avatar="miller" >
+			<!--Helper quest for the camera movement-->
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="4"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ANSWER_FROM_THE_BUTCHER_STARTED_02">
+				<start-quest id="OLDLADY_FOCUS_02"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="OLDLADY_FOCUS_02" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--Helper quest for the camera movement-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted>
+				<center-to-building target="building_herbgarden"/>
+			</onStarted>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="OLDLADY_TASKS"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="OLDLADY_TASKS" isKeyQuest="true" start="custom"  title="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01A_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_OLDLADY_TASKS_STARTED" visible="true" avatar="oldwoman" >
+			<!--The old lady need something before answer-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_OLDLADY_TASKS_STARTED">
+				<start-quest id="BUILD_MILITARY"/>
+			</onStarted>
+			<objectives timeout="2">
+				<produce resource="herbs" amount="15"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ANSWER_FROM_THE_OLDLADY_1_SUCCESS">
+				<!--				<start-quest id="ANSWER_FROM_OLDLADY_2"/>-->
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<start-quest id="ANSWER_FROM_OLDLADY_2"/>
+				<resource resource="bread" amount="5"/>
+				<resource resource="armor" amount="5"/>
+			</rewards>
+		</quest>
+
+		<quest id="ANSWER_FROM_OLDLADY_2" isKeyQuest="true" start="custom" visible="false" avatar="oldwoman" >
+			<!--The answer of the old lady-->
+			<!--She is not able to translate but she heard that the monk got a young girl under his protection since 6 months and she is able to talk foreign languages -->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ANSWER_FROM_THE_OLDLADY_2_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="ANSWER_FROM_OLDLADY_3"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="ANSWER_FROM_OLDLADY_3" isKeyQuest="true" start="custom" visible="false" avatar="oldwoman" >
+			<!--The answer of the old lady-->
+			<!--She is not able to translate but she heard that the monk got a young girl under his protection since 6 months and she is able to talk foreign languages -->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ANSWER_FROM_THE_OLDLADY_2_STARTED_02"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<set-flag key="oldlady_speaking" value="true"/>
+				<!--				<start-quest id="TRADE_GUILD"/>-->
+				<start-quest id="MONK_FOCUS"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="MONK_FOCUS" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--Helper quest for the camera movement-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted>
+				<center-to-building target="building_monestary"/>
+			</onStarted>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="MONK_TASKS"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="MONK_TASKS" isKeyQuest="true" start="custom"  title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_MONK_TASKS_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_MONK_TASKS_STARTED" visible="true" avatar="monk" >
+			<!--The monk need something before answer-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ASK_THE_MONK_TASKS_STARTED">
+				<set-durability type="building_monestary_x2" value="20"/>
+			</onStarted>
+			<objectives timeout="2">
+				<repair type="building_monestary_x2" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ANSWER_FROM_THE_MONK_SUCCESS">
+				<!--				<start-quest id="MONK_TASKS_02"/>-->
+				<set-flag key="translator_is_found" value="true"/>
+			</onSuccess>
+			<rewards>
+			
+				<start-quest id="MONK_TASKS_02"/>
+				<resource resource="flour" amount="10"/>
+				<resource resource="prestige" amount="2"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="MONK_TASKS_02" isKeyQuest="true" start="custom" visible="false" avatar="monk" >
+			<!--The monk need something before answer-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_ANSWER_FROM_THE_MONK_SUCCESS_02"/>
+			<onSuccess>
+				<start-quest id="YOUNG_GIRL_INTRODUCTION"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="YOUNG_GIRL_INTRODUCTION" isKeyQuest="true" start="custom" visible="false" avatar="girl" >
+			<!--The young girl introduced herself-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_YOUNG_GIRL_INTRODUCTION_STARTED"/>
+			<objectives timeout="2"/>
+			<!-- <onSuccess >
+				<set-flag key="translator_is_found" value="true"/>
+			</onSuccess> -->
+			<rewards>
+				<start-quest id="QUEEN_ARRIVED"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+
+		<!--______________________________________________________PHASE I END : FIND THE TRANSLATOR___________________________________________________________________-->
+
+		<!--______________________________________________________TRANSITION BETWEEN PHASE I AND II___________________________________________________________________-->
+
+		<quest id="QUEEN_ARRIVED" isKeyQuest="true" start="custom" visible="false" avatar="king" >
+			<!--King is here with the Queen-->
+			<!--He is glad that you have found a translator-->
+			<start_condition operator="and" timeout="2">
+				<flag-has-value key="translator_is_found" value="true"/>
+				<flag-has-value key="trade_guild_is_here" value="true"/>
+			</start_condition>
+			<onStarted>
+				<start-quest id="BANDIT_ATTACK_STARTER"/>
+			</onStarted>
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEEN_ARRIVED_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="QUEEN_ARRIVED_02"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEEN_ARRIVED_02" isKeyQuest="true" start="custom" visible="false" avatar="queen" >
+			<!--King is here with the Queen-->
+			<!--He is glad that you have found a translator-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEEN_ARRIVED_STARTED_02"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="TRANLSATION_001"/>
+				<start-quest id="BANDIT_SCENARIO"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="BANDIT_SCENARIO" isKeyQuest="true" start="custom" visible="true" avatar="client" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_BANDIT_RAID_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_BANDIT_RAID_DESC">
+			<!--If the bandits succeed 5 attacks, you just loose the reward-->
+			<start_condition timeout="17" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MILITARY_SUCCESS_02"/>
+			<objectives timeout="2" operator="and">			
+				<!-- <flag-has-value key="MISSION_COMPLETE" value="true"/> -->
+				<flag-has-value key="reward_bandit_defend_town" value="true"/>
+			</objectives>
+			<fail_condition operator="and" timeout="3">
+				<!--TODO change the number of atks--> 
+				<raid-successful count="5"/>
+				<!--				<flag-has-value key="delete_quests" value="true"/>-->
+			</fail_condition>		
+			<onFailed>
+				<set-flag key="five_attacks_on_town" value="true"/>
+				<set-flag key="bandits_failed_messages_show" value="true"/>
+				<start-quest id="BANDIT_SCENARIO_CHECK_TRADE"/>
+			<!-- <onFailed notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MILITARY_FAILED_BANDIT"> -->
+				<!-- <set-flag key="diplomatic_failed" value="true"/> -->
+				<!-- <set-flag key="delete_quests" value="true"/> -->
+				<!-- <start-quest id="END_SCENARIO_KING"/> -->
+			</onFailed>
+			<rewards>
+				<resource resource="prestige" amount="25"/>
+				<resource resource="coins" amount="300"/>
+			</rewards>
+		</quest>
+		
+		<!--TODO test this quest-->
+			<quest id="BANDIT_SCENARIO_CHECK_TRADE" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--If the bandits succeed 5 attacks, you just loose the reward-->
+				<start_condition timeout="2" operator="and">
+					<flag-has-value key="diplomatic_failed" value="false"/>
+					<flag-has-value key="five_attacks_on_town" value="true"/>
+				</start_condition>
+				<objectives timeout="2" operator="and">
+					<flag-has-value key="bandits_failed_messages_show" value="true"/>
+				</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_FAILED_BANDIT_RAID_001"/>
+		</quest>
+
+
+		<quest id="TRADE_GUILD_DESTROYED" isKeyQuest="true" start="custom" finish="user" avatar="client" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRADEGUILD_WARNING_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRADEGUILD_WARNING" visible="true">
+			<!--If the trade guild is destroyed, the scenario failed-->
+			<start_condition timeout="3" operator="and">
+				<building type="building_tradeguild" count="1"/>
+			</start_condition>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRADEGUILD_WARNING">
+				<disallow key="building_tradeguild"/>
+			</onStarted>
+			<objectives timeout="2" operator="and">
+				<!--				<destroy-building target="building_tradeguild" count="1"/>-->
+				<!--				<flag-has-value key="scenario_is_won" value="true"/>-->
+				<!--				<flag-has-value key="tradeguilde_out" value="true"/>-->
+				<!-- <flag-has-value key="scenario_is_won" value="true"/> -->
+				<flag-has-value key="reward_for_the_trade_guild" value="true"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+				<set-flag key="tradeguilde_out" value="false"/>
+			</rewards>
+			<onSuccess>
+				
+			</onSuccess>
+					<!--TODO CHECK WITH OR AND AND--> 
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="tradeguilde_out" value="true"/>
+<!--				<flag-has-value key="delete_quests" value="true"/>-->
+			</fail_condition>
+			<onFailed>
+				<start-quest id="CHECK_TRADEGUILD_AND_SCENARIO_END"/>
+			</onFailed>
+		</quest>
+		
+		<quest id="CHECK_TRADEGUILD_AND_SCENARIO_END" isKeyQuest="true" start="custom" finish="instant" visible="false" avatar="client">
+			<onStarted/>
+			<start_condition operator="and" timeout="2">
+				<flag-has-value key="tradeguilde_out" value="true"/>
+			</start_condition>
+			<objectives timeout="2" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRADEGUILD_OVER">
+				<start-quest id="TRADE_GUILD_DESTROYED_002"/>
+			</onSuccess>
+			<rewards/>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="TRADE_GUILD_DESTROYED_002" isKeyQuest="true" start="custom" finish="instant" visible="false">
+			<!--If the trade guild is destroyed, the scenario failed-->
+			<objectives timeout="2" operator="and">
+				<destroy-building target="building_tradeguild" count="1"/>
+			</objectives>
+			<onSuccess>
+				<set-flag key="tradeguilde_out" value="true"/>
+				<set-flag key="diplomatic_failed" value="true"/>
+				<start-quest id="END_SCENARIO_KING"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="stone" amount="1"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			<onFailed>
+<!--				<resource resource="prestige" amount="5"/>-->
+			</onFailed>
+		</quest>
+
+		<quest id="TRANLSATION_001" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--The queen is asking for something and the client saying that he don t understand it-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRANSLATION_001_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="HERBS_TRADITION"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+				<quest id="HERBS_TRADITION" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--Helper quest where the client is explaining that in the country of the queen, you give an herb to say that you trust someone-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_HERBS_TRADITION_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="TRANLSATION_001a"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="TRANLSATION_001a" isKeyQuest="true" start="custom" visible="false" avatar="girl" >
+			<!--The queen is asking for something and the client saying that he don t understand it-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_TRANSLATION_001_STARTED_01"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="GIRL_TRANSLATION_001"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="GIRL_TRANSLATION_001" isKeyQuest="true" start="custom" finish="user" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_TRANSLATION_001_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_TRANSLATION_001_STARTED" visible="true" avatar="girl" >
+			<!--The girl is translating it-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_TRANSLATION_001_STARTED"/>
+			<objectives timeout="2" operator="and">
+				<building type="deco_1x1_banner_lft03" count="2"/>
+				<building type="deco_1x1_banner_rt03" count="2"/>
+			</objectives>
+			<rewards>
+				<start-quest id="QUEEN_UNHAPPY_1"/>
+				<resource resource="sausage" amount="10"/>
+				<resource resource="meat" amount="10"/>
+			</rewards>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEEN_UNHAPPY_1" isKeyQuest="true" start="custom" visible="false" avatar="king" >
+			<!--Seems like the translation was all wrong-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEEN_UNHAPPY_1_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="GIRL_IS_SORRY"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="GIRL_IS_SORRY" isKeyQuest="true" start="custom" visible="false" avatar="girl" >
+			<!--the girl is sorry and she promise to do it better next time-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_IS_SORRY_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="GIRL_IS_SORRY_002"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="GIRL_IS_SORRY_002" isKeyQuest="true" start="custom" visible="false" avatar="girl" >
+			<!--the girl is sorry and she promise to do it better next time-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_IS_SORRY_STARTED_02"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="QUEEN_IS_TALKING"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+		
+		<quest id="QUEEN_IS_TALKING" isKeyQuest="true" start="custom" visible="false" avatar="queen" >
+			<!--the girl is sorry and she promise to do it better next time-->
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_003_STARTED_01"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="TRANLSATION_002"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="TRANLSATION_002" isKeyQuest="true" start="custom" visible="false" avatar="king" >
+			<!--Queen is saying something else and client still don t understand it-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_TRANSLATION_002_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess>
+				<start-quest id="BREAD_GIRL_TRANSLATE_TRUE"/>
+				<start-quest id="BREAD_CLIENT_TRANSLATE_FALSE"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="BREAD_GIRL_TRANSLATE_TRUE" isKeyQuest="true" start="custom" visible="false" avatar="girl" >
+			<!--We are listening to the girl translation-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_003_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="BREAD_CLIENT_TRANSLATE_FALSE"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="BREAD_CLIENT_TRANSLATE_FALSE" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--We are listening to the girl translation-->
+			<start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_TRANSLATION_003_STARTED"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="CHOOSE_TRANSLATOR"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+
+		<!--______________________________________________________TRANSITION BETWEEN PHASE I AND II___________________________________________________________________-->
+
+		<!--_______________________________________________________PHASE II CHOICE MECHANICS 001________________________________________________________________________-->
+
+		<!--_______________________TRIBUTE OR PRODUCE BREAD_________________________-->
+
+
+		<quest id="CHOOSE_TRANSLATOR" visible="false" finish="user" start="custom" avatar="client">
+			<!--So the girl is translating it, but the client say something else too cause he don t trust the girl anymore-->
+			<objectives timeout="3" operator="and">
+				<flag-has-value key="delete_quests" value="false"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_TRANSLATION_002_STARTED"/>
+			<rewards >
+				<!--In this quest, the player will need to choose to listen the girl or the client-->
+				<start-quest id="DIPLOMATICVISIT_QUEST_START_01_GIRL_TRANSLATION" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_START_02_CLIENT_TRANSLATION" />
+			</rewards>
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_START_01_GIRL_TRANSLATION" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_003_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_003_STARTED" avatar="girl" >
+			<!--This is the choice one, the player choose to believe the girl-->
+			<!--PRODUCE BREAD-->
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="algos_scenario_over" value="false" />
+				<tribute amount="1" resource="herbs" />
+			</objectives>
+			<rewards >
+				<resource resource="flour" amount="10"/>
+				<!-- <resource resource="coins" amount="20"/> -->
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_PRODUCE_BREAD"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="aglos_scenario_over" value="true" />
+				<!--				<flag-has-value key="delete_quests" value="true"/>-->
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_START_02_CLIENT_TRANSLATION" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_TRANSLATION_003_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_TRANSLATION_003_STARTED" avatar="client" >
+			<!--TRIBUTE BREAD-->
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="algos_scenario_over" value="false" />
+				<tribute amount="1" resource="herbs" />
+			</objectives>
+			<rewards >
+				<!-- <resource resource="coins" amount="20"/> -->
+				<resource resource="prestige" amount="2"/>
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_TRIBUTE_BREAD"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="aglos_scenario_over" value="true" />
+				<!--				<flag-has-value key="delete_quests" value="true"/>-->
+			</fail_condition>
+		</quest>
+
+		<!--PRODUCE BREAD GIRL-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_PRODUCE_BREAD" finish="user" isKeyQuest="true" start="custom" title="T_SCENARIO_BESIEGEMENT_SIDEQUEST_03_NAME" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_PRODUCE_BREAD_START" visible="true" avatar="girl">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_PRODUCE_BREAD_START"/>
+			<start_condition timeout="4" operator="and"/>
+			<objectives timeout="1" operator="and" >
+				<produce resource="bread" amount="10"/>
+			</objectives>
+			<rewards>
+			<start-quest id="HELPER_QUEST_SUCCESS_BREAD_GIRL"/>	
+				<resource resource="prestige" amount="2"/>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_PRODUCE_BREAD_SUCCESS">
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_001"/>
+				<set-flag key="produce_bread" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="aglos_scenario_over" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--TRIBUTE BREAD CLIENT-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_TRIBUTE_BREAD" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_BREAD_TRIBUTE_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_TRANSLATION_003_STARTED" visible="true" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_BREAD_TRIBUTE"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="and" >
+				<tribute resource="bread" amount="10"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="200"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_TRANSLATION_003_SUCCESS">
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_001"/>
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_002"/>
+				<set-flag key="tribute_bread" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="aglos_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+
+		<!--CONCLUSION OF TRIBUTE OR PRODUCE BREAD: QUEEN MOOD-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_001" isKeyQuest="true" start="custom" visible="false" avatar="king">
+			<onStarted/>
+			<start_condition timeout="4" operator="and">
+				<flag-has-value key="produce_bread" value="true"/>
+			</start_condition>
+			<objectives timeout="2" operator="and" />
+			<rewards>					
+				<resource resource="coins" amount="100"/>
+			</rewards>
+			<onSuccess >
+				<!--the selling price is higher, because the queen likes it-->
+				<set-trade-costs resource="bread" sell="200"/>
+				<!-- <start-quest id="TRANLSATION_003"/> -->
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="tribute_bread" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="HELPER_QUEST_SUCCESS_BREAD_GIRL" isKeyQuest="true" start="custom" visible="false" avatar="king">
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="1" operator="and" />
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_BREAD_PRODUCE">
+				<!--the selling price is higher, because the queen likes it-->
+				<!-- <set-trade-costs resource="bread" sell="200"/> -->
+				<start-quest id="TRANLSATION_003"/>
+				<!-- <bandit-attack intention="lay_fire" target="building_tradeguild"/> -->
+			</onSuccess>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_002" isKeyQuest="true" start="custom" visible="false" avatar="client">
+			<onStarted/>
+			<start_condition timeout="4" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_BREAD_TRIBUTE">
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_002a"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_002a" isKeyQuest="true" start="custom" visible="false" avatar="girl">
+			<onStarted/>
+			<start_condition timeout="4" operator="and">
+				<!--now, if we buy bread from the merchant, it will be higher price because we didn't produce it ourself, so opportunity for the queen-->
+				<flag-has-value key="tribute_bread" value="true"/>
+			</start_condition>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_BREAD_TRIBUTE_02">
+				<set-trade-costs resource="bread" buy="200"/>
+				<start-quest id="TRANLSATION_003"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="produce_bread" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--_________________________________________________________END PHASE II CHOICE MECHANICS 001______________________________________________________________-->
+
+		<!--___________________________________________________________CHOICE MECHANICS 002________________________________________________________________________-->
+
+		<!--_______________________TAVERN OR CHURCH_________________________-->
+		<!--A place where people are gathering-->
+
+		<quest id="TRANLSATION_003" isKeyQuest="true" start="custom" visible="false" avatar="king" >
+			<!--Queen is saying something else and client still don t understand it-->
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="TRANLSATION_003a"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="TRANLSATION_003a" isKeyQuest="true" start="custom" visible="false" avatar="queen" >
+			<!--Queen is saying something else and client still don t understand it-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_003_STARTED_01"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="TAVERN_GIRL_TRANSLATE_FALSE"/>
+				<start-quest id="CHURCH_CLIENT_TRANSLATE_TRUE"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="TAVERN_GIRL_TRANSLATE_FALSE" isKeyQuest="true" start="custom" visible="false" avatar="girl" >
+			<!--We are listening to the girl translation-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_TAVERN_FALSE"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="CHURCH_CLIENT_TRANSLATE_TRUE"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="CHURCH_CLIENT_TRANSLATE_TRUE" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--We are listening to the girl translation-->
+			<start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_CHURCH_TRUE"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="CHOOSE_TAVERN_OR_CHURCH"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="CHOOSE_TAVERN_OR_CHURCH" visible="false" finish="instant" start="custom" avatar="girl">
+			<!--So the girl is translating it, but the client say something else too cause he don t trust the girl anymore-->
+			<objectives timeout="3" operator="and" />
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_IS_SURE"/>
+			<rewards >
+				<!--In this quest, the player will need to choose to listen the girl or the client-->
+				<start-quest id="CHOOSE_TAVERN_OR_CHURCH_02" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="CHOOSE_TAVERN_OR_CHURCH_02" visible="false" finish="instant" start="custom" avatar="client">
+			<!--So the girl is translating it, but the client say something else too cause he don t trust the girl anymore-->
+			<objectives timeout="1" operator="and" />
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_GIRL_IS_SURE_02"/>
+			<rewards >
+				<!--In this quest, the player will need to choose to listen the girl or the client-->
+				<start-quest id="DIPLOMATICVISIT_QUEST_START_03_GIRL_TRANSLATION" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_START_04_CLIENT_TRANSLATION" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_START_03_GIRL_TRANSLATION" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_003_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_TAVERN_FALSE" avatar="girl" >
+			<!--This is the choice one, the player choose to believe the girl-->
+			<!--BUILD A TAVERN-->
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen1" value="false" />
+				<flag-has-value key="algos_scenario_over1" value="false" />
+				<tribute amount="1" resource="herbs" />
+			</objectives>
+			<rewards >
+				<!-- <resource resource="coins" amount="20"/> -->
+				<resource resource="tools" amount="5"/>
+				<set-flag key="player_has_choosen1" value="true" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_TAVERN"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen1" value="true" />
+				<flag-has-value key="aglos_scenario_over1" value="true" />
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--build a church-->
+		<quest id="DIPLOMATICVISIT_QUEST_START_04_CLIENT_TRANSLATION" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_TRANSLATION_003_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_CHURCH_TRUE" avatar="client">
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen1" value="false" />
+				<flag-has-value key="diplomaticvisit_scenario_over1" value="false" />
+				<tribute amount="1" resource="herbs" />
+			</objectives>
+			<rewards >
+				<resource resource="tools" amount="2"/>
+				<set-flag key="player_has_choosen1" value="true" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_CHURCH"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen1" value="true" />
+				<flag-has-value key="diplomaticvisit_scenario_over1" value="true" />
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--BUILD A TAVERN FOR THE GIRL-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_TAVERN" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN6_8_NAME" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TAVERN_FALSE" visible="true" avatar="girl">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TAVERN_FALSE"/>
+			<start_condition timeout="4" operator="and"/>
+			<objectives timeout="3">
+				<building type="building_tavern" count="1"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TAVERN_FAILED">
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_003"/>
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_004"/>
+				<set-flag key="tavern_build" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="player_has_choosen1" value="true" />
+				<flag-has-value key="aglos_scenario_over1" value="true"/>
+				<!--				<flag-has-value key="delete_quests" value="true"/>-->
+			</fail_condition>
+		</quest>
+
+
+		<!--BUILD A CHURCH CLIENT-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_CHURCH" isKeyQuest="true" start="custom" visible="false" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_CHURCH_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess>
+				<start-quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_CHURCH_002"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_CHURCH_002" isKeyQuest="true" start="custom" title="T_GAME_TUTORIAL_QUEST_NAME_CHURCH" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_CHURCH_STARTED" visible="true" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_CHURCH_STARTED_02"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<building type="building_church" count="1"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="200"/>
+				<resource resource="bread" amount="20"/>
+			</rewards>
+			<onSuccess>
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_003"/>
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_004"/>
+				<set-flag key="build_church" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen1" value="true" />
+				<flag-has-value key="aglos_scenario_over1" value="true" />
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--CONCLUSION OF CHURCH OR TAVERN KING REACT-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_003" isKeyQuest="true" start="custom" visible="false" avatar="king">
+			<onStarted/>
+			<start_condition timeout="4" operator="and">
+				<flag-has-value key="tavern_build" value="true"/>
+			</start_condition>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_TAVERN">
+				<start-quest id="TRANLSATION_004"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="build_church" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_004" isKeyQuest="true" start="custom" visible="false" avatar="monk">
+			<onStarted/>
+			<start_condition timeout="4" operator="and">
+				<flag-has-value key="build_church" value="true"/>
+			</start_condition>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_CHURCH">
+				<start-quest id="TRANLSATION_004"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="tavern_build" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--_______________________________________________________   END CHOICE MECHANICS 002______________________________________________________________-->
+
+		<!--___________________________________________________________CHOICE MECHANICS 003________________________________________________________________________-->
+
+		<!--_______________________Jousting ground or fairground_________________________-->
+
+		<quest id="TRANLSATION_004" isKeyQuest="true" start="custom" visible="false" avatar="king" >
+			<!--Queen is saying something else and client still don t understand it-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_QUEEN_SPEAKING_004"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="TRANLSATION_004a"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="TRANLSATION_004a" isKeyQuest="true" start="custom" visible="false" avatar="queen" >
+			<!--Queen is saying something else and client still don t understand it-->
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEEN_TEXT_003"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="JOUSTINGGROUND_GIRL_TRANSLATE_TRUE"/>
+				<!--				<start-quest id="FAIRGROUND_CLIENT_TRANSLATE_FALSE"/>-->
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="JOUSTINGGROUND_GIRL_TRANSLATE_TRUE" isKeyQuest="true" start="custom" visible="false" avatar="girl" >
+			<!--We are listening to the girl translation-->
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_JOUSTING_TRUE"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="FAIRGROUND_CLIENT_TRANSLATE_FALSE"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="FAIRGROUND_CLIENT_TRANSLATE_FALSE" isKeyQuest="true" start="custom" visible="false" avatar="client" >
+			<!--We are listening to the girl translation-->
+			<start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_FAIRGROUND_FALSE"/>
+			<objectives timeout="2"/>
+			<onSuccess >
+				<start-quest id="CHOOSE_TRANSLATOR_004"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="CHOOSE_TRANSLATOR_004" visible="false" finish="instant" start="custom" avatar="girl">
+			<!--So the girl is translating it, but the client say something else too cause he don t trust the girl anymore-->
+			<objectives timeout="3" operator="and" />
+			<onSuccess/>
+			<rewards >
+				<!--In this quest, the player will need to choose to listen the girl or the client-->
+				<start-quest id="DIPLOMATICVISIT_QUEST_START_05_GIRL_TRANSLATION" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_START_06_CLIENT_TRANSLATION" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_START_05_GIRL_TRANSLATION" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_003_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_GIRL_JOUSTING_TRUE" avatar="girl" >
+			<!--This is the choice one, the player choose to believe the girl-->
+			<!--PRODUCE BREAD-->
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen2" value="false" />
+				<flag-has-value key="algos_scenario_over2" value="false" />
+				<tribute amount="1" resource="herbs" />
+			</objectives>
+			<rewards >
+				<resource resource="coins" amount="20"/>
+				<set-flag key="player_has_choosen2" value="true" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_JOUSTING"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen2" value="true" />
+				<flag-has-value key="aglos_scenario_over2" value="true" />
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_START_06_CLIENT_TRANSLATION" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_CLIENT_TRANSLATION_003_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_FAIRGROUND_FALSE" avatar="client">
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen2" value="false" />
+				<flag-has-value key="aglos_scenario_over3" value="false" />
+				<tribute amount="1" resource="herbs" />
+			</objectives>
+			<rewards >
+				<resource resource="coins" amount="20"/>
+				<set-flag key="player_has_choosen2" value="true" />
+				<start-quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_FAIRGROUND"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen2" value="true" />
+				<flag-has-value key="aglos_scenario_over3" value="true" />
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--BUILD A jousting ground FOR THE GIRL-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_GIRL_TRANSLATION_JOUSTING" isKeyQuest="true" start="custom" title="T_GAME_QUEST_DESIRES_12_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_JOUSTING_START" visible="true" avatar="girl">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_JOUSTING_START"/>
+			<start_condition timeout="4" operator="and"/>
+			<objectives timeout="3" operator="and">
+				<building type="building_jousting" count="1"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+			</rewards>
+			<onSuccess >
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_005"/>
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_006"/>
+				<set-flag key="jousting_build" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="player_has_choosen2" value="true" />
+				<flag-has-value key="aglos_scenario_over2" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+
+		<!--BUILD A FAIRGROUND CLIENT-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_FAIRGROUND" isKeyQuest="true" start="custom" finish="user" title="T_SCENARIO_2016_FESTIVITIES_QUEST01_NAME" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_FAIRGROUND_START" visible="true" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_FAIRGROUND_START"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="200"/>
+			</rewards>
+			<onSuccess>
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_005"/>
+				<start-quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_006"/>
+				<set-flag key="build_fairground" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen2" value="true" />
+				<flag-has-value key="aglos_scenario_over2" value="true" />
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--CONCLUSION OF JOUSTING AND FAIRGROUND KING REACT-->
+
+		<quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_005" isKeyQuest="true" start="custom" visible="false" avatar="king">
+			<onStarted/>
+			<start_condition timeout="4" operator="and">
+				<flag-has-value key="jousting_build" value="true"/>
+			</start_condition>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+<!--			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_JOUSTING"/>-->
+			<rewards>
+				<start-quest id="HELPER_QUEST_JOUSTING_REACTION"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="build_fairground" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+		
+		<quest id="HELPER_QUEST_JOUSTING_REACTION" isKeyQuest="true" start="custom" visible="false" avatar="king">
+			<onStarted/>
+			<objectives operator="and" timeout="1"/>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_JOUSTING"/>
+			<rewards>
+				<start-quest id="MORE_PEOPLE_FOR_EVENT"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="DIPLOMATICVISIT_QUEST_HELPER_QUEEN_MOOD_006" isKeyQuest="true" start="custom" visible="false" avatar="king">
+			<start_condition timeout="4" operator="and">
+				<flag-has-value key="build_fairground" value="true"/>
+			</start_condition>
+			<objectives timeout="3" operator="and"/>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEST_REACTION_QUEEN_FAIRGROUND"/>
+			<rewards>
+				<!-- <start-quest id="DIPLOMATICVISIT_QUEST_QUEEN_OUT"/> -->
+				<start-quest id="DECORATION_TOWN"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="jousting_build" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!--_____________________________________________LAST QUEST WITH THE END OF THE STORY________________________________________________-->
+
+		<!-- <quest id="DIPLOMATICVISIT_QUEST_QUEEN_OUT" isKeyQuest="true" start="custom" avatar="king" visible="false">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_QUEEN_OUT"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess>
+				<set-flag key="diplomatic_failed" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="aglos_scenario_over" value="true" />
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest> -->
+
+<!-- QUEST IF WE CHOOSE THE GIRL -->
+		<quest id="MORE_PEOPLE_FOR_EVENT" isKeyQuest="true" start="custom" visible="true" avatar="client" title="T_GAME_QUEST_DESIRES_03_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MORE_PEOPLE_STARTED">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MORE_PEOPLE_STARTED"/>
+			<start_condition timeout="4" operator="and"/>
+			<objectives operator="and" timeout="2">
+				<building type="building_residence_03" count="4"/>
+				<!--				<population count="60"/>-->
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MORE_PEOPLE_SUCCEED"/>
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+				<resource resource="juice" amount="10"/>
+				<start-quest id="HAPPY_END_QUEEN"/>
+				<set-flag key="queen_is_happy" value="true"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+<!-- QUEST IF WE CHOOSE THE ADVISOR -->
+		<quest id="DECORATION_TOWN" isKeyQuest="true" start="custom" finish="user" visible="true" avatar="client" title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_DECORATION_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_DECORATION_STARTED">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_DECORATION_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives operator="and" timeout="2">
+			<!-- TODO add the ney decoration objects to build : fields and trees  -->
+				<building count="1" type="deco_3x3_fairy_fountain"/>
+				<building count="1" type="deco_2x2_statue_01"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+				<resource resource="juice" amount="10"/>
+				<start-quest id="HAPPY_END_QUEEN"/>
+				<set-flag key="queen_is_happy" value="true"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="HAPPY_END_QUEEN" isKeyQuest="true" start="custom" visible="false" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_HAPPYEND_ADVISOR"/>
+			<start_condition timeout="4" operator="and"/>
+			<rewards>
+				<start-quest id="HAPPY_END_QUEEN_002"/>
+				<set-flag key="reward_for_the_trade_guild" value="true"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="HAPPY_END_QUEEN_002" isKeyQuest="true" start="custom" visible="false" avatar="king">
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_HAPPYEND_02"/>
+			<start_condition timeout="1" operator="and"/>
+			<objectives operator="and" timeout="3"/>
+			<rewards>
+				<start-quest id="END_SCENARIO"/>
+				<!-- <set-flag key="reward_for_the_trade_guild" value="true"/> -->
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+
+
+		<!--__________________________________________________________END CHOICE MECHANICS 003______________________________________________________________-->
+
+
+		<!--_________________________________________________________________MAINQUEST______________________________________________________________________-->
+
+		<quest id="MAINQUEST" isKeyQuest="true" start="custom"  title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MAINQUEST_TITLE" description="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MAINQUEST_STARTED" visible="true" avatar="client" finish="user">
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_MAINQUEST_STARTED" >
+				<start-quest id="ASK_THE_BUTCHER"/>
+				<start-quest id="JUST_IN_TIME"/>
+				<start-quest id="TRADE_GUILD_DESTROYED"/>
+				<start-quest id="TRADE_GUILD_DESTROYED_002"/>
+			</onStarted>
+			<!--Make sure you found the translator (part 1) and make our guest the queen, happy-->
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="translator_is_found" value="true"/>
+				<flag-has-value key="queen_is_happy" value="true"/>
+			</objectives>
+			<onSuccess>
+				<set-flag key="bandit_over_quest" value="true"/>
+				<set-flag key="reward_bandit_defend_town" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="10" operator="and">
+				<flag-has-value key="diplomatic_failed" value="true"/>
+			</fail_condition>
+			<onFailed>
+				<start-quest id="END_SCENARIO_KING"/>
+			</onFailed>
+			<rewards>
+				<start-quest id="SCENARIO_FINISHED"/>
+				<resource resource="prestige" amount="100"/>
+				<set-flag key="diplomatic_failed" value="false"/>
+				<set-quest-state id="TRADE_GUILD_DESTROYED_002" state="failed"/>
+			</rewards>
+		</quest>
+
+		<quest id="END_SCENARIO_KING"  start="custom" finish="instant" visible="false" avatar="king">
+			<start_condition timeout="7" operator="and">
+				<flag-has-value key="diplomatic_failed" value="true"/>
+			</start_condition>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_FAILED">
+				<set-quest-state id="JUST_IN_TIME" state="failed"/>
+				<set-flag key="bandits_is_over" value="false"/>
+				<set-quest-state id="BANDIT_SCENARIO" state="failed"/>
+				<set-quest-state id="DIPLOMATICVISIT_QUEST_CLIENT_TRANSLATION_CHURCH_002" state="failed"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="END_SCENARIO"/>
+				<set-flag key="bandit_over_quest" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="END_SCENARIO"  start="custom" finish="instant" visible="false" avatar="king">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted>
+				<!--TODO: remove all modifiers still active here please!-->
+				<enable-bandits enable="any"/>
+				<!-- <set-flag key="delete_quests" value="true"/> -->
+				<!-- <set-flag key="stop_attacks" value="true"/> -->
+			</onStarted>
+			<objectives timeout="10" operator="and">
+				<flag-has-value key="MISSION_COMPLETE" value="true"/>
+			</objectives>
+			<fail_condition timeout="6" operator="and">
+				<flag-has-value key="diplomatic_failed" value="true"/>
+			</fail_condition>
+			<onFailed>
+			<set-flag key="delete_quests" value="true"/>
+				<scenario-failed/>
+				<start-quest id="METASTART"/>
+				<set-quest-state id="JUST_IN_TIME" state="failed"/>
+			</onFailed>
+			<onSuccess >
+			<set-flag key="delete_quests" value="true"/>
+				<scenario-finished />
+				<start-quest id="METASTART"/>
+			</onSuccess>
+		</quest>
+
+		<!--Quest for too many bandit atks-->
+
+
+		<!--___________________________________________________________________BANDIT MANAGER ____________________________________________________-->
+
+		<quest id="BANDIT_CAMP_IS_OUT"  start="instant" finish="instant" visible="false" avatar="knight">
+			<start_condition timeout="10" operator="and"/>
+			<objectives timeout="10" operator="and">
+				<destroy-building target="banditcamp" count="1"/>
+			</objectives>
+			<fail_condition timeout="6" operator="or">
+				<flag-has-value key="diplomatic_failed" value="true"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_BANDITCAMP_DESTROYED_SUCCESS"/>
+			<rewards>
+				<resource resource="coins" amount="1000"/>
+				<resource resource="weapons" amount="10"/>
+				<resource resource="armor" amount="10"/>
+				<start-quest id="BANDIT_REPLY"/>
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_REPLY"  start="custom" finish="instant" visible="false" avatar="bandit">
+			<start_condition timeout="1" operator="and"/>
+			<fail_condition timeout="6" operator="and">
+				<flag-has-value key="diplomatic_failed" value="true"/>
+			</fail_condition>
+			<onSuccess notification="T_QUESTS_SCENARIO_DIPLOMATICVISIT_BANDIT_REPLY"/>
+		</quest>
+
+		<!--________________________________________________ATTACK MANAGER FOR BANDITS________________________________________-->
+
+		<quest id="BANDIT_ATTACK_STARTER"
+			   start="custom"
+			   isKeyQuest="false"
+			   visible="false"
+			   avatar="client"
+			   repeatable="custom">
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="5" operator="and"/>
+			<fail_condition timeout="1">
+				<flag-has-value key="stop_attacks" value="true"/>
+				<!--"stop attacks" flag is the necessary command to abort the attack sequence-->
+			</fail_condition>
+			<rewards>
+				<!--				<debug-message message="Bandit-attack-manager: bandit attack mode started!"/>-->
+				<set-flag key="attack_is_over" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN"/>
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_ATTACK_COOLDOWN"
+			   visible="false"
+			   start="custom"
+			   finish="instant"
+			   repeatable="custom">
+			<onStarted>
+				<!--				<debug-message message="Bandit-attack-manager:cooldown started!"/>-->
+			</onStarted>
+			<objectives timeout="300" operator="and" >
+				<!--waiting after each attack-->
+				<flag-has-value key="cooldown_complete" value="false" />
+				<flag-has-value key="attack_is_over" value="true" />
+			</objectives>
+			<fail_condition timeout="1">
+				<flag-has-value key="stop_attacks" value="true"/>
+				<!--"stop attacks" flag is the necessary command to abort the attack sequence-->
+			</fail_condition>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager:Cooldown: attack sequence aborted!"/>-->
+			</onFailed>
+			<rewards >
+				<set-flag key="cooldown_complete" value="true" />
+				<set-flag key="attack_is_over" value="false" />
+				<start-quest id="BANDIT_ATTACK_REPEATER" />
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_ATTACK_REPEATER"
+			   visible="false"
+			   start="custom"
+			   finish="instant"
+			   repeatable="custom">
+			<onStarted>
+				<!--				<debug-message message="Bandit-attack-manager:Cooldown complete!"/>-->
+				<set-flag key="cooldown_complete" value="true" />
+			</onStarted>
+			<objectives timeout="6" operator="and" >
+				<flag-has-value key="stop_attacks" value="false" />
+			</objectives>
+			<fail_condition timeout="1">
+				<flag-has-value key="stop_attacks" value="true"/>
+				<!--"stop attacks" flag is the necessary command to abort the attack sequence-->
+			</fail_condition>
+			<rewards >
+				<start-quest id="BANDIT_ATTACK_CONDITION" />
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_ATTACK_CONDITION"
+			   start="custom"
+			   isKeyQuest="false"
+			   visible="false"
+			   avatar="client"
+			   repeatable="custom">
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<!--			here a useful condition can be entered.
+				For example the player has the marketplace building and the bandits only attack as long as the market is present-->
+			</objectives>
+			<fail_condition timeout="2">
+				<flag-has-value key="stop_attacks" value="true" />
+			</fail_condition>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager:No required condition found!"/>-->
+				<!-- the message should be fitting to the inserted condition-->
+				<set-flag key="attack_is_over" value="true"/>
+				<set-flag key="cooldown_complete" value="false"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN"/>
+			</onFailed>
+			<onSuccess >
+				<!--				<debug-message message="Bandit-attack-manager:Condition found!"/>-->
+				<set-flag key="attack_is_over" value="true" />
+				<set-flag key="cooldown_complete" value="false"/>
+				<start-quest id="ATTACK_SELECTOR_FIRE"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="ATTACK_SELECTOR_FIRE" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<!--				<debug-message message="Bandit-attack-manager:Trying fire type..."/>-->
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<random chance="20"/>
+			</objectives>
+			<onSuccess >
+				<start-quest id="BANDIT_ATTACK_FIRE"/>
+				<!--				<debug-message message="Bandit-attack-manager:success!"/>-->
+			</onSuccess>
+			<fail_condition timeout="2"/>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager:Fire failed!"/>-->
+				<start-quest id="ATTACK_SELECTOR_DESTROY"/>
+			</onFailed>
+		</quest>
+
+		<quest id="ATTACK_SELECTOR_DESTROY" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<!--				<debug-message message="Bandit-attack-manager:Trying destroy type..."/>-->
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<random chance="10"/>
+			</objectives>
+			<onSuccess >
+				<start-quest id="BANDIT_ATTACK_DESTROY"/>
+				<!--				<debug-message message="Bandit-attack-manager:success!"/>-->
+			</onSuccess>
+			<fail_condition timeout="2"/>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager:Destroy failed!"/>-->
+				<start-quest id="ATTACK_SELECTOR_STEAL"/>
+			</onFailed>
+		</quest>
+
+		<quest id="ATTACK_SELECTOR_STEAL" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<!--				<debug-message message="Bandit-attack-manager:Trying steal type..."/>-->
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<random chance="50"/>
+			</objectives>
+			<onSuccess >
+				<start-quest id="BANDIT_ATTACK_STEAL"/>
+				<!--				<debug-message message="Bandit-attack-manager:success!"/>-->
+			</onSuccess>
+			<fail_condition timeout="2"/>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager:Steal failed!"/>-->
+				<start-quest id="ATTACK_SELECTOR_PLAGUE" />
+			</onFailed>
+		</quest>
+
+		<quest id="ATTACK_SELECTOR_PLAGUE" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<!--				<debug-message message="Bandit-attack-manager:Trying plague type..."/>-->
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<random chance="15"/>
+			</objectives>
+			<onSuccess >
+				<start-quest id="BANDIT_ATTACK_PLAGUE" />
+				<!--				<debug-message message="Bandit-attack-manager:success!"/>-->
+			</onSuccess>
+			<fail_condition timeout="2"/>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager:Plague failed!"/>
+				<debug-message message="Bandit-attack-manager:No attack chosen! Back to cooldown"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onFailed>
+		</quest>
+
+		<quest id="BANDIT_ATTACK_STEAL" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+				<!--				<debug-message message="Bandit-attack-manager:Fire attack started!"/>-->
+			</onStarted>
+			<objectives timeout="2" operator="or" >
+				<raid-defeated including-interceptions="true" count="3"/>
+				<raid-successful count="3"/>
+			</objectives>
+			<onSuccess >
+				<!--				<debug-message message="Bandit-attack-manager:Bandit attack complete!! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onSuccess>
+			<fail_condition timeout="120"/>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager: Timeout! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onFailed>
+		</quest>
+
+		<quest id="BANDIT_ATTACK_FIRE" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+				<!--				<debug-message message="Bandit-attack-manager:Fire attack started!"/>-->
+			</onStarted>
+			<objectives timeout="2" operator="or" >
+				<raid-defeated including-interceptions="true" count="3"/>
+				<raid-successful count="3"/>
+			</objectives>
+			<onSuccess >
+				<!--				<debug-message message="Bandit-attack-manager: Bandit attack complete!! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onSuccess>
+			<fail_condition timeout="120"/>
+			<onFailed >
+				<!--				<debug-message message="Timeout! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onFailed>
+		</quest>
+
+		<quest id="BANDIT_ATTACK_DESTROY" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+				<!--				<debug-message message="Bandit-attack-manager: Blow up attack started!"/>-->
+			</onStarted>
+			<objectives timeout="2" operator="or" >
+				<raid-defeated including-interceptions="true" count="3"/>
+				<raid-successful count="3"/>
+			</objectives>
+			<onSuccess >
+				<!--				<debug-message message="Bandit-attack-manager: Bandit attack complete!! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onSuccess>
+			<fail_condition timeout="120"/>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager: Timeout! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onFailed>
+		</quest>
+
+		<quest id="BANDIT_ATTACK_PLAGUE" visible="false" start="custom" finish="instant" repeatable="custom">
+			<onStarted>
+				<bandit-attack intention="lay_fire" target="building_tradeguild"/>
+				<!--				<debug-message message="Bandit-attack-manager: Plague attack started!"/>-->
+			</onStarted>
+			<objectives timeout="2" operator="and">
+				<raid-successful count="1"/>
+			</objectives>
+			<onSuccess >
+				<!--				<debug-message message="Bandit-attack-manager: Bandit attack complete!! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-plague amount="1"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+				<!--				<start-quest id="TUTORIAL_06_PLAGUE_QUESTLINE_START"/>-->
+			</onSuccess>
+			<fail_condition timeout="300"/>
+			<onFailed >
+				<!--				<debug-message message="Bandit-attack-manager: Timeout! Back to cooldown!"/>-->
+				<set-flag key="wave_complete" value="true"/>
+				<start-quest id="BANDIT_ATTACK_COOLDOWN" />
+			</onFailed>
+		</quest>
+
+		<!--______________________________________________________END OF BANDIT MANAGER-->
+
+		<!--___________________________________________________________END OF THE SCENARIO_________________________________________________________________________-->
+
+		<quest visible="false" id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" description="T_GAME_QUEST_SCEN_FINISHED_DESC" start="custom">
+			<start_condition timeout="5" operator="and"/>
+			<onStarted >
+				<scenario-finished />
+			</onStarted>
+			<objectives timeout="5" operator="and"/>
+			<onSuccess>
+<!--				<allow key="building_tradeguild"/>-->
+				<!-- <set-flag key="scenario_is_won" value="true"/> -->
+				<!-- TODO TEST THIS flag -->
+				<!-- <set-flag key="reward_for_the_trade_guild" value="true"/> -->
+				<!-- <set-flag key="reward_bandit_defend_town" value="true"/> -->
+			</onSuccess>
+			<rewards >
+				<start-quest id="METASTART"/>
+			</rewards>
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"   >
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+			<start_condition timeout="5"/>
+			<objectives timeout="1"/>
+			<rewards>
+				<allow key="building_tradeguild"/>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+				
+			</rewards>
+		</quest>
+
+		<!-- STORM -->
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2"  operator="and"/>
+			<rewards>
+				<lightningstrike topLeftX="38" topLeftY="45" bottomRightX="82" bottomRightY="83" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->
+
+	</group>
+</questdb>
+

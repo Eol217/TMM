@@ -1,0 +1,186 @@
+[random_start]
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next		1
+
+
+
+[fem_booth_1]
+frame:	ani_market_01.0.png		2
+
+delay:	0.10	4.00
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next			1
+
+[fem_booth_2]
+frame:	ani_market_01.1.png		0.2
+frame:	ani_market_01.2.png		0.5
+frame:	ani_market_01.1.png		0.2
+frame:	ani_market_01.0.png		1
+
+
+delay:	0.10	2
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next			1
+
+[fem_look_1]
+
+frame:	ani_market_01.3.png		2
+
+delay:	0.10	2.00
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next			1
+
+[fem_look_2]
+
+frame:	ani_market_01.4.png		2
+
+delay:	0.10	2.00
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next			1
+
+[fem_look_3]
+
+frame:	ani_market_01.5.png		2
+
+delay:	0.10	2.00
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next			1
+
+[fem_look_4]
+
+frame:	ani_market_01.6.png		2
+
+delay:	0.10	2.00
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next			1
+
+
+[fem_to_next]
+
+frame:	ani_market_01.7.png		0.1
+frame:	ani_market_01.8.png		0.1
+frame:	ani_market_01.9.png		0.1
+frame:	ani_market_01.10.png		0.1
+frame:	ani_market_01.11.png		0.1
+frame:	ani_market_01.12.png		2
+
+
+delay:	1.00	5.00
+
+next:	fem_back_1			1
+
+
+[fem_walk]
+
+frame:	ani_market_01.13.png		0.1
+frame:	ani_market_01.14.png		0.1
+frame:	ani_market_01.15.png		0.1
+frame:	ani_market_01.16.png		0.1
+frame:	ani_market_01.17.png		0.1
+frame:	ani_market_01.18.png		0.1
+frame:	ani_market_01.19.png		0.1
+frame:	ani_market_01.20.png		0.1
+frame:	ani_market_01.21.png		2
+
+delay:	1.00	5.00
+
+next:	fem_back_2			1
+
+[fem_back_1]
+
+frame:	ani_market_01.22.png		0.1
+frame:	ani_market_01.23.png		0.1
+frame:	ani_market_01.24.png		0.1
+frame:	ani_market_01.25.png		0.1
+frame:	ani_market_01.26.png		0.1
+frame:	ani_market_01.27.png		0.1
+frame:	ani_market_01.28.png		0.1
+
+
+frame:	ani_market_01.0.png			1
+
+delay:	0.1		2
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		1
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next		0.5
+
+[fem_back_2]
+
+frame:	ani_market_01.29.png		0.1
+frame:	ani_market_01.30.png		0.1
+frame:	ani_market_01.31.png		0.1
+frame:	ani_market_01.32.png		0.1
+frame:	ani_market_01.33.png		0.1
+frame:	ani_market_01.34.png		0.1
+frame:	ani_market_01.35.png		0.1
+frame:	ani_market_01.36.png		0.1
+
+
+frame:	ani_market_01.0.png			1
+
+delay:	0.1		2
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_walk		0.5
+next:	fem_look_1		1
+next:	fem_look_2		1
+next:	fem_look_3		1
+next:	fem_look_4		1
+next:	fem_to_next		1
+

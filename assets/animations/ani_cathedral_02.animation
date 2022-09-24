@@ -1,0 +1,115 @@
+
+[walkby]
+
+frame-delay: 0.2
+
+frame:	ani_cathedral_00.0.png
+frame:	ani_cathedral_00.1.png
+frame:	ani_cathedral_00.2.png
+frame:	ani_cathedral_00.3.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			0.75
+next:	walkback			1
+next:	staythere			0.5
+next:	staythere2			0.5
+
+
+[walkback]
+
+frame-delay: 0.2
+
+frame:	ani_cathedral_00.2.png
+frame:	ani_cathedral_00.1.png
+frame:	ani_cathedral_00.0.png
+
+frame:	ani_cathedral_00.5.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			0.75
+next:	staythere			0.5
+next:	staythere2			0.5
+
+
+
+[staythere]
+
+frame-delay: 0.2
+
+frame:	ani_cathedral_00.0.png
+frame:	ani_cathedral_00.1.png
+
+
+delay:	0.5	2.00
+
+next:	nostay				
+
+[nostay]
+
+frame-delay: 0.2
+
+frame:	ani_cathedral_00.2.png
+
+frame:	ani_cathedral_00.1.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			1
+next:	staythere			0.25
+next:	staythere2			0.25
+
+[staythere2]
+
+frame-delay: 0.2
+
+frame:	ani_cathedral_00.0.png
+frame:	ani_cathedral_00.1.png
+
+
+delay:	0.5	2.00
+
+next:	nostay2
+
+[nostay2]
+
+frame-delay: 0.2
+
+frame:	ani_cathedral_00.2.png
+
+frame:	ani_cathedral_00.5.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			1
+next:	staythere			0.25
+next:	staythere2			0.25
+
+
+[null]
+
+frame-delay: 0.2
+
+frame:	ani_cathedral_00.0.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			1
+next:	staythere			1
+next:	staythere2			1
+

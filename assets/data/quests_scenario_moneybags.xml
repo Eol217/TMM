@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: Moneybags -->
+<!-- prestige: 185 -->
+
+      
+<questdb>  
+    <group avatar="client" >
+        <include file = "data/common-quests.xml"/>
+        <include file = "data/quests_sandbox.xml"/>
+        
+<!-- Main Quest-->   
+        <quest id="SCENARIO_STARTER" finish="instant" start="instant" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <onStarted >
+                <start-quest id="MAIN_00" /> <!-- Mainquest -->
+                <start-quest id="QUEST_00" /> <!-- Startquest -->
+                <start-quest id="HAPPYNESS" />
+                <start-quest id="BANDIT_01" />
+                <start-quest id="BANDIT_TIMER_01" />
+                <start-quest id="BANDIT_TIMER_02" />
+                <start-quest id="BANDIT_TIMER_03_STARTER" />
+                <start-quest id="BANDIT_TIMER_04_STARTER" />
+                <start-quest id="BANDIT_TIMER_05_STARTER" />
+                <start-quest id="BANDIT_TIMER_10_STARTER" />
+                <start-quest id="BANDIT_ENDER" />
+                <start-quest id="QUEST_20" />
+                <start-quest id="NEED_FAIL" />
+				<enable-bandits enable="false" />
+            </onStarted>
+        </quest>
+        <quest id="MAIN_00" avatar="king" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2016_06_QUEST_04_NAME" description="T_SCENARIO_2016_10_MAIN_00_DESC" >
+            <onStarted notification="T_SCENARIO_2016_10_MAIN_00_DESC">
+                <set-flag key="scenario_over" value="false" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <tribute amount="25000" resource="coins" />
+            </objectives>
+            <rewards>
+                <set-flag key="scenario_over" value="true" />
+                <set-flag key="need_in_progress" value="false" />
+                <start-quest id="scenario-finished" />
+                <resource amount="50" resource="prestige" />
+            </rewards>
+            <onSuccess notification="T_SCENARIO_2016_10_MAIN_00_END" />
+        </quest>
+        
+<!-- Quests -->      
+        <quest id="HAPPYNESS" start="custom" visible="true" description="T_SCENARIO_2016_10_HAPPYNESS_DESC" title="T_SCENARIO_2016_10_HAPPYNESS_NAME" repeatable="custom" >
+            <onStarted notification="T_SCENARIO_2016_10_HAPPYNESS_DESC" >
+                <set-flag key="happyness_is_high" value="false"/>
+                <set-modifier name="mod_taxes" tag="taxes" value="50" />
+                <start-quest id="HAPPYNESS_LOW" />
+            </onStarted>
+            <start_condition timeout="90" operator="and_not">
+                <happyness value="80" />
+                <flag-has-value key="strike_active" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <objectives timeout="60" operator="and">
+                <happyness value="80" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="taxes" />
+                <start-quest id="HAPPYNESS_REPEATER" />
+                <resource amount="100" resource="coins" />
+                <set-flag key="happyness_is_high" value="true"/>
+            </rewards>
+            <fail_condition timeout="1" operator="or">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+			<onFailed>
+				<remove-modifier-by-tag tag="taxes" />
+			</onFailed>
+        </quest>
+        
+        <quest id="HAPPYNESS_LOW" start="custom" visible="false" repeatable="custom" finish="instant">
+            <objectives timeout="5" operator="and_not">
+                <happyness value="40" />
+            </objectives>
+            <rewards >
+                <start-quest id="HAPPYNESS_LOW_INCREASE" />
+            </rewards>
+            <fail_condition timeout="1" operator="or">
+                <flag-has-value key="scenario_over" value="true" />
+                <flag-has-value key="happyness_is_high" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="HAPPYNESS_LOW_INCREASE" start="custom" visible="false" repeatable="custom" finish="instant">
+            <onStarted >
+				<remove-modifier-by-tag tag="taxes" />
+                <set-modifier name="mod_taxes" tag="taxes_low" value="10" />
+            </onStarted>
+            <objectives timeout="5" operator="and">
+                <happyness value="40" />
+            </objectives>
+            <rewards >
+                <remove-modifier-by-tag tag="taxes_low" />
+				<set-modifier name="mod_taxes" tag="taxes" value="50" />
+                <start-quest id="HAPPYNESS_LOW" />
+            </rewards>
+            <fail_condition timeout="1" operator="or">
+                <flag-has-value key="scenario_over" value="true" />
+                <flag-has-value key="happyness_is_high" value="true" />
+            </fail_condition>
+			<onFailed >
+				<remove-modifier-by-tag tag="taxes_low" />
+			</onFailed>
+        </quest>
+            
+        <quest id="HAPPYNESS_REPEATER" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="2" operator="and"/>
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+            <rewards >
+                <start-quest id="HAPPYNESS" />
+            </rewards>
+        </quest>
+        
+        
+        <quest id="QUEST_00" start="custom" description="T_SCENARIO_2016_10_QUEST_00_DESC" title="T_SCENARIO_2016_10_QUEST_00_NAME">
+            <start_condition timeout="6" operator="and"/>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_00_DESC" />
+            <objectives timeout="2" operator="and">
+                <building type="building_sawmill" count="1" />
+				<construct count="1" type="building_fishing_lodge" />
+            </objectives>
+            <rewards >
+                <resource amount="200" resource="coins" />
+                <resource amount="15" resource="planks" />
+                <start-quest id="QUEST_01" />
+                <start-quest id="QUEST_10_STARTER" />
+                <start-quest id="NEED_FISH" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_01" start="custom" description="T_SCENARIO_2016_10_QUEST_01_DESC" title="T_SCENARIO_2016_10_QUEST_01_NAME">
+            <start_condition timeout="3" operator="and"/>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_01_DESC" />
+            <objectives timeout="2" operator="and">
+                <building type="building_mine" count="1" />
+            </objectives>
+            <rewards >
+                <resource amount="150" resource="coins" />
+                <resource amount="20" resource="stone" />
+                <start-quest id="QUEST_02_STARTER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_02_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="20" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_02" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+		<quest id="QUEST_02" start="custom" description="T_SCENARIO_2016_10_QUEST_02_DESC" title="T_SCENARIO_2016_10_QUEST_02_NAME">
+            
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_02_DESC" />
+            <objectives timeout="2" operator="or">
+                <stock resource="bread" amount="10" />
+            </objectives>
+            <rewards >
+                <resource amount="300" resource="coins" />
+                <resource amount="15" resource="prestige" />
+                <start-quest id="QUEST_04_STARTER" />
+                <start-quest id="NEED_BREAD" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_03_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="28" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_03" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_03" avatar="farmer" start="custom" description="T_SCENARIO_2016_10_QUEST_03_DESC" title="T_SCENARIO_2016_10_QUEST_03_NAME">
+            <start_condition timeout="3" operator="and">
+                <population count="28" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_03_DESC" />
+            <objectives timeout="2" operator="or">
+                <stock resource="brew" amount="10" />
+            </objectives>
+            <rewards >
+                <resource amount="300" resource="coins" />
+                <resource amount="10" resource="tools" />
+                <start-quest id="QUEST_05_STARTER" />
+                <start-quest id="NEED_BREW" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_04_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="24" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_04" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_04" start="custom" description="T_SCENARIO_2016_10_QUEST_04_DESC" title="T_SCENARIO_2016_10_QUEST_04_NAME">
+            <start_condition timeout="3" operator="and" >
+                <population count="24" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_04_DESC" />
+            <objectives timeout="2" operator="or">
+                <stock resource="meat" amount="10" />
+            </objectives>
+            <rewards >
+                <resource amount="250" resource="coins" />
+                <resource amount="20" resource="herbs" />
+                <start-quest id="QUEST_03_STARTER" />
+                <start-quest id="NEED_MEAT" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_05_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="32" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_05" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_05" avatar="girl" start="custom" description="T_SCENARIO_2016_10_QUEST_05_DESC" title="T_SCENARIO_2016_10_QUEST_05_NAME">
+            <start_condition timeout="3" operator="and">
+                <population count="32" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_05_DESC" />
+            <objectives timeout="2" operator="or">
+                <stock resource="cloths" amount="10" />
+            </objectives>
+            <rewards >
+                <resource amount="300" resource="coins" />
+                <resource amount="15" resource="prestige" />
+                <start-quest id="QUEST_06_STARTER" />
+                <start-quest id="NEED_CLOTHS" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_06_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="36" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_06" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_06" start="custom" description="T_SCENARIO_2016_10_QUEST_06_DESC" title="T_SCENARIO_2016_10_QUEST_06_NAME">
+            <start_condition timeout="3" operator="and">
+                <population count="36" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_06_DESC" />
+            <objectives timeout="2" operator="or">
+                <stock resource="juice" amount="10" />
+            </objectives>
+            <rewards >
+                <resource amount="250" resource="coins" />
+                <resource amount="10" resource="tools" />
+                <start-quest id="QUEST_07_STARTER" />
+                <start-quest id="NEED_JUICE" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_07_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="40" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_07" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_07" avatar="merchant" start="custom" description="T_SCENARIO_2016_10_QUEST_07_DESC" title="T_SCENARIO_2016_10_QUEST_07_NAME">
+            <start_condition timeout="3" operator="and">
+                <population count="40" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_07_DESC" />
+            <objectives timeout="2" operator="or">
+                <stock resource="jewelry" amount="10" />
+            </objectives>
+            <rewards >
+                <resource amount="350" resource="coins" />
+                <resource amount="15" resource="prestige" />
+                <start-quest id="NEED_JEWELRY" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_10_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="16" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_10" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_10" start="custom" description="T_SCENARIO_2016_10_QUEST_10_DESC" title="T_GAME_TUTORIAL_QUEST_NAME_CHURCH">
+            <start_condition timeout="9" operator="and">
+                <population count="16" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_10_DESC" />
+            <objectives timeout="2" operator="and">
+                <building count="1" type="building_church" />
+            </objectives>
+            <rewards >
+                <resource amount="200" resource="coins" />
+                <resource amount="10" resource="bread" />
+                <start-quest id="QUEST_11_STARTER" />
+                <start-quest id="NEED_CHURCH_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_11_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="24" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_11" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_11" start="custom" description="T_SCENARIO_2016_10_QUEST_11_DESC" title="T_GAME_QUEST_SCEN_CC_60_TITEL">
+            <start_condition timeout="7" operator="and">
+                <population count="24" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_11_DESC" />
+            <objectives timeout="2" operator="and">
+                <building count="1" type="building_tavern" />
+            </objectives>
+            <rewards >
+                <resource amount="300" resource="coins" />
+                <resource amount="10" resource="brew" />
+                <start-quest id="QUEST_12_STARTER" />
+                <start-quest id="NEED_TAVERN_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_12_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="32" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_12" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_12" start="custom" description="T_SCENARIO_2016_10_QUEST_12_DESC" title="T_SCENARIO_2016_FESTIVITIES_QUEST01_NAME">
+            <start_condition timeout="7" operator="and">
+                <population count="32" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_12_DESC" >
+            </onStarted>
+            <objectives timeout="2" operator="and">
+                <building count="1" type="building_fairground" />
+            </objectives>
+            <rewards >
+                <resource amount="250" resource="coins" />
+                <resource amount="10" resource="juice" />
+                <start-quest id="QUEST_13_STARTER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_13_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="36" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_13" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_13" start="custom" description="T_SCENARIO_2016_10_QUEST_13_DESC" title="T_GAME_HINT_FIRE_TITLE">
+            <start_condition timeout="7" operator="and">
+                <population count="36" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_13_DESC" />
+            <objectives timeout="2" operator="and">
+                <building count="1" type="building_firewatch" />
+            </objectives>
+            <rewards >
+                <resource amount="100" resource="coins" />
+                <resource amount="5" resource="prestige" />
+                <start-quest id="QUEST_14_STARTER" />
+                <start-quest id="NEED_FIREWATCH_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_14_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="40" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_14" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_14" avatar="merchant" start="custom" description="T_SCENARIO_2016_10_QUEST_14_DESC" title="T_SCENARIO_2016_10_QUEST_14_NAME">
+            <start_condition timeout="7" operator="and">
+                <population count="40" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_14_DESC" />
+            <objectives timeout="2" operator="and">
+                <building count="1" type="building_medicus" />
+            </objectives>
+            <rewards >
+                <resource amount="250" resource="coins" />
+                <resource amount="15" resource="prestige" />
+                <start-quest id="QUEST_15_STARTER" />
+                <start-quest id="NEED_MEDICUS" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_15_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="44" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_15" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_15" start="custom" description="T_SCENARIO_2016_10_QUEST_15_DESC" title="T_GAME_QUEST_DESIRES_12_TITLE">
+            <start_condition timeout="7" operator="and">
+                <population count="44" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_15_DESC" />
+            <objectives timeout="2" operator="and">
+                <building count="1" type="building_jousting" />
+            </objectives>
+            <rewards >
+                <resource amount="300" resource="coins" />
+                <resource amount="10" resource="cloths" />
+                <start-quest id="QUEST_16_STARTER" />
+                <start-quest id="NEED_JOUSTING_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+		<quest id="QUEST_16_STARTER" start="custom" finish="instant" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and">
+                <population count="48" />
+            </start_condition>
+			<objectives timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="QUEST_16" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+		</quest>
+		
+        <quest id="QUEST_16" start="custom" description="T_SCENARIO_2016_10_QUEST_16_DESC" title="T_GAME_QUEST_SCEN8_2_NAME">
+            <start_condition timeout="7" operator="and">
+                <population count="48" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_16_DESC" />
+            <objectives timeout="2" operator="or">
+                <building count="1" type="building_carpenter" />
+            </objectives>
+            <rewards >
+                <resource amount="350" resource="coins" />
+                <resource amount="15" resource="prestige" />
+                <start-quest id="NEED_CARPENTER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_20" avatar="knight" start="custom" description="T_SCENARIO_2016_10_QUEST_20_DESC" title="T_GAME_QUEST_SCEN13_12_TITLE">
+            <start_condition timeout="6" operator="and">
+                <raid-successful count="3" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_20_DESC" />
+            <objectives timeout="1" operator="and">
+                <soldiers-in-town count="2" />
+            </objectives>
+            <rewards>
+                <resource amount="200" resource="coins" />
+                <resource amount="10" resource="sausage" />
+                <start-quest id="QUEST_21" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_21" avatar="knight" start="custom" description="T_SCENARIO_2016_10_QUEST_21_DESC" title="T_GAME_QUEST_SCEN_CC_C_30_TITEL">
+            <start_condition timeout="6" operator="and"/>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_21_DESC" />
+            <objectives timeout="1" operator="and">
+                <raid-defeated count="3" />
+            </objectives>
+            <rewards>
+                <resource amount="250" resource="coins" />
+                <resource amount="10" resource="armor" />
+                <start-quest id="QUEST_22" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_22" visible="false" start="custom" finish="instant" >
+            <objectives timeout="1" operator="and">
+                <building count="2" type="building_banditcamp" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="QUEST_222" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_220" />
+            </onFailed>
+        </quest>
+		<quest id="QUEST_220" visible="false" start="custom" finish="instant" >
+            <objectives timeout="1" operator="and">
+                <building count="1" type="building_banditcamp" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="QUEST_221" />
+            </rewards>
+            <onFailed >
+                <spawn-bandit-camp count="1" upgrade_level="2" />
+				<start-quest id="QUEST_221" />
+            </onFailed>
+        </quest>
+        
+        <quest id="QUEST_221" avatar="knight" start="custom" description="T_SCENARIO_2016_10_QUEST_22_DESC" title="T_GAME_QUEST_SCEN13_10_TITLE">
+            <start_condition timeout="6" operator="and"/>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_22_DESC" />
+            <objectives timeout="1" operator="and" >
+                <destroy-building count="1" target="building_banditcamp" />
+            </objectives>
+            <rewards>
+                <resource amount="300" resource="coins" />
+                <resource amount="15" resource="prestige" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="QUEST_222" avatar="knight" start="custom" description="T_SCENARIO_2016_10_QUEST_22_DESC" title="T_GAME_QUEST_SCEN13_10_TITLE">
+            <start_condition timeout="6" operator="and"/>
+            <onStarted notification="T_SCENARIO_2016_10_QUEST_22_DESC" />
+            <objectives timeout="1" operator="and">
+                <destroy-building count="2" target="building_banditcamp" />
+            </objectives>
+            <rewards>
+                <resource amount="400" resource="coins" />
+                <resource amount="20" resource="prestige" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>       
+                
+        <quest id="BANDIT_TIMER_01" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="350" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_ATTACK_01" />
+                <start-quest id="BANDIT_TIMER_01_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_01_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="45" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_01" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_02" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="855" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_ATTACK_02" />
+                <start-quest id="BANDIT_TIMER_02_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_02_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="48" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_02" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_03_STARTER" visible="false" start="custom" finish="instant" >
+            <objectives timeout="1500" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_03" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_03" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="1455" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_ATTACK_03" />
+                <start-quest id="BANDIT_TIMER_03_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_03_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="42" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_03" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_04_STARTER" visible="false" start="custom" finish="instant" >
+            <objectives timeout="2400" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_04" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_04" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="2355" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_ATTACK_03" />
+                <start-quest id="BANDIT_TIMER_04_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_04_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="51" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_04" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_05_STARTER" visible="false" start="custom" finish="instant" >
+            <objectives timeout="600" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_05" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_05" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="1455" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_ATTACK_02" />
+                <start-quest id="BANDIT_TIMER_05_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_05_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="39" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_05" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_ENDER" avatar="bandit" visible="false" start="custom" finish="instant" >
+            <objectives timeout="1" operator="and_not">
+                <building count="1" type="building_banditcamp"/>
+            </objectives>
+            <onSuccess notification="T_SCENARIO_2016_10_BANDIT_END_DESC" />
+            <rewards>
+                <set-flag key="bandits_stop" value="true" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+            <onFailed >
+                <set-flag key="bandits_stop" value="true" />
+            </onFailed>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_10_STARTER" avatar="bandit" visible="false" start="custom" finish="instant" >
+            <start_condition timeout="6" operator="and"/>
+            <objectives timeout="1" operator="and">
+                <destroy-building count="1" target="building_banditcamp"/>
+            </objectives>
+            <onSuccess notification="T_SCENARIO_2016_10_BANDIT_TIMER_10_DESC" />
+            <rewards >
+                <start-quest id="BANDIT_TIMER_10" />
+                <start-quest id="BANDIT_ATTACK_04" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_10" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="1935" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_ATTACK_04" />
+                <start-quest id="BANDIT_TIMER_10_REPEATER" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_TIMER_10_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom" >
+            <objectives timeout="33" operator="and"/>
+            <rewards >
+                <start-quest id="BANDIT_TIMER_10" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="bandits_stop" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_ATTACK_01" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="false" />
+            </objectives>
+            <rewards >
+                <bandit-attack source="outside" count="1" intention="steal" resource="coins" />
+            </rewards>
+            <fail_condition timeout="2" operator="and"/>
+        </quest>
+        
+        <quest id="BANDIT_ATTACK_02" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="false" />
+            </objectives>
+            <rewards >
+                <bandit-attack source="outside" count="2" intention="steal" resource="coins" />
+            </rewards>
+            <fail_condition timeout="2" operator="and"/>
+        </quest>
+        
+        <quest id="BANDIT_ATTACK_03" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="false" />
+            </objectives>
+            <rewards >
+                <bandit-attack source="outside" count="3" intention="steal" resource="coins" />
+            </rewards>
+            <fail_condition timeout="2" operator="and"/>
+        </quest>
+        
+        <quest id="BANDIT_ATTACK_04" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="false" />
+            </objectives>
+            <rewards >
+                <bandit-attack source="outside" count="4" intention="steal" resource="coins" />
+            </rewards>
+            <fail_condition timeout="2" operator="and"/>
+        </quest>
+        
+        <quest id="BANDIT_01" visible="false" finish="instant" avatar="bandit" start="custom" description="T_SCENARIO_2016_10_BANDIT_01_DESC" repeatable="custom">
+            <start_condition timeout="54" operator="and">
+                <stock amount="2500" resource="coins" />
+            </start_condition>
+            <objectives timeout="10" operator="and"/>
+            <onSuccess notification="T_SCENARIO_2016_10_BANDIT_01_DESC" />
+            <rewards >
+                <bandit-attack amount="125" source="outside" count="2" intention="steal" resource="coins" target="building_hq" />
+                <start-quest id="BANDIT_02" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_02" visible="false" finish="instant" avatar="bandit" start="custom" description="T_SCENARIO_2016_10_BANDIT_01_DESC" repeatable="custom">
+            <start_condition timeout="73" operator="and">
+                <stock amount="4321" resource="coins" />
+            </start_condition>
+            <objectives timeout="10" operator="and"/>
+            <onSuccess notification="T_SCENARIO_2016_10_BANDIT_01_DESC" />
+            <rewards >
+                <bandit-attack source="outside" count="3" intention="lay_fire" target="building_mine" />
+                <start-quest id="BANDIT_03" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_03" visible="false" finish="instant" avatar="bandit" start="custom" description="T_SCENARIO_2016_10_BANDIT_01_DESC" repeatable="custom">
+            <start_condition timeout="64" operator="and">
+                <stock amount="7654" resource="coins" />
+            </start_condition>
+            <objectives timeout="10" operator="and"/>
+            <onSuccess notification="T_SCENARIO_2016_10_BANDIT_01_DESC" />
+            <rewards >
+                <bandit-attack amount="225" source="outside" count="4" intention="steal" resource="coins" target="building_hq" />
+                <start-quest id="BANDIT_04" />
+                <start-quest id="BANDIT_05" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="BANDIT_04" visible="false" start="custom" finish="instant" >
+            <start_condition timeout="1"  operator="and" > 
+                <stock amount="12345" resource="coins" />
+            </start_condition>
+            <onStarted >
+                <start-quest id="BANDIT_04_2"/> 
+            </onStarted>
+        </quest>
+        
+        <quest id="BANDIT_04_2" avatar="bandit" visible="true" start="custom" title="T_SCENARIO_2016_10_BANDIT_04_NAME" description="T_SCENARIO_2016_10_BANDIT_04_DESC" repeatable="custom">
+            <start_condition timeout="215" operator="and_not">
+                <season season="winter" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_BANDIT_04_DESC" >
+                <set-merchant state="disabled" />
+            </onStarted>
+            <objectives timeout="3" operator="and">
+                <tribute amount="1000" resource="coins" />
+            </objectives>
+            <rewards >
+                <resource amount="15" resource="prestige"/>        
+                <set-merchant state="available" />
+                <start-quest id="BANDIT_045" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+            <onFailed >
+                <set-merchant state="available" />
+            </onFailed>
+        </quest>
+        
+        <quest id="BANDIT_045" avatar="bandit" visible="false" finish="instant" start="custom" >
+            <onStarted notification="T_SCENARIO_2016_10_BANDIT_04_END" />
+        </quest>
+
+        <quest id="BANDIT_05" visible="false" finish="instant" avatar="bandit" start="custom" description="T_SCENARIO_2016_10_BANDIT_01_DESC" repeatable="custom">
+            <start_condition timeout="340" operator="and">
+                <stock amount="18642" resource="coins" />
+            </start_condition>
+            <objectives timeout="10" operator="and"/>
+            <onSuccess notification="T_SCENARIO_2016_10_BANDIT_01_DESC" />
+            <rewards >
+                <bandit-attack source="outside" count="4" intention="blow_up" target="building_market" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+<!-- /Quests -->
+
+<!-- Need Quests -->
+        <quest id="NEED_FAIL" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and">
+                <flag-has-value key="need_failed" value="true" />
+				<flag-has-value key="scenario_over" value="false" />
+            </objectives>
+            <rewards >
+                <start-quest id="STRIKE" />
+                <set-flag key="need_failed" value="false" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="STRIKE" title="T_SCENARIO_2016_10_STRIKE_NAME" description="T_SCENARIO_2016_10_STRIKE_DESC" finish="instant" avatar="farmer" start="custom" visible="true" repeatable="custom" >
+            <onStarted notification="T_SCENARIO_2016_10_STRIKE_DESC" >
+                <set-flag key="strike_active" value="true" />
+                <set-modifier name="mod_taxes" tag="strike" value="0" />
+                <set-modifier name="mod_strike_chance" tag="strike" value="200" />
+                <set-modifier name="mod_happiness" tag="strike" value="0" />
+				<bandit-attack count="1" intention="steal" resource="coins" amount="500" source="any" target="building_hq" />
+          </onStarted>
+            <objectives timeout="180" operator="and"/>
+            <rewards >
+                <resource amount="50" resource="coins" />
+                <remove-modifier-by-tag tag="strike" />
+                <set-flag key="strike_active" value="false" />
+				<start-quest id="STRIKE_COOLDOWN" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+            <onFailed >
+                <remove-modifier-by-tag tag="strike" />
+                <set-flag key="strike_active" value="false" />
+            </onFailed>
+        </quest>        
+        
+        <quest id="STRIKE_COOLDOWN" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="180" operator="and"/>
+            <rewards >
+                <set-flag key="need_in_progress" value="false" />
+                <start-quest id="NEED_FAIL" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+
+        <quest id="NEED_FISH" isKeyQuest="true" avatar="farmer" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_FISH_DESC" title="T_SCENARIO_2016_10_NEED_FISH_NAME" >
+            <start_condition timeout="30" operator="and_not" >
+                <stock resource="fish" amount="1" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_FISH_DESC">
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <stock amount="8" resource="fish" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_FISH_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <resource amount="3" resource="fish" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="300" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_FISH_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_FISH_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="60" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_FISH" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_BREAD" isKeyQuest="true" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_BREAD_DESC" title="T_SCENARIO_2016_10_NEED_BREAD_NAME" >
+            <start_condition timeout="32" operator="and_not" >
+                <stock resource="bread" amount="1" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_BREAD_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <stock amount="8" resource="bread" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_BREAD_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <resource amount="3" resource="bread" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="300" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_BREAD_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_BREAD_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="60" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_BREAD" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_BREW" isKeyQuest="true" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_BREW_DESC" title="T_SCENARIO_2016_10_NEED_BREW_NAME" >
+            <start_condition timeout="34" operator="and_not" >
+                <stock resource="brew" amount="1" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_BREW_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <stock amount="8" resource="brew" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_BREW_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <resource amount="3" resource="brew" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="300" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_BREW_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_BREW_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_BREW" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_MEAT" isKeyQuest="true" avatar="farmer" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_MEAT_DESC" title="T_SCENARIO_2016_10_NEED_MEAT_NAME" >
+            <start_condition timeout="36" operator="and_not" >
+                <stock resource="meat" amount="1" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_MEAT_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <stock amount="8" resource="meat" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_MEAT_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <resource amount="3" resource="meat" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="300" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_MEAT_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_MEAT_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_MEAT" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_CLOTHS" isKeyQuest="true" avatar="girl" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_CLOTHS_DESC" title="T_SCENARIO_2016_10_NEED_CLOTHS_NAME" >
+            <start_condition timeout="38" operator="and_not" >
+                <stock resource="cloths" amount="1" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_CLOTHS_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <stock amount="8" resource="cloths" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_CLOTHS_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <resource amount="3" resource="cloths" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="300" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_CLOTHS_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_CLOTHS_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_CLOTHS" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_JUICE" isKeyQuest="true" avatar="merchant" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_JUICE_DESC" title="T_SCENARIO_2016_10_NEED_JUICE_NAME" >
+            <start_condition timeout="40" operator="and_not" >
+                <stock resource="juice" amount="1" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_JUICE_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <stock amount="8" resource="juice" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_JUICE_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <resource amount="3" resource="juice" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="300" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_JUICE_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_JUICE_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_JUICE" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_JEWELRY" isKeyQuest="true" avatar="merchant" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_JEWELRY_DESC" title="T_SCENARIO_2016_10_NEED_JEWELRY_NAME" >
+            <start_condition timeout="42" operator="and_not" >
+                <stock resource="jewelry" amount="1" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_JEWELRY_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <stock amount="8" resource="jewelry" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_JEWELRY_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <resource amount="3" resource="jewelry" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="300" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_JEWELRY_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_JEWELRY_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_JEWELRY" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_CHURCH" isKeyQuest="true" start="custom" repeatable="custom" description="T_GAME_QUEST_SCEN_WW_HAPPYNESS_20_DESC" title="T_GAME_QUEST_SCEN3_14_NAME" >
+            <start_condition timeout="44" operator="and_not" >
+                <happyness type="religion" value="80" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_GAME_QUEST_SCEN_WW_HAPPYNESS_20_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="10" operator="and">
+                <happyness type="religion" value="80" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_CHURCH_REPEATER" />
+                <resource amount="100" resource="coins" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="360" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_CHURCH_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_CHURCH_REPEATER" visible="false" finish="instant" repeatable="custom">
+            <objectives timeout="2" operator="and">
+                <happyness type="religion" value="80" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_CHURCH" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_TAVERN" isKeyQuest="true" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_TAVERN_DESC" title="T_GAME_QUEST_GENERIC_COMMUNITY_NAME" >
+            <start_condition timeout="46" operator="and_not" >
+                <happyness type="tavern" value="80" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_TAVERN_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="10" operator="and">
+                <happyness type="tavern" value="80" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_TAVERN_REPEATER" />
+                <resource amount="100" resource="coins" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="360" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_TAVERN_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_TAVERN_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and">
+                <happyness type="tavern" value="80" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_TAVERN" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_JOUSTING" isKeyQuest="true" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_JOUSTING_DESC" title="T_GAME_QUEST_SCEN10_7_NAME" >
+            <start_condition timeout="48" operator="and_not" >
+                <happyness type="entertainment" value="80" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_JOUSTING_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="10" operator="and">
+                <happyness type="entertainment" value="80" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_JOUSTING_REPEATER" />
+                <resource amount="100" resource="coins" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="360" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_JOUSTING_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_JOUSTING_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and">
+                <happyness type="entertainment" value="80" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_JOUSTING" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_FIREWATCH" isKeyQuest="true" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_FIREWATCH_DESC" title="T_GAME_QUEST_SCEN_WW_DISASTER_20_NAME" >
+            <start_condition timeout="50" operator="and_not" >
+                <coverage coverage="80" type="firefighters" />
+                <flag-has-value key="need_in_progress" value="true" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_FIREWATCH_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <coverage coverage="80" type="firefighters" />
+            </objectives>
+            <rewards >
+                <start-quest id="NEED_FIREWATCH_REPEATER" />
+                <resource amount="50" resource="coins" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="360" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+                <start-quest id="NEED_FIREWATCH_REPEATER" />
+            </onFailed>
+        </quest>
+        
+        <quest id="NEED_FIREWATCH_REPEATER" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="NEED_FIREWATCH" />
+            </rewards>
+            <fail_condition timeout="1" operator="and">            
+                <flag-has-value key="scenario_over" value="true" />
+            </fail_condition>
+        </quest>
+        
+        <quest id="NEED_MEDICUS" isKeyQuest="true" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_MEDICUS_DESC" title="T_SCENARIO_2016_10_NEED_MEDICUS_NAME" >
+            <start_condition timeout="20" operator="and" >
+                <population count="40"/>
+                <flag-has-value key="need_in_progress" value="false" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_MEDICUS_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <building count="2" type="building_medicus"/>
+            </objectives>
+            <rewards >
+                <resource amount="100" resource="coins" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="420" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+            </onFailed>
+        </quest>
+
+        <quest id="NEED_CARPENTER" isKeyQuest="true" start="custom" repeatable="custom" description="T_SCENARIO_2016_10_NEED_CARPENTER_DESC" title="T_SCENARIO_2016_10_NEED_CARPENTER_NAME" >
+            <start_condition timeout="25" operator="and" >
+                <population count="50"/>
+                <flag-has-value key="need_in_progress" value="false" />
+                <flag-has-value key="scenario_over" value="true" />
+            </start_condition>
+            <onStarted notification="T_SCENARIO_2016_10_NEED_CARPENTER_DESC" >
+                <set-flag key="need_in_progress" value="true" />
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <building count="2" type="building_carpenter"/>
+            </objectives>
+            <rewards >
+                <resource amount="100" resource="coins" />
+                <set-flag key="need_in_progress" value="false" />
+            </rewards>
+            <fail_condition timeout="420" operator="and"/>
+            <onFailed >
+                <set-flag key="need_failed" value="true" />
+            </onFailed>
+        </quest>
+<!-- /Needs -->     
+
+<!-- Scenario End quest-->   
+        <quest id="scenario-finished" start="custom" visible="false" >
+            <start_condition timeout="4" operator="and"/>
+            <objectives timeout="1" operator="and"/>
+            <rewards>
+                <scenario-finished/>
+                <start-quest id="sandbox_start"/>
+                <remove-modifier-by-tag tag="taxes" />          
+            </rewards>
+        </quest>         
+                                                   
+        <quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START" visible="false" >
+            <onStarted notification="T_GAME_SANDBOX_START"/>
+            <start_condition timeout="8" operator="and"/>
+            <objectives timeout="1" operator="and"/>
+            <rewards>
+                <enable-bandits enable="any" />
+                <start-quest id="SANDBOX_QUEST_META"/>
+                <start-quest id="SANDBOX_QUEST_META_DISASTER"/>	
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+            </rewards>
+        </quest>      
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="98" topLeftY="71" bottomRightX="147" bottomRightY="116" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+
+    </group>
+</questdb>
+

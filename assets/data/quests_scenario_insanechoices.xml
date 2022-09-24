@@ -1,0 +1,1378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+
+<!-- Insane choices scenario -->
+
+
+<!--LIST OF OBJECTIVES -->
+<!--QUEST_TORCH : Objective_torches
+QUEST_FISH: Objective_fish
+QUEST_TOWNIE_1A: Objective_firetower_in_time for success and Objective_firetower_not_in_time for failed
+QUEST_TOWNIE_1B: Objective_archery_in_time for success and Objective_archery_not_in_time for failed
+QUEST_HELP: Objective_bakery
+QUEST_ROAD: Objective_roads
+QUEST_TRIBUTETOWNIE: Objective_church
+QUEST_TRIBUTELIEGE: Objective_tavern-->
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group avatar="client">
+		<quest id="INTRO" isKeyQuest="false" start="instant" visible="false" avatar="client">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted>
+				<disallow key="building_watchtower"/>
+				<set-modifier name="mod_taxes" value="0" tag="startingmodifier"/>
+				<set-modifier name="mod_happiness" value="90" tag="happiness_adjustment"/>
+				<set-trade-costs resource="fish" sell="150"/>
+			</onStarted>
+			<!-- intro part of quest. Advisor says hello -->
+			<objectives timeout="1" operator="and"/>
+			<onSuccess >
+				<start-quest id="MAINQUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_STARTER" visible="false" finish="instant" start="custom" avatar="client">
+			<objectives timeout="3" operator="and" />
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_CHOOSE_TEST">
+				<start-quest id="INSANECHOICES_QUEST_STARTER1"/>
+				<start-quest id="HELPER_TICKET"/>
+			</onSuccess>
+			<rewards >
+				<start-quest id="INSANECHOICES_QUEST_START_01" />
+				<start-quest id="INSANECHOICES_QUEST_START_02" />
+			</rewards>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_STARTER1" visible="false" finish="instant" start="custom" avatar="client">
+			<objectives timeout="2" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_CHOOSE_TEST1"/>
+		</quest>
+
+		<quest id="HELPER_TICKET" visible="false" finish="instant" start="custom" avatar="client">
+			<ticket title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELPER_TICKET" type="neutral"/>
+			<objectives timeout="2" operator="and">
+				<flag-has-value key="player_has_choosen" value="true" />
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELPER_TICKET_DIALOGUE"/>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_01" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TORCH_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_CHOOSE_TEST" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="insanechoices_scenario_over" value="false" />
+				<tribute amount="100" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource resource="tools" amount="5"/>
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="QUEST_TORCH"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="insanechoices_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_02" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_CHOOSE_TEST" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="insanechoices_scenario_over" value="false" />
+				<tribute amount="100" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource resource="prestige" amount="5"/>
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="QUEST_FISH"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="insanechoices_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_TORCH" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TORCH_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TORCH_STARTED" visible="true" avatar="townie">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TORCH_STARTED"/>
+			<start_condition timeout="4" operator="and"/>
+			<objectives timeout="3">
+				<building type="deco_1x1_torch" count="5"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="300"/>
+				<set-modifier name="mod_happiness" value="120" tag="happiness_adjustment"/>
+				<start-quest id="QUEST_FISH_OUT"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TORCH_SUCCESS">
+				<set-flag key="Objective_torches" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="insanechoices_scenario_over" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_FISH_OUT" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_OUT_SUCCESS">
+				<center-to-building target="test1_fish"/>
+			</onStarted>
+			<onSuccess>
+				<start-quest id="QUEST_FISH_OUT_PART2"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_FISH_OUT_PART2" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_OUT_SUCCESS_PART2"/>
+			<onSuccess>
+				<start-quest id="QUEST_FISH_OUT2"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_FISH_OUT2" isKeyQuest="true" start="custom" visible="false" avatar="nobleman" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_OUT2_SUCCESS"/>
+			<objectives timeout="2"/>
+			<onSuccess>
+				<destruct-building type="building_fishing_lodge_x2" count="1"/>
+				<start-quest id="QUEST_TOWNIE_1A"/>
+				<start-quest id="QUEST_LADY"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_FISH" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_STARTED" visible="true" avatar="nobleman">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<produce resource="fish" amount="10"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="600"/>
+				<start-quest id="QUEST_BANDITS"/>
+				<start-quest id="QUEST_SECRETMESSAGE"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FISH_SUCCESS">
+				<set-flag key="Objective_fish" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="insanechoices_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_BANDITS" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_BANDITS_SUCCESS">
+				<bandit-attack resource="coins" amount="300"/>
+				<start-fire target="plague" state="smouldering"/>
+				<center-to-building target="plague"/>
+				<start-quest id="QUEST_LADY"/>
+				<set-modifier name="mod_strike_chance" tag="strike_chance" value="1"/>
+				<!--happiness is going down-->
+				<set-modifier name="mod_happiness" tag="happiness_adjustment" value="75"/>
+				<set-flag key="first_choice_Liege" value="true"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_FIRETOWER" isKeyQuest="true" start="custom" visible="true" avatar="client" title="T_GAME_HINT_FIRE_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1A_STARTED">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1A_STARTED"/>
+			<start_condition timeout="7" operator="and"/>
+			<objectives timeout="5">
+				<building type="building_firewatch" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1A_SUCCESS">
+				<resource resource="coins" amount="300"/>
+				<resource resource="tools" amount="3"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="coins" amount="200"/>
+				<start-quest id="QUEST_TOWNIE_1B"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_LADY" isKeyQuest="true" start="custom" visible="false" avatar="oldwoman" finish="instant">
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="5"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_LADY"/>
+		</quest>
+
+		<quest id="QUEST_TOWNIE_1A" isKeyQuest="true" start="custom" visible="true" avatar="client" title="T_GAME_HINT_FIRE_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1A_STARTED">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1A_STARTED"/>
+			<start_condition timeout="10" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<building type="building_firewatch" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1A_SUCCESS">
+				<set-flag key="Objective_firetower_in_time" value="true"/>
+				<set-modifier name="mod_happiness" value="130" tag="happiness_adjustment"/>
+			</onSuccess>
+			<fail_condition timeout="300" operator="and"/>
+			<onFailed notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1A_FAILED">
+				<start-quest id="QUEST_TOWNIE_2"/>
+				<start-fire target="test" state="burning"/>
+				<set-flag key="Objective_firetower_not_in_time" value="true"/>
+			</onFailed>
+			<rewards>
+				<resource resource="coins" amount="200"/>
+				<start-quest id="QUEST_TOWNIE_2"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_TOWNIE_1B" isKeyQuest="true" title="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04B_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1B_STARTED" start="custom" visible="true" avatar="client" finish="user">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1B_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="4" operator="and">
+				<building type="building_archery_contest" count="1"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1B_SUCCESS">
+				<set-flag key="Objective_archery_in_time" value="true"/>
+				<set-modifier name="mod_happiness" value="120" tag="happiness_adjustment"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_TOWNIE_2"/>
+				<resource resource="coins" amount="400"/>
+			</rewards>
+			<fail_condition timeout="300" operator="and"/>
+			<onFailed notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_1B_FAILED">
+				<start-quest id="QUEST_TOWNIE_2"/>
+				<bandit-attack resource="coins"/>
+				<set-flag key="Objective_archery_not_in_time" value="true"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_SECRETMESSAGE" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="30" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_SECRETMESSAGE1_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_FIRETOWER"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_TOWNIE_2" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN7_GIRL_1_1_NAME" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_2_STARTED" visible="true" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_2_STARTED"/>
+			<start_condition timeout="10" operator="and"/>
+			<objectives timeout="3">
+				<building type="building_farm" count="1"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+				<start-quest id="QUEST_TOWNIE_3_CHOICE"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_2_SUCCESS"/>
+		</quest>
+
+		<quest id="QUEST_TOWNIE_3_CHOICE" visible="false" finish="instant" start="custom" avatar="client">
+			<objectives timeout="3" operator="and" >
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_3_CHOICE_STARTED"/>
+			<rewards >
+				<start-quest id="INSANECHOICE_QUESTHELPER"/>
+			</rewards>
+		</quest>
+
+		<quest id="INSANECHOICE_QUESTHELPER" isKeyQuest="true" start="custom" visible="false" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELP1"/>
+			<start_condition timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="INSANECHOICE_QUESTHELPER_PART2"/>
+				<start-quest id="QUEST_MEMORY1"/>
+			</rewards>
+		</quest>
+
+		<quest id="INSANECHOICE_QUESTHELPER_PART2" isKeyQuest="true" start="custom" visible="false" avatar="client">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELP1_PART2"/>
+			<start_condition timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="HELPER_TICKET2"/>
+				<start-quest id="INSANECHOICES_QUEST_START_03" />
+				<start-quest id="INSANECHOICES_QUEST_START_04" />
+			</rewards>
+		</quest>
+
+		<quest id="HELPER_TICKET2" visible="false" finish="instant" start="custom" avatar="client">
+			<ticket title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELPER_TICKET" type="neutral"/>
+			<objectives timeout="2" operator="and">
+				<flag-has-value key="player_has_choosen1" value="true" />
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELPER_TICKET_DIALOGUE"/>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_03" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELP_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELP_TITLE" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen1" value="false" />
+				<flag-has-value key="insanechoices_scenario_over1" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource resource="fish" amount="20"/>
+				<set-flag key="player_has_choosen1" value="true" />
+				<start-quest id="QUEST_HELP"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen1" value="true" />
+				<flag-has-value key="insanechoices_scenario_over1" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_04" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ROAD_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ROAD_TITLE" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen1" value="false" />
+				<flag-has-value key="insanechoices_scenario_over1" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource resource="juice" amount="10"/>
+				<set-flag key="player_has_choosen1" value="true" />
+				<start-quest id="QUEST_ROAD"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen1" value="true" />
+				<flag-has-value key="insanechoices_scenario_over1" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_HELP" isKeyQuest="true" start="custom" title="T_GAME_QUEST_SCEN7_GIRL_1_NAME" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELP_STARTED" visible="true" avatar="townie">
+		<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELP_STARTED"/>
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="3">
+				<building type="building_bakery" count="1"/>
+			</objectives>
+			<rewards>
+				<set-modifier name="mod_happiness" value="130" tag="happiness_adjustment"/>
+				<resource resource="coins" amount="300"/>
+				<resource resource="cloths" amount="5"/>
+				<resource resource="meat" amount="5"/>
+				<start-quest id="QUEST_BOTTLE1"/>
+				<start-quest id="QUEST_TRIBUTE1A"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELP_SUCCESS">
+				<set-flag key="Objective_bakery" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="insanechoices_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_BOTTLE1" isKeyQuest="true" start="custom" visible="false" avatar="client">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_BOTTLE1">
+				<start-quest id="QUEST_MEAT"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_MEAT" isKeyQuest="false" start="custom" visible="true" finish="user" title="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_05_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_MEAT_STARTED" avatar="medicus">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_MEAT_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<tribute resource="meat" amount="10"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_MEAT_SUCCESS"/>
+			<rewards>
+				<set-flag key="meat_is_given" value="true"/>
+				<resource resource="coins" amount="200"/>
+				<resource resource="fish" amount="20"/>
+				<start-quest id="QUEST_MEAT_HELPER_QUEST"/>
+			</rewards>
+		</quest>
+		
+		<quest id="QUEST_MEAT_HELPER_QUEST" isKeyQuest="false" start="custom" visible="false" avatar="medicus" finish="instant">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_MEAT_SUCCESS_002"/>
+			<start_condition timeout="3" operator="and">
+				<flag-has-value key="meat_is_given" value="true"/>
+			</start_condition>
+			<objectives timeout="3"/>
+			<onSuccess/>
+			<rewards>
+				<start-quest id="QUEST_TOWNIE_4"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_MEMORY1" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="15" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_MEMORY1_SUCCESS"/>
+		</quest>
+
+		<quest id="QUEST_TRIBUTE1A" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="10" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTE1A_SUCCESS">
+				<start-quest id="QUEST_TRIBUTE1"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="STORY" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_STORY_STARTED">
+				<start-quest id="STORY1"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="STORY1" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_STORY_STARTED1">
+				<start-quest id="INSANECHOICES_QUEST_STARTER"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_TRIBUTE1" isKeyQuest="true" start="custom" visible="false" avatar="nobleman" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTE1_STARTED"/>
+			<rewards>
+				<center-to-building target="point"/>
+				<start-fire target="house1" state="burning"/>
+				<start-fire target="house2" state="burning"/>
+				<bandit-attack intention="steal"/>
+				<start-quest id="QUEST_TOWNIE_FIRE"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_TOWNIE_FIRE" isKeyQuest="true" start="custom" visible="false" finish="instant" avatar="townie">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_FIRE_SUCCESS"/>
+		</quest>
+
+		<quest id="QUEST_CHOICECHECKLIEGE" isKeyQuest="true" start="custom" visible="false" finish="instant">
+			<!--This quest is to set down the hapiness in case that we have already choose the Duke over the townies before-->
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<flag-has-value key="first_choice_Liege" value="true"/>
+			</objectives>
+			<onSuccess>
+				<set-modifier name="mod_happiness" value="60" tag="happiness_adjustment"/>
+				<set-flag key="second_choice_Liege" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="2">
+				<flag-has-value key="first_choice_Liege" value="false"/>
+			</fail_condition>
+			<onFailed>
+				<set-flag key="second_choice_Liege" value="true"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_ROAD" isKeyQuest="true" start="custom" title="T_GAME_TUTORIAL_QUEST_NAME_10" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ROAD_STARTED" visible="true" avatar="nobleman">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ROAD_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<street type="dirt" count="2"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+				<start-quest id="QUEST_MERCHANT"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ROAD_SUCCESS">
+				<set-flag key="Objective_roads" value="true"/>
+				<start-quest id="QUEST_CHOICECHECKLIEGE"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="insanechoices_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_MERCHANT" isKeyQuest="true" start="custom" visible="false" avatar="merchant" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_MERCHANT_SUCCESS">
+				<start-quest id="QUEST_SICK1A"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_SICK1A" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_SICK1A_SUCCESS">
+				<start-plague amount="3"/>
+				<start-quest id="QUEST_SICK1"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_SICK1" isKeyQuest="true" start="custom" visible="true" title="T_GAME_QUEST_SCEN_CC_C_10_TITEL" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_SICK1_STARTED" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_SICK1_STARTED"/>
+			<rewards>
+				<start-quest id="QUEST_SICK1_PART2"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_SICK1_PART2" isKeyQuest="true" start="custom" visible="true" title="T_GAME_QUEST_SCEN_CC_C_10_TITEL" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_SICK1_STARTED" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_SICK1_SUCCESS_PART2"/>
+			<objectives timeout="2">
+				<purge-plague/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_SICK1_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_TOWNIE_4"/>
+				<resource resource="coins" amount="200"/>
+				<resource resource="bread" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_TOWNIE_4" isKeyQuest="true" start="custom" visible="true" avatar="client" title="T_QUESTS_WATCHTOWERS" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_4_STARTED">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_4_STARTED">
+				<allow key="building_watchtower"/>
+				<start-quest id="BANDIT_CAMP"/>
+			</onStarted>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3" operator="and">
+				<building type="building_watchtower" count="1"/>
+			</objectives>
+			<rewards>
+				<start-quest id="QUEST_TOWN5"/>
+				<resource resource="coins" amount="300"/>
+				<resource resource="weapons" amount="10"/>
+				<resource resource="sausage" amount="10"/>
+			</rewards>
+		</quest>
+
+
+		<quest id="QUEST_TOWN5" isKeyQuest="true" start="custom" finish="user" visible="true" avatar="client" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_5_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_5_STARTED">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_5_STARTED">
+				<start-quest id="QUEST_BANDITS_TIMER_HELPER_QUESTE"/>
+			</onStarted>
+			<objectives timeout="3" operator="and">
+				<tribute resource="coins" amount="100"/>
+				<tribute resource="bread" amount="20"/>
+				<flag-has-value key="timer_is_over" value="false"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_5_SUCCESS">
+				<set-flag key="bandits_tribute_okay" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1">
+				<flag-has-value key="timer_is_over" value="true"/>
+			</fail_condition>
+			<onFailed>
+				<start-quest id="QUEST_BANDITS_FAILED_BRIBE"/>
+			</onFailed>
+			<rewards>
+				<set-flag value="true" key="tribute_payed"/>
+				<resource resource="prestige" amount="10"/>
+				<start-quest id="QUEST_BANDITS_THANKS_001"/>
+			</rewards>
+		</quest>
+		
+		<!--Helper quest for the timer, so the quest is not auto completed if the player have the ressource and dont give them-->
+		<quest id="QUEST_BANDITS_TIMER_HELPER_QUESTE" isKeyQuest="true" start="custom" visible="true" finish="instant" title="T_SCENARIO_2017_ELECTION_MAINQUEST_TIMER_TITLE">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3" operator="and">
+				<flag-has-value key="tribute_payed" value="true"/>
+			</objectives>
+			<onSuccess/>
+			<fail_condition timeout="250"/>
+			<onFailed>
+				<set-flag value="true" key="timer_is_over"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_BANDITS_FAILED_BRIBE" isKeyQuest="true" start="custom" visible="false" avatar="bandit" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_BANDITS_BRIBE_FAILED">
+				<bandit-attack intention="steal"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_TOWNIE_6_CHOICE"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_BANDITS_THANKS_001" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and">
+				<flag-has-value key="bandits_tribute_okay" value="true"/>
+			</start_condition>
+			<onSuccess/>
+			<rewards>
+				<start-quest id="QUEST_BANDITS_THANKS"/>
+			</rewards>
+		</quest>
+		
+				<quest id="QUEST_BANDITS_THANKS" isKeyQuest="true" start="custom" visible="false" avatar="bandit" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_BANDITS_THANKS_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_TOWNIE_6_CHOICE"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_TOWNIE_6_CHOICE" visible="false" finish="instant" start="custom" avatar="client">
+			<objectives timeout="3" operator="and" >
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TOWNIE_6_CHOICE_STARTED"/>
+			<rewards >
+				<start-quest id="HELPER_TICKET3"/>
+				<start-quest id="INSANECHOICES_QUEST_START_05" />
+				<start-quest id="INSANECHOICES_QUEST_START_06" />
+			</rewards>
+		</quest>
+
+		<quest id="HELPER_TICKET3" visible="false" finish="instant" start="custom" avatar="client">
+			<ticket title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELPER_TICKET" type="neutral"/>
+			<objectives timeout="2" operator="and">
+				<flag-has-value key="player_has_choosen2" value="true" />
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_HELPER_TICKET_DIALOGUE"/>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_05" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTELIEGE_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTELIEGE_TITLE" >
+			<!--start the quest for the Duke-->
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen2" value="false" />
+				<flag-has-value key="insanechoices_scenario_over2" value="false" />
+				<tribute amount="50" resource="coins"/>
+			</objectives>
+			<rewards >
+				<set-flag key="player_has_choosen2" value="true"/>
+				<start-quest id="QUEST_TRIBUTELIEGE"/>
+				<resource resource="prestige" amount="10"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="player_has_choosen2" value="true"/>
+				<flag-has-value key="insanechoices_scenario_over2" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_06" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTETOWNIE_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTETOWNIE_TITLE" >
+			<!--start the quest for the townies-->
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen2" value="false" />
+				<flag-has-value key="insanechoices_scenario_over2" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<set-flag key="player_has_choosen2" value="true" />
+				<start-quest id="QUEST_TRIBUTETOWNIE"/>
+				<resource resource="fish" amount="20"/>
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen2" value="true" />
+				<flag-has-value key="insanechoices_scenario_over2" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_TRIBUTELIEGE" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTELIEGE_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTELIEGE_STARTED" visible="true" avatar="nobleman">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTELIEGE_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<building type="building_tavern" count="1"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="250"/>
+				<start-quest id="QUEST_TRIBUTEA"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTELIEGE_SUCCESS">
+				<set-flag key="Objective_tavern" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen2" value="true" />
+				<flag-has-value key="insanechoices_scenario_over2" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_TRIBUTETOWNIE" isKeyQuest="true" start="custom" title="T_GAME_TUTORIAL_QUEST_NAME_CHURCH" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTETOWNIE_STARTED" visible="true" avatar="townie">
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTETOWNIE_STARTED"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<building type="building_church" count="1"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="100"/>
+				<start-quest id="QUEST_TRIBUTEB"/>
+				<set-modifier name="mod_happiness" value="140" tag="happiness_adjustment"/>
+			</rewards>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTETOWNIE_SUCCESS">
+				<set-flag key="Objective_church" value="true"/>
+			</onSuccess>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen2" value="true" />
+				<flag-has-value key="insanechoices_scenario_over2" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="QUEST_TRIBUTEA" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTEA_SUCCESS"/>
+			<rewards>
+				<!--consequence to your help to the Duke-->
+				<start-fire amount="2" state="burning"/>
+				<!--after the consequence we check for the bandit camp-->
+				<start-quest id="CHECK_BANDIT"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_TRIBUTEB" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<!--consequence of your help to the townies-->
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_TRIBUTEB_SUCCESS"/>
+			<rewards>
+				<destruct-building count="1" type="building_lumberjack"/>
+				<!--after the consequence we check for the bandit camp-->
+				<start-quest id="CHECK_BANDIT"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_END1" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<rewards>
+				<set-flag key="END1_Townies1" value="true"/>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="all_townies_1"/>
+			</onSuccess>
+			<!--fail condition is coming a few time after the check time of objectives and it will delete it-->
+			<fail_condition timeout="2" operator="and"/>
+			<onFailed>
+				<start-quest id="QUEST_END1B"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END1B" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="all_townies_1B"/>
+			</onSuccess>
+			<rewards>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-flag key="END1b_Townies1" value="true"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END2A"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END2A" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<!--ending with duke choice all along-->
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_not_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_ALL_DUKE">
+				<set-flag key="quest_done" value="true"/>
+				<set-modifier name="mod_happiness" value="50" tag="happiness_adjustment"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END11"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END11" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<!--ending with duke choice all along-->
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_ALL_DUKE">
+				<set-flag key="quest_done" value="true"/>
+				<set-modifier name="mod_happiness" value="50" tag="happiness_adjustment"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END13"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END13" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<!--ending with duke choice all along-->
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_not_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_ALL_DUKE">
+				<set-flag key="quest_done" value="true"/>
+				<set-modifier name="mod_happiness" value="50" tag="happiness_adjustment"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END2B"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END2B" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<!--ending with duke choice all along-->
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_not_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_ALL_DUKE">
+				<set-flag key="quest_done" value="true"/>
+				<set-modifier name="mod_happiness" value="50" tag="happiness_adjustment"/>
+			</onSuccess>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END6A"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END6A" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="townies_balance_6A"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END4"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END4" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="townies_balance_6A"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END17"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END17" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_not_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="townies_balance_6A"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END6B"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END6B" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="perfect_balance_6B"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END6C"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END6C" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_not_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="perfect_balance_6C"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END3"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END3" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="perfect_balance_6C"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END5"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END5" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_torches" value="true"/>
+				<flag-has-value key="Objective_firetower_not_in_time" value="true"/>
+				<flag-has-value key="Objective_roads" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="perfect_balance_6C"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END12"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END12" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="perfect_balance_6C"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END14"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END14" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_not_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_church" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="perfect_balance_6C"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_END6D"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_END6D" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="Objective_fish" value="true"/>
+				<flag-has-value key="Objective_archery_not_in_time" value="true"/>
+				<flag-has-value key="Objective_bakery" value="true"/>
+				<flag-has-value key="Objective_tavern" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--simplification of all flags necessary for that ending-->
+				<set-flag value="true" key="duke_balance_6D"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="QUEST_WAKEUP"/>
+				<set-modifier name="mod_happiness" value="150" tag="happiness_adjustment"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+		</quest>
+
+		<quest id="QUEST_SAVEYON" visible="false" finish="instant" start="custom" avatar="client">
+			<!--			here we start the yes or no choice on the bandit camp-->
+			<objectives timeout="2" operator="and" >
+				<!--this quest will start if he not chosen it already-->
+				<flag-has-value key="already_chosen" value="false"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVEYON_SUCCESS"/>
+			<rewards >
+					<start-quest id="INSANECHOICES_QUEST_START_07" />
+					<start-quest id="INSANECHOICES_QUEST_START_08" />
+					<set-flag key="already_chosen" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_07" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVEYES_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVEYES_TITLE" >
+			<!--				we have choose yes -->
+			<!--you choose to destroy the bandit camp-->
+			<objectives timeout="1" operator="and" >
+					<flag-has-value key="player_has_choosen3" value="false" />
+					<flag-has-value key="insanechoices_scenario_over3" value="false" />
+					<tribute amount="50" resource="coins" />
+				</objectives>
+				<rewards >
+					<resource amount="50" resource="coins" />
+					<set-flag key="player_has_choosen3" value="true" />
+					<start-quest id="QUEST_DESTROYBANDIT"/>
+				</rewards>
+				<fail_condition timeout="1" operator="or" >
+					<flag-has-value key="player_has_choosen3" value="true" />
+					<flag-has-value key="insanechoices_scenario_over3" value="true" />
+				</fail_condition>
+		</quest>
+
+		<quest id="INSANECHOICES_QUEST_START_08" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVENO_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVENO_TITLE" >
+				<objectives timeout="1" operator="and" >
+					<flag-has-value key="player_has_choosen3" value="false" />
+					<flag-has-value key="insanechoices_scenario_over3" value="false" />
+					<tribute amount="50" resource="coins" />
+				</objectives>
+				<rewards >
+					<resource amount="50" resource="coins" />
+					<set-flag key="player_has_choosen3" value="true" />
+					<start-quest id="QUEST_NO"/>
+				</rewards>
+				<fail_condition timeout="1" operator="or" >
+					<flag-has-value key="player_has_choosen3" value="true" />
+					<flag-has-value key="insanechoices_scenario_over3" value="true" />
+				</fail_condition>
+		</quest>
+
+		<quest id="CHECK_BANDIT" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="2">
+				<flag-has-value key="bandit_raid_it_before" value="true"/>
+			</objectives>
+			<onSuccess>
+				<!--just atk the camp and the player has no choice anymore-->
+				<start-quest id="QUEST_END1"/>
+			</onSuccess>
+			<fail_condition timeout="3">
+				<flag-has-value key="bandit_raid_it_before" value="false"/>
+			</fail_condition>
+			<onFailed>
+				<start-quest id="QUEST_SAVEYON"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_WAKEUP" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_WAKEUP_STARTED"/>
+			<objectives timeout="2" operator="and"/>
+			<rewards>
+				<!--here start the story of the Duke and his twin revelation-->
+				<start-quest id="QUEST_FRAGMENT1"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_DESTROYBANDIT" isKeyQuest="true" start="custom" visible="true" avatar="client" finish="instant" title="T_GAME_QUEST_MIL_TUT_21_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVEYON_SUCCESS">
+			<start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVEYES_TITLE"/>
+			<objectives timeout="3">
+				<destroy-building target="bandits"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_BANDITCAMP_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_END1"/>
+				<resource resource="prestige" amount="20"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_NO" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDSAVEN_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_ENDING_NO_RESCUE"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_ENDING_NO_RESCUE" isKeyQuest="true" start="custom" visible="false" avatar="nobleman" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_NO_RESCUE"/>
+			<rewards>
+				<set-flag key="quest_done" value="true"/>
+				<resource resource="coins" amount="500"/>
+				<set-modifier name="mod_happiness" value="50" tag="happiness_adjustment"/>
+			</rewards>
+		</quest>
+
+		<!--All the fragment of the story-->
+
+		<quest id="QUEST_FRAGMENT1" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FRAGMENT1_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_FRAGMENT2"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_FRAGMENT2" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FRAGMENT2_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_FRAGMENT3"/>
+			</rewards>
+				</quest>
+
+		<quest id="QUEST_FRAGMENT3" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FRAGMENT3_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_FRAGMENT4"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_FRAGMENT4" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FRAGMENT4_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_FRAGMENT5"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_FRAGMENT5" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FRAGMENT5_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_FRAGMENT6"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_FRAGMENT6" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FRAGMENT6_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_FRAGMENT7"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_FRAGMENT7" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_FRAGMENT7_SUCCESS"/>
+			<rewards>
+				<start-quest id="QUEST_ENDING_PERFECT_BALANCE_1"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_ENDING_PERFECT_BALANCE_1" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="perfect_balance_6B" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_PERFECT_BALANCE"/>
+			<rewards>
+				<set-flag key="quest_done" value="true"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_ENDING_PERFECT_BALANCE_2"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_ENDING_PERFECT_BALANCE_2" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="perfect_balance_6C" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_PERFECT_BALANCE"/>
+			<rewards>
+				<set-flag key="quest_done" value="true"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_ENDING_BALANCE_DUKE"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_ENDING_BALANCE_DUKE" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="duke_balance_6D" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_BALANCE_DUKE"/>
+			<rewards>
+				<set-flag key="quest_done" value="true"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_ENDING_BALANCE_TOWNIES"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_ENDING_BALANCE_TOWNIES" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1">
+				<flag-has-value key="townies_balance_6A" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_BALANCE_TOWNIES"/>
+			<rewards>
+				<set-flag key="quest_done" value="true"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_ENDING_ALL_TOWNIES"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_ENDING_ALL_TOWNIES" isKeyQuest="true" start="custom" visible="false" avatar="nobleman" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="or">
+				<flag-has-value key="all_townies_1" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_ALL_TOWNIES"/>
+			<rewards>
+				<set-flag key="quest_done" value="true"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<start-quest id="QUEST_ENDING_ALL_TOWNIES_2"/>
+			</onFailed>
+		</quest>
+
+		<quest id="QUEST_ENDING_ALL_TOWNIES_2" isKeyQuest="true" start="custom" visible="false" avatar="nobleman" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="or">
+				<flag-has-value key="all_townies_1B" value="true"/>
+			</objectives>
+			<onSuccess notification="T_QUESTS_SCENARIO_INSANECHOICES_QUEST_ENDING_ALL_TOWNIES"/>
+			<rewards>
+				<set-flag key="quest_done" value="true"/>
+			</rewards>
+			<fail_condition operator="and" timeout="2"/>
+			<onFailed>
+				<set-flag key="quest_done" value="true"/>
+			</onFailed>
+		</quest>
+
+		<quest id="BANDIT_CAMP" isKeyQuest="true" start="custom" visible="false" avatar="client" finish="instant">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3">
+				<destroy-building target="bandits"/>
+			</objectives>
+			<rewards>
+				<set-flag value="true" key="bandit_raid_it_before"/>
+				<resource resource="prestige" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="MAINQUEST" isKeyQuest="true" start="custom" title="T_QUESTS_SCENARIO_INSANECHOICES_MAINQUEST_TITLE" description="T_QUESTS_SCENARIO_INSANECHOICES_MAINQUEST_STARTED" visible="true" avatar="client">
+			<start_condition timeout="1" operator="and"/>
+			<onStarted notification="T_QUESTS_SCENARIO_INSANECHOICES_MAINQUEST_STARTED" >
+				<start-quest id="STORY"/>
+			</onStarted>
+			<objectives timeout="1">
+				<flag-has-value key="quest_done" value="true"/>
+			</objectives>
+			<rewards>
+				<start-quest id="SCENARIO_FINISHED"/>
+				<resource resource="prestige" amount="200"/>
+				<remove-modifier-by-tag tag="startingmodifier"/>
+				<remove-modifier-by-tag tag="happiness_adjustment"/>
+			</rewards>
+		</quest>
+
+		<quest visible="false" id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" description="T_GAME_QUEST_SCEN_FINISHED_DESC" start="custom">
+			<start_condition timeout="5" operator="and"/>
+			<onStarted >
+				<scenario-finished/>
+			</onStarted>
+			<objectives timeout="5" operator="and"/>
+			<onSuccess notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+			<rewards >
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-season season="autumn"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+		<!-- STORM -->
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2"  operator="and"/>
+			<rewards>
+				<lightningstrike topLeftX="38" topLeftY="45" bottomRightX="82" bottomRightY="83" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->
+	</group>
+</questdb>
+
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/T_INFO_PRIVACYPOLICYUPDATE_TEXT" android:layout_weight="1.0" />
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:id="@id/gtc_link" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/T_INFO_PRIVACYPOLICYUPDATE_GTC" android:layout_weight="1.0" />
+        <Button android:id="@id/privacy_policy_link" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/T_INFO_PRIVACY_POLICY_TRANSLATED" android:layout_weight="1.0" />
+    </LinearLayout>
+    <CheckBox android:id="@id/gdpr_consent_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/T_INFO_PRIVACYPOLICYUPDATE_ACKNOWLEDGED" android:layout_weight="1.0" />
+    <Button android:enabled="false" android:id="@id/gdpr_continue_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/T_INFO_PRIVACYPOLICYUPDATE_CONTINUE" />
+</LinearLayout>

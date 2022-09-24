@@ -1,0 +1,104 @@
+
+fighting_overlay.png
+size: 256,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fight_hit_a0
+  rotate: false
+  xy: 187, 13
+  size: 19, 20
+  orig: 19, 20
+  offset: 0, 0
+  index: -1
+fight_hit_a1
+  rotate: false
+  xy: 31, 30
+  size: 41, 32
+  orig: 41, 32
+  offset: 0, 0
+  index: -1
+fight_hit_a2
+  rotate: true
+  xy: 208, 14
+  size: 16, 21
+  orig: 16, 21
+  offset: 0, 0
+  index: -1
+fight_hit_b0
+  rotate: false
+  xy: 2, 4
+  size: 4, 4
+  orig: 4, 4
+  offset: 0, 0
+  index: -1
+fight_hit_c2
+  rotate: false
+  xy: 243, 34
+  size: 10, 28
+  orig: 10, 28
+  offset: 0, 0
+  index: -1
+fight_miss0
+  rotate: true
+  xy: 31, 2
+  size: 26, 34
+  orig: 39, 59
+  offset: 13, 25
+  index: -1
+fight_miss1
+  rotate: true
+  xy: 123, 39
+  size: 23, 42
+  orig: 39, 59
+  offset: 9, 12
+  index: -1
+fight_miss2
+  rotate: false
+  xy: 2, 10
+  size: 27, 52
+  orig: 39, 59
+  offset: 6, 0
+  index: -1
+fight_miss3
+  rotate: true
+  xy: 167, 35
+  size: 27, 42
+  orig: 39, 59
+  offset: 0, 10
+  index: -1
+fight_parried
+  rotate: false
+  xy: 211, 32
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+fight_shield_a
+  rotate: true
+  xy: 120, 14
+  size: 23, 34
+  orig: 26, 34
+  offset: 0, 0
+  index: -1
+fight_shield_b
+  rotate: true
+  xy: 156, 8
+  size: 25, 29
+  orig: 26, 34
+  offset: 1, 2
+  index: -1
+fight_weapon_a
+  rotate: true
+  xy: 74, 39
+  size: 23, 47
+  orig: 23, 48
+  offset: 0, 1
+  index: -1
+fight_weapon_b
+  rotate: true
+  xy: 74, 21
+  size: 16, 44
+  orig: 23, 48
+  offset: 7, 0
+  index: -1

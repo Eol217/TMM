@@ -1,0 +1,370 @@
+[random_start]
+
+delay:	1.00	5.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: looking1	1
+next: looking2	1
+next: looking3	1
+
+next: tug	0.75
+next: yawn	0.5
+next: powder	0.25
+
+[tug]
+
+// frame-delay: 0.1
+
+female_01_stand_4.0.png	0.5
+female_01_idle.20.png		0.1
+female_01_idle.21.png		0.1
+female_01_idle.20.png		0.1
+female_01_idle.21.png		0.1
+female_01_idle.20.png		0.1
+female_01_idle.21.png		0.1
+
+
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir4	1
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+next: looking1	1
+next: looking2	1
+next: looking3	1
+
+next: yawn	0.5
+next: powder	0.25
+next: tug	0.5
+
+[yawn]
+
+// frame-delay: 0.1
+
+female_01_stand_4.0.png	0.5
+female_01_idle.0.png	0.1
+female_01_idle.1.png	0.3
+female_01_idle.2.png	1
+female_01_idle.3.png	0.1
+
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir4	1
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+next: looking1	1
+next: looking2	1
+next: looking3	1
+
+next: powder	0.5
+next: tug	0.75
+
+
+[powder]
+
+// frame-delay: 0.1
+
+female_01_stand_4.0.png	0.5
+female_01_idle.10.png	0.1
+female_01_idle.11.png	0.3
+female_01_idle.12.png	0.1
+female_01_idle.13.png	0.1
+female_01_idle.12.png	0.1
+female_01_idle.13.png	0.1
+female_01_idle.12.png	0.1
+female_01_idle.13.png	0.1
+female_01_idle.12.png	0.1
+female_01_idle.13.png	0.1
+female_01_idle.11.png	0.3
+female_01_idle.10.png	0.1
+
+
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir4	1
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+next: looking1	1
+next: looking2	1
+next: looking3	1
+
+next: yawn	0.5
+next: tug	0.75
+
+
+[looking1]
+
+play_ambient: sfx_townies_chatter_female_marketplace_7
+play_ambient_chance: 0.2
+
+frame-delay: 1
+
+female_01_idle.30.png
+
+
+delay:	1.00	4.00
+
+next: dir4		1
+next: looking2	1
+next: looking3	1
+
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+next: yawn	0.5
+next: powder	0.5
+next: tug	0.75
+
+[looking2]
+
+frame-delay: 1
+
+female_01_idle.31.png
+
+
+delay:	1.00	4.00
+
+next: dir4		1
+next: looking1	1
+next: looking3	1
+
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+next: yawn	0.5
+next: powder	0.5
+next: tug	0.75
+
+[looking3]
+
+frame-delay: 1
+
+female_01_idle.32.png
+
+
+delay:	1.00	4.00
+
+next: dir4		1
+next: looking2	1
+next: looking1	1
+
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+next: yawn	0.5
+next: powder	0.5
+next: tug	0.75
+
+[dir0]
+
+frame-delay: 1
+
+female_01_stand_0.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+
+[dir1]
+
+frame-delay: 1
+
+female_01_stand_1.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+
+[dir2]
+
+frame-delay: 1
+
+female_01_stand_2.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+
+[dir3]
+
+frame-delay: 1
+
+female_01_stand_3.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+
+[dir4]
+
+frame-delay: 1
+
+female_01_stand_4.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: looking1	1
+next: looking2	1
+next: looking3	1
+
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir4	0.75
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+
+[dir5]
+
+frame-delay: 1
+
+female_01_stand_3.0.png
+flip_x 1
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+
+[dir6]
+
+frame-delay: 1
+
+female_01_stand_2.0.png
+flip_x 1
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+
+[dir7]
+
+frame-delay: 1
+
+female_01_stand_1.0.png
+flip_x 1
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+next: yawn	1
+next: powder	0.5
+next: tug	0.75
+

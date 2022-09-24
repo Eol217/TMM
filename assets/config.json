@@ -1,0 +1,19 @@
+{
+	"InterstitialManager": {
+		"interstitial.refresh": 300,
+		"adcolony.questrestart.timer": 600,
+
+		"DefaultInterstitials": {
+			"adcolony.weight": 6,
+			"MyAdMob.weight": 2,
+			"MyChartboost.weight": 2,
+			"MySponsorpay.weight": 0
+		}
+	},
+	"VirtualCurrencyManager": {
+		"OfferWall": {
+			"SponsorpayOfferwall.weight": 1,
+			"SuperSonicOfferwall.weight": 1
+		}
+	}
+}

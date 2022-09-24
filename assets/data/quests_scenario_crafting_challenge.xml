@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: Crafting Challenge -->
+<!-- prestige: 60 -->
+
+<questdb>
+	<group avatar="client">
+		<include file = "data/common-quests.xml"/>
+		<include file = "data/quests_sandbox.xml"/>
+
+<!-- Szenario Start Quest -->
+		<quest id="QUEST_STARTER" visible="false" start="instant" finish="instant">
+			<objectives timeout="1"/>
+			<rewards>
+				<set-flag key="scenario-finished" value="false" />
+				<set-merchant state="disabled" />
+				<set-modifier tag="map" name="mod_consumption_rate_idle" value="0" />
+				<set-modifier tag="map" name="mod_rest" value="200" />
+				<set-modifier tag="map" name="mod_effort" value="200" />
+				<start-quest id="CC_MAIN" />
+				<disallow key="building_residence_00" />
+				<disallow key="building_residence_01" />
+				<disallow key="building_residence_02" />
+				<disallow key="building_residence_03" />
+			</rewards>
+		</quest>
+
+<!-- Main Quest --> 
+	<quest id="CC_MAIN" title="T_GAME_QUEST_SCEN_CC_MAIN_TITLE" description="T_GAME_QUEST_SCEN_CC_MAIN_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_MAIN_DESC" >
+			<start-quest id="CC_10" />
+		</onStarted>
+
+		<start_condition timeout="2"/>
+
+		<objectives timeout="1" > 
+			<quest-done id="CC_60" />
+			<quest-done id="CC_64" />
+		</objectives>  
+
+		<onSuccess notification="T_GAME_QUEST_SCEN_CC_MAIN_END" />
+
+		<rewards >
+			<start-quest id="scenario-finished" />
+			<set-flag key="scenario-finished" value="true" />
+			<resource amount="40" resource="prestige" />
+		</rewards>
+	</quest>
+
+<!-- Main Quest ends -->
+
+<!-- Visible Quest Starts -->
+	<quest id="CC_10" title="T_GAME_QUEST_SCEN_CC_10_TITEL" description="T_GAME_QUEST_SCEN_CC_10_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_10_DESC" />
+
+		<start_condition timeout="3"/>
+
+		<objectives timeout="1" > 
+			<assign count="1" type="building_lumberjack" trigger="is_assigned" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_45" />
+			<start-quest id="CC_B_15" />
+			<start-quest id="CC_B_20" />
+			<start-quest id="RANDOM_EVENT_SWITCH" />
+			<start-quest id="CC_C_10_COOLDOWN" />
+			<resource amount="12" resource="wood" />
+			<resource amount="350" resource="coins" />
+		</rewards>
+	</quest>
+	<!--
+	<quest id="CC_20" title="T_GAME_QUEST_SCEN_CC_20_TITLE" description="T_GAME_QUEST_SCEN_CC_20_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_20_DESC" />
+
+		<objectives timeout="1" > 
+			<produce amount="2" resource="wood" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_45" />
+			<start-quest id="CC_B_10" />
+			<resource amount="150" resource="coins" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_30" title="T_GAME_QUEST_SCEN_CC_30_TITLE" description="T_GAME_QUEST_SCEN_CC_30_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_30_DESC" />
+
+		<objectives timeout="1" > 
+			<construct count="1" type="building_fishing_lodge" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_40" />
+			<start-quest id="CC_B_10" />
+			<resource amount="400" resource="coins" />
+			<resource amount="24" resource="wood" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_40" title="T_GAME_QUEST_SCEN_CC_40_TITLE" description="T_GAME_QUEST_SCEN_CC_40_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_40_DESC" />
+
+		<objectives timeout="1" > 
+			<construct count="1" type="building_sawmill" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_45" />
+			<resource amount="400" resource="coins" />
+			<resource amount="24" resource="wood" />
+		</rewards>
+	</quest>
+	-->
+	<quest id="CC_45" title="T_GAME_TUTORIAL_QUEST_NAME_8" description="T_GAME_QUEST_SCEN_CC_45_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_45_DESC" >
+			<start-quest id="CC_46" />
+		</onStarted>
+
+		<start_condition timeout="4"/>
+
+		<objectives timeout="1" > 
+			<building count="1" type="building_market" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_61" />
+			<resource amount="5" resource="prestige" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_46" title="T_GAME_QUEST_SCEN_CC_46_TITEL" description="T_GAME_QUEST_SCEN_CC_46_DESC" start="custom"  >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_46_DESC" />
+
+		<start_condition timeout="7">
+		</start_condition>
+
+		<objectives timeout="1" > 
+			<assign count="1" type="building_sawmill" trigger="is_assigned" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_47" />
+			<resource amount="200" resource="coins" />
+			<resource amount="14" resource="planks" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_47" title="T_GAME_QUEST_SCEN_CC_47_TITEL" description="T_GAME_QUEST_SCEN_CC_47_DESC" start="custom"  >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_47_DESC" >
+			<start-quest id="CC_471" />
+		</onStarted>
+
+		<start_condition timeout="7"/>
+
+		<objectives timeout="1" > 
+			<assign trigger="is_assigned" count="1" type="building_mine" />
+		</objectives>  
+
+		<onSuccess notification="T_GAME_QUEST_SCEN_CC_47_END" />
+
+		<rewards >
+			<resource amount="350" resource="coins" />
+			<resource amount="22" resource="stone" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_471" start="custom" visible="false" finish="instant" >
+
+		<objectives timeout="1" operator="or"> 
+			<produce amount="3" resource="ore" />
+			<produce amount="3" resource="nuggets" />
+		</objectives>  
+
+		<onSuccess notification="T_GAME_QUEST_SCEN_CC_471_DESC" /> <!-- hint for the player to produce stones -->
+
+		<fail_condition timeout="1" operator="or">
+			<building count="1" type="building_market" />
+			<produce amount="3" resource="stone"/>
+		</fail_condition>
+	</quest>
+	<!--
+	<quest id="CC_50" title="T_GAME_QUEST_SCEN_CC_50_TITLE" description="T_GAME_QUEST_SCEN_CC_50_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_50_DESC" />
+
+		<objectives timeout="1" > 
+			<construct count="1" type="building_market" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_60" />
+			<resource amount="400" resource="coins" />
+			<resource amount="10" resource="prestige" />
+		</rewards>
+	</quest>
+	-->
+	<quest id="CC_60" title="T_GAME_QUEST_SCEN6_8_NAME" description="T_GAME_QUEST_SCEN_CC_60_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_60_DESC" >
+			<start-quest id="CC_62" />
+		</onStarted>
+
+		<start_condition timeout="4"/>
+
+		<objectives timeout="1" > 
+			<building count="1" type="building_tavern" />
+		</objectives>  
+
+		<rewards >
+			<!--
+			<start-quest id="CC_70" />
+			-->
+			<resource amount="9" resource="prestige" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_61" title="T_GAME_TUTORIAL_QUEST_NAME_2" description="T_GAME_QUEST_SCEN_CC_61_DESC" start="custom"  >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_61_DESC" >
+			<allow key="building_residence_00" />
+			<start-quest id="CC_611" />
+		</onStarted>
+
+		<start_condition timeout="2"/>
+
+		<objectives timeout="1" operator="and"> 
+			<construct count="1" type="building_residence_00" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_60" />
+			<resource amount="200" resource="coins" />
+			<resource amount="10" resource="wood" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_611" visible="false" start="custom" finish="instant"> <!-- this quest prevents the player to start building more than one residence -->
+		<objectives timeout="1" operator="or"> 
+			<construction-started count="1" include_constructed="false" type="building_residence_00" />
+			<building count="2" type="building_residence_00" />
+		</objectives>
+
+		<rewards >
+			<disallow key="building_residence_00" />
+		</rewards>
+	</quest>
+
+	<quest id="CC_62" title="T_GAME_QUEST_SCEN_CC_62_TITEL" description="T_GAME_QUEST_SCEN_CC_62_DESC" start="custom"  >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_62_DESC" />
+
+		<objectives timeout="1" > 
+			<building count="1" type="building_coaler"  />
+		</objectives>  
+
+		<start_condition timeout="7" >
+		</start_condition>
+
+		<rewards >
+			<start-quest id="CC_63" />
+			<resource amount="250" resource="coins" />
+			<resource amount="10" resource="coal" />
+		</rewards>
+
+		<fail_condition timeout="1" >
+			<flag-has-value key="scenario-finished" value="true" />
+		</fail_condition>
+
+	</quest>
+
+	<quest id="CC_63" title="T_GAME_QUEST_SCEN3_5_1_NAME" description="T_GAME_QUEST_SCEN_CC_63_DESC" start="custom"  >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_63_DESC" />
+
+		<start_condition timeout="2"/>
+
+		<objectives timeout="1" > 
+			<building count="1" type="building_mint" />
+		</objectives>  
+
+		<rewards >
+			<start-quest id="CC_64" />
+			<resource amount="250" resource="coins" />
+			<resource amount="8" resource="iron" />
+		</rewards>
+
+		<fail_condition timeout="1" >
+			<flag-has-value key="scenario-finished" value="true" />
+		</fail_condition>
+	</quest>
+
+	<quest id="CC_64" title="T_GAME_QUEST_SCEN7_GIRL_3_1_NAME" description="T_GAME_QUEST_SCEN_CC_64_DESC" start="custom"  >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_64_DESC" />
+
+		<start_condition timeout="2"/>
+
+		<objectives timeout="1" > 
+			<building count="1" type="building_blacksmith" />
+		</objectives>  
+
+		<rewards >
+			<resource amount="8" resource="tools" />
+			<resource amount="6" resource="prestige" />
+		</rewards>
+
+		<fail_condition timeout="1" >
+			<flag-has-value key="scenario-finished" value="true" />
+		</fail_condition>
+	</quest>
+	<!--
+	<quest id="CC_70" title="Baue einen Weingarten" description="T_GAME_QUEST_SCEN_CC_70_DESC" start="custom" isKeyQuest="true" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_70_DESC" >
+		</onStarted>
+
+		<objectives timeout="1" > 
+			<construct count="1" type="building_vineyard" />
+		</objectives>  
+
+		<rewards >
+			<resource amount="400" resource="coins" />
+			<resource amount="20" resource="prestige" />
+		</rewards>
+	</quest>
+	-->
+
+	<!-- Visible Quest Ends -->
+
+	<!-- Side Quest Starts -->
+	<quest id="CC_B_15" avatar="farmer" title="T_GAME_QUEST_SCEN_CC_B_15_TITEL" description="T_GAME_QUEST_SCEN_CC_B_15_DESC" repeatable="custom" start="custom" >
+		<onStarted notification="T_GAME_QUEST_SCEN_CC_B_15_DESC" >
+		</onStarted>
+
+			<start_condition timeout="1" operator="and_not">
+				<stock amount="1" resource="fish" />
+				<stock amount="1" resource="meat" />
+			</start_condition>
+
+			<objectives timeout="1" operator="and">
+				<produce amount="4" resource="fish" />
+				<produce amount="4" resource="meat" />
+			</objectives>
+
+			<rewards >
+				<resource amount="6" resource="fish" />
+				<resource amount="6" resource="meat" />
+				<start-quest id="CC_B_15_COOLDOWN" />
+			</rewards>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="CC_B_15_COOLDOWN" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="300" />
+			<rewards >
+				<start-quest id="CC_B_15" />
+			</rewards>
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="CC_B_20" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_GAME_QUEST_SCEN_CC_B_20_DESC" start="custom" repeatable="custom" >
+			<onStarted notification="T_GAME_QUEST_SCEN_CC_B_20_DESC" >
+			</onStarted>
+
+			<start_condition timeout="1" operator="and_not">
+				<stock amount="1" resource="coins" />
+			</start_condition>
+
+			<objectives timeout="1" >
+				<tribute amount="10" resource="ore" />
+			</objectives>
+
+			<rewards >
+				<resource amount="400" resource="coins" />
+				<start-quest id="CC_B_30" />
+			</rewards>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="CC_B_30" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_GAME_QUEST_SCEN_CC_B_30_DESC" start="custom" repeatable="custom" >
+			<onStarted notification="T_GAME_QUEST_SCEN_CC_B_30_DESC" >
+			</onStarted>
+
+			<start_condition timeout="1" operator="and_not">
+				<stock amount="1" resource="coins" />
+			</start_condition>
+
+			<objectives timeout="1" >
+				<tribute amount="10" resource="skins" />
+			</objectives>
+
+			<rewards >
+				<resource amount="400" resource="coins" />
+				<start-quest id="CC_B_40" />
+			</rewards>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest avatar="merchant" id="CC_B_40" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_GAME_QUEST_SCEN_CC_B_40_DESC" start="custom" repeatable="custom" >
+			<onStarted notification="T_GAME_QUEST_SCEN_CC_B_40_DESC" />
+
+			<start_condition timeout="1" operator="and_not">
+				<stock amount="1" resource="coins" />
+			</start_condition>
+
+			<objectives timeout="1" >
+				<tribute amount="10" resource="nuggets" />
+			</objectives>
+
+			<rewards >
+				<resource amount="600" resource="coins" />
+				<start-quest id="CC_B_20" />
+			</rewards>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<!-- Make townie sick quest -->
+		<quest id="CC_C_10_STARTER" start="custom" visible="false" finish="instant" repeatable="custom">
+			<onStarted >
+				<start-plague amount="1" />
+			</onStarted>
+			<objectives timeout="2" />
+			<rewards >
+				<start-quest id="CC_C_10_CHECK"/>
+			</rewards>
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+		<!-- If a townie get sick, then start cure quest else try to make them sick again -->
+		<quest id="CC_C_10_CHECK" start="custom" visible="false" finish="instant" repeatable="custom">
+			<objectives timeout="1" operator="and_not" >
+				<purge-plague />
+			</objectives>
+			<fail_condition timeout="30" />
+			<rewards >
+				<start-quest id="CC_C_10"/>
+			</rewards>
+			<onFailed >
+				<start-quest id="CC_C_10_STARTER"/>
+			</onFailed>
+		</quest>
+		<!-- if a townie is sick start this quest -->
+		<quest avatar="farmer" id="CC_C_10" title="T_GAME_QUEST_SCEN_CC_C_10_TITEL" description="T_GAME_QUEST_SCEN_CC_C_10_DESC" start="custom" repeatable="custom" >
+			<onStarted notification="T_GAME_QUEST_SCEN_CC_C_10_DESC" />
+
+			<objectives timeout="1" >
+				<purge-plague />
+			</objectives>
+
+			<rewards >
+				<resource amount="8" resource="wood" />
+				<resource amount="8" resource="stone" />
+				<start-quest id="CC_C_10_COOLDOWN" />
+			</rewards>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+		<!-- cooldown before the "make a townie sick" quest starts again -->
+		<quest id="CC_C_10_COOLDOWN" start="custom" visible="false" finish="instant" repeatable="custom">
+			<objectives timeout="350" />
+			<rewards >
+				<start-quest id="CC_C_10_STARTER"/>
+			</rewards>
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest avatar="client" id="CC_C_20" title="T_GAME_QUEST_SCEN_CC_C_20_TITEL" description="T_GAME_QUEST_SCEN_CC_C_20_DESC" start="custom" repeatable="custom" >
+			<onStarted notification="T_GAME_QUEST_SCEN_CC_C_20_DESC" >
+				<start-fire amount="1" state="burning" />
+			</onStarted>
+
+			<start_condition timeout="230"/>
+
+			<objectives timeout="1" >
+				<purge-fire />
+			</objectives>
+
+			<rewards >
+				<resource amount="8" resource="wood" />
+				<resource amount="5" resource="planks" />
+				<set-durability value="100" />
+				<start-quest id="RANDOM_EVENT_SWITCH" />
+			</rewards>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="CC_C_30_STARTER" start="custom" visible="false" finish="instant" repeatable="custom">
+			<!-- this quest prevents an edge case, where the bandit attack could appear after the map was already finished -->
+			<objectives timeout="2" />
+			<rewards >
+				<start-quest id="CC_C_30"/>
+			</rewards>
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest avatar="client" id="CC_C_30" title="T_GAME_QUEST_SCEN_CC_C_30_TITEL" description="T_GAME_QUEST_SCEN_CC_C_30_DESC" start="custom" repeatable="custom" >
+			<onStarted notification="T_GAME_QUEST_SCEN_CC_C_30_DESC" >
+				<bandit-attack amount="1" intention="steal" source="outside" target="building_hq" />
+			</onStarted>
+
+			<start_condition timeout="260"/>
+
+			<objectives timeout="1" >
+				<raid-defeated count="1" />
+			</objectives>
+
+			<rewards >
+				<resource amount="6" resource="nuggets" />
+				<resource amount="7" resource="meat" />
+				<start-quest id="RANDOM_EVENT_SWITCH" />
+			</rewards>
+
+			<fail_condition timeout="1" operator="or" >
+				<raid-successful count="1" />
+			</fail_condition>
+
+			<onFailed >
+				<start-quest id="RANDOM_EVENT_SWITCH" />
+			</onFailed>
+		</quest>
+
+		<quest avatar="farmer" id="CC_C_40" title="T_GAME_QUEST_SCEN_CC_C_40_TITEL" description="T_GAME_QUEST_SCEN_CC_C_40_DESC" start="custom" repeatable="custom" >
+			<onStarted notification="T_GAME_QUEST_SCEN_CC_C_40_DESC" >
+			</onStarted>
+
+			<start_condition timeout="280"/>
+
+			<objectives timeout="1" >
+				<produce amount="4" resource="bread" />
+			</objectives>
+
+			<rewards >
+				<resource amount="8" resource="bread" />
+				<start-quest id="RANDOM_EVENT_SWITCH"/>
+			</rewards>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="scenario-finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="RANDOM_EVENT_SWITCH" start="custom" repeatable="custom" visible="false" finish="instant" >
+			<objectives timeout="1" >
+				<random chance="50"/>
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="RANDOM_EVENT_10"/>
+			</rewards>
+			<onFailed >
+				<start-quest id="RANDOM_EVENT_01"/>
+			</onFailed>
+		</quest>
+
+		<quest id="RANDOM_EVENT_10" start="custom" repeatable="custom" visible="false" finish="instant" >
+			<objectives timeout="1" >
+				<random chance="50"/>
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="CC_C_20"/>
+			</rewards>
+			<onFailed >
+				<start-quest id="CC_C_30_STARTER"/>
+			</onFailed>
+		</quest>
+
+		<quest id="RANDOM_EVENT_01" start="custom" repeatable="custom" visible="false" finish="instant" >
+			<objectives timeout="1" >
+				<random chance="50"/>
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards >
+				<start-quest id="CC_C_40"/>
+			</rewards>
+			<onFailed >
+				<start-quest id="RANDOM_EVENT_SWITCH"/>
+			</onFailed>
+		</quest>
+
+		<!-- Side Quest Ends -->
+
+		<!-- Scenario End quest-->
+
+		<quest id="scenario-finished" start="custom" visible="false" >
+
+			<start_condition timeout="5"/>
+
+			<objectives timeout="1"/>
+
+			<rewards>
+				<scenario-finished/>
+				<allow key="building_residence_00" />
+				<allow key="building_residence_01" />
+				<allow key="building_residence_02" />
+				<allow key="building_residence_03" />
+				<set-modifier tag="map" name="mod_consumption_rate_idle" value="100" />
+				<set-modifier tag="map" name="mod_rest" value="100" />
+				<set-modifier tag="map" name="mod_effort" value="100" />
+				<start-quest id="sandbox_start"/>
+				<set-merchant state="available" />
+			</rewards>
+		</quest>
+
+
+		<quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START" visible="false" >
+
+			<onStarted notification="T_GAME_SANDBOX_START"/>
+
+			<start_condition timeout="5"/>
+
+			<objectives timeout="1"/>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+<!-- STORM --> 
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards>
+				<lightningstrike topLeftX="31" topLeftY="20" bottomRightX="64" bottomRightY="57" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+<!-- STORM END -->  
+
+	</group>
+</questdb>
+

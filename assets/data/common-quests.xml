@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<questdb>
+	<include file="data/xp-quests.xml" />
+	<include file="data/events-quests.xml" /> 
+	<include file="data/seasonal_quests.xml" />
+
+	<group>
+
+	</group>
+
+
+</questdb>
+

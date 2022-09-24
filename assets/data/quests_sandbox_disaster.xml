@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<questdb>
+
+	<group>
+
+		<quest id="SANDBOX_QUEST_META_DISASTER" title="SANDBOX_QUEST_META" start="custom" visible="false" repeatable="no" finish="instant">
+
+			<start_condition timeout="20">
+				<population count="30"/>
+			</start_condition>
+
+			<objectives timeout="1"/>
+			
+			<rewards>
+                <!--
+				<start-quest id="TRIGGER_FIRE"/>
+				<start-quest id="TRIGGER_PLAGUE"/>
+				<start-quest id="TRIGGER_DROUGHT"/>
+				<start-quest id="TRIGGER_ANIMALS"/>
+                
+                <start-quest id="QUEST_DISASTER_PRICES_LUXURY" />
+                -->
+                <start-quest id="QUEST_DISASTER_REPEATER" />
+                <start-quest id="SANDBOX_LIGHTNING_STARTER" />
+                <start-quest id="SANDBOX_SNOWSTORM_STARTER" />
+			</rewards>
+		</quest>
+
+        <quest id="QUEST_DISASTER_REPEATER" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="567" > <!-- Cooldown for next disaster chance (567) -->
+                <flag-has-value key="disaster_disabled" value="false" />
+            </objectives>
+            <rewards >
+                <start-quest id="QUEST_CHANCE_DISASTER_FIRE" />
+                <set-flag key="disaster_running" value="true" />
+            </rewards>
+        </quest>
+        <quest id="QUEST_CHANCE_DISASTER_FIRE" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" >
+                <random chance="6" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards >
+                <start-quest id="QUEST_DISASTER_FIRE" />
+				<set-flag key="achievement_disaster_fire" value="true" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_CHANCE_DISASTER_DRAUGHT" />
+            </onFailed>
+        </quest>
+        <quest id="QUEST_CHANCE_DISASTER_DRAUGHT" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" >
+                <random chance="6" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards >
+                <start-quest id="QUEST_DISASTER_DRAUGHT_SEASON_CHECK" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_CHANCE_DISASTER_PlAGUE" />
+            </onFailed>
+        </quest>
+                <quest id="QUEST_DISASTER_DRAUGHT_SEASON_CHECK" visible="false" start="custom" finish="instant" repeatable="custom">
+                    <objectives timeout="1" >
+                        <season season="summer"/>
+                    </objectives>
+                    <fail_condition timeout="2" />
+                    <rewards >
+                        <start-quest id="QUEST_DISASTER_DRAUGHT_SHORT" />
+						<set-flag value="true" key="weather_disabled" />
+                    </rewards>
+                    <onFailed >
+                        <start-quest id="QUEST_DISASTER_DRAUGHT_THEME_CHECK" />
+                    </onFailed>
+                </quest>
+                <quest id="QUEST_DISASTER_DRAUGHT_THEME_CHECK" visible="false" start="custom" finish="instant" repeatable="custom">
+                    <objectives timeout="1" >
+                        <theme theme="summer"/>
+                    </objectives>
+                    <fail_condition timeout="2" />
+                    <rewards >
+                        <start-quest id="QUEST_DISASTER_DRAUGHT_LONG" />
+						<set-flag value="true" key="weather_disabled" />
+                    </rewards>
+                    <onFailed >
+                        <start-quest id="QUEST_CHANCE_DISASTER_PlAGUE" />
+                    </onFailed>
+                </quest>
+        <quest id="QUEST_CHANCE_DISASTER_PlAGUE" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" >
+                <random chance="6" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards >
+                <start-quest id="QUEST_DISASTER_PlAGUE" />
+				<set-flag key="achievement_disaster_plague" value="true" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_CHANCE_DISASTER_ANIMALS" />
+            </onFailed>
+        </quest>
+        <quest id="QUEST_CHANCE_DISASTER_ANIMALS" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" >
+                <random chance="6" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards >
+                <start-quest id="QUEST_DISASTER_ANIMALS_SEASON_CHECK" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_CHANCE_DISASTER_BANDITS" />
+            </onFailed>
+        </quest>
+                <quest id="QUEST_DISASTER_ANIMALS_SEASON_CHECK" visible="false" start="custom" finish="instant" repeatable="custom">
+                    <objectives timeout="1" operator="or">
+                        <season season="spring"/>
+                        <season season="summer"/>
+                        <season season="autumn"/>
+                    </objectives>
+                    <fail_condition timeout="2" />
+                    <rewards >
+                        <start-quest id="QUEST_DISASTER_ANIMALS_SHORT" />
+						<set-flag key="achievement_disaster_animals" value="true" />
+                    </rewards>
+                    <onFailed >
+                        <start-quest id="QUEST_DISASTER_ANIMALS_THEME_CHECK" />
+                    </onFailed>
+                </quest>
+                <quest id="QUEST_DISASTER_ANIMALS_THEME_CHECK" visible="false" start="custom" finish="instant" repeatable="custom">
+                    <objectives timeout="1" operator="and_not">
+                        <theme theme="winter"/>
+                    </objectives>
+                    <fail_condition timeout="2" />
+                    <rewards >
+                        <start-quest id="QUEST_DISASTER_ANIMALS_LONG" />
+						<set-flag key="achievement_disaster_animals" value="true" />
+                    </rewards>
+                    <onFailed >
+                        <start-quest id="QUEST_CHANCE_DISASTER_BANDITS" />
+                    </onFailed>
+                </quest>
+
+		<quest id="QUEST_CHANCE_DISASTER_BANDITS" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" operator="and">
+                <random chance="6" />
+                <flag-has-value key="sandbox_military_enabled" value="true"/>
+				<building count="1" type="building_barracks" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <onSuccess notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_01"/>
+            <rewards >
+                <start-quest id="START_WAVE_ATTACKS"/>
+				<set-flag key="achievement_disaster_bandits" value="true" />
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_CHANCE_DISASTER_AVALANCHE" />
+            </onFailed>
+        </quest>
+                
+        <quest id="QUEST_CHANCE_DISASTER_AVALANCHE" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="1" operator="and" >
+                <random chance="10" />
+                <flag-has-value key="sandbox_map_has_avalanche" value="true"/>
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards >
+                <start-quest id="QUEST_DISASTER_AVALANCHE_CHECK_SEASON"/>
+            </rewards>
+            <onFailed >
+                <start-quest id="QUEST_DISASTER_REPEATER" />
+            </onFailed>
+        </quest>
+                <quest id="QUEST_DISASTER_AVALANCHE_CHECK_SEASON" visible="false" start="custom" finish="instant" repeatable="custom">
+                    <objectives timeout="1" >
+                        <season season="winter"/>
+                    </objectives>
+                    <fail_condition timeout="2" />
+                    <rewards >
+                        <start-quest id="SANDBOX_AVALANCHE_LAUNCHER" />
+                        <start-quest id="QUEST_DISASTER_COOLDOWN" />
+						<set-flag key="achievement_disaster_avalanche" value="true" />
+                    </rewards>
+                    <onFailed >
+                        <start-quest id="QUEST_DISASTER_AVALANCHE_CHECK_THEME" />
+                    </onFailed>
+                </quest>
+                <quest id="QUEST_DISASTER_AVALANCHE_CHECK_THEME" visible="false" start="custom" finish="instant" repeatable="custom">
+                    <objectives timeout="1" >
+                        <theme theme="winter"/>
+                    </objectives>
+                    <fail_condition timeout="2" />
+                    <rewards >
+                        <start-quest id="SANDBOX_AVALANCHE_LAUNCHER" />
+                        <start-quest id="QUEST_DISASTER_COOLDOWN" />
+						<set-flag key="achievement_disaster_avalanche" value="true" />
+                    </rewards>
+                    <onFailed >
+                        <start-quest id="QUEST_DISASTER_REPEATER" />
+                    </onFailed>
+                </quest>
+                
+        <quest id="QUEST_DISASTER_COOLDOWN" visible="false" start="custom" finish="instant" repeatable="custom">
+            <objectives timeout="10" /> <!-- 678 -->
+            <rewards >
+                <start-quest id="QUEST_DISASTER_REPEATER" />
+            </rewards>
+        </quest>
+
+
+        <!-- Disaster Quests -->
+        
+        <quest id="QUEST_DISASTER_FIRE" title="T_MOD_BUILDING_FEATURE_EXTINGUISHALL" description="T_GAME_QUEST_DISASTER_FIRE_START" start="custom" finish="user" repeatable="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_DISASTER_FIRE_START">
+				<start-fire amount="5" state="burning"/>
+			</onStarted>
+			<objectives timeout="1">
+				<purge-fire/>
+			</objectives>
+			<onSuccess notification="T_GAME_QUEST_DISASTER_FIRE_SUCCESS" >
+                <start-quest id="QUEST_DISASTER_COOLDOWN" />
+            </onSuccess>
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+			</rewards>
+		</quest>
+        
+        <quest id="QUEST_DISASTER_PlAGUE" title="T_GAME_QUEST_SCEN16_09_TITLE" description="T_GAME_QUEST_DISASTER_PLAGUE_START" start="custom" finish="user" repeatable="custom" avatar="medicus">
+			<onStarted notification="T_GAME_QUEST_DISASTER_PLAGUE_START">
+				<start-plague amount="5"/>
+			</onStarted>
+			<objectives timeout="1">
+				<purge-plague/>
+			</objectives>
+			<onSuccess notification="T_GAME_QUEST_DISASTER_PLAGUE_SUCCESS">
+				<start-quest id="QUEST_DISASTER_COOLDOWN" />
+			</onSuccess>
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+			</rewards>
+		</quest>
+		
+		<quest id="QUEST_DISASTER_DRAUGHT_SHORT" visible="false" finish="instant" start="custom" repeatable="custom" >
+			<start_condition timeout="20" operator="and" />
+			<onStarted>
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="default"/>
+				<weather-set-intensity type="thunderstorm" intensity="default"/>
+				<weather-set-intensity type="snow" intensity="default"/>
+			</onStarted>
+			<objectives timeout="30"/>
+			<rewards >
+				<start-quest id="QUEST_DISASTER_DRAUGHT_SHORT_2" />
+				<set-flag key="achievement_disaster_draught" value="true" />
+			</rewards>
+		</quest>
+		
+        <quest id="QUEST_DISASTER_DRAUGHT_SHORT_2" title="drought" description="drought" visible="false" finish="instant" start="custom" repeatable="custom" avatar="farmer">
+			<onStarted notification="T_GAME_QUEST_SCEN16_08_START">
+		<!--	<set-game-state state="draught" enable="true"/> -->
+				<disallow key="cornfield_1x1_growth" />
+				<disallow key="hopfield_1x1_growth" />
+				<disallow key="vinefield_1x1_growth" />
+				<!-- prices for food go up-->
+				<set-trade-costs-group name="food_resources" buy="120" sell="120" tag="foods"/>
+				<set-trade-costs-group name="growables_resources" buy="120" sell="120" tag="growables"/>
+			</onStarted>
+			<objectives timeout="240"/>
+            <fail_condition timeout="1" operator="and_not">
+                <season season="summer" />
+            </fail_condition>
+			<onSuccess notification="T_GAME_QUEST_DISASTER_DROUGHT_SUCCESS">
+				<start-quest id="QUEST_DISASTER_COOLDOWN" />
+                <remove-modifier-by-tag tag="foods"/>
+				<remove-modifier-by-tag tag="growables"/>
+				<allow key="cornfield_1x1_growth" />
+				<allow key="hopfield_1x1_growth" />
+				<allow key="vinefield_1x1_growth" />
+				<set-flag key="weather_disabled" value="false" />
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+			</onSuccess>
+            <onFailed notification="T_GAME_QUEST_DISASTER_DROUGHT_SUCCESS">
+                <start-quest id="QUEST_DISASTER_COOLDOWN" />
+                <remove-modifier-by-tag tag="foods"/>
+				<remove-modifier-by-tag tag="growables"/>
+				<allow key="cornfield_1x1_growth" />
+				<allow key="hopfield_1x1_growth" />
+				<allow key="vinefield_1x1_growth" />
+				<set-flag key="weather_disabled" value="false" />
+				<start-quest id="QUEST_WEATHER_COOLDOWN" />
+            </onFailed>
+            <ticket title="T_GAME_WARNING_FIELDS_DROUGHT" type="negative" />
+		</quest>
+		
+				<quest id="QUEST_DISASTER_DRAUGHT_LONG" visible="false" finish="instant" start="custom" repeatable="custom" >
+					<start_condition timeout="20" operator="and" />
+					<onStarted>
+						<weather-set-intensity type="rain" intensity="default"/>
+						<weather-set-intensity type="cloudyness" intensity="default"/>
+						<weather-set-intensity type="thunderstorm" intensity="default"/>
+						<weather-set-intensity type="snow" intensity="default"/>
+					</onStarted>
+					<objectives timeout="30"/>
+					<rewards >
+						<start-quest id="QUEST_DISASTER_DRAUGHT_LONG_2" />
+						<set-flag key="achievement_disaster_draught" value="true" />
+					</rewards>
+				</quest>
+		
+                <quest id="QUEST_DISASTER_DRAUGHT_LONG_2" title="drought" description="drought" visible="false" finish="instant" start="custom" repeatable="custom" avatar="farmer">
+                    <onStarted notification="T_GAME_QUEST_SCEN16_08_START">
+                <!--    <set-game-state state="draught" enable="true"/> -->
+						<disallow key="cornfield_1x1_growth" />
+						<disallow key="hopfield_1x1_growth" />
+						<disallow key="vinefield_1x1_growth" />
+                        <!-- prices for food go up-->
+                        <set-trade-costs-group name="food_resources" buy="120" sell="120" tag="foods"/>
+                        <set-trade-costs-group name="growables_resources" buy="120" sell="120" tag="growables"/>
+                    </onStarted>
+                    <objectives timeout="480"/>
+                    <fail_condition timeout="1" operator="and_not">
+                        <theme theme="summer" />
+                    </fail_condition>
+                    <onSuccess notification="T_GAME_QUEST_DISASTER_DROUGHT_SUCCESS">
+                        <start-quest id="QUEST_DISASTER_COOLDOWN" />
+                        <remove-modifier-by-tag tag="foods"/>
+                        <remove-modifier-by-tag tag="growables"/>
+						<allow key="cornfield_1x1_growth" />
+						<allow key="hopfield_1x1_growth" />
+						<allow key="vinefield_1x1_growth" />
+						<set-flag key="weather_disabled" value="false" />
+						<start-quest id="QUEST_WEATHER_COOLDOWN" />
+                    </onSuccess>
+                    <onFailed notification="T_GAME_QUEST_DISASTER_DROUGHT_SUCCESS">
+                        <start-quest id="QUEST_DISASTER_COOLDOWN" />
+                        <remove-modifier-by-tag tag="foods"/>
+                        <remove-modifier-by-tag tag="growables"/>
+						<allow key="cornfield_1x1_growth" />
+						<allow key="hopfield_1x1_growth" />
+						<allow key="vinefield_1x1_growth" />
+						<set-flag key="weather_disabled" value="false" />
+						<start-quest id="QUEST_WEATHER_COOLDOWN" />
+                    </onFailed>
+                    <ticket title="T_GAME_WARNING_FIELDS_DROUGHT" type="negative" />
+                </quest>
+
+        <quest id="QUEST_DISASTER_ANIMALS_SHORT" title="animals_die" description="animals_die" visible="false" finish="instant" start="custom" repeatable="custom" avatar="farmer">
+			<onStarted notification="T_GAME_QUEST_SCEN16_10_START">
+				<!-- prices for food go up-->
+				<set-trade-costs-group name="food_resources" buy="120" sell="120" tag="foods_1"/>
+		<!--	<set-game-state state="animals-sick" enable="true"/> -->
+				<disallow key="animal_spawn" />
+			</onStarted>
+			<objectives timeout="360"/>
+            <fail_condition timeout="1" >
+                <season season="winter" />
+            </fail_condition>
+			<onSuccess notification="T_GAME_QUEST_DISASTER_ANIMAL_SUCCESS">
+				<remove-modifier-by-tag tag="foods_1"/>
+        <!--    <set-game-state state="animals-sick" enable="false"/> -->
+				<allow key="animal_spawn" />
+                <start-quest id="QUEST_DISASTER_COOLDOWN" />
+			</onSuccess>
+            <onFailed notification="T_GAME_QUEST_DISASTER_ANIMAL_SUCCESS" >
+                <remove-modifier-by-tag tag="foods_1"/>
+        <!--    <set-game-state state="animals-sick" enable="false"/> -->
+				<allow key="animal_spawn" />
+                <start-quest id="QUEST_DISASTER_COOLDOWN" />
+            </onFailed>
+            <ticket title="T_MOD_MAP_MODIFIER_ANIMALS_DIE" type="negative" />
+		</quest>
+		
+                <quest id="QUEST_DISASTER_ANIMALS_LONG" title="animals_die" description="animals_die" visible="false" finish="instant" start="custom" repeatable="custom" avatar="farmer">
+                    <onStarted notification="T_GAME_QUEST_SCEN16_10_START">
+                        <!-- prices for food go up-->
+                        <set-trade-costs-group name="food_resources" buy="120" sell="120" tag="foods_1"/>
+                <!--    <set-game-state state="animals-sick" enable="true"/> -->
+						<disallow key="animal_spawn" />
+                    </onStarted>
+                    <objectives timeout="720"/>
+                    <fail_condition timeout="1" >
+                        <theme theme="winter" />
+                    </fail_condition>
+                    <onSuccess notification="T_GAME_QUEST_DISASTER_ANIMAL_SUCCESS">
+                        <remove-modifier-by-tag tag="foods_1"/>
+                <!--    <set-game-state state="animals-sick" enable="false"/> -->
+						<allow key="animal_spawn" />
+                        <start-quest id="QUEST_DISASTER_COOLDOWN" />
+                    </onSuccess>
+                    <onFailed notification="T_GAME_QUEST_DISASTER_ANIMAL_SUCCESS" >
+                        <remove-modifier-by-tag tag="foods_1"/>
+				<!--    <set-game-state state="animals-sick" enable="false"/> -->
+						<allow key="animal_spawn" />
+                        <start-quest id="QUEST_DISASTER_COOLDOWN" />
+                    </onFailed>
+                    <ticket title="T_MOD_MAP_MODIFIER_ANIMALS_DIE" type="negative" />
+                </quest>
+
+
+        <!-- Permanent Diaster Quests -->
+        
+        
+        <quest id="QUEST_DISASTER_PRICES_LUXURY" title="DEBUG: Prices Luxury" start="custom" visible="false" finish="instant" repeatable="no">
+            <!--
+			<start_condition timeout="3" operator="and_not">
+                <stock resource="jewelry" amount="30"/>
+				<stock resource="cloths" amount="30"/>
+            </start_condition>
+            <onStarted>
+				<set-trade-costs-group name="luxury_resources" buy="120" sell="120" tag="luxury_1"/>
+			</onStarted>
+            -->
+			<objectives timeout="1" operator="and">
+                <!--
+				<stock resource="jewelry" amount="30"/>
+				<stock resource="cloths" amount="30"/>
+                -->
+			</objectives>
+			<rewards>
+				<remove-modifier-by-tag tag="luxury_1"/>
+			</rewards>
+		</quest>
+
+                
+        
+        
+        
+        
+        <quest id="CHECK_LUXURY" start="custom" visible="false" finish="instant" repeatable="no">
+            
+			<start_condition timeout="1"/>
+            
+			<objectives timeout="2">
+				<building type="building_market" count="1"/>
+			</objectives>
+			<fail_condition timeout="1">
+				<stock resource="jewelry" amount="30"/>
+				<stock resource="cloths" amount="30"/>
+			</fail_condition>
+			<rewards>
+				<start-quest id="TRIGGER_PRICES_LUXURY"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIGGER_PRICES_LUXURY" title="luxury_prices" description="luxury_prices" visible="false" finish="instant" start="custom" repeatable="no" avatar="client">
+			<onStarted>
+				<set-trade-costs-group name="luxury_resources" buy="120" sell="120" tag="luxury_1"/>
+			</onStarted>
+			<start_condition timeout="1">
+				
+			</start_condition>
+
+			<objectives timeout="900"/>
+			
+			<rewards>
+				<remove-modifier-by-tag tag="luxury_1"/>
+				<start-quest id="CHECK_LUXURY"/>
+			</rewards>
+		</quest>
+
+
+
+		<quest id="TRIGGER_FIRE" start="custom" visible="false" finish="instant" repeatable="no">
+
+			<start_condition timeout="1800"/>
+
+			<objectives timeout="1">
+				<random chance="10"/>
+			</objectives>
+
+			<fail_condition timeout="2"/>
+
+			<rewards>
+				<start-quest id="CHECK_FIRE"/>
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_FIRE" start="custom" visible="false" finish="instant" repeatable="no">
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="2"/>
+
+			<fail_condition timeout="1">
+				<flag-has-value key="disaster" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_FIRE"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_FIRE" title="T_MOD_BUILDING_FEATURE_EXTINGUISHALL" description="T_GAME_QUEST_DISASTER_FIRE_START" start="custom" finish="instant" repeatable="no" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_DISASTER_FIRE_START">
+				<set-flag key="disaster" value="true"/>
+				<start-fire amount="5" state="burning"/>
+			</onStarted>
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="1">
+				<purge-fire/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_DISASTER_FIRE_SUCCESS">
+				<set-flag key="disaster" value="false"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIGGER_PLAGUE" title="title" start="custom" visible="false" finish="instant" repeatable="no">
+
+			<start_condition timeout="1200"/>
+
+			<objectives timeout="1">
+				<random chance="15"/>
+			</objectives>
+
+			<fail_condition timeout="2"/>
+
+			<rewards>
+				<start-quest id="CHECK_PLAGUE"/>
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_PLAGUE" start="custom" visible="false" finish="instant" repeatable="no">
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="2"/>
+
+			<fail_condition timeout="1">
+				<flag-has-value key="disaster" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_PLAGUE"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_PLAGUE" title="T_GAME_QUEST_SCEN16_09_TITLE" description="T_GAME_QUEST_DISASTER_PLAGUE_START" start="custom" finish="instant" repeatable="no" avatar="medicus">
+		
+			<onStarted notification="T_GAME_QUEST_DISASTER_PLAGUE_START">
+				<set-flag key="disaster" value="true"/>
+				<start-plague amount="5"/>
+			</onStarted>
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="1">
+				<purge-plague/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_DISASTER_PLAGUE_SUCCESS">
+				<set-flag key="disaster" value="false"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIGGER_DROUGHT" title="DEBUG: TRIGGER DROUGHT" start="custom" visible="true" finish="instant" repeatable="no">
+
+			<start_condition timeout="2400">
+				<season season="summer"/>
+			</start_condition>
+
+			<objectives timeout="1">
+				<random chance="10"/>
+			</objectives>
+
+			<fail_condition timeout="2"/>
+
+			<rewards>
+				<start-quest id="CHECK_DROUGHT"/>
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_DROUGHT" start="custom" visible="false" finish="instant" repeatable="no">
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="2"/>
+
+			<fail_condition timeout="1">
+				<flag-has-value key="disaster" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_DROUGHT"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_DROUGHT" title="draught" description="draught" visible="false" finish="instant" start="custom" repeatable="no" avatar="farmer">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN16_08_START">
+				<set-flag key="disaster" value="true"/>
+		<!--	<set-game-state state="draught" enable="true"/> -->
+				<disallow key="cornfield_1x1_growth" />
+				<disallow key="hopfield_1x1_growth" />
+				<disallow key="vinefield_1x1_growth" />
+				<!-- prices for food go up-->
+				<set-trade-costs-group name="food_resources" buy="120" sell="120" tag="foods"/>
+				<set-trade-costs-group name="growables_resources" buy="120" sell="120" tag="growables"/>
+			</onStarted>
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="600"/>
+
+			<onSuccess notification="T_GAME_QUEST_DISASTER_DROUGHT_SUCCESS">
+				<set-flag key="disaster" value="false"/>
+			</onSuccess>
+
+			<rewards>
+				<remove-modifier-by-tag tag="foods"/>
+				<remove-modifier-by-tag tag="growables"/>
+		<!--	<set-game-state state="draught" enable="false"/> -->
+				<allow key="cornfield_1x1_growth" />
+				<allow key="hopfield_1x1_growth" />
+				<allow key="vinefield_1x1_growth" />
+			</rewards>
+		</quest>
+
+		<quest id="TRIGGER_ANIMALS" title="title" start="custom" visible="false" finish="instant" repeatable="no">
+
+			<start_condition timeout="720"/>
+
+			<objectives timeout="1">
+				<random chance="15"/>
+			</objectives>
+
+			<fail_condition timeout="2"/>
+
+			<rewards>
+				<start-quest id="CHECK_ANIMALS"/>
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_ANIMALS" start="custom" visible="false" finish="instant" repeatable="no">
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="2"/>
+
+			<fail_condition timeout="1">
+				<flag-has-value key="disaster" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_ANIMALS"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_ANIMALS" title="animals_die" description="animals_die" visible="false" finish="instant" start="custom" repeatable="no" avatar="farmer">
+
+			<onStarted notification="T_GAME_QUEST_SCEN16_10_START">
+				<set-flag key="disaster" value="true"/>
+				<!-- prices for food go up-->
+				<set-trade-costs-group name="food_resources" buy="120" sell="120" tag="foods_1"/>
+		<!--	<set-game-state state="animals-sick" enable="true"/> -->
+				<disallow key="animal_spawn" />
+			</onStarted>
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="1600"/>
+
+			<onSuccess notification="T_GAME_QUEST_DISASTER_ANIMAL_SUCCESS">
+				<set-flag key="disaster" value="false"/>
+			</onSuccess>
+
+			<rewards>
+				<remove-modifier-by-tag tag="foods_1"/>
+		<!--	<set-game-state state="animals-sick" enable="false"/> -->
+				<allow key="animal_spawn" />
+			</rewards>
+		</quest>
+
+		<!-- START OF BANDIT WAVE ATTACKS-->
+
+		<quest id="START_WAVE_ATTACKS" visible="false" start="custom" finish="instant" repeatable="custom" >
+			<objectives timeout="5"/>
+			<rewards >
+				<start-quest id="BANDIT_WAVE_01" />
+			</rewards>
+
+		</quest>
+
+		<quest id="BANDIT_WAVE_01" visible="false" start="custom" finish="instant" repeatable="custom" avatar="knight" >
+			<start_condition timeout="60"/>
+			<onStarted notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_02">
+				<bandit-attack count="2" intention="steal" source="outside"/>
+				<bandit-attack count="2" intention="lay_fire" source="outside"/>
+			</onStarted>
+			<objectives timeout="1" operator="or">
+				<raid-defeated count="2" including-interceptions="true"/>
+				<raid-successful count="2"/>
+			</objectives>
+			<fail_condition timeout="300"/>
+			<onFailed>
+				<start-quest id="BANDIT_WAVE_02"/>
+			</onFailed>
+			<rewards >
+				<start-quest id="BANDIT_WAVE_02"/>
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_WAVE_02" visible="false" start="custom" finish="instant" repeatable="custom" avatar="knight" >
+			<start_condition timeout="60"/>
+			<onStarted notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_03">
+				<bandit-attack count="2" intention="steal" source="outside"/>
+				<bandit-attack count="2" intention="lay_fire" source="outside"/>
+				<bandit-attack count="2" intention="steal" source="outside"/>
+			</onStarted>
+			<objectives timeout="1" operator="or">
+				<raid-defeated count="3" including-interceptions="true"/>
+				<raid-successful count="3"/>
+			</objectives>
+			<fail_condition timeout="300"/>
+			<onFailed>
+				<start-quest id="BANDIT_WAVE_03"/>
+			</onFailed>
+			<rewards >
+				<start-quest id="BANDIT_WAVE_03" />
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_WAVE_03" visible="false" start="custom" finish="instant" repeatable="custom" avatar="knight" >
+			<start_condition timeout="60"/>
+			<onStarted notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_04">
+				<bandit-attack count="4" intention="steal" source="outside"/>
+				<bandit-attack count="4" intention="lay_fire" source="outside"/>
+			</onStarted>
+			<objectives timeout="1" operator="or">
+				<raid-defeated count="2" including-interceptions="true"/>
+				<raid-successful count="2"/>
+			</objectives>
+			<fail_condition timeout="300"/>
+			<onFailed>
+				<start-quest id="BANDIT_WAVE_04"/>
+			</onFailed>
+			<rewards >
+				<start-quest id="BANDIT_WAVE_04" />
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_WAVE_04" visible="false" start="custom" finish="instant" repeatable="custom" avatar="knight" >
+			<start_condition timeout="60"/>
+			<onStarted notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_05">
+				<bandit-attack count="4" intention="steal" source="outside"/>
+				<bandit-attack count="4" intention="lay_fire" source="outside"/>
+				<bandit-attack count="2" intention="blow_up" source="outside"/>
+			</onStarted>
+			<objectives timeout="1" operator="or">
+				<raid-defeated count="3" including-interceptions="true"/>
+				<raid-successful count="2"/>
+			</objectives>
+			<fail_condition timeout="300"/>
+			<onFailed>
+				<start-quest id="BANDIT_WAVE_05"/>
+			</onFailed>
+			<rewards >
+				<start-quest id="BANDIT_WAVE_05" />
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_WAVE_05" visible="false" start="custom" finish="instant" repeatable="custom" avatar="knight" >
+			<start_condition timeout="60"/>
+			<onStarted notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_06">
+				<bandit-attack count="2" intention="steal" source="outside"/>
+				<bandit-attack count="4" intention="lay_fire" source="outside"/>
+				<bandit-attack count="3" intention="blow_up" source="outside"/>
+				<bandit-attack count="3" intention="steal" source="outside"/>
+			</onStarted>
+			<objectives timeout="1" operator="or">
+				<raid-defeated count="4" including-interceptions="true"/>
+				<raid-successful count="4"/>
+			</objectives>
+			<onSuccess notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_07"/>
+			<fail_condition timeout="300"/>
+			<onFailed notification="T_GAME_QUEST_DISASTERS_BANDIT_RAID_07" >
+				<start-quest id="QUEST_DISASTER_COOLDOWN"/>
+			</onFailed>
+			<rewards >
+				<start-quest id="QUEST_DISASTER_COOLDOWN" />
+			</rewards>
+		</quest>
+
+		<!-- END OF BANDIT WAVE ATTACKS-->
+<!-- XXX    REMOVED BECAUSE ITS NOW INCLUDED IN THE SEASONAL QUEST.XML   XXXX
+
+		<quest id="CHECK_WINTER" start="instant" visible="false" finish="instant" repeatable="instant">
+
+			<start_condition timeout="1"/>
+
+			<objectives timeout="2">
+				<season season="winter"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or">
+				<season season="spring"/>
+				<season season="summer"/>
+				<season season="autumn"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="TRIGGER_PRICES_WINTER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRIGGER_PRICES_WINTER" title="winter_prices" description="winter_prices" visible="false" finish="instant" start="custom" repeatable="custom" avatar="client">
+--> <!--<onStarted notification="XXX DEBUG: The prices for growables has increased due to winter, my liege!"></onStarted>-->
+<!--
+			<onStarted>
+--> <!-- prices for growables go up	-->
+<!--
+				<set-trade-costs-group name="growables_resources" buy="120" sell="120" tag="growables_1"/>
+			</onStarted>
+
+			<start_condition timeout="1">
+				<season season="winter"/>
+			</start_condition>
+
+			<objectives timeout="900"/>
+-->
+<!--
+			<onFailed notification="XXX DEBUG: FAILED The prices for growables is back to normal, my liege!"/>
+			<onSuccess notification="XXX DEBUG: SUCCESS The prices for growables is back to normal, my liege!"/>
+-->
+<!--
+			<rewards>
+				<remove-modifier-by-tag tag="growables_1"/>
+				<start-quest id="TRIGGER_PRICES_WINTER"/>
+			</rewards>
+		</quest>
+-->
+		
+
+
+<!-- PERMA DISASTER -->
+<!-- Disaster which trigger in certain situations, like lightning strikes during storms -->
+
+    <!-- Lightning Strikes -->
+        <quest id="SANDBOX_LIGHTNING_STARTER" start="custom" visible="false" finish="instant" repeatable="instant" >
+            <start_condition timeout="1" operator="and">
+                <flag-has-value key="disaster_disabled" value="false" />
+                <flag-has-value key="sandbox_map_has_thunderstorm" value="true" />
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </start_condition>
+                <onStarted >
+                    <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+                </onStarted>
+            <objectives timeout="1" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="false" />
+            </objectives>
+			<rewards >
+				<set-flag key="achievement_disaster_lightning" value="true" />
+			</rewards>
+            <ticket title="T_SANDBOX_THUNDERSTORM_TICKET" type="negative" />
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_00" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <!-- This Quests stops the chances if the duration is over -->
+            <start_condition timeout="10" /> <!-- "Cooldown" for next strike -->
+            <objectives timeout="1" > 
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_01" />
+            </rewards>
+            <fail_condition timeout="2" />
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_01" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="5" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_02" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_02" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="12" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_03" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_03" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="18" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_04" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_04" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="24" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_05" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_05" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="30" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_06" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_06" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="36" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_07" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_07" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="42" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_08" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_08" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="48" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_09" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_09" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="54" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_10" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SANDBOX_LIGHTNING_CHANCE_10" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <start_condition timeout="5" />
+            <objectives timeout="1" >
+                <random chance="60" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_LIGHTNING_STRIKE" />
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_00" />
+            </rewards>
+            <fail_condition timeout="2" />
+            <onFailed >
+                <start-quest id="SANDBOX_LIGHTNING_CHANCE_08" />
+            </onFailed>
+        </quest>
+
+    <!-- Lightning Strikes Ends -->
+
+    <!-- Snowstorm -->
+        <quest id="SANDBOX_SNOWSTORM_STARTER" start="custom" visible="false" finish="instant" repeatable="instant" >
+            <start_condition timeout="1" operator="and">
+                <flag-has-value key="disaster_disabled" value="false" />
+                <flag-has-value key="sandbox_enable_snowstorm" value="true" />
+            </start_condition>
+            <onStarted >
+                <start-quest id="SANDBOX_SNOWSTORM_CHANCE_00" />
+            </onStarted>
+            <objectives timeout="1" >
+                <flag-has-value key="sandbox_enable_snowstorm" value="false" />
+            </objectives>
+			<rewards >
+				<set-flag key="achievement_disaster_snowstorm" value="true" />
+			</rewards>
+            <ticket title="T_SANDBOX_SNOWSTORM_TICKET" type="negative"/>
+        </quest>
+        
+        <quest id="SANDBOX_SNOWSTORM_CHANCE_00" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <!-- This Quests stops the chances if the duration is over -->
+            <start_condition timeout="5" /> <!-- "Cooldown" for next damage -->
+            <objectives timeout="1" > 
+                <flag-has-value key="sandbox_enable_snowstorm" value="true" />
+            </objectives>
+            <rewards >
+                <start-quest id="SANDBOX_SNOWSTORM_CHANCE_01" />
+            </rewards>
+            <fail_condition timeout="2" />
+        </quest>
+        
+        <quest id="SANDBOX_SNOWSTORM_CHANCE_01" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <rewards >
+                <set-durabilitychange topLeftX="0" topLeftY="0" bottomRightX="300" bottomRightY="300"
+                        destroyOnNoDurability="false" minValue="-1" maxValue="0" />
+                <start-quest id="SANDBOX_SNOWSTORM_CHANCE_00" />
+            </rewards>
+        </quest>
+
+    <!-- Snowstorm Ends -->
+
+    </group>
+</questdb>
+

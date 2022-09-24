@@ -1,0 +1,122 @@
+[walkby]
+
+frame-delay: 0.2
+
+frame:	ani_tavern_03.0.png
+frame:	ani_tavern_03.1.png
+frame:	ani_tavern_03.2.png
+
+frame:	ani_mine_r_01.29.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			0.75
+next:	walkback			1
+next:	staythere			0.5
+next:	staythere2			0.5
+
+
+[walkback]
+
+frame-delay: 0.2
+
+frame:	ani_tavern_03.2.png
+frame:	ani_tavern_03.1.png
+frame:	ani_tavern_03.0.png
+
+frame:	ani_mine_r_01.29.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			0.75
+next:	staythere			0.5
+next:	staythere2			0.5
+
+
+
+[staythere]
+
+play_ambient: sfx_townies_chatter_male_tavern_4	
+play_ambient_chance: 0.5
+frame-delay: 0.2
+
+frame:	ani_tavern_03.0.png
+frame:	ani_tavern_03.1.png
+
+
+delay:	0.5	2.00
+
+next:	nostay				
+
+[nostay]
+
+frame-delay: 0.2
+
+frame:	ani_tavern_03.2.png
+
+frame:	ani_mine_r_01.29.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			1
+next:	staythere			0.25
+next:	staythere2			0.25
+
+[staythere2]
+
+play_ambient: sfx_townies_chatter_male_tavern_2	
+play_ambient_chance: 0.5
+frame-delay: 0.2
+
+frame:	ani_tavern_03.0.png
+frame:	ani_tavern_03.1.png
+
+
+delay:	0.5	2.00
+
+next:	nostay2
+
+[nostay2]
+
+frame-delay: 0.2
+
+frame:	ani_tavern_03.2.png
+
+frame:	ani_mine_r_01.29.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			1
+next:	staythere			0.25
+next:	staythere2			0.25
+
+
+[null]
+
+frame-delay: 0.2
+
+frame:	ani_mine_r_01.29.png
+
+
+delay:	0.2	2.00
+
+next:	null				1
+next:	walkby			1
+next:	walkback			1
+next:	staythere			1
+next:	staythere2			1
+
+
+
+

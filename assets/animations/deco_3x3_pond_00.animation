@@ -1,0 +1,71 @@
+[pond_fish]
+frame:	deco_3x3_pond_00.png		4.00
+
+delay:	1.00	5.00
+
+next:	pond_fish_00			0.75
+next:	pond_fish_01			0.75
+next:	pond_fish_02			0.75
+
+[pond_fish_00]
+frame:	deco_3x3_pond_00.0.png		0.10
+frame:	deco_3x3_pond_00.1.png		0.10
+frame:	deco_3x3_pond_00.2.png		0.10
+frame:	deco_3x3_pond_00.3.png		0.10
+frame:	deco_3x3_pond_00.4.png		0.10
+frame:	deco_3x3_pond_00.5.png		0.10
+frame:	deco_3x3_pond_00.6.png		0.10
+frame:	deco_3x3_pond_00.7.png		0.10
+frame:	deco_3x3_pond_00.8.png		0.10
+frame:	deco_3x3_pond_00.9.png		0.10
+frame:	deco_3x3_pond_00.10.png		0.10
+frame:	deco_3x3_pond_00.11.png		0.10
+frame:	deco_3x3_pond_00.png		0.10
+
+delay:	1.00	5.00
+
+next:	pond_fish_00			0.25
+next:	pond_fish_01			0.75
+next:	pond_fish_02			0.75
+
+[pond_fish_01]
+frame:	deco_3x3_pond_01.0.png		0.10
+frame:	deco_3x3_pond_01.1.png		0.10
+frame:	deco_3x3_pond_01.2.png		0.10
+frame:	deco_3x3_pond_01.3.png		0.10
+frame:	deco_3x3_pond_01.4.png		0.10
+frame:	deco_3x3_pond_01.5.png		0.10
+frame:	deco_3x3_pond_01.6.png		0.10
+frame:	deco_3x3_pond_01.7.png		0.10
+frame:	deco_3x3_pond_01.8.png		0.10
+frame:	deco_3x3_pond_01.9.png		0.10
+frame:	deco_3x3_pond_01.10.png		0.10
+frame:	deco_3x3_pond_01.11.png		0.10
+frame:	deco_3x3_pond_00.png		0.10
+
+delay:	1.00	5.00
+
+next:	pond_fish_00			0.25
+next:	pond_fish_01			0.75
+next:	pond_fish_02			0.75
+
+[pond_fish_02]
+frame:	deco_3x3_pond_02.0.png		0.10
+frame:	deco_3x3_pond_02.1.png		0.10
+frame:	deco_3x3_pond_02.2.png		0.10
+frame:	deco_3x3_pond_02.3.png		0.10
+frame:	deco_3x3_pond_02.4.png		0.10
+frame:	deco_3x3_pond_02.5.png		0.10
+frame:	deco_3x3_pond_02.6.png		0.10
+frame:	deco_3x3_pond_02.7.png		0.10
+frame:	deco_3x3_pond_02.8.png		0.10
+frame:	deco_3x3_pond_02.9.png		0.10
+frame:	deco_3x3_pond_02.10.png		0.10
+frame:	deco_3x3_pond_02.11.png		0.10
+frame:	deco_3x3_pond_00.png		0.10
+
+delay:	1.00	5.00
+
+next:	pond_fish_00			0.25
+next:	pond_fish_01			0.75
+next:	pond_fish_02			0.75

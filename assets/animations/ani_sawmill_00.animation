@@ -1,0 +1,74 @@
+[work_1]
+
+frame:	ani_sawmill_00.0.png			0.20
+frame:	ani_sawmill_00.1.png			0.20
+frame:	ani_sawmill_00.2.png			0.20
+frame:	ani_sawmill_00.3.png			0.20
+frame:	ani_sawmill_00.4.png			0.20
+frame:	ani_sawmill_00.5.png			0.20
+frame:	ani_sawmill_00.6.png			0.20
+frame:	ani_sawmill_00.7.png			0.20
+frame:	ani_sawmill_00.8.png			0.20
+frame:	ani_sawmill_00.9.png			0.20
+frame:	ani_sawmill_00.10.png			0.20
+frame:	ani_sawmill_00.11.png			0.20
+play_ambient: sfx_buildings_sawmill		
+frame:	ani_sawmill_00.12.png			0.20
+frame:	ani_sawmill_00.13.png			0.20
+frame:	ani_sawmill_00.14.png			0.20
+frame:	ani_sawmill_00.15.png			0.20
+frame:	ani_sawmill_00.16.png			0.20
+frame:	ani_sawmill_00.17.png			0.20
+frame:	ani_sawmill_00.18.png			0.20
+frame:	ani_sawmill_00.19.png			0.20
+frame:	ani_sawmill_00.20.png			0.20
+frame:	ani_sawmill_00.21.png			0.20
+frame:	ani_sawmill_00.22.png			0.20
+
+delay:	0.10	0.20
+
+next:	work_1					0.90
+next:	idle_1					0.20
+next:	idle_2					0.10
+
+[idle_1]
+
+frame:	ani_sawmill_02.0.png			0.20
+frame:	ani_sawmill_02.1.png			0.20
+frame:	ani_sawmill_02.2.png			0.20
+frame:	ani_sawmill_02.3.png			0.20
+frame:	ani_sawmill_02.2.png			0.20
+frame:	ani_sawmill_02.1.png			0.20
+frame:	ani_sawmill_02.0.png			0.20
+
+delay:	0.10	0.20
+
+next:	work_1					0.90
+next:	idle_1					0.20
+next:	idle_2					0.10
+
+[idle_2]
+
+frame:	ani_sawmill_03.0.png			0.20
+frame:	ani_sawmill_03.1.png			0.20
+frame:	ani_sawmill_03.2.png			0.20
+frame:	ani_sawmill_03.3.png			0.20
+frame:	ani_sawmill_03.4.png			0.20
+frame:	ani_sawmill_03.5.png			0.20
+frame:	ani_sawmill_03.4.png			0.20
+frame:	ani_sawmill_03.5.png			0.20
+frame:	ani_sawmill_03.4.png			0.20
+frame:	ani_sawmill_03.5.png			0.20
+frame:	ani_sawmill_03.4.png			0.20
+frame:	ani_sawmill_03.3.png			0.20
+frame:	ani_sawmill_03.2.png			0.20
+frame:	ani_sawmill_03.1.png			0.20
+frame:	ani_sawmill_03.0.png			0.20
+
+delay:	0.10	0.20
+
+next:	work_1					0.90
+next:	idle_1					0.20
+next:	idle_2					0.10
+
+

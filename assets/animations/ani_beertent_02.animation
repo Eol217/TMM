@@ -1,0 +1,37 @@
+
+[random_start]
+
+next:	girls_drinking			1.00
+next:	girls_drinking_gone			0.10
+
+[girls_drinking]
+visible:	1
+frame:	ani_beertent_02.0.png		1.0
+frame:	ani_beertent_02.1.png		0.1
+play_ambient: sfx_buildings_beertent_clink_04
+frame:	ani_beertent_02.2.png		0.1
+frame:	ani_beertent_02.3.png		0.1
+play_ambient: sfx_buildings_beertent_drink_04
+play_ambient_chance: 0.3
+frame:	ani_beertent_02.4.png		0.2
+frame:	ani_beertent_02.5.png		0.1
+frame:	ani_beertent_02.4.png		0.2
+frame:	ani_beertent_02.5.png		0.1
+frame:	ani_beertent_02.4.png		0.2
+play_ambient: sfx_buildings_chatter_female_beertent_4
+play_ambient_chance:  0.2
+frame:	ani_beertent_02.5.png		0.1
+frame:	ani_beertent_02.6.png		0.1
+frame:	ani_beertent_02.7.png		1.0
+
+delay:	1.00	4.00
+
+next:	girls_drinking			1.00
+next:	girls_drinking_gone			0.10
+
+[girls_drinking_gone]
+visible: 0
+delay:	2.0     5.0
+
+next:	girls_drinking			1.00
+next:	girls_drinking_gone			0.10

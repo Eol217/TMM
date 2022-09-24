@@ -1,0 +1,62 @@
+
+daily_giftbox.png
+size: 512,64
+format: RGBA4444
+filter: Linear,Linear
+repeat: none
+daily_gift_bows
+  rotate: false
+  xy: 299, 40
+  size: 39, 17
+  orig: 39, 17
+  offset: 0, 0
+  index: -1
+daily_gift_box0
+  rotate: false
+  xy: 131, 7
+  size: 54, 50
+  orig: 54, 50
+  offset: 0, 0
+  index: -1
+daily_gift_box1a
+  rotate: false
+  xy: 187, 20
+  size: 54, 37
+  orig: 54, 50
+  offset: 0, 13
+  index: -1
+daily_gift_box1b
+  rotate: false
+  xy: 243, 20
+  size: 54, 37
+  orig: 54, 50
+  offset: 0, 0
+  index: -1
+daily_gift_crown
+  rotate: false
+  xy: 2, 2
+  size: 70, 55
+  orig: 70, 55
+  offset: 0, 0
+  index: -1
+daily_gift_ribbon_l
+  rotate: false
+  xy: 299, 28
+  size: 24, 10
+  orig: 24, 10
+  offset: 0, 0
+  index: -1
+daily_gift_ribbon_r
+  rotate: false
+  xy: 187, 7
+  size: 26, 11
+  orig: 26, 11
+  offset: 0, 0
+  index: -1
+daily_gift_shine_s
+  rotate: false
+  xy: 74, 2
+  size: 55, 55
+  orig: 56, 55
+  offset: 1, 0
+  index: -1

@@ -1,0 +1,212 @@
+[random_start]
+
+delay:	1.00	5.00
+
+next: deepidle 0.25
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir4	1
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+
+[deepidle]
+
+frame-delay: 0.15
+
+soldier_idle.10.png
+soldier_idle.11.png
+soldier_idle.12.png
+soldier_idle.13.png
+play_ambient: sfx_buildings_armory_single_hit_var4
+soldier_idle.14.png
+soldier_idle.10.png
+soldier_idle.11.png
+soldier_idle.12.png
+soldier_idle.13.png
+play_ambient: sfx_buildings_armory_single_hit_var4
+soldier_idle.14.png
+soldier_idle.10.png
+soldier_idle.11.png
+soldier_idle.12.png
+soldier_idle.13.png
+play_ambient: sfx_buildings_armory_single_hit_var4
+soldier_idle.14.png
+soldier_idle.10.png
+
+
+delay:	0	1
+
+next: dir4	1
+
+
+[dir0]
+
+frame-delay: 1
+
+soldier_idle_0.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+
+[dir1]
+
+frame-delay: 1
+
+soldier_idle_1.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+
+[dir2]
+
+frame-delay: 1
+
+soldier_stand_2.0.png
+flip_x 0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+
+[dir3]
+
+frame-delay: 1
+flip_x 0
+
+soldier_stand_3.0.png
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+
+[dir4]
+
+frame-delay: 1
+flip_x 0
+
+soldier_stand_4.0.png
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+
+[dir5]
+
+frame-delay: 1
+
+soldier_stand_3.0.png
+flip_x 1
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+
+[dir6]
+
+frame-delay: 1
+
+soldier_idle_2.0.png
+flip_x 1
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+
+[dir7]
+
+frame-delay: 1
+
+soldier_stand_1.0.png
+flip_x 1
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+next: deepidle 1
+
+
+

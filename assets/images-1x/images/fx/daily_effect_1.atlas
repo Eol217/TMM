@@ -1,0 +1,55 @@
+
+daily_effect_1.png
+size: 512,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+daily_effect_crown
+  rotate: false
+  xy: 2, 2
+  size: 46, 48
+  orig: 46, 48
+  offset: 0, 0
+  index: -1
+daily_effect_crown_big
+  rotate: false
+  xy: 203, 15
+  size: 55, 35
+  orig: 55, 35
+  offset: 0, 0
+  index: -1
+daily_effect_crownwhite_b
+  rotate: false
+  xy: 146, 15
+  size: 55, 35
+  orig: 55, 35
+  offset: 0, 0
+  index: -1
+daily_effect_crownwhite_s
+  rotate: false
+  xy: 50, 2
+  size: 46, 48
+  orig: 46, 48
+  offset: 0, 0
+  index: -1
+daily_effect_shine
+  rotate: false
+  xy: 98, 2
+  size: 46, 48
+  orig: 46, 48
+  offset: 0, 0
+  index: -1
+daily_gift_shine_s
+  rotate: false
+  xy: 146, 2
+  size: 11, 11
+  orig: 11, 11
+  offset: 0, 0
+  index: -1
+sparkle_01
+  rotate: false
+  xy: 260, 15
+  size: 38, 35
+  orig: 38, 35
+  offset: 0, 0
+  index: -1

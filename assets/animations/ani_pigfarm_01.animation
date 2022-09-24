@@ -1,0 +1,26 @@
+[random_start]
+
+next:	normal			1
+next:	down			1
+
+
+
+[normal]
+frame:	ani_pigfarm_01.0.png		2.00
+
+
+delay:	1.00	5.00
+
+next:	normal			1
+next:	down			1
+
+
+
+[down]
+frame:	ani_pigfarm_01.1.png		2.00
+
+
+delay:	1.00	5.00
+
+next:	normal			1
+next:	down			1

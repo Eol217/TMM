@@ -1,0 +1,29 @@
+{
+	"layers": [
+		{
+			"sprite":  {
+				"theme": {
+					"": null,
+					"summer": null,
+					"*": "{typeId}.png"					
+				}
+			},
+			"transition":null,
+			"anchor": "bottom",
+			"touchable": true
+		},
+		{
+			"animation": {
+				"theme": {
+					"*": null,
+					"summer": "{typeId}"
+				}
+			},
+			"touchable": true,
+			"transition":null,
+			"fps": 10,
+			"anchor": "bottom"
+
+		}
+	]
+}

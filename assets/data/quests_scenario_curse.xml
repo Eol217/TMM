@@ -1,0 +1,1050 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- "Curse" scenario 26-->
+
+<questdb>
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group avatar="client">
+
+		<quest id="SCENARIO_START" visible="false" start="instant" avatar="client">
+			
+			<objectives timeout="2" operator="and"/>
+			<rewards>
+				<start-quest id="CHECK_FOR_CHURCH"/>
+				<start-quest id="SCENARIO_APOC_MAINQUEST"/>
+				<start-quest id="PHASE_1_START"/>
+				<set-merchant state="disabled"/>
+				<set-flag key="sandbox_military_enabled" value="true"/>
+				<set-flag key="weather_disabled" value="true" />
+			</rewards>
+		</quest>
+
+		<!-- MAINQUEST (Find a way to stop the apocalypse)-->
+
+		<quest id="SCENARIO_APOC_MAINQUEST" isKeyQuest="true" visible="true" title="T_SCENARIO_2017_APOCALYPSE_MQ_01_NAME" description="T_SCENARIO_2017_APOCALYPSE_MQ_01_DESC" start="custom"  avatar="client" >
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_MQ_01_DESC"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="10" operator="and">
+				<flag-has-value key="all_done" value="true"/>
+			</objectives>
+			<fail_condition timeout="7200" operator="and"/>
+				<onFailed notification="T_SCENARIO_2017_APOCALYPSE_MQ_01_FAILED">
+				<start-quest id="SCEN26_FAILED"/>
+				<start-quest id="SCENARIO_END_REMOVALS"/>
+			</onFailed>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_MQ_01_SUCCESS">
+				<start-quest id="SCENARIO_END_REMOVALS"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="prestige" amount="100"/>
+				<start-quest id="SCEN26_SUCCESSFULL"/>
+			</rewards>
+		</quest>
+
+	<quest id="CHECK_FOR_CHURCH" isKeyQuest="true" title="T_GAME_TUTORIAL_QUEST_NAME_CHURCH" description="T_SCENARIO_2017_APOCALYPSE_CHURCH_GONE_01" start="custom" avatar="client" finish="instant" repeatable="custom">
+
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_CHURCH_GONE_01"/>
+
+			<start_condition timeout="3" operator="and">
+				<destroy-building target="building_church"/>
+				<flag-has-value key="clear_quests" value="false" />
+			</start_condition>
+
+			<onStarted >
+				<set-flag key="church_alive" value="false"/>
+			</onStarted>
+
+			<objectives timeout="3" operator="and">
+				<building type="building_church" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess >
+				<set-flag key="church_alive" value="true"/>
+			</onSuccess>
+
+			<rewards >
+				<resource resource="coins" amount="200"/>
+				<start-quest id="CHECK_FOR_CHURCH"/>
+			</rewards>
+	</quest>
+		<!-- Scenario End -->
+
+		<quest id="SCENARIO_END_REMOVALS" start="custom" finish="instant" visible="false" avatar="client">
+			<objectives timeout="5" operator="and"/>
+			<rewards>
+				<set-flag key="clear_quests" value="true"/>
+				<set-flag key="weather_disabled" value="false" />
+				<set-flag key="curse_active" value="false"/>
+				<remove-modifier-by-tag tag="decay_delayed"/>
+				<set-merchant state="available"/>
+				<remove-modifier-by-tag tag="animals_die"/>
+				<allow key="animal_spawn"/>
+				<allow key="cornfield_1x1_growth"/>
+				<weather-set-intensity type="thunderstorm" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="default"/>
+				<weather-set-intensity type="rain" intensity="default"/>
+				<set-season season="autumn"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCEN26_SUCCESSFULL" start="custom" finish="instant" visible="false" avatar="client">
+			<start_condition timeout="2" operator="and" />
+			<objectives timeout="2" operator="and"/>
+			<rewards>
+				<start-quest id="METASTART"/>
+				<scenario-finished/>
+			</rewards>
+		</quest>
+
+		<quest id="SCEN26_FAILED" start="custom" finish="instant" visible="false" avatar="client">
+			<onStarted >
+				<start-fire amount="12"/>
+				<start-plague amount="20"/>
+				<lightningstrike topLeftX="110" topLeftY="106" bottomRightX="160" bottomRightY="151" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="10" targetCountMax="30"/>
+			</onStarted>
+
+			<objectives timeout="3" operator="and"/>
+			<rewards>
+				<start-quest id="METASTART"/>
+				<scenario-failed/>
+			</rewards>
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"   >
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and"/>
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+		<!-- PHASE 1 -->
+
+		<quest id="PHASE_1_START" start="custom" visible="false" description="T_SCENARIO_2017_APOCALYPSE_PHASE_01_START" avatar="client">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_01_START">
+				<set-modifier tag="decay_delayed" name="mod_decay" value="75"/>
+				<start-quest id="QUEST_01A"/>
+				<start-quest id="QUEST_01B"/>
+				<start-plague amount="2"/>
+				<start-quest id="PLAGUE_REPEATER"/>
+				<set-flag key="curse_active" value="true"/>	<!-- enables the catastrophes-->
+			</onStarted>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<quest-done id="QUEST_01A"/>
+				<quest-done id="QUEST_01B"/>
+				<quest-done id="QUEST_01C"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<onSuccess >
+				<start-quest id="PHASE_2_START"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_01A" isKeyQuest="true" visible="true" title="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01A_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01A_DESC" start="custom" avatar="client">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01A_DESC"/>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<produce resource="herbs" amount="30"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="coins" amount="250"/>
+				<resource resource="prestige" amount="5"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_01B" isKeyQuest="true" visible="true" title="T_SCENARIO_2016_10_QUEST_14_NAME" description="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01B_DESC" start="custom" avatar="client">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01B_DESC"/>
+			<start_condition timeout="12" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<building type="building_medicus" count="1"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="coins" amount="150"/>
+				<resource resource="tools" amount="5"/>
+				<start-quest id="QUEST_01C"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_01C" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN14_01A_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01C_DESC" start="custom" avatar="client">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_01_QUEST_01C_DESC"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<tribute resource="fabric" amount="12"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="coins" amount="300"/>
+				<resource resource="meat" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="PLAGUE_REPEATER" visible="false" start="custom" avatar="client" finish="instant" repeatable="custom">
+
+			<objectives timeout="300" operator="and">
+				<flag-has-value key="curse_active" value="true"/>
+			</objectives>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="curse_active" value="false"/>
+			</fail_condition>
+			<onSuccess>
+				<start-quest id="INFECTION"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="INFECTION" visible="false" start="custom" avatar="client" finish="instant" repeatable="custom">
+
+			<objectives timeout="1" operator="and">
+				<random chance="50"/>
+			</objectives>
+			<fail_condition timeout="2" operator="and"/>
+			<onFailed>
+				<start-quest id="PLAGUE_REPEATER"/>
+			</onFailed>
+			<onSuccess >
+				<start-plague amount="5"/>
+				<start-quest id="PLAGUE_REPEATER"/>
+			</onSuccess>
+		</quest>
+
+		<!-- Phase 2-->
+
+		<quest id="PHASE_2_START" start="custom" visible="false" avatar="farmer">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_02_START">
+				<start-quest id="QUEST_02A"/>
+				<set-modifier name="mod_production_building_fishing_lodge" value="0" tag="animals_die"/>
+				<set-modifier name="mod_production_building_pigfarm" value="0" tag="animals_die"/>
+				<disallow key="animal_spawn" />
+			</onStarted>
+
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<quest-done id="QUEST_02A"/>
+				<quest-done id="QUEST_02B"/>
+				<quest-done id="QUEST_02C"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<onSuccess >
+				<start-quest id="PHASE_3_START"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_02A" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN3_9_NAME" description="T_SCENARIO_2017_APOCALYPSE_PHASE_02_QUEST_02A_DESC" start="custom" avatar="miller">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_02_QUEST_02A_DESC"/>
+			<start_condition timeout="4" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<building type="building_windmill" count="1"/>
+				<produce resource="flour" amount="20"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="sausage" amount="5"/>
+				<resource resource="coins" amount="250"/>
+				<start-quest id="QUEST_02B"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_02B" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN7_GIRL_1_NAME" description="T_SCENARIO_2017_APOCALYPSE_PHASE_02_QUEST_02B_DESC" start="custom" avatar="miller">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_02_QUEST_02B_DESC"/>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<building type="building_bakery" count="1"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="tools" amount="5"/>
+				<resource resource="prestige" amount="10"/>
+				<start-quest id="QUEST_02C"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_02C" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN7_GIRL_1_3_NAME" description="T_SCENARIO_2017_APOCALYPSE_PHASE_02_QUEST_02C_DESC" start="custom" avatar="client">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_02_QUEST_02C_DESC"/>
+
+			<start_condition timeout="8" operator="and"/>
+			<objectives timeout="1" operator="and">
+							<!-- text has fixed bread amount of 25 -->
+				<produce resource="bread" amount="25"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="juice" amount="5"/>
+				<resource resource="coins" amount="200"/>
+			</rewards>
+		</quest>
+
+		<!-- Phase 3-->
+		<quest id="PHASE_3_START" start="custom" visible="false" avatar="monk">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_START">
+				
+				<center-to-building target="thechurch"/>
+				<start-quest id="TRADE_PREQUEST"/> <!-- starts the trade helper missions-->
+				<start-quest id="FIRE_REPEATER"/>
+				<disallow key="cornfield_1x1_growth"/>
+				<start-fire state="burning" target="thechurch"/>
+				<start-fire amount="2" state="burning"/>
+				<start-quest id="QUEST_03A"/>
+			</onStarted>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<start_condition timeout="2" operator="and">
+				<building type="building_church" count="1"/>
+			</start_condition>
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="start_next_phase" value="true"/>
+			</objectives>
+			<onSuccess >
+				<start-quest id="PHASE_4_START"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="FIRE_REPEATER" visible="false" start="custom" avatar="client" repeatable="custom" finish="instant">
+
+			<objectives timeout="210" operator="and">
+				<flag-has-value key="curse_active" value="true"/>
+			</objectives>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="curse_active" value="false"/>
+			</fail_condition>
+			<onSuccess>
+				<start-quest id="FIRE"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="FIRE" visible="false" start="custom" avatar="client" repeatable="custom" finish="instant">
+
+			<objectives timeout="1" operator="and">
+				<random chance="50"/>
+			</objectives>
+			<fail_condition timeout="2" operator="and"/>
+			<onFailed>
+				<start-quest id="FIRE_REPEATER"/>
+			</onFailed>
+			<onSuccess >
+				<start-fire amount="2"/>
+				<start-quest id="FIRE_REPEATER"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_03A" isKeyQuest="true" visible="true" title="T_MOD_BUILDING_FEATURE_EXTINGUISHALL" description="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03A_DESC" start="custom" avatar="monk">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03A_DESC">
+				<start-quest id="QUEST_03C"/>
+			</onStarted>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<purge-fire />
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="ore" amount="25"/>
+				<resource resource="prestige" amount="5"/>
+				<start-quest id="QUEST_03B"/>
+				<!--<start-quest id="QUEST_03D"/>-->
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_03B" isKeyQuest="true" visible="true" title="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03B_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03B_DESC" start="custom" avatar="monk">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03B_DESC">
+				<set-durability type="building_church" value="10"/>
+			</onStarted>
+			<start_condition timeout="5" operator="and">
+				<building type="building_church" count="1"/>
+			</start_condition>
+			<objectives timeout="1" operator="and">
+				<repair type="building_church" count="1"/>
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03B_SUCCESS"/>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<start-quest id="CLIENT_TELLS"/>
+				<resource resource="tools" amount="10"/>
+				<resource resource="prestige" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_03C" isKeyQuest="false" visible="true" title="T_GAME_QUEST_SCEN13_12_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03C_DESC" start="custom" avatar="client">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03C_DESC">
+				<set-modifier name="mod_strike_chance" tag="panic"  value="1000"/>
+				<set-modifier name="mod_happiness" tag="panic"  value="0"/>
+			</onStarted>
+			<start_condition timeout="25" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<soldiers-in-town count="4"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<onSuccess>
+				<remove-modifier-by-tag tag="panic"/>
+			</onSuccess>
+			<rewards>
+				<resource resource="coins" amount="300"/>
+				<resource resource="armor" amount="5"/>
+			</rewards>
+		</quest>
+
+		<quest id="CLIENT_TELLS" visible="false" start="custom" avatar="client">
+
+			<objectives timeout="3" operator="and"/>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03B_SUCCESS_A"/>
+			<rewards>
+				<start-quest id="KINGS_ANSWER"/>
+			</rewards>
+		</quest>
+
+		<quest id="KINGS_ANSWER" visible="false" start="custom" avatar="king">
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="20" operator="and"/>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03C_KING"/>
+			<rewards>
+				<start-quest id="CLIENT_ANSWER"/>
+			</rewards>
+		</quest>
+
+		<quest id="CLIENT_ANSWER" visible="false" start="custom" avatar="client">
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="3" operator="and"/>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03C_CLIENT"/>
+			<rewards>
+				<spawn-bandit-camp count="1" upgrade_level="0"/>
+				<start-quest id="QUEST_03D"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_03D" isKeyQuest="true" visible="true" title="T_GAME_QUEST_MIL_TUT_21_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03D_DESC" start="custom" avatar="client">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03D_DESC" >
+				<center-to-building target="building_banditcamp"/>
+			</onStarted>
+			<start_condition timeout="10" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<destroy-building target="building_banditcamp" count="1"/>
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03D_SUCCESS"/>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="pig" amount="15"/>
+				<resource resource="corn" amount="15"/>
+				<start-quest id="BANDIT_ANSWER"/>
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_ANSWER" visible="false" start="custom" avatar="bandit">
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="3" operator="and"/>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03D_BANDIT"/>
+			<rewards>
+				<start-quest id="BANDIT_ANSWER_2"/>
+			</rewards>
+		</quest>
+
+		<quest id="BANDIT_ANSWER_2" visible="false" start="custom" avatar="bandit">
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="3" operator="and"/>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_03_QUEST_03D_BANDIT_02"/>
+			<rewards>
+				<set-flag key="start_next_phase" value="true"/>
+			</rewards>
+		</quest>
+
+		<!-- Phase 4-->
+		<quest id="PHASE_4_START" start="custom" visible="false" avatar="townie">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_04_START">
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<start-quest id="QUEST_04A"/>
+				<start-quest id="QUEST_04B"/>
+			</onStarted>
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="preparations_a" value="true"/>
+				<flag-has-value key="preparations_b" value="true"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<onSuccess>
+				<start-quest id="RAID_PRISION_START"/>
+			</onSuccess>
+		</quest>
+
+	<quest id="RAID_PRISION_START" visible="false" start="custom" avatar="bandit">
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="3" operator="and"/>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_04_SUCCESS">
+				<start-quest id="PHASE_5_START"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_04A" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN12_10_TITLE_2" description="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04A_DESC" start="custom" avatar="bandit">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04A_DESC"/>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<building type="building_armory" count="1"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="coins" amount="250"/>
+				<resource resource="meat" amount="15"/>
+				<start-quest id="QUEST_04D"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_04B" isKeyQuest="true" visible="true" title="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04B_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04B_DESC" start="custom" avatar="bandit">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04B_DESC"/>
+			<start_condition timeout="10" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<building type="building_archery_contest" count="1"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="pig" amount="15"/>
+				<resource resource="brew" amount="5"/>
+				<start-quest id="QUEST_04C"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_04C" isKeyQuest="true" visible="true" title="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04C_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04C_DESC" start="custom" avatar="bandit">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04C_DESC"/>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<tribute resource="bread" amount="5"/>
+				<tribute resource="brew" amount="5"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="corn" amount="25"/>
+				<resource resource="armor" amount="5"/>
+				<set-flag key="preparations_a" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_04D" isKeyQuest="true" visible="true" title="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04D_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04D_DESC" start="custom" avatar="bandit">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04D_DESC"/>
+			<start_condition timeout="12" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<tribute resource="weapons" amount="5"/>
+				<tribute resource="armor" amount="5"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			
+			<rewards>
+				<resource resource="coins" amount="300"/>
+				<resource resource="prestige" amount="5"/>
+				<set-flag key="preparations_b" value="true"/>
+			</rewards>
+		</quest>
+		
+		<!-- Phase 5-->
+
+		<quest id="PHASE_5_START" start="custom" visible="false" avatar="medicus">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_START">
+				<weather-set-intensity type="thunderstorm" intensity="heavy"/>
+				<weather-set-intensity type="rain" intensity="heavy"/>
+			</onStarted>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="3" operator="and"/>
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_START_02" >
+				<start-quest id="QUEST_05A"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="THUNDERSTORM_WARNING" visible="false" start="custom" avatar="client" repeatable="custom" finish="instant">
+			<start_condition timeout="3" operator="and" />
+			<objectives timeout="6" operator="and"/>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_SCENARIO_2017_APOCALYPSE_THUNDERSTORM_WARNING">
+				<start-quest id="LIGHNTING_REPEATER"/>
+			</onSuccess>
+
+		</quest>
+
+		<quest id="LIGHNTING_REPEATER" visible="false" start="custom" avatar="client" repeatable="custom" finish="instant">
+
+			<objectives timeout="103" operator="and">
+				<flag-has-value key="curse_active" value="true"/>
+			</objectives>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="curse_active" value="false"/>
+			</fail_condition>
+			<onSuccess>
+				<start-quest id="LIGHTNING"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="LIGHTNING" visible="false" start="custom" avatar="client" repeatable="custom" finish="instant">
+
+			<objectives timeout="1" operator="and">
+				<random chance="50"/>
+			</objectives>
+			<fail_condition timeout="2" operator="and"/>
+			<onFailed>
+				<lightningstrike topLeftX="110" topLeftY="106" bottomRightX="160" bottomRightY="151" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="2" targetCountMax="2"/>
+				<start-quest id="LIGHNTING_REPEATER"/>
+			</onFailed>
+			<onSuccess >
+				<lightningstrike topLeftX="110" topLeftY="106" bottomRightX="160" bottomRightY="151" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+				<start-quest id="LIGHNTING_REPEATER"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_05A" isKeyQuest="true" start="custom" title="T_QUESTS_TRIBUTE_SAUSAGES" description="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05A_DESC" visible="true" avatar="medicus">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05A_DESC"/>
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="3" operator="and">
+				<tribute resource="sausage" amount="5"/>
+			</objectives>
+
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<start-quest id="PREQUEST_PHASE_05"/>
+				<resource resource="coins" amount="450"/>
+			</rewards>
+		</quest>
+
+		<quest id="PREQUEST_PHASE_05" visible="false" start="custom" avatar="medicus" repeatable="custom" finish="instant">
+			<start_condition timeout="5" operator="and" />
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05B_DESC">
+				<start-quest id="THUNDERSTORM_WARNING"/>
+			</onStarted>
+			<objectives timeout="3" operator="and"/>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="curse_active" value="false"/>
+			</fail_condition>
+			<onSuccess>
+				<start-quest id="QUEST_05_RITUAL_START"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_05_RITUAL_START" isKeyQuest="true" start="custom" visible="false" avatar="medicus">
+			<onStarted  notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05B_SUCCESS"/>
+			<start_condition timeout="2" operator="and"/>
+			<objectives timeout="1" operator="and"/>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<onSuccess >
+				<start-quest id="QUEST_05_RITUAL_2"/>
+				<start-quest id="QUEST_05_RITUAL_CHECKER"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_05_RITUAL_CHECKER" start="custom" visible="false" avatar="medicus">
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<quest-done id="QUEST_05_RITUAL_1"/>
+				<quest-done id="QUEST_05_RITUAL_3"/>
+				<quest-done id="QUEST_05_RITUAL_2"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<onSuccess>
+				<start-quest id="QUEST_05_RITUAL_END"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="QUEST_05_RITUAL_1" isKeyQuest="true" start="custom" title="T_GAME_QUEST_MIL_TUT_21_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_1_DESC" visible="true" avatar="bandit">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_1_DESC">
+				<spawn-bandit-camp count="1" upgrade_level="1"/>
+				<center-to-building target="building_bandit_camp"/>
+			</onStarted>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<destroy-building target="building_banditcamp" count="1"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<set-flag key="part1_rdy" value="true"/>
+				<start-quest id="QUEST_05_RITUAL_3"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_05_RITUAL_2" isKeyQuest="true" start="custom" title="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_2_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_2_DESC" visible="true" avatar="medicus">		
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_2_DESC"/>
+			<start_condition timeout="15" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<tribute  resource="iron" amount="10"/>
+				<tribute  resource="tools" amount="5"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<set-flag key="part2_rdy" value="true"/>
+				<start-quest id="QUEST_05_RITUAL_1"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_05_RITUAL_3" isKeyQuest="true" start="custom" title="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_3_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_3_DESC" visible="true"  avatar="monk">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_3_DESC"/>
+			<start_condition timeout="22" operator="and"/>
+			<objectives timeout="5" operator="and">
+				<tribute  resource="flour" amount="10"/>
+				<tribute resource="hops" amount="10"/>
+				<tribute resource="juice" amount="10"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<set-flag key="part3_rdy" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="QUEST_05_RITUAL_END" isKeyQuest="true" start="custom" title="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_END_TITLE" description="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_END_DESC" visible="false" avatar="client" finish="instant">
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_PHASE_05_QUEST_05_RITUAL_END_DESC"/>
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="5" operator="and">
+				<flag-has-value key="part1_rdy" value="true"/>
+				<flag-has-value key="part2_rdy" value="true"/>
+				<flag-has-value key="part3_rdy" value="true"/>
+			</objectives>
+			<fail_condition timeout="3" operator="and">
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<onSuccess >
+					<center-to-castle />
+					<lightningstrike minValue="-1" maxValue="-2" topLeftX="109" topLeftY="121" bottomRightX="130" bottomRightY="140" destroyOnNoDurability="false" produceFire="false" targetCountMin="10" targetCountMax="20"/>
+			</onSuccess>
+			<rewards>
+				<set-flag key="all_done" value="true"/>
+			</rewards>
+		</quest>
+
+		<!-- Trade helper quests -->
+
+		<quest id="TRADE_PREQUEST" start="custom" visible="false" finish="instant" repeatable="custom" avatar="merchant" >
+			<start_condition timeout="30" operator="and"/>
+			<onStarted notification="T_SCENARIO_2017_APOCALYPSE_TRADE_QUEST_01_DESC"/>
+			<objectives timeout="1" operator="and" >
+
+			</objectives>
+
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="all_done" value="true" />
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_DELETER" start="custom" visible="false" title="DEBUG: NEXT TRADE OFFER IN..." finish="instant" repeatable="custom">
+			<onStarted >
+				<set-flag key="delete_trades" value="false"/>
+			</onStarted>
+			<objectives timeout="60" operator="and"/>
+			<onSuccess>
+				<set-flag key="delete_trades" value="true"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="TRADE_HELPER_REPEATER" start="custom" visible="false" finish="instant" repeatable="custom">
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="120" operator="and" />
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="all_done" value="true" />
+				<flag-has-value key="clear_quests" value="true"/>
+			</fail_condition>
+			<rewards>
+				<start-quest id="TRADE_CHOSER_01"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_CHOSER_01" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and" >
+				<random chance="25"/>
+			</objectives>
+
+			<fail_condition timeout="2" operator="and" />
+
+			<onFailed >
+				<start-quest id="TRADE_CHOSER_02"/>
+			</onFailed>
+
+			<rewards>
+				<start-quest id="TRADE_01"/>
+				<start-quest id="TRADE_DELETER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_CHOSER_02" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and" >
+				<random chance="10"/>
+			</objectives>
+
+			<fail_condition timeout="2" operator="and" />
+
+			<onFailed >
+				<start-quest id="TRADE_CHOSER_03"/>
+			</onFailed>
+
+			<rewards>
+				<start-quest id="TRADE_02"/>
+				<start-quest id="TRADE_DELETER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_CHOSER_03" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and" >
+				<random chance="20"/>
+			</objectives>
+
+			<fail_condition timeout="2" operator="and" />
+
+			<onFailed >
+				<start-quest id="TRADE_CHOSER_04"/>
+			</onFailed>
+
+			<rewards>
+				<start-quest id="TRADE_03"/>
+				<start-quest id="TRADE_DELETER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_CHOSER_04" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and" >
+				<random chance="15"/>
+			</objectives>
+
+			<fail_condition timeout="2" operator="and" />
+
+			<onFailed >
+				<start-quest id="TRADE_CHOSER_05"/>
+			</onFailed>
+
+			<rewards>
+				<start-quest id="TRADE_04"/>
+				<start-quest id="TRADE_DELETER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_CHOSER_05" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and" >
+				<random chance="15"/>
+			</objectives>
+
+			<fail_condition timeout="2" operator="and" />
+
+			<onFailed >
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+			</onFailed>
+
+			<rewards>
+				<start-quest id="TRADE_05"/>
+				<start-quest id="TRADE_DELETER"/>
+			</rewards>
+		</quest>
+
+		<!-- Tades-->
+
+		<quest id="TRADE_01" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_SCENARIO_2017_APOCALYPSE_TRADE_QUEST_01_DESC" start="custom" repeatable="custom" visible="true">
+
+			<onStarted >
+				<set-flag key="trade_running" value="true"/>
+			</onStarted>
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="500" resource="coins" />
+				<flag-has-value key="delete_trades" value="false"/>
+			</objectives>
+
+			<onFailed >
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+				<set-flag key="trade_running" value="false"/>
+			</onFailed>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_trades" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<set-flag key="trade_running" value="false"/>
+				<resource amount="25" resource="corn"/>
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_02" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_SCENARIO_2017_APOCALYPSE_TRADE_QUEST_01_DESC" start="custom"  repeatable="custom" visible="true">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="500" resource="coins" />
+				<flag-has-value key="delete_trades" value="false"/>
+			</objectives>
+
+			<onFailed >
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+				<set-flag key="trade_running" value="false"/>
+			</onFailed>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_trades" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource amount="20" resource="juice"/>
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_03" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_SCENARIO_2017_APOCALYPSE_TRADE_QUEST_01_DESC" start="custom"  repeatable="custom" visible="true">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="500" resource="coins" />
+				<flag-has-value key="delete_trades" value="false"/>
+			</objectives>
+
+			<onFailed >
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+				<set-flag key="trade_running" value="false"/>
+			</onFailed>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_trades" value="true"/>
+			</fail_condition>
+
+			<rewards>
+					<resource resource="pig" amount="15"/>
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_04" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_SCENARIO_2017_APOCALYPSE_TRADE_QUEST_01_DESC" start="custom"  repeatable="custom" visible="true">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="500" resource="coins" />
+				<flag-has-value key="delete_trades" value="false"/>
+			</objectives>
+
+			<onFailed >
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+				<set-flag key="trade_running" value="false"/>
+			</onFailed>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_trades" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource amount="15" resource="brew"/>
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+			</rewards>
+		</quest>
+
+		<quest id="TRADE_05" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_B_20_TITEL" description="T_SCENARIO_2017_APOCALYPSE_TRADE_QUEST_01_DESC" start="custom"  repeatable="custom" visible="true">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="500" resource="coins" />
+				<flag-has-value key="delete_trades" value="false"/>
+			</objectives>
+
+			<onFailed >
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+				<set-flag key="trade_running" value="false"/>
+			</onFailed>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_trades" value="true"/>
+			</fail_condition>
+		
+			<rewards>
+				<resource amount="15" resource="sausage"/>
+				<start-quest id="TRADE_HELPER_REPEATER"/>
+			</rewards>
+		</quest>
+
+		<!-- STORM -->
+
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom">
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2" operator="and"/>
+			<rewards>
+				<lightningstrike topLeftX="110" topLeftY="106" bottomRightX="160" bottomRightY="151" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+
+		<!-- STORM END -->
+
+	</group>
+</questdb>
+

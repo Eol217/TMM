@@ -1,0 +1,190 @@
+[random_start]
+
+next:	sheep_stand_0			1
+next:	sheep_walk_right		0.75
+next:	sheep_stand_1			0.75
+next:	sheep_stand_2			0.75
+next:	sheep_walk_right2		0.75
+next:	sheep_stand_3			0.75
+next:	sheep_walk_back			0.75
+next:	sheep_walk_left			0.75
+next:	sheep_leftstand_0		0.75
+next:	sheep_lefteat_0			0.75
+next:	sheep_walk_back_2		0.75
+
+
+
+[sheep_stand_0]
+frame:	ani_sheepwalk_01.00.png		2.00
+
+delay:	3.00	10.00
+
+next:	sheep_walk_right			0.75
+next:	sheep_eat_0			1.00
+
+[sheep_eat_0]
+frame:	ani_sheepwalk_01.01.png		2.00
+
+delay:	1.00	5.00
+
+next:	sheep_stand_0			0.75
+next:	sheep_walk_right			1
+
+[sheep_walk_right]
+frame:	ani_sheepwalk_01.02.png		0.50
+frame:	ani_sheepwalk_01.03.png		0.10
+frame:	ani_sheepwalk_01.04.png		0.10
+frame:	ani_sheepwalk_01.05.png		0.10
+frame:	ani_sheepwalk_01.06.png		0.10
+frame:	ani_sheepwalk_01.07.png		0.10
+frame:	ani_sheepwalk_01.08.png		0.50
+
+delay:	1.00	5.00
+
+next:	sheep_stand_1			1
+next:	sheep_stand_2			1
+
+[sheep_stand_1]
+frame:	ani_sheepwalk_01.08.png		2.00
+
+delay:	3.00	10.00
+
+next:	sheep_stand_1			0.5
+next:	sheep_walk_right2		0.5
+next:	sheep_walk_left			0.75
+next:	sheep_stand_2			1
+
+
+[sheep_stand_2]
+frame:	ani_sheepwalk_01.09.png		2.00
+
+delay:	3.00	10.00
+
+next:	sheep_stand_2			0.5
+next:	sheep_walk_right2			1
+next:	sheep_walk_left			1
+next:	sheep_stand_1			1
+
+
+[sheep_walk_right2]
+frame:	ani_sheepwalk_01.10.png		0.10
+frame:	ani_sheepwalk_01.11.png		0.10
+frame:	ani_sheepwalk_01.12.png		0.10
+frame:	ani_sheepwalk_01.13.png		0.10
+frame:	ani_sheepwalk_01.14.png		0.10
+frame:	ani_sheepwalk_01.15.png		0.50
+
+
+delay:	0.10	1.00
+
+next:	sheep_stand_3			1
+next:	sheep_walk_back			0.75
+
+[sheep_stand_3]
+frame:	ani_sheepwalk_01.15.png		2.00
+play_ambient: sfx_buildings_pasture
+
+delay:	3.00	10.00
+
+next:	sheep_stand_3			0.5
+next:	sheep_walk_back					1
+
+[sheep_walk_back]
+frame:	ani_sheepwalk_01.16.png		0.1
+frame:	ani_sheepwalk_01.17.png		0.1
+frame:	ani_sheepwalk_01.18.png		0.1
+frame:	ani_sheepwalk_01.19.png		0.1
+frame:	ani_sheepwalk_01.20.png		0.1
+frame:	ani_sheepwalk_01.21.png		0.1
+frame:	ani_sheepwalk_01.22.png		0.1
+frame:	ani_sheepwalk_01.23.png		0.1
+frame:	ani_sheepwalk_01.24.png		0.1
+frame:	ani_sheepwalk_01.25.png		0.1
+frame:	ani_sheepwalk_01.26.png		0.1
+frame:	ani_sheepwalk_01.27.png		0.1
+frame:	ani_sheepwalk_01.28.png		0.1
+frame:	ani_sheepwalk_01.30.png		0.1
+frame:	ani_sheepwalk_01.31.png		0.1
+frame:	ani_sheepwalk_01.32.png		0.1
+frame:	ani_sheepwalk_01.33.png		0.1
+frame:	ani_sheepwalk_01.34.png		0.1
+frame:	ani_sheepwalk_01.35.png		0.5
+
+
+delay:	0.10	1.00
+
+next:	sheep_stand_2			0.75
+next:	sheep_walk_right2		0.5
+next:	sheep_walk_left			1
+next:	sheep_stand_1			1
+
+[sheep_walk_left]
+frame:	ani_sheepwalk_01.35.png		0.1
+frame:	ani_sheepwalk_01.36.png		0.1
+frame:	ani_sheepwalk_01.37.png		0.1
+frame:	ani_sheepwalk_01.38.png		0.1
+frame:	ani_sheepwalk_01.39.png		0.1
+frame:	ani_sheepwalk_01.40.png		0.5
+
+delay:	0.10	1.00
+
+next:	sheep_lefteat_0				0.75
+next:	sheep_leftstand_0			1
+
+[sheep_leftstand_0]
+frame:	ani_sheepwalk_01.40.png		2.00
+
+delay:	3.00	10.00
+
+next:	sheep_walk_back_2			0.75
+next:	sheep_lefteat_0			1.00
+
+[sheep_lefteat_0]
+frame:	ani_sheepwalk_01.41.png		2.00
+
+delay:	1.00	5.00
+
+next:	sheep_leftstand_0			0.75
+next:	sheep_walk_back_2			1
+
+[sheep_walk_back_2]
+frame:	ani_sheepwalk_01.42.png		0.1
+frame:	ani_sheepwalk_01.43.png		0.1
+frame:	ani_sheepwalk_01.44.png		0.1
+frame:	ani_sheepwalk_01.45.png		0.1
+frame:	ani_sheepwalk_01.46.png		0.1
+frame:	ani_sheepwalk_01.47.png		0.1
+frame:	ani_sheepwalk_01.48.png		0.1
+frame:	ani_sheepwalk_01.49.png		0.1
+frame:	ani_sheepwalk_01.50.png		0.1
+frame:	ani_sheepwalk_01.51.png		0.1
+frame:	ani_sheepwalk_01.52.png		0.1
+frame:	ani_sheepwalk_01.53.png		0.5
+
+
+delay:	0.10	1.00
+
+next:	sheep_eat_0				0.5
+next:	sheep_stand_0			1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

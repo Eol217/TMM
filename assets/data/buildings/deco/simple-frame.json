@@ -1,0 +1,21 @@
+{
+	"layers": [
+		{
+			"sprite": "{typeId}.png",
+			"anchor": "bottom",
+			"touchable": true
+		},
+		{
+			"sprite": {
+				"theme": {
+					"": null,
+					"winter": "{typeId}_snow.png",
+					"*": null
+				}
+			},
+			"transition": null,
+			"anchor": "bottom"
+		}
+	]
+
+}

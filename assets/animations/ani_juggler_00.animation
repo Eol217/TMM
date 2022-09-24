@@ -1,0 +1,55 @@
+[juggler_come_out]
+frame:	ani_jugglercamp_03.0.png		0.15
+frame:	ani_jugglercamp_03.1.png		0.15
+frame:	ani_jugglercamp_03.2.png		0.15
+frame:	ani_jugglercamp_03.3.png		0.15
+frame:	ani_jugglercamp_03.4.png		0.15
+frame:	ani_jugglercamp_03.5.png		0.15
+frame:	ani_jugglercamp_03.6.png		0.15
+frame:	ani_jugglercamp_04.0.png		1.00
+
+delay:	1.00	2.00
+
+next:	juggler_fire				1.00
+next:	juggler_ball				1.00
+
+[juggler_fire]
+frame:	ani_jugglercamp_01.0.png		0.15
+frame:	ani_jugglercamp_01.1.png		0.15
+frame:	ani_jugglercamp_01.2.png		0.15
+play_ambient: sfx_building_juggler_breathing_fire_var1
+frame:	ani_jugglercamp_01.3.png		0.15
+frame:	ani_jugglercamp_01.4.png		0.15
+frame:	ani_jugglercamp_01.5.png		0.15
+frame:	ani_jugglercamp_01.6.png		0.15
+frame:	ani_jugglercamp_01.7.png		0.15
+frame:	ani_jugglercamp_01.8.png		0.15
+frame:	ani_jugglercamp_01.9.png		0.15
+
+delay:	1.50	2.00
+
+next:	juggler_come_in				0.20
+next:	juggler_fire				1.00
+
+[juggler_come_in]
+frame:	ani_jugglercamp_04.0.png		0.15
+frame:	ani_jugglercamp_02.0.png		0.15
+frame:	ani_jugglercamp_02.1.png		0.15
+frame:	ani_jugglercamp_02.2.png		0.15
+frame:	ani_jugglercamp_02.3.png		0.15
+frame:	ani_jugglercamp_02.4.png		0.15
+frame:	ani_jugglercamp_02.5.png		0.15
+frame:	ani_jugglercamp_02.6.png		0.15
+
+delay:	1.50	2.00
+
+next:	juggler_come_out
+
+[juggler_ball]
+play_ambient: sfx_building_juggling_var1
+frame:	ani_jugglercamp_00.0.png		0.15
+frame:	ani_jugglercamp_00.1.png		0.15
+frame:	ani_jugglercamp_00.2.png		0.15
+frame:	ani_jugglercamp_00.3.png		0.15
+next:	juggler_come_in				0.20
+next:	juggler_ball				1.00

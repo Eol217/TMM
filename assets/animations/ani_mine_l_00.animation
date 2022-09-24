@@ -1,0 +1,64 @@
+[get_in]
+
+frame-delay: 0.15
+
+frame:	ani_mine_l_01.17.png
+frame:	ani_mine_l_01.18.png
+frame:	ani_mine_l_01.19.png
+frame:	ani_mine_l_01.20.png
+frame:	ani_mine_l_01.21.png
+frame:	ani_mine_l_01.22.png
+frame:	ani_mine_l_01.23.png
+frame:	ani_mine_l_01.24.png
+frame:	ani_mine_l_01.25.png
+frame:	ani_mine_l_01.26.png
+frame:	ani_mine_l_01.27.png
+frame:	ani_mine_l_01.28.png
+frame:	ani_mine_l_01.29.png
+frame:	ani_mine_l_01.29.png
+frame:	ani_mine_l_01.29.png
+frame:	ani_mine_l_01.29.png
+
+next:	idle			1
+
+[idle]
+
+frame-delay: 4.8
+frame:	ani_mine_l_01.29.png
+
+next:	get_out			1
+
+[get_out]
+
+frame-delay: 0.15
+frame:	ani_mine_l_01.00.png
+frame:	ani_mine_l_01.01.png
+frame:	ani_mine_l_01.02.png
+frame:	ani_mine_l_01.03.png
+frame:	ani_mine_l_01.04.png
+frame:	ani_mine_l_01.05.png
+frame:	ani_mine_l_01.06.png
+frame:	ani_mine_l_01.07.png
+frame:	ani_mine_l_01.08.png
+frame:	ani_mine_l_01.09.png
+frame:	ani_mine_l_01.10.png
+frame:	ani_mine_l_01.11.png
+frame:	ani_mine_l_01.12.png
+
+next:	shake			1
+
+
+[shake]
+
+frame-delay: 0.15
+
+frame:	ani_mine_l_01.13.png
+frame:	ani_mine_l_01.14.png
+frame:	ani_mine_l_01.15.png
+frame:	ani_mine_l_01.16.png
+frame:	ani_mine_l_01.13.png
+frame:	ani_mine_l_01.14.png
+frame:	ani_mine_l_01.15.png
+frame:	ani_mine_l_01.16.png
+
+next:	get_in			1

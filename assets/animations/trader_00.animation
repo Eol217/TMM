@@ -1,0 +1,27 @@
+[idle]
+
+trader_00.0.png		3
+
+
+delay:	0.30	4.00
+
+next: wave	1
+
+
+[wave]
+
+trader_00.1.png		0.2
+trader_00.2.png		0.2
+trader_00.3.png		0.2
+trader_00.4.png		0.5
+trader_00.5.png		0.2
+trader_00.6.png		0.2
+trader_00.7.png		1
+trader_00.8.png		0.2
+trader_00.5.png		0.2
+
+
+delay:	0.10	3.00
+
+next: idle	1
+

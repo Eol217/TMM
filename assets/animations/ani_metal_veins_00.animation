@@ -1,0 +1,284 @@
+[start]
+frame: ani_metal_veins_01.00.png
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+
+[glitter_0]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.00.png
+frame: ani_metal_veins_00.01.png
+frame: ani_metal_veins_00.02.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.50
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+
+[glitter_1]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.10.png
+frame: ani_metal_veins_00.11.png
+frame: ani_metal_veins_00.12.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.50
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+[glitter_2]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.20.png
+frame: ani_metal_veins_00.21.png
+frame: ani_metal_veins_00.22.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.50
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+[glitter_3]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.30.png
+frame: ani_metal_veins_00.31.png
+frame: ani_metal_veins_00.32.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.50
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+[glitter_4]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.40.png
+frame: ani_metal_veins_00.41.png
+frame: ani_metal_veins_00.42.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.50
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+[glitter_5]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.50.png
+frame: ani_metal_veins_00.51.png
+frame: ani_metal_veins_00.52.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.50
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+[glitter_6]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.60.png
+frame: ani_metal_veins_00.61.png
+frame: ani_metal_veins_00.62.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.50
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+[glitter_7]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.70.png
+frame: ani_metal_veins_00.71.png
+frame: ani_metal_veins_00.72.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.50
+next:	glitter_8				0.75
+next:glitter_straight			0.75
+
+[glitter_8]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.80.png
+frame: ani_metal_veins_00.81.png
+frame: ani_metal_veins_00.82.png
+frame: ani_metal_veins_01.00.png
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.50
+next:glitter_straight			0.75
+
+
+[glitter_straight]
+
+frame-delay: 0.15
+
+frame: ani_metal_veins_00.00.png
+frame: ani_metal_veins_00.01.png
+frame: ani_metal_veins_00.02.png
+frame: ani_metal_veins_00.10.png
+frame: ani_metal_veins_00.11.png
+frame: ani_metal_veins_00.12.png
+frame: ani_metal_veins_00.20.png
+frame: ani_metal_veins_00.21.png
+frame: ani_metal_veins_00.22.png
+frame: ani_metal_veins_00.30.png
+frame: ani_metal_veins_00.31.png
+frame: ani_metal_veins_00.32.png
+frame: ani_metal_veins_00.40.png
+frame: ani_metal_veins_00.41.png
+frame: ani_metal_veins_00.42.png
+frame: ani_metal_veins_00.50.png
+frame: ani_metal_veins_00.51.png
+frame: ani_metal_veins_00.52.png
+frame: ani_metal_veins_00.60.png
+frame: ani_metal_veins_00.61.png
+frame: ani_metal_veins_00.62.png
+frame: ani_metal_veins_00.70.png
+frame: ani_metal_veins_00.71.png
+frame: ani_metal_veins_00.72.png
+frame: ani_metal_veins_00.80.png
+frame: ani_metal_veins_00.81.png
+frame: ani_metal_veins_00.82.png
+frame: ani_metal_veins_01.00.png
+
+
+
+
+delay:	0.05	1.50
+
+next:	glitter_0				0.75
+next:	glitter_1				0.75
+next:	glitter_2				0.75
+next:	glitter_3				0.75
+next:	glitter_4				0.75
+next:	glitter_5				0.75
+next:	glitter_6				0.75
+next:	glitter_7				0.75
+next:	glitter_8				0.75
+next:glitter_straight			0.50
+

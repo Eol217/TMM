@@ -1,0 +1,20 @@
+[random_start]
+
+next: looking1	1
+next: looking2	1
+
+[looking1]
+
+bunny_idle.0.png 2
+
+delay: 1.00	8.00
+
+next: random_start
+
+[looking2]
+
+bunny_idle.10.png 2
+
+delay: 1.00	8.00
+
+next: random_start

@@ -1,0 +1,45 @@
+[work1]
+
+frame:	ani_weaver_00.0.png		0.1
+frame:	ani_weaver_00.1.png		0.1
+frame:	ani_weaver_00.0.png		0.1
+frame:	ani_weaver_00.2.png		0.1
+frame:	ani_weaver_00.0.png		0.1
+frame:	ani_weaver_00.1.png		0.1
+frame:	ani_weaver_00.0.png		0.1
+frame:	ani_weaver_00.2.png		0.1
+frame:	ani_weaver_00.0.png		0.1
+frame:	ani_weaver_00.1.png		0.1
+frame:	ani_weaver_00.0.png		0.1
+frame:	ani_weaver_00.2.png		0.1
+
+frame:	ani_weaver_00.0.png		0.2
+frame:	ani_weaver_00.1.png		0.1
+frame:	ani_weaver_00.0.png		0.1
+frame:	ani_weaver_00.2.png		0.1
+
+frame:	ani_weaver_00.0.png		0.2
+
+delay:	0.10	0.30
+
+next:	work1	0.75
+next:	work2	1
+
+[work2]
+
+frame:	ani_weaver_00.3.png		0.1
+play_ambient: sfx_buildings_weaver
+frame:	ani_weaver_00.4.png		0.1
+frame:	ani_weaver_00.3.png		0.1
+frame:	ani_weaver_00.3.png		0.1
+frame:	ani_weaver_00.4.png		0.1
+frame:	ani_weaver_00.3.png		0.1
+frame:	ani_weaver_00.3.png		0.1
+frame:	ani_weaver_00.4.png		0.4
+frame:	ani_weaver_00.3.png		0.1
+
+next:	work2	0.5
+next:	work1	1
+
+
+

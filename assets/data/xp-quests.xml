@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<questdb>
+	
+	<group>
+		<quest id="goodsquest"  start="instant" visible="false" repeatable="instant">
+			<objectives timeout="1">
+				<trade-profit amount="1000"/>
+			</objectives>
+
+			<onSuccess>
+				<xp value="150" message="T_GAME_TOWNLEVEL_TRADE" />
+			</onSuccess>
+		</quest>
+		<quest id="goodsquest2" start="instant" visible="false" repeatable="instant">
+			<objectives timeout="1">
+				<trade-profit amount="2000"/>
+			</objectives>
+
+			<onSuccess>
+				<xp value="300" message="T_GAME_TOWNLEVEL_TRADE" />
+			</onSuccess>
+		</quest>
+        
+		<quest id="happiness"  start="instant" visible="false" repeatable="instant">
+			<onSuccess>
+				<xp value="100" message="T_GAME_TOWNLEVEL_HAPPINESS"/>
+			</onSuccess>
+			<objectives timeout="300">
+				<happyness value="100" />
+			</objectives>
+		</quest>
+              
+
+		<quest id="happiness2"  start="instant" visible="false" repeatable="instant">
+			<onSuccess>
+				<xp value="200" message="T_GAME_TOWNLEVEL_HAPPINESS" />
+			</onSuccess>
+                        
+			<objectives timeout="600">
+				<happyness value="150" />
+			</objectives>
+
+		</quest>
+
+		<quest id="taxes"  start="instant" visible="false" repeatable="instant">
+			<onSuccess>
+				<xp value="50" message="T_GAME_TOWNLEVEL_MILITARY_TAXBONUS"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<tax-collected amount="1000" />
+			</objectives>
+		</quest>
+                
+		<!--quest id="annualcycle" title="play for a year" description="winter again?" start="instant" visible="false" repeatable="instant">
+		<objectives timeout="3600"/>
+			<rewards>
+				<xp value="500" message="T_GAME_TOWNLEVEL_QUEST" />
+			</rewards>
+		</quest-->
+
+		<quest id="population1"  start="instant" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<population count="25" />
+			</objectives>
+			<rewards>
+				<xp value="50" message="T_GAME_TOWNLEVEL_POPULATION" />
+				<start-quest id="population2"/>
+			</rewards>
+		</quest>
+
+		<quest id="population2"  start="instant" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<population count="50" />
+			</objectives>
+			<rewards>
+				<xp value="100" message="T_GAME_TOWNLEVEL_POPULATION" />
+				<start-quest id="population3"/>
+			</rewards>
+		</quest>
+
+		<quest id="population3" start="instant" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<population count="100" />
+			</objectives>
+			
+			<rewards>
+				<xp value="150" message="T_GAME_TOWNLEVEL_POPULATION" />
+				<start-quest id="population4"/>
+			</rewards>
+		</quest>
+
+		<quest id="population4" start="instant" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<population count="200" />
+			</objectives>
+			<rewards>
+				<xp value="500" message="T_GAME_TOWNLEVEL_HAPPINESS" />
+				<start-quest id="population5"/>
+			</rewards>
+		</quest>
+
+		<quest id="population5"  start="instant" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<population count="400" />
+			</objectives>
+			
+			<rewards>
+				<xp value="1000" message="T_GAME_TOWNLEVEL_HAPPINESS" />
+				<start-quest id="population6"/>
+			</rewards>
+		</quest>
+
+		<quest id="population6" start="instant" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<population count="800" />
+			</objectives>
+			<rewards>
+				<xp value="2500" message="T_GAME_TOWNLEVEL_HAPPINESS" />
+			</rewards>
+		</quest>
+     
+		<quest id="military_camps"  start="instant" visible="false" repeatable="instant">
+			<start_condition timeout="1">
+				<building type="building_banditcamp" count="1"/>
+			</start_condition>
+			<onSuccess>
+				<xp value="150" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<destroy-building target="building_banditcamp" count="1"/>
+			</objectives>
+		</quest>
+        
+		<quest id="military_raids"  start="instant" visible="false" repeatable="instant">
+			<onSuccess>
+				<xp value="75" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<raid-defeated count="3" />
+			</objectives>
+		</quest>
+
+		<quest id="military_population1"  start="instant" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<onSuccess>
+				<xp value="25" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<soldiers-in-town count="4" />
+			</objectives>
+		</quest>
+
+		<quest id="military_population2"  start="custom" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<onSuccess>
+				<xp value="50" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+
+			<objectives timeout="1">
+				<soldiers-in-town count="8" />
+			</objectives>
+			<rewards>
+				<start-quest id="military_population3"/>
+			</rewards>
+		</quest>
+
+		<quest id="military_population3"  start="custom" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<onSuccess>
+				<xp value="75" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<soldiers-in-town count="12" />
+			</objectives>
+			<rewards>
+				<start-quest id="military_population4"/>
+			</rewards>
+		</quest>
+
+		<quest id="military_population4"  start="custom" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<onSuccess>
+				<xp value="100" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<soldiers-in-town count="16" />
+			</objectives>
+			<rewards>
+				<start-quest id="military_population5"/>
+			</rewards>
+		</quest>
+
+		<quest id="military_population5"  start="custom" visible="false" repeatable="no">
+			<start_condition timeout="5"/>
+			<onSuccess>
+				<xp value="100" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<soldiers-in-town count="20" />
+			</objectives>
+			<rewards>
+				<start-quest id="military_population6"/>
+			</rewards>
+		</quest>
+
+		<quest id="military_population6"  start="custom" visible="false" repeatable="custom">
+			<start_condition timeout="300"/>
+			<onSuccess>
+				<xp value="150" message="T_GAME_TOWNLEVEL_MILITARY"/>
+			</onSuccess>
+			<objectives timeout="1">
+				<soldiers-in-town count="40" />
+			</objectives>
+		</quest>
+	</group>
+</questdb>    

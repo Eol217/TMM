@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:4354aefc188a8bde45c833c7dbbf433e:308dce6466dcac03de361081898d6854:69c034392dc0ecadacffb795e40d24e7$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="loading_spring.png" width="64" height="256">
+    <sprite n="loading_bg_spring" x="1" y="1" w="45" h="145" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="loading_butterfly.0" x="47" y="1" w="12" h="7" pX="0.5" pY="0.5" oX="95" oY="4" oW="145" oH="45"/>
+    <sprite n="loading_butterfly.1" x="47" y="9" w="10" h="9" pX="0.5" pY="0.5" oX="96" oY="2" oW="145" oH="45"/>
+    <sprite n="loading_butterfly.2" x="47" y="19" w="10" h="9" pX="0.5" pY="0.5" oX="97" oY="1" oW="145" oH="45" r="y"/>
+</TextureAtlas>

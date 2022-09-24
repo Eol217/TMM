@@ -1,0 +1,57 @@
+[random_start]
+
+next:	complain_1		0.75
+next:	complain_2		1
+
+
+
+[complain_1]
+
+frame:	farmer_medicus_stand_4.0.png 0.5
+frame:	farmer_medicus_complain_4.0.png 0.1
+play_ambient: sfx_townies_chatter_male_complaining_1
+
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.0.png 0.1
+
+
+delay:	0.5 1.5
+next:	random_start
+
+[complain_2]
+
+frame:	farmer_medicus_stand_4.0.png 0.5
+frame:	farmer_medicus_complain_4.0.png 0.1
+
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.2.png 0.2
+
+frame:	farmer_medicus_complain_4.1.png 0.2
+frame:	farmer_medicus_complain_4.0.png 0.1
+
+
+delay:	0.5 1.5
+next:	random_start

@@ -1,0 +1,11 @@
+[mint_work_2]
+
+play_ambient: sfx_buildings_smelter
+frame:	ani_mint_03.0.png		0.20
+frame:	ani_mint_03.1.png		0.20
+frame:	ani_mint_03.2.png		0.20
+frame:	ani_mint_03.3.png		0.20
+
+
+next:	mint_work_2
+

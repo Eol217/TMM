@@ -1,0 +1,2257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: Moneybags -->
+<!-- prestige: 185 -->
+
+      
+<questdb>  
+    <group avatar="client" >
+        <include file = "data/common-quests.xml"/>
+        <include file = "data/quests_sandbox.xml"/>
+        
+        <quest id="SCENARIO_STARTER" finish="instant" start="instant" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <onStarted >
+                <start-quest id="ELECTION_MAINQUEST" /> <!-- Mainquest -->
+<!-- DELETE THIS BEFORE RELEASE  <start-quest id="DEBUG_CHEAT" />  DELETE THIS BEFORE RELEASE -->
+            </onStarted>
+        </quest>
+<!-- DELETE THIS QUEST BEFORE RELEASE -->		
+<!-- DELETE THIS QUEST BEFORE RELEASE -->	
+<!-- DELETE THIS QUEST BEFORE RELEASE -->
+<!--
+		<quest id="DEBUG_CHEAT" start="custom" visible="true" isKeyQuest="false" title="CHEAT: LET ME CHOOSE ALL FACTIONS!" >
+			<objectives timeout="2" operator="and" >
+				<flag-has-value key="election_choosen_complete" value="true" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_01_start" value="true" />
+				<set-flag key="election_02_start" value="true" />
+				<set-flag key="election_03_start" value="true" />
+				<set-flag key="election_04_start" value="true" />
+				<set-flag key="election_05_start" value="true" />
+				<set-flag key="election_06_start" value="true" />
+				<set-flag key="election_07_start" value="true" />
+				<set-flag key="election_08_start" value="true" />
+			</rewards>
+		</quest>
+-->
+<!-- /DELETE THIS QUEST BEFORE RELEASE -->	
+<!-- /DELETE THIS QUEST BEFORE RELEASE -->	
+<!-- /DELETE THIS QUEST BEFORE RELEASE -->		
+		
+<!-- Main Questline-->   
+        <quest id="ELECTION_MAINQUEST" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_MAINQUEST_TITLE" description="T_SCENARIO_2017_ELECTION_MAINQUEST_DESC" >
+			<start_condition timeout="2" operator="and" />
+            <onStarted notification="T_SCENARIO_2017_ELECTION_MAINQUEST_DESC">
+				<start-quest id="ELECTION_QUEST_01" />
+				<start-quest id="ELECTION_QUEST_CHOOSER_1" />
+				<start-quest id="ELECTION_QUEST_TIMELIMIT_STARTER" />
+				<start-quest id="ELECTION_QUEST_COUNTER_1" />
+			</onStarted>
+			<objectives timeout="2" operator="and" >
+				<quest-done id="ELECTION_QUEST_COUNTER_3" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_MAINQUEST_SUCCESS" >
+				<set-flag key="election_stop_timer" value="true" />
+			</onSuccess>
+			<rewards >
+				<start-quest id="scenario-finished" />
+				<resource amount="70" resource="prestige" />
+				<set-flag key="election_scenario_over" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_timelimit_reached" value="true" />
+			</fail_condition>
+			<onFailed notification="T_SCENARIO_2017_ELECTION_MAINQUEST_FAILED" >
+				<set-flag key="election_scenario_over" value="true" />
+				<start-quest id="scenario-failed" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_01" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_STANDARD_QUEST_01_TITLE" description="T_SCENARIO_2017_ELECTION_STANDARD_QUEST_01_DESC" >
+			<start_condition timeout="5" operator="and" />
+            <onStarted notification="T_SCENARIO_2017_ELECTION_STANDARD_QUEST_01_DESC"/>
+			<objectives timeout="2" operator="and" >
+				<deassign count="1" trigger="command" type="building_carpenter" />
+			</objectives>
+			<rewards >
+				<resource amount="14" resource="stone" />
+				<start-quest id="ELECTION_QUEST_03" />
+			</rewards>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_03" start="custom" visible="true" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_3_NAME" description="T_SCENARIO_2017_ELECTION_STANDARD_QUEST_02_DESC" >
+			<start_condition timeout="4" operator="and" />
+            <onStarted notification="T_SCENARIO_2017_ELECTION_STANDARD_QUEST_02_DESC"/>
+			<objectives timeout="2" operator="and" >
+				<building type="building_fishing_lodge" count="2" />
+			</objectives>
+			<rewards >
+				<resource amount="8" resource="planks" />
+				<start-quest id="ELECTION_QUEST_04" />
+			</rewards>
+        </quest>
+		 
+		<quest id="ELECTION_QUEST_04" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2016_06_QUEST_01_NAME" description="T_SCENARIO_2017_ELECTION_STANDARD_QUEST_03_DESC" >
+			<start_condition timeout="4" operator="and" />
+            <onStarted notification="T_SCENARIO_2017_ELECTION_STANDARD_QUEST_03_DESC"/>
+			<objectives timeout="2" operator="and" >
+				<building type="building_sawmill" count="1" />
+			</objectives>
+			<rewards >
+				<resource amount="8" resource="planks" />
+				<start-quest id="ELECTION_QUEST_10" />
+			</rewards>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_10" start="custom" visible="false" repeatable="custom" isKeyQuest="true" >
+			<start_condition timeout="1" operator="and" >
+				<flag-has-value key="election_done_counter" value="false" />
+			</start_condition>
+            <onStarted >
+				<start-quest id="ELECTION_QUEST_STARTER" /> <!-- Start a faction Questline here -->
+				<start-quest id="ELECTION_QUEST_REPEAT_RANDOMIZER" />
+			</onStarted>
+			<objectives timeout="2" operator="and" >
+				<flag-has-value key="election_factionquest_done" value="true" /> <!-- Continue here after a faction questline -->
+				<flag-has-value key="election_scenario_over" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_factionquest_done" value="false" /> 
+				<set-flag key="election_done_counter" value="true" /> 
+				<start-quest id="ELECTION_QUEST_10_REPEATER" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_10_REPEATER" start="custom" visible="false" repeatable="custom" >
+			<objectives timeout="2" operator="and" >
+				<flag-has-value key="election_done_counter" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_10" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_COUNTER_1" title="DEBUG: Counter 1" start="custom" visible="false" isKeyQuest="true" >
+			<objectives timeout="2" operator="and" >
+				<flag-has-value key="election_done_counter" value="true" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_done_counter" value="false" />
+				<start-quest id="ELECTION_QUEST_COUNTER_2" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_COUNTER_2" title="DEBUG: Counter 2" start="custom" visible="false" isKeyQuest="true" >
+			<objectives timeout="2" operator="and" >
+				<flag-has-value key="election_done_counter" value="true" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_done_counter" value="false" />
+				<start-quest id="ELECTION_QUEST_COUNTER_3" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_COUNTER_3" title="DEBUG: Counter 3" start="custom" visible="false" isKeyQuest="true" >
+			<objectives timeout="2" operator="and" >
+				<flag-has-value key="election_done_counter" value="true" />
+			</objectives>
+			<rewards >
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		
+		<quest id="ELECTION_QUEST_REPEAT_RANDOMIZER" title="DEBUG: RANDOMIZER" start="custom" visible="false" repeatable="custom" isKeyQuest="true" >
+			<objectives timeout="5" operator="and" >
+				<flag-has-value key="player_has_choosen" value="true" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_CHOOSER_1" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="ELECTION_QUEST_TIMELIMIT_STARTER" start="custom" visible="false" isKeyQuest="true" >
+			<start_condition timeout="1" operator="and" >
+				<season season="autumn" />
+			</start_condition>
+			<objectives timeout="5" operator="and" >
+				<season season="summer" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_TIMELIMIT" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_stop_timer" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_TIMELIMIT" avatar="client" description="T_SCENARIO_2017_ELECTION_MAINQUEST_TIMER" title="T_SCENARIO_2017_ELECTION_MAINQUEST_TIMER_TITLE" finish="instant" start="custom" visible="true" isKeyQuest="true" >
+			<start_condition timeout="72" operator="and">
+				<season season="autumn" />
+			</start_condition>
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MAINQUEST_TIMER" />
+			<objectives timeout="2" operator="and" >
+				<flag-has-value key="election_stop_timer" value="true" />
+			</objectives>
+			<fail_condition timeout="600" operator="and" />
+			<rewards >
+				<resource amount="5" resource="prestige" />
+			</rewards>
+			<onFailed >
+				<set-flag key="election_timelimit_reached" value="true" />
+			</onFailed>
+		</quest>
+		
+<!-- FACTION QUESTS -->
+		
+	<!-- RELIGIOUS -->
+		<quest id="ELECTION_QUEST_FACTION_11" avatar="monk" title="T_SCENARIO_2017_ELECTION_RELIGIOUS_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_START" >
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_01_PRE" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_RELIGIOUS_08" />
+				<quest-done id="ELECTION_QUEST_RELIGIOUS_06" />
+				<flag-has-value key="election_religious_needislow" value="false" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_religious" value="true" />
+				<set-flag key="election_01_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_01_PRE" visible="false" start="custom" repeatable="custom" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and" >
+				<building count="1" type="building_tavern" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards >
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_01" />
+			</rewards>
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_04" />
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_02" />
+			</onFailed>
+		</quest>
+
+		<quest id="ELECTION_QUEST_RELIGIOUS_01" avatar="monk" title="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_01_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_01_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="and">
+				<destroy-building count="1" target="building_tavern" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_01_SUCCESS" />
+			<rewards>
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_04" />
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_02" />
+				<resource amount="10" resource="brew" />
+				<resource amount="10" resource="juice" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_02" avatar="monk" title="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_02_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_02_DESC" >
+				<unlock key="building_level_2_special" />
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_02_2" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="or">
+				<construct count="1" type="building_church" />
+				<flag-has-value key="election_quest_construct_church" value="true" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_02_SUCCESS" />
+			<rewards>
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_07" />
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_03_PRE" />
+				<resource amount="8" resource="tools" />
+				<resource amount="15" resource="stone" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_02_2" start="custom" visible="false" repeatable="custom" >
+			<objectives timeout="2" operator="and" >
+				<construct count="1" type="building_church_x2" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_quest_construct_church" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_RELIGIOUS_02" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_07" avatar="monk" title="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_07_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_07_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_07_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="and">
+				<building count="2" type="deco_2x2_crypta" />
+				<construct count="2" type="deco_1x1_grave_01" />
+				<construct count="2" type="deco_1x1_grave_02" />
+			</objectives>
+			<rewards>
+				<resource amount="12" resource="bread" />
+				<resource amount="10" resource="juice" />
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_08" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_08" avatar="monk" title="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_08_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_08_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_08_DESC" />
+			<start_condition timeout="3" operator="and" >
+			</start_condition>
+			<objectives timeout="1" operator="and">
+				<construct count="3" type="deco_1x1_graveyardwall_x" />
+				<construct count="3" type="deco_1x1_graveyardwall_y" />
+			</objectives>
+			<rewards>
+				<resource amount="10" resource="juice" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_04" avatar="monk" title="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_04_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_04_DESC" />
+			<start_condition timeout="7" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_hopsfarm" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_05" />
+				<resource amount="15" resource="hops" />
+				<resource amount="10" resource="tools" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_05" avatar="monk" title="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_05_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_05_DESC" >
+				<unlock key="building_level_2_food" />
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_05_2" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="or">
+				<flag-has-value key="election_quest_construct_monestary" value="true" />
+				<construct count="1" type="building_monestary" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_06" />
+				<resource amount="15" resource="corn" />
+				<resource amount="15" resource="hops" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_05_2" visible="false" start="custom" >
+			<objectives timeout="2" operator="and" >
+				<construct count="1" type="building_monestary_x2" />
+			</objectives>
+			<rewards>
+				<set-flag key="election_quest_construct_monestary" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_RELIGIOUS_05" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_06" avatar="monk" title="T_GAME_QUEST_SCEN14_HEALER_04_TITLE" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_06_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="and">
+				<produce amount="18" resource="brew" />
+			</objectives>
+			<rewards>
+				<resource amount="300" resource="coins" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_03_PRE" start="custom" visible="false" repeatable="custom" isKeyQuest="true" >
+			<start_condition timeout="5" operator="and" />
+			<objectives timeout="5" operator="and_not">
+				<happyness type="religion" value="90" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_03" />
+				<set-flag key="election_religious_needislow" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario-finished" value="true" />
+				<flag-has-value key="election_factionquest_done" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_RELIGIOUS_03" avatar="monk" title="T_GAME_QUEST_SCEN8_3_NAME" description="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_03_DESC" repeatable="custom" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_03_DESC" />
+			<start_condition timeout="5" operator="and" />
+			<objectives timeout="1" operator="and">
+				<happyness type="religion" value="90" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_03_SUCCESS" />
+			<rewards>
+				<start-quest id="ELECTION_QUEST_RELIGIOUS_03_PRE" />
+				<resource amount="150" resource="coins" />
+				<set-flag key="election_religious_needislow" value="false" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+	<!-- / RELIGIOUS -->
+	
+	<!-- MILITARY -->
+		<quest id="ELECTION_QUEST_FACTION_21" avatar="knight" title="T_SCENARIO_2017_ELECTION_MILITARY_TITLE" description="T_SCENARIO_2017_ELECTION_MILITARY_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MILITARY_START" >
+				<start-quest id="ELECTION_QUEST_MILITARY_01" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_MILITARY_05" />
+				<quest-done id="ELECTION_QUEST_MILITARY_06" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_MILITARY_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_military" value="true" />
+				<set-flag key="election_02_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+					
+		<quest id="ELECTION_QUEST_MILITARY_01" avatar="knight" title="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_01_TITLE" description="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_01_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="1" type="building_barracks" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_MILITARY_02" />
+				<resource amount="10" resource="tools" />
+				<resource amount="15" resource="stone" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MILITARY_03" avatar="knight" title="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_03_TITLE" description="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_03_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_03_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="3" type="deco_1x1_tent" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_MILITARY_05" />
+				<resource amount="12" resource="planks" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MILITARY_05" avatar="knight" title="T_QUESTS_PRODUCE_SAUSAGES" description="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_05_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<produce amount="12" resource="sausage"/>
+			</objectives>
+			<rewards>
+				<resource amount="10" resource="brew" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MILITARY_02" avatar="knight" title="T_GAME_QUEST_SCEN13_12_TITLE" description="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_02_DESC" >
+				<start-quest id="ELECTION_QUEST_MILITARY_03" />
+			</onStarted>
+			<start_condition timeout="5" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<assign count="6" trigger="is_assigned" type="building_watchtower" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_MILITARY_04" />
+				<resource amount="250" resource="coins" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MILITARY_04" avatar="knight" title="T_GAME_QUEST_SCEN_WW_DISASTER_30_NAME" description="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_04_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<soldiers-in-town count="10" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_MILITARY_06" />
+				<resource amount="12" resource="meat"/>
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MILITARY_06" avatar="knight" title="T_SCENARIO_2017_APOCALYPSE_PHASE_04_QUEST_04B_TITLE" description="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_06_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_archery_contest" />
+			</objectives>
+			<rewards>
+				<resource amount="12" resource="herbs" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+	<!-- / MILITARY -->
+
+	<!-- NOBLEMEN -->
+		<quest id="ELECTION_QUEST_FACTION_31" avatar="nobleman" title="T_SCENARIO_2017_ELECTION_NOBLEMEN_TITLE" description="T_SCENARIO_2017_ELECTION_NOBLEMEN_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_START" >
+				<start-quest id="ELECTION_QUEST_NOBLEMEN_01" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_NOBLEMEN_02" />
+				<quest-done id="ELECTION_QUEST_NOBLEMEN_03" />
+				<quest-done id="ELECTION_QUEST_NOBLEMEN_06" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_noblemen" value="true" />
+				<set-flag key="election_03_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_NOBLEMEN_01" avatar="nobleman" title="T_GAME_QUESTS_VINEYARD_JUICEMANUFACTURE_TITLE" description="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_01_DESC" >
+				<start-quest id="ELECTION_QUEST_NOBLEMEN_04" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_winefarm" />
+				<building count="1" type="building_vineyard" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_NOBLEMEN_02" />
+				<resource amount="12" resource="meat" />
+				<resource amount="250" resource="coins" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_NOBLEMEN_02" avatar="nobleman" title="T_QUESTS_PRODUCE_JUICE" description="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_02_DESC" >
+				<start-quest id="ELECTION_QUEST_NOBLEMEN_05" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<produce amount="16" resource="juice" />
+			</objectives>
+			<rewards>
+				<resource amount="250" resource="coins" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_NOBLEMEN_03" avatar="nobleman" title="T_GAME_QUEST_DESIRES_12_TITLE" description="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_03_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_03_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_jousting" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="nuggets" />
+				<resource amount="20" resource="ore" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_NOBLEMEN_05" avatar="nobleman" title="T_GAME_QUEST_SCEN3_10_NAME" description="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_05_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_goldsmith" />
+			</objectives>
+			<rewards>
+				<resource amount="10" resource="tools" />
+				<start-quest id="ELECTION_QUEST_NOBLEMEN_06" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_NOBLEMEN_06" avatar="nobleman" title="T_QUESTS_PRODUCE_JEWELLERY" description="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_06_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<produce amount="12" resource="jewelry" />
+			</objectives>
+			<rewards>
+				<resource amount="350" resource="coins" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_NOBLEMEN_04" avatar="nobleman" title="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_04_TITLE" description="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_NOBLEMEN_QUEST_04_DESC" >
+			</onStarted>
+			<start_condition timeout="5" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="1" type="deco_2x2_crypta" />
+				<construct count="1" type="deco_2x2_statue_01" />
+			</objectives>
+			<rewards>
+				<resource amount="10" resource="tools" />
+				<resource amount="250" resource="coins" />
+				<start-quest id="ELECTION_QUEST_NOBLEMEN_03" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+	<!-- /NOBLEMEN -->
+	
+	<!-- FLOWER CLUB -->
+		<quest id="ELECTION_QUEST_FACTION_41" avatar="oldwoman" title="T_SCENARIO_2017_ELECTION_FLOWERCLUB_TITLE" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_START" >
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_01" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_FLOWERCLUB_04" />
+				<quest-done id="ELECTION_QUEST_FLOWERCLUB_05" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_flowerclub" value="true" />
+				<set-flag key="election_04_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>		
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_01" avatar="oldwoman" title="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_01_TITLE" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_01_DESC" >
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_07_PRE" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="or" >
+				<construct count="3" type="deco_1x1_flowerbed_01" />
+				<construct count="3" type="deco_1x1_flowerbed_02" />
+			</objectives>
+			<rewards>
+				<resource amount="12" resource="fabric" />
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_06" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_06" avatar="oldwoman" title="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_06_TITLE" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_06_DESC" >
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_02" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="2" type="deco_1x2_stonebench_1" />
+				<construct count="2" type="deco_2x1_stonebench_2" />
+			</objectives>
+			<rewards>
+				<resource amount="10" resource="cloths" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_02" avatar="oldwoman" title="T_GAME_QUEST_SCEN4_3_NAME" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_02_DESC" >
+				<set-durabilitychange topLeftX="67" topLeftY="95" bottomRightX="74" bottomRightY="110" destroyOnNoDurability="false" minValue="-8" maxValue="-3" />
+				<set-durabilitychange topLeftX="83" topLeftY="84" bottomRightX="87" bottomRightY="101" destroyOnNoDurability="false" minValue="-8" maxValue="-3" />
+				<set-durabilitychange topLeftX="89" topLeftY="75" bottomRightX="90" bottomRightY="76" destroyOnNoDurability="false" minValue="-8" maxValue="-3" />
+			</onStarted>
+			<start_condition timeout="7" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="2" type="building_well"  />
+			</objectives>
+			<rewards>
+				<resource amount="15" resource="stone" />
+				<resource amount="8" resource="planks" />
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_03" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_03" avatar="oldwoman" title="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_03_TITLE" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_03_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_03_DESC" >
+				<set-durabilitychange topLeftX="67" topLeftY="95" bottomRightX="74" bottomRightY="110" destroyOnNoDurability="false" minValue="-8" maxValue="-3" />
+				<set-durabilitychange topLeftX="83" topLeftY="84" bottomRightX="87" bottomRightY="101" destroyOnNoDurability="false" minValue="-8" maxValue="-3" />
+				<set-durabilitychange topLeftX="89" topLeftY="75" bottomRightX="90" bottomRightY="76" destroyOnNoDurability="false" minValue="-8" maxValue="-3" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="3" type="deco_1x1_canal_x" />
+				<construct count="3" type="deco_1x1_canal_y" />
+				<construct count="2" type="deco_1x1_canal_corner" />
+			</objectives>
+			<rewards>
+				<resource amount="10" resource="fish" />
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_04" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_04" avatar="oldwoman" title="T_SCENARIO_2016_FESTIVITIES_AUTUMN_03_NAME" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_04_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" >
+				<quest-done id="ELECTION_QUEST_FLOWERCLUB_06" />
+			</start_condition>
+			<objectives timeout="2" operator="and" >
+				<happyness type="decay" value="95" />
+			</objectives>
+			<rewards>
+				<resource amount="12" resource="jewelry" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_07_PRE" visible="false" start="custom" repeatable="custom" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="or" >
+				<building count="1" type="building_butcher" />
+				<building count="1" type="building_pigfarm" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_07" />
+			</rewards>
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_05" />
+			</onFailed>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_07" avatar="oldwoman" title="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_07_TITLE" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_07_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_07_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<destroy-building count="1" target="building_butcher" />
+				<destroy-building count="1" target="building_pigfarm" />
+			</objectives>
+			<rewards>
+				<resource amount="250" resource="coins" />
+				<resource amount="25" resource="meat" />
+				<start-quest id="ELECTION_QUEST_FLOWERCLUB_05" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_FLOWERCLUB_05" avatar="oldwoman" title="T_GAME_QUEST_SCEN8_6_NAME" description="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_FLOWERCLUB_QUEST_05_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="2" type="building_hunters_cabin" />
+			</objectives>
+			<rewards>
+				<resource amount="350" resource="coins" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+	<!-- /FLOWER CLUB --> 
+
+	<!-- MERCHANTS GUILD -->
+		<quest id="ELECTION_QUEST_FACTION_51" avatar="merchant" title="T_SCENARIO_2017_ELECTION_MERCHANTS_TITLE" description="T_SCENARIO_2017_ELECTION_MERCHANTS_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_START" >
+				<start-quest id="ELECTION_QUEST_MERCHANTS_00" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_MERCHANTS_04" />
+				<quest-done id="ELECTION_QUEST_MERCHANTS_06" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_MERCHANTS_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_merchant" value="true" />
+				<set-flag key="election_05_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_00" start="custom" visible="false" isKeyQuest="true" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and" >
+				<building count="1" type="building_market" />
+			</objectives>
+			<rewards>
+				<start-quest id="ELECTION_QUEST_MERCHANTS_05" />
+			</rewards>
+			<fail_condition timeout="1" operator="and_not" >
+				<building count="1" type="building_market" />
+			</fail_condition>
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_MERCHANTS_01" />
+			</onFailed>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_01" avatar="merchant" title="T_GAME_QUEST_SCEN_CC_45_TITEL" description="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_01_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_market" />
+			</objectives>
+			<rewards>
+				<resource amount="15" resource="tools" />
+				<start-quest id="ELECTION_QUEST_MERCHANTS_06" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_06" avatar="merchant" title="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_06_TITLE" description="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_06_DESC" >
+				<start-quest id="ELECTION_QUEST_MERCHANTS_02_PRE" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="5" type="deco_2x2_littlemarket" />
+			</objectives>
+			<rewards>
+				<resource amount="30" resource="hops" />
+				<resource amount="20" resource="fabric" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_02_PRE" start="custom" visible="false" >
+			<start_condition timeout="5" operator="and" />
+			<onStarted >
+				<destruct-building count="1" type="building_tradeguild" />
+			</onStarted>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_MERCHANTS_02" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_02" avatar="merchant" title="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_02_TITLE" description="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_02_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="1" type="building_tradeguild" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="iron" />
+				<start-quest id="ELECTION_QUEST_MERCHANTS_03" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_03" avatar="merchant" title="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_03_TITLE" description="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_03_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_03_DESC" >
+				<start-quest id="ELECTION_QUEST_MERCHANTS_07" />
+				<start-quest id="ELECTION_QUEST_MERCHANTS_03_HELP" />
+				<start-quest id="ELECTION_QUEST_MERCHANTS_03_HELP_2" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="or" >
+				<flag-has-value key="election_merchant_ressell" value="true"/>
+				<flag-has-value key="election_merchant_resbuy" value="true"/>
+			</objectives>
+			<rewards>
+				<resource amount="30" resource="corn" />
+				<resource amount="20" resource="herbs" />
+				<start-quest id="ELECTION_QUEST_MERCHANTS_04" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_03_HELP" start="custom" visible="false" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="or">
+				<auto-trade-buy-created amount="1" resource="bread" />
+				<auto-trade-buy-created amount="1" resource="cloths" />
+				<auto-trade-buy-created amount="1" resource="coal" />
+				<auto-trade-buy-created amount="1" resource="corn" />
+				<auto-trade-buy-created amount="1" resource="fabric" />
+				<auto-trade-buy-created amount="1" resource="fish" />
+				<auto-trade-buy-created amount="1" resource="flour" />
+				<auto-trade-buy-created amount="1" resource="gold" />
+				<auto-trade-buy-created amount="1" resource="grapes" />
+				<auto-trade-buy-created amount="1" resource="iron" />
+				<auto-trade-buy-created amount="1" resource="jewelry" />
+				<auto-trade-buy-created amount="1" resource="juice" />
+				<auto-trade-buy-created amount="1" resource="meat" />
+				<auto-trade-buy-created amount="1" resource="nuggets" />
+				<auto-trade-buy-created amount="1" resource="ore" />
+				<auto-trade-buy-created amount="1" resource="planks" />
+				<auto-trade-buy-created amount="1" resource="stone" />
+				<auto-trade-buy-created amount="1" resource="tools" />
+				<auto-trade-buy-created amount="1" resource="wood" />
+				<auto-trade-buy-created amount="1" resource="wool" />
+				<auto-trade-buy-created amount="1" resource="hops" />
+				<auto-trade-buy-created amount="1" resource="sausage" />
+				<auto-trade-buy-created amount="1" resource="skins" />
+				<auto-trade-buy-created amount="1" resource="pig" />
+				<auto-trade-buy-created amount="1" resource="armor" />
+				<auto-trade-buy-created amount="1" resource="weapons" />
+				<auto-trade-buy-created amount="1" resource="herbs" />
+				<auto-trade-buy-created amount="1" resource="brew" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_merchant_resbuy" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_03_HELP_2" start="custom" visible="false" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="or">
+				<auto-trade-sell-created amount="1" resource="bread" />
+				<auto-trade-sell-created amount="1" resource="cloths" />
+				<auto-trade-sell-created amount="1" resource="coal" />
+				<auto-trade-sell-created amount="1" resource="corn" />
+				<auto-trade-sell-created amount="1" resource="fabric" />
+				<auto-trade-sell-created amount="1" resource="fish" />
+				<auto-trade-sell-created amount="1" resource="flour" />
+				<auto-trade-sell-created amount="1" resource="gold" />
+				<auto-trade-sell-created amount="1" resource="grapes" />
+				<auto-trade-sell-created amount="1" resource="iron" />
+				<auto-trade-sell-created amount="1" resource="jewelry" />
+				<auto-trade-sell-created amount="1" resource="juice" />
+				<auto-trade-sell-created amount="1" resource="meat" />
+				<auto-trade-sell-created amount="1" resource="nuggets" />
+				<auto-trade-sell-created amount="1" resource="ore" />
+				<auto-trade-sell-created amount="1" resource="planks" />
+				<auto-trade-sell-created amount="1" resource="stone" />
+				<auto-trade-sell-created amount="1" resource="tools" />
+				<auto-trade-sell-created amount="1" resource="wood" />
+				<auto-trade-sell-created amount="1" resource="wool" />
+				<auto-trade-sell-created amount="1" resource="hops" />
+				<auto-trade-sell-created amount="1" resource="sausage" />
+				<auto-trade-sell-created amount="1" resource="skins" />
+				<auto-trade-sell-created amount="1" resource="pig" />
+				<auto-trade-sell-created amount="1" resource="armor" />
+				<auto-trade-sell-created amount="1" resource="weapons" />
+				<auto-trade-sell-created amount="1" resource="herbs" />
+				<auto-trade-sell-created amount="1" resource="brew" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_merchant_ressell" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_04" avatar="merchant" title="T_GAME_QUEST_SCEN5_11_NAME" description="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_04_DESC" />
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<trade-profit amount="2500" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="nuggets" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_07" avatar="merchant" title="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_07_TITLE" description="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_07_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_07_DESC" >
+				<set-trade-costs sell="150" buy="150" resource="brew" />
+				<set-trade-costs sell="150" buy="150" resource="cloths" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<sell-resource resource="brew" amount="20" />
+				<sell-resource resource="cloths" amount="20" />
+			</objectives>
+			<rewards>
+				<resource amount="8" resource="armor" />
+				<set-trade-costs sell="100" buy="100" resource="brew" />
+				<set-trade-costs sell="100" buy="100" resource="cloths" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_MERCHANTS_05" avatar="merchant" title="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_05_TITLE" description="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_MERCHANTS_QUEST_05_DESC" >
+				<unlock key="building_level_2_needs" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="1" type="building_market_x2" />
+			</objectives>
+			<rewards>
+				<resource amount="15" resource="tools" />
+				<start-quest id="ELECTION_QUEST_MERCHANTS_06" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+	<!-- SERVANTS -->
+		<quest id="ELECTION_QUEST_FACTION_61" avatar="townie" title="T_SCENARIO_2017_ELECTION_SERVANTS_TITLE" description="T_SCENARIO_2017_ELECTION_SERVANTS_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_START" >
+				<start-quest id="ELECTION_QUEST_SERVANTS_01" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_SERVANTS_03" />
+				<quest-done id="ELECTION_QUEST_SERVANTS_05" />
+				<quest-done id="ELECTION_QUEST_SERVANTS_06" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_SERVANTS_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_servants" value="true" />
+				<set-flag key="election_06_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_01" avatar="townie" title="T_GAME_QUEST_SCEN_WW_DISASTER_20_NAME" description="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_01_DESC" >
+				<start-quest id="ELECTION_QUEST_SERVANTS_04" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<coverage coverage="80" type="firefighters" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="wood" />
+				<start-quest id="ELECTION_QUEST_SERVANTS_02" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_02" avatar="townie" title="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_NAME" description="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_02_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_jugglercamp" />
+			</objectives>
+			<rewards>
+				<resource amount="30" resource="wool" />
+				<start-quest id="ELECTION_QUEST_SERVANTS_03" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_03" avatar="townie" title="T_GAME_HINT_MOREWAREHOUSES" description="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_03_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_03_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<construct count="1" type="building_warehouse" />
+			</objectives>
+			<rewards>
+				<resource amount="30" resource="pig" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_04" avatar="townie" title="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_04_TITLE" description="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_04_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="20" resource="cloths" />
+			</objectives>
+			<rewards>
+				<resource amount="15" resource="planks" />
+				<resource amount="15" resource="stone" />
+				<start-quest id="ELECTION_QUEST_SERVANTS_05" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_05" avatar="townie" title="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_05_TITLE" description="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_05_DESC" >
+				<start-quest id="ELECTION_QUEST_SERVANTS_07" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="15" resource="fabric" />
+				<tribute amount="15" resource="leather" />
+			</objectives>
+			<rewards>
+				<resource amount="12" resource="tools" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_07" repeatable="custom" avatar="townie" title="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_07_TITLE" description="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_07_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_07_DESC" >
+				<start-quest id="ELECTION_QUEST_SERVANTS_07_HELP" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<flag-has-value key="election_servants_unassign" value="true" /> 
+				<tax-collected amount="600" />
+			</objectives>
+			<rewards>
+				<resource amount="15" resource="brew" />
+				<start-quest id="ELECTION_QUEST_SERVANTS_06" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_07_HELP" start="custom" title="DEBUG: CHECK IF ASSIGNED" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<deassign count="1" trigger="command" type="building_collector"/>
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_SERVANTS_07_HELP_2" />
+				<set-flag key="election_servants_unassign" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_SERVANTS_07" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_07_HELP_2" start="custom" title="DEBUG: CHECK IF ASSIGNED" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and">
+				<assign count="1" trigger="is_assigned" type="building_collector"/>
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_SERVANTS_07_HELP" />
+				<set-flag key="election_servants_unassign" value="false" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_SERVANTS_07" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SERVANTS_06" avatar="townie" title="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_06_TITLE" description="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SERVANTS_QUEST_06_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="1000" resource="coins" />
+			</objectives>
+			<rewards>
+				<resource amount="25" resource="iron" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+	<!-- /SERVANTS -->
+	
+	<!-- BANDITS --> 
+		<quest id="ELECTION_QUEST_FACTION_71" avatar="bandit" title="T_SCENARIO_2017_ELECTION_BANDIT_TITLE" description="T_SCENARIO_2017_ELECTION_BANDIT_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_START" >
+				<start-quest id="ELECTION_QUEST_BANDIT_00" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_BANDIT_06" />
+				<quest-done id="ELECTION_QUEST_BANDIT_07" />
+				<quest-done id="ELECTION_QUEST_BANDIT_04" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_BANDIT_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_bandits" value="true" />
+				<set-flag key="election_07_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_00" visible="false" start="custom" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and" >
+				<building count="1" type="building_tavern" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards >
+				<start-quest id="ELECTION_QUEST_BANDIT_05" />
+			</rewards>
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_BANDIT_08" />
+			</onFailed>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_08" avatar="bandit" title="T_GAME_QUEST_SCEN6_8_NAME" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_TAVERN_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_TAVERN_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_tavern" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="grapes" />
+				<resource amount="20" resource="corn" />
+				<start-quest id="ELECTION_QUEST_BANDIT_05" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_05" avatar="bandit" title="T_GAME_QUEST_SCEN9_2_NAME" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_05_DESC" >
+				<start-quest id="ELECTION_QUEST_BANDIT_000" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<happyness type="tavern_complete" value="80" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="coal" />
+				<start-quest id="ELECTION_QUEST_BANDIT_06" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_06" avatar="bandit" title="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_06_TITLE" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_06_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="10" resource="sausage" />
+				<tribute amount="10" resource="bread" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="ore" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_000" visible="false" start="custom" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and" >
+				<building count="1" type="building_barracks" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards >
+				<start-quest id="ELECTION_QUEST_BANDIT_01" />
+			</rewards>
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_BANDIT_01_2" />
+			</onFailed>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_01" avatar="bandit" title="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_01_TITLE" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_01_DESC" >
+				<start-quest id="ELECTION_QUEST_BANDIT_01_HELP" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<flag-has-value key="election_bandits_unassign" value="true" />
+			</objectives>
+			<onSuccess >
+				<set-resource resource="weapons" value="0" building="building_barracks"/>
+				<set-resource resource="armor" value="0" building="building_barracks" />
+				<set-resource resource="brew" value="0" building="building_barracks"/>
+				<set-resource resource="sausage" value="0" building="building_barracks"/>
+ 			</onSuccess>
+			<rewards>
+				<resource amount="8" resource="sausage" />
+				<resource amount="8" resource="brew" />
+				<start-quest id="ELECTION_QUEST_BANDIT_02" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_01_HELP" start="custom" title="DEBUG: CHECK IF ASSIGNED" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<deassign count="1" trigger="command" type="building_barracks"/>
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_BANDIT_01_HELP_2" />
+				<set-flag key="election_bandits_unassign" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_BANDIT_01" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_01_HELP_2" start="custom" title="DEBUG: CHECK IF ASSIGNED" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and">
+				<assign count="1" trigger="is_assigned" type="building_barracks"/>
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_BANDIT_01_HELP" />
+				<set-flag key="election_bandits_unassign" value="false" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_BANDIT_01" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_01_2" avatar="bandit" title="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_01_TITLE_CASTLE" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_01_DESC" >
+				<start-quest id="ELECTION_QUEST_BANDIT_01_2_HELP" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<flag-has-value key="election_bandits_unassign" value="true" />
+			</objectives>
+			<onSuccess >
+				<set-resource resource="weapons" value="0" building="building_hq"/>
+				<set-resource resource="armor" value="0" building="building_hq"/>
+				<set-resource resource="brew" value="0" building="building_hq"/>
+				<set-resource resource="sausage" value="0" building="building_hq"/>
+ 			</onSuccess>
+			<rewards>
+				<resource amount="20" resource="herbs" />
+				<start-quest id="ELECTION_QUEST_BANDIT_02" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_01_2_HELP" start="custom" title="DEBUG: CHECK IF ASSIGNED" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<deassign count="1" trigger="command" type="building_hq"/>
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_BANDIT_01_2_HELP_2" />
+				<set-flag key="election_bandits_unassign" value="true" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_BANDIT_01_2" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_01_2_HELP_2" start="custom" title="DEBUG: CHECK IF ASSIGNED" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and">
+				<assign count="1" trigger="is_assigned" type="building_hq"/>
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_BANDIT_01_2_HELP" />
+				<set-flag key="election_bandits_unassign" value="false" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="ELECTION_QUEST_BANDIT_01_2" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_02" avatar="bandit" title="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_02_TITLE" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_02_DESC" >
+				<start-quest id="ELECTION_QUEST_BANDIT_03" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="1" operator="and_not" >
+				<soldiers-in-town count="1" />
+			</objectives>
+			<rewards>
+				<resource amount="15" resource="brew" />
+				<resource amount="30" resource="corn" />
+				<start-quest id="ELECTION_QUEST_BANDIT_07" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_07" avatar="bandit" title="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_07_TITLE" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_07_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_07_DESC" >
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="8" resource="armor" />
+				<tribute amount="8" resource="weapons" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="pig" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_03" avatar="bandit" title="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_03_TITLE" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_03_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_03_DESC" >
+			</onStarted>
+			<start_condition timeout="14" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tax-collected amount="750" />
+			</objectives>
+			<rewards>
+				<resource amount="30" resource="hops" />
+				<start-quest id="ELECTION_QUEST_BANDIT_04" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_BANDIT_04" avatar="bandit" title="T_GAME_QUEST_DESIRES_10_TITLE" description="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_BANDIT_QUEST_04_DESC" >
+			</onStarted>
+			<start_condition timeout="7" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="1500" resource="coins" />
+			</objectives>
+			<rewards>
+				<resource amount="30" resource="ore" />
+				<resource amount="20" resource="skins" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+				
+	<!-- /BANDITS -->
+	
+	<!-- SMALL FOLK --> 
+		<quest id="ELECTION_QUEST_FACTION_81" avatar="miller" title="T_SCENARIO_2017_ELECTION_SMALLFOLK_TITLE" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_START" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_START" >
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_00" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_01" />
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="3" operator="and" >
+				<quest-done id="ELECTION_QUEST_SMALLFOLK_03" />
+				<quest-done id="ELECTION_QUEST_SMALLFOLK_07" />
+				<quest-done id="ELECTION_QUEST_SMALLFOLK_04" />
+				<quest-done id="ELECTION_QUEST_SMALLFOLK_05" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_SUCCESS" />
+			<rewards>
+				<set-flag key="election_factionquest_done" value="true" />
+				<set-flag key="achievement_election_smallfolk" value="true" />
+				<set-flag key="election_08_done" value="true" />
+				<resource amount="20" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_00" visible="false" start="custom" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="1" operator="and" >
+				<building count="1" type="building_farm" />
+				<building count="1" type="building_bakery" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards >
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_06" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_03" />
+			</rewards>
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_02" />
+			</onFailed>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_01" avatar="miller" title="T_GAME_QUEST_SCEN_WW_DISASTER_START_NAME" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_01_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_01_DESC" >
+				<start-plague amount="3" />
+			</onStarted>
+			<start_condition timeout="47" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_medicus" />
+				<purge-plague/>
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="corn" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_04" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_04" avatar="client" title="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_04_TITLE" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_04_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_04_DESC" >
+			</onStarted>
+			<start_condition timeout="17" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="1300" resource="coins" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="grapes" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_02" avatar="client" title="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_02_TITLE" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_02_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_02_DESC" >
+				
+			</onStarted>
+			<start_condition timeout="4" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_farm" />
+				<building count="1" type="building_bakery" />
+			</objectives>
+			<rewards>
+				<resource amount="10" resource="tools" />
+				<resource amount="15" resource="stone" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_06" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_03" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_06" avatar="farmer" title="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_06_TITLE" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_06_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_06_DESC" >
+			</onStarted>
+			<start_condition timeout="6" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="20" resource="bread" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="herbs" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_05" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_05" avatar="client" title="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_05_TITLE" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_05_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_05_DESC" >
+			</onStarted>
+			<start_condition timeout="6" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<tribute amount="20" resource="meat" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="fabric" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_03" avatar="miller" title="T_SCENARIO_2016_FESTIVITIES_QUEST01_NAME" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_03_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_03_DESC" >
+			</onStarted>
+			<start_condition timeout="37" operator="and" />
+			<objectives timeout="2" operator="and" >
+				<building count="1" type="building_fairground" />
+			</objectives>
+			<rewards>
+				<resource amount="30" resource="wool" />
+				<resource amount="20" resource="grapes" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_07" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_07" avatar="miller" title="T_GAME_QUEST_SCEN4_15_NAME" description="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_07_DESC" start="custom" visible="true" isKeyQuest="true" >
+			<onStarted notification="T_SCENARIO_2017_ELECTION_SMALLFOLK_QUEST_07_DESC" >
+			</onStarted>
+			<start_condition timeout="27" operator="and" />
+			<objectives timeout="300" operator="and" >
+				<happyness value="100" />
+			</objectives>
+			<rewards>
+				<resource amount="20" resource="fabric" />
+				<resource amount="20" resource="hops" />
+				<set-modifier name="mod_production" tag="quest_election_modifier" value="125" />
+				<start-quest id="ELECTION_QUEST_SMALLFOLK_07_ENDER" />
+			</rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_SMALLFOLK_07_ENDER" start="custom" visible="false" >
+			<start_condition timeout="1" operator="and" />
+			<objectives timeout="210" operator="and" >
+			</objectives>
+			<rewards>
+				<remove-modifier-by-tag tag="quest_election_modifier" />
+			</rewards>
+		</quest>
+		
+	<!-- /SMALL FOLK --> 
+							
+<!-- Randomizer-->   
+		<quest id="ELECTION_QUEST_RANDOMIZER" title="DEBUG: RANDOMIZER" start="custom" repeatable="custom" visible="false" >
+			<objectives timeout="1" operator="and" >
+				<random chance="50" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards >
+				<start-quest id="ELECTION_QUEST_RANDOM_0" />
+			</rewards>
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOM_1" />
+			</onFailed>
+		</quest>
+			<quest id="ELECTION_QUEST_RANDOM_0" start="custom" repeatable="custom" visible="false" >
+				<objectives timeout="1" operator="and" >
+					<random chance="50" />
+				</objectives>
+				<fail_condition timeout="2" operator="and" />
+				<rewards >
+					<start-quest id="ELECTION_QUEST_RANDOM_00" />
+				</rewards>
+				<onFailed >
+					<start-quest id="ELECTION_QUEST_RANDOM_01" />
+				</onFailed>
+			</quest>
+			<quest id="ELECTION_QUEST_RANDOM_1" start="custom" repeatable="custom" visible="false" >
+				<objectives timeout="1" operator="and" >
+					<random chance="50" />
+				</objectives>
+				<fail_condition timeout="2" operator="and" />
+				<rewards >
+					<start-quest id="ELECTION_QUEST_RANDOM_10" />
+				</rewards>
+				<onFailed >
+					<start-quest id="ELECTION_QUEST_RANDOM_11" />
+				</onFailed>
+			</quest>
+				<quest id="ELECTION_QUEST_RANDOM_00" start="custom" repeatable="custom" visible="false" >
+					<objectives timeout="1" operator="and" >
+						<random chance="50" />
+					</objectives>
+					<fail_condition timeout="2" operator="and" />
+					<rewards >
+						<start-quest id="ELECTION_QUEST_RANDOM_000" />
+					</rewards>
+					<onFailed >
+						<start-quest id="ELECTION_QUEST_RANDOM_001" />
+					</onFailed>
+				</quest>
+				<quest id="ELECTION_QUEST_RANDOM_01" start="custom" repeatable="custom" visible="false" >
+					<objectives timeout="1" operator="and" >
+						<random chance="50" />
+					</objectives>
+					<fail_condition timeout="2" operator="and" />
+					<rewards >
+						<start-quest id="ELECTION_QUEST_RANDOM_010" />
+					</rewards>
+					<onFailed >
+						<start-quest id="ELECTION_QUEST_RANDOM_011" />
+					</onFailed>
+				</quest>
+				<quest id="ELECTION_QUEST_RANDOM_10" start="custom" repeatable="custom" visible="false" >
+				<objectives timeout="1" operator="and" >
+					<random chance="50" />
+				</objectives>
+				<fail_condition timeout="2" operator="and" />
+				<rewards >
+					<start-quest id="ELECTION_QUEST_RANDOM_100" />
+				</rewards>
+				<onFailed >
+					<start-quest id="ELECTION_QUEST_RANDOM_101" />
+				</onFailed>
+				</quest>
+				<quest id="ELECTION_QUEST_RANDOM_11" start="custom" repeatable="custom" visible="false" >
+					<objectives timeout="1" operator="and" >
+						<random chance="50" />
+					</objectives>
+					<fail_condition timeout="2" operator="and" />
+					<rewards >
+						<start-quest id="ELECTION_QUEST_RANDOM_110" />
+					</rewards>
+					<onFailed >
+						<start-quest id="ELECTION_QUEST_RANDOM_111" />
+					</onFailed>
+				</quest>
+		<!--
+		ELECTION_QUEST_RANDOM_000 - 01 Religion
+		ELECTION_QUEST_RANDOM_001 - 02 Military
+		ELECTION_QUEST_RANDOM_010 - 03 Noblemen
+		ELECTION_QUEST_RANDOM_011 - 04 Flower Club
+		ELECTION_QUEST_RANDOM_100 - 05 Merchants guild
+		ELECTION_QUEST_RANDOM_101 - 06 Servants
+		ELECTION_QUEST_RANDOM_110 - 07 Bandit
+		ELECTION_QUEST_RANDOM_111 - 08 Small folk
+		--> 
+		<quest id="ELECTION_QUEST_RANDOM_000" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_01_start" value="false" />
+				<flag-has-value key="election_01_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_01_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+		<quest id="ELECTION_QUEST_RANDOM_001" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_02_start" value="false" />
+				<flag-has-value key="election_02_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_02_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+		<quest id="ELECTION_QUEST_RANDOM_010" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_03_start" value="false" />
+				<flag-has-value key="election_03_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_03_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+		<quest id="ELECTION_QUEST_RANDOM_011" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_04_start" value="false" />
+				<flag-has-value key="election_04_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_04_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+		<quest id="ELECTION_QUEST_RANDOM_100" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_05_start" value="false" />
+				<flag-has-value key="election_05_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_05_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+		<quest id="ELECTION_QUEST_RANDOM_101" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_06_start" value="false" />
+				<flag-has-value key="election_06_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_06_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+		<quest id="ELECTION_QUEST_RANDOM_110" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_07_start" value="false" />
+				<flag-has-value key="election_07_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_07_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+		<quest id="ELECTION_QUEST_RANDOM_111" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_08_start" value="false" />
+				<flag-has-value key="election_08_done" value="false" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_08_start" value="true" />
+				<set-flag key="election_choosen" value="true" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+			<onFailed >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onFailed>
+		</quest>
+
+		<!-- Chooser Quests -->
+		<quest id="ELECTION_QUEST_CHOOSER_1" title="DEBUG: CHOOSER 1" visible="false" start="custom" repeatable="custom" >
+			<onStarted >
+				<set-flag key="player_has_choosen" value="false" />
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_choosen" value="true" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_choosen" value="false" />
+				<start-quest id="ELECTION_QUEST_CHOOSER_2" />
+			</rewards>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_CHOOSER_2" visible="false" start="custom" repeatable="custom" >
+			<onStarted >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_choosen" value="true" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_choosen" value="false" />
+				<start-quest id="ELECTION_QUEST_CHOOSER_3" />
+			</rewards>
+		</quest>
+		
+		<quest id="ELECTION_QUEST_CHOOSER_3" visible="false" start="custom" repeatable="custom" >
+			<onStarted >
+				<start-quest id="ELECTION_QUEST_RANDOMIZER" />
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_choosen" value="true" />
+			</objectives>
+			<rewards >
+				<set-flag key="election_choosen" value="false" />
+				<set-flag key="election_choosen_complete" value="true" />
+			</rewards>
+		</quest>
+		
+		
+		<!-- Election Quests Starter -->
+		<quest id="ELECTION_QUEST_STARTER" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_choosen_complete" value="true" />
+			</objectives>
+			<onSuccess notification="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" />
+			<rewards >
+				<start-quest id="ELECTION_QUEST_START_01" />
+				<start-quest id="ELECTION_QUEST_START_02" />
+				<start-quest id="ELECTION_QUEST_START_03" />
+				<start-quest id="ELECTION_QUEST_START_04" />
+				<start-quest id="ELECTION_QUEST_START_05" />
+				<start-quest id="ELECTION_QUEST_START_06" />
+				<start-quest id="ELECTION_QUEST_START_07" />
+				<start-quest id="ELECTION_QUEST_START_08" />
+				<set-flag key="election_choosen_complete" value="false" />
+			</rewards>
+		</quest>
+		<quest id="ELECTION_QUEST_START_01" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_01_start" value="true" />
+				<flag-has-value key="election_01_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_10" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+		<quest id="ELECTION_QUEST_START_02" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_02_start" value="true" />
+				<flag-has-value key="election_02_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_20" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+		<quest id="ELECTION_QUEST_START_03" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_03_start" value="true" />
+				<flag-has-value key="election_03_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_30" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+		<quest id="ELECTION_QUEST_START_04" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_04_start" value="true" />
+				<flag-has-value key="election_04_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_40" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+		<quest id="ELECTION_QUEST_START_05" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_05_start" value="true" />
+				<flag-has-value key="election_05_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_50" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+		<quest id="ELECTION_QUEST_START_06" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_06_start" value="true" />
+				<flag-has-value key="election_06_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_60" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+		<quest id="ELECTION_QUEST_START_07" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_07_start" value="true" />
+				<flag-has-value key="election_07_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_70" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+		<quest id="ELECTION_QUEST_START_08" visible="false" start="custom" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="election_08_start" value="true" />
+				<flag-has-value key="election_08_done" value="false" />
+			</objectives>
+			<rewards >
+				<start-quest id="ELECTION_QUEST_FACTION_80" />
+			</rewards>
+			<fail_condition timeout="2" operator="and" />
+		</quest>
+
+		<quest id="ELECTION_QUEST_FACTION_10" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_RELIGIOUS" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_11" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_01_start" value="false" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_FACTION_20" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_MILITARY" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_21" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_02_start" value="false" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_FACTION_30" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_NOBLEMAN" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_31" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_03_start" value="false" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_FACTION_40" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_FLOWERCLUB" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_41" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_04_start" value="false" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_FACTION_50" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_MERCHANTS" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_51" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_05_start" value="false" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_FACTION_60" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_SERVANTS" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_61" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_06_start" value="false" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_FACTION_70" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_BANDITS" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_71" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_07_start" value="false" />
+			</onFailed>
+        </quest>
+		
+		<quest id="ELECTION_QUEST_FACTION_80" start="custom" repeatable="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_SMALLFOLK" description="T_SCENARIO_2017_ELECTION_CHOSE_FACTION_QUEST_01_DESC" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="player_has_choosen" value="false" />
+				<flag-has-value key="election_scenario_over" value="false" />
+				<tribute amount="50" resource="coins" />
+			</objectives>
+			<rewards >
+				<resource amount="50" resource="coins" />
+				<set-flag key="player_has_choosen" value="true" />
+				<start-quest id="ELECTION_QUEST_FACTION_81" />
+			</rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="player_has_choosen" value="true" />
+				<flag-has-value key="election_scenario_over" value="true" />
+			</fail_condition>
+			<onFailed >
+				<set-flag key="election_08_start" value="false" />
+			</onFailed>
+        </quest>
+		
+<!-- Scenario End quest-->   
+        <quest id="scenario-finished" start="custom" visible="false" >
+            <start_condition timeout="4" operator="and"/>
+            <rewards>
+                <scenario-finished/>
+                <start-quest id="sandbox_start"/>     
+            </rewards>
+        </quest>     
+		
+		<quest id="scenario-failed" start="custom" visible="false" >
+            <start_condition timeout="4" operator="and"/>
+            <rewards>
+                <scenario-failed/>
+                <start-quest id="sandbox_start"/>     
+            </rewards>
+        </quest>            
+                                                   
+        <quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START" visible="false" >
+            <onStarted notification="T_GAME_SANDBOX_START"/>
+            <start_condition timeout="8" operator="and"/>
+            <rewards>
+                <start-quest id="SANDBOX_QUEST_META"/>
+                <start-quest id="SANDBOX_QUEST_META_DISASTER"/>	
+				<set-flag key="sandbox_map_has_avalanche" value="false" />
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+            </rewards>
+        </quest>      
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="49" topLeftY="80" bottomRightX="99" bottomRightY="124" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+
+    </group>
+</questdb>
+

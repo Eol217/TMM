@@ -1,0 +1,20 @@
+{
+	"layers": [
+
+		{
+			"animation": "{typeId}",
+			"fps": 10,
+			"anchor": "bottom",
+			"touchable": true
+		},
+		{
+			"sprite": {
+				"theme": {
+					"winter": "{typeId}_snow.png",
+					"*": null
+				}
+			},
+			"anchor": "bottom"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+
+menu_banner.png
+size: 512,256
+format: RGBA4444
+filter: Linear,Linear
+repeat: none
+menu_art_banner
+  rotate: true
+  xy: 2, 94
+  size: 145, 263
+  orig: 145, 263
+  offset: 0, 0
+  index: -1
+menu_art_button
+  rotate: false
+  xy: 267, 202
+  size: 124, 37
+  orig: 124, 37
+  offset: 0, 0
+  index: -1
+menu_art_logo
+  rotate: false
+  xy: 2, 2
+  size: 222, 90
+  orig: 222, 90
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,30 @@
+[start]
+flip_x 	
+
+frame:	hunter_stand_3.0.png	0.1
+frame:	hunter_shoot_3.0.png	0.1
+frame:	hunter_shoot_3.1.png	0.1
+
+next:	shoot
+
+
+[shoot]
+
+frame:	hunter_stand_3.2.png	0.1
+frame:	hunter_shoot_3.3.png	0.1
+frame:	hunter_shoot_3.4.png	0.2
+play_ambient: sfx_townies_hunter_shoot
+frame:	hunter_stand_3.2.png	0.5
+
+// play_ambient: sfx_townies_lumberjack
+
+delay:	0.05	0.5
+next:	back
+
+
+[back]
+
+frame:	hunter_shoot_3.1.png	0.1
+frame:	hunter_shoot_3.0.png	0.1
+frame:	hunter_stand_3.0.png	0.1
+delay:	10

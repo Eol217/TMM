@@ -1,0 +1,179 @@
+[idle0]
+
+frame-delay: 0.1
+
+play_ambient: sfx_townies_chatter_male_fisherman_whistling_1 
+play_ambient_chance: 0.2
+frame:	ani_fishing_lodge_l_00.0.png		
+
+delay:	1.00	10.00
+		
+
+next:	idle0	1
+next:	idle1	1
+next:	idle2	1
+next:	idle3	1
+	
+
+[idle1]
+
+frame-delay: 0.15
+
+play_ambient: sfx_townies_chatter_male_fisherman_humming_2 
+play_ambient_chance:  0.2
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+
+delay:	1.00	5.00		
+
+next:	idle0	1
+next:	idle1	1
+next:	idle2	1
+next:	idle3	1
+
+[idle2]
+
+frame-delay: 0.15
+
+play_ambient: sfx_townies_chatter_male_fisherman_humming_1 
+play_ambient_chance: 0.2
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+
+delay:	1.00	5.00		
+
+next:	idle0	1
+next:	idle1	1
+next:	idle2	1
+next:	idle3	1
+
+
+[idle3]
+
+frame-delay: 0.15
+
+play_ambient: sfx_townies_chatter_male_fisherman_whistling_2 
+play_ambient_chance: 0.2
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+	
+frame:	ani_fishing_lodge_l_00.1.png		
+frame:	ani_fishing_lodge_l_00.2.png	
+
+frame:	ani_fishing_lodge_l_00.0.png
+	
+frame:	ani_fishing_lodge_l_00.3.png	
+frame:	ani_fishing_lodge_l_00.4.png	
+
+frame:	ani_fishing_lodge_l_00.0.png	
+
+delay:	1.00	5.00		
+
+next:	idle0	1
+next:	idle1	1
+next:	idle2	1
+next:	idle3	1
+
+

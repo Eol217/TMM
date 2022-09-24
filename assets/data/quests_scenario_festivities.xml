@@ -1,0 +1,1296 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- Festivities scenario
+	? prestige earned
+-->
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+	
+	<group avatar="client">
+		<!--  Main quest group start-->
+		<quest id="STARTER"  isKeyQuest="true" start="instant" avatar="client" visible="false" finish="instant" >
+			<start_condition timeout="1" operator="and"/>
+			<objectives timeout="1" operator="and"/>
+			<rewards>
+				<start-quest id="MAINQUEST"/>
+				<start-quest id="SPRING_FESTIVAL_QUEST"/>
+			</rewards>
+		</quest>
+
+		<quest id="MAINQUEST" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_MQ_01_NAME" description="T_SCENARIO_2016_FESTIVITIES_MQ_01_DESC" start="custom" avatar="king" visible="true">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_MQ_01_DESC" >
+				<center-to-building target="building_fairground"/>
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="0" />
+				<!-- seasonal parties can either be 100=true or 0=false-->
+				<enable-bandits enable="any"/>
+			</onStarted>
+
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<flag-has-value key="SPRING_FESTIVAL_COMPLETE" value="true"/>
+				<flag-has-value key="SUMMER_FESTIVAL_COMPLETE" value="true"/>
+				<flag-has-value key="AUTUMN_FESTIVAL_COMPLETE" value="true"/>
+				<flag-has-value key="WINTER_FESTIVAL_COMPLETE" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="10" operator="and">
+				<flag-has-value key="festival_failed" value="true"/>
+			</fail_condition>
+
+			<onFailed notification="T_SCENARIO_2016_FESTIVITIES_MQ_01_FAILED">
+				<start-quest id="END_SCENARIO"/>
+			</onFailed>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_MQ_01_SUCESS">
+				<start-quest id="END_SCENARIO"/>
+			</onSuccess>
+
+			<rewards>
+				<set-flag key="MISSION_COMPLETE" value="true"/>
+				<resource resource="prestige" amount="100"/>
+			</rewards>
+		</quest>
+
+		<quest id="SPRING_FESTIVAL_QUEST" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_MQ_SPRING_NAME" description="T_SCENARIO_2016_FESTIVITIES_MQ_SPRING_DESC" start="custom" avatar="client" finish="instant">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_MQ_SPRING_DESC" >
+				<start-quest id="FAIRGROUND"/>
+<!--				<start-quest id="CHEAT_ACTIVE_FEST_1"/>-->
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<flag-has-value key="spring_fest_start" value="true"/>
+				<flag-has-value key="fairground_alive" value="true"/>
+				<flag-has-value key="festival_failed" value="false"/>
+				<quest-done id="SEE_SPRING_FEST" />
+			</objectives>
+
+			<fail_condition timeout="840" operator="and">
+				<flag-has-value key="SPRING_FESTIVAL_COMPLETE" value="false"/>
+			</fail_condition>
+
+			<onFailed notification="T_SCENARIO_2016_FESTIVITIES_FEAST_FAILED" >
+				<set-flag key="festival_failed" value="true"/>
+			</onFailed>
+
+			<rewards>
+				<resource amount="25" resource="prestige"/>
+				<set-flag key="SPRING_FESTIVAL_COMPLETE" value="true"/>
+				<start-quest id="SUMMER_FESTIVAL_QUEST_PREQUEST"/>
+			</rewards>
+		</quest>
+
+		<quest id="timeout_spring" start="custom" title="T_GAME_QUEST_FEAST_TITLE" description="T_SCENARIO_2016_FESTIVITIES_FEAST_READY" isKeyQuest="true" visible="true" finish="user" >
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_FEAST_READY"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="delete_quests" value="true"/>
+				<flag-has-value key="festival_failed" value="true"/>
+			</fail_condition>
+			
+			<rewards>
+				<resource amount="500" resource="coins"/>
+				<set-flag key="spring_fest_start" value="true"/>
+				<start-quest id="SEE_SPRING_FEST"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SEE_SPRING_FEST"  start="custom" visible="false" finish="instant" >
+
+			<start_condition timeout="1" operator="and"/>
+
+			<onStarted >
+				<center-to-building target="building_fairground"/>
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="100" />
+			</onStarted>
+
+			<objectives timeout="15" operator="and"/>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess >
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="0" />
+			</onSuccess>
+		</quest>
+
+		<quest id="SUMMER_FESTIVAL_QUEST_PREQUEST"  start="custom" visible="false" finish="instant" >
+			<objectives timeout="5" operator="and"/>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			<onSuccess >
+				<set-season season="summer"/>
+				<start-quest id="SUMMER_FESTIVAL_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="SUMMER_FESTIVAL_QUEST" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_MQ_SUMMER_NAME" description="T_SCENARIO_2016_FESTIVITIES_MQ_SUMMER_DESC" start="custom" avatar="client" finish="instant">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_MQ_SUMMER_DESC">
+				<start-quest id="SUMMER_01"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<flag-has-value key="summer_fest_start" value="true"/>
+				<flag-has-value key="fairground_alive" value="true"/>
+				<flag-has-value key="festival_failed" value="false"/>
+				<quest-done id="SEE_SUMMER_FEST" />
+			</objectives>
+
+			<fail_condition timeout="840" operator="and">
+				<flag-has-value key="SUMMER_FESTIVAL_COMPLETE" value="false"/>
+			</fail_condition>
+			
+			<onFailed notification="T_SCENARIO_2016_FESTIVITIES_FEAST_FAILED">
+				<set-flag key="festival_failed" value="true"/>
+			</onFailed>
+
+			<rewards>
+				<resource amount="15" resource="prestige"/>
+				<set-flag key="SUMMER_FESTIVAL_COMPLETE" value="true"/>
+				<start-quest id="AUTUMN_FESTIVAL_QUEST_PREQUEST"/>
+			</rewards>
+		</quest>
+
+		<quest id="timeout_summer"  title="T_GAME_QUEST_FEAST_TITLE" description="T_SCENARIO_2016_FESTIVITIES_FEAST_READY" isKeyQuest="true" visible="true" finish="user" >
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_FEAST_READY"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="delete_quests" value="true"/>
+				<flag-has-value key="festival_failed" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource amount="500" resource="coins"/>
+				<set-flag key="summer_fest_start" value="true"/>
+				<start-quest id="SEE_SUMMER_FEST"/>
+			</rewards>
+		</quest>
+
+		<quest id="SEE_SUMMER_FEST"  isKeyQuest="true" start="custom" visible="false" finish="instant" >
+
+			<start_condition timeout="1" operator="and"/>
+
+			<onStarted >
+				<center-to-building target="building_fairground"/>
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="100" />
+			</onStarted>
+
+			<objectives timeout="15" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			
+			<onSuccess >
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="0" />
+			</onSuccess>
+		</quest>
+
+		<quest id="AUTUMN_FESTIVAL_QUEST_PREQUEST"  start="custom" visible="false" finish="instant" >
+			<objectives timeout="5" operator="and"/>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			<onSuccess >
+				<set-season season="autumn"/>
+				<start-quest id="AUTUMN_FESTIVAL_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="AUTUMN_FESTIVAL_QUEST" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_MQ_AUTUMN_NAME" description="T_SCENARIO_2016_FESTIVITIES_MQ_AUTUMN_DESC" start="custom" avatar="client" finish="instant">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_MQ_AUTUMN_DESC">
+				<start-quest id="AUTUMN_01"/>
+			</onStarted>
+
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<flag-has-value key="autumn_fest_start" value="true"/>
+				<flag-has-value key="fairground_alive" value="true"/>
+				<flag-has-value key="festival_failed" value="false"/>
+				<quest-done id="SEE_AUTUMN_FEST" />
+			</objectives>
+
+			<fail_condition  timeout="840" operator="and">
+				<flag-has-value key="AUTUMN_FESTIVAL_COMPLETE" value="false"/>
+			</fail_condition>
+			
+			<onFailed notification="T_SCENARIO_2016_FESTIVITIES_FEAST_FAILED">
+				<set-flag key="festival_failed" value="true"/>
+			</onFailed>
+
+			<rewards>
+				<resource amount="25" resource="prestige"/>
+				<set-flag key="AUTUMN_FESTIVAL_COMPLETE" value="true"/>
+				<start-quest id="WINTER_FESTIVAL_QUEST_PREQUEST" />
+			</rewards>
+		</quest>
+
+		<quest id="timeout_autumn" title="T_GAME_QUEST_FEAST_TITLE" description="T_SCENARIO_2016_FESTIVITIES_FEAST_READY" isKeyQuest="true" visible="true" finish="user" >
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_FEAST_READY"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="delete_quests" value="true"/>
+				<flag-has-value key="festival_failed" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource amount="500" resource="coins"/>
+				<start-quest id="SEE_AUTUMN_FEST"/>
+				<set-flag key="autumn_fest_start" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="SEE_AUTUMN_FEST" isKeyQuest="true"  start="custom" visible="false" finish="instant" >
+
+			<start_condition operator="and" timeout="1"/>
+
+			<onStarted >
+				<center-to-building target="building_fairground"/>
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="100" />
+			</onStarted>
+
+			<objectives timeout="15" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess >
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="0" />
+			</onSuccess>
+		</quest>
+
+		<quest id="WINTER_FESTIVAL_QUEST_PREQUEST"  start="custom" visible="false" finish="instant" >
+			<objectives timeout="5" operator="and"/>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			<onSuccess >
+				<set-season season="winter"/>
+				<start-quest id="WINTER_FESTIVAL_QUEST"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="WINTER_FESTIVAL_QUEST" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_MQ_WINTER_NAME" description="T_SCENARIO_2016_FESTIVITIES_MQ_WINTER_DESC" start="custom" avatar="client" finish="instant">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_MQ_WINTER_DESC" >
+				<set-season season="winter"/>
+				<start-quest id="WINTER_01"/>
+			</onStarted>
+
+			<start_condition timeout="8" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<flag-has-value key="winter_fest_start" value="true"/>
+				<flag-has-value key="fairground_alive" value="true"/>
+				<flag-has-value key="festival_failed" value="false"/>
+				<quest-done id="SEE_WINTER_FEST" />
+			</objectives>
+
+			<fail_condition timeout="840" operator="and"/>
+						
+			<onFailed notification="T_SCENARIO_2016_FESTIVITIES_FEAST_FAILED">
+				<set-flag key="festival_failed" value="true"/>
+			</onFailed>
+
+			<rewards>
+				<resource amount="25" resource="prestige"/>
+				<set-flag key="WINTER_FESTIVAL_COMPLETE" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="timeout_winter" title="T_GAME_QUEST_FEAST_TITLE" description="T_SCENARIO_2016_FESTIVITIES_FEAST_READY" isKeyQuest="true" visible="true" finish="user" >
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_FEAST_READY"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="delete_quests" value="true"/>
+				<flag-has-value key="festival_failed" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource amount="500" resource="coins"/>
+				<set-flag key="winter_fest_start" value="true"/>
+				<start-quest id="SEE_WINTER_FEST"/>
+			</rewards>
+		</quest>
+
+		<quest id="SEE_WINTER_FEST" isKeyQuest="true"  start="custom" visible="false" finish="instant" >
+
+			<start_condition timeout="1" operator="and"/>
+			
+			<onStarted >
+				<center-to-building target="building_fairground"/>
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="100" />
+			</onStarted>
+
+			<objectives timeout="15" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+		</quest>
+	</group>
+	<!-- Main quest end -->
+
+	<!-- Spring festival quests-->
+	<group>
+		<quest id="FAIRGROUND" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_QUEST01_NAME" description="T_SCENARIO_2016_FESTIVITIES_QUEST01_DESC" start="custom" avatar="client">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_QUEST01_DESC">
+				<start-quest id="SPRING_01"/>
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_QUEST01_SUCESS">
+				<start-quest id="CHECK_FOR_FAIRGROUND"/>
+			</onSuccess>
+			
+			<rewards>
+				<resource resource="armor" amount="3"/>
+				<resource resource="tools" amount="15"/>
+				<set-flag key="fairground_alive" value="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_FOR_FAIRGROUND" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_QUEST01_NAME" description="T_SCENARIO_2016_FESTIVITIES_QUEST_FAIRGROUND_DESTR" start="custom" avatar="client" finish="instant" repeatable="custom">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_QUEST_FAIRGROUND_DESTR"/>
+
+			<start_condition timeout="3" operator="and">
+				<destroy-building target="building_fairground"/>
+				<flag-has-value key="delete_quests" value="false" />
+			</start_condition>
+			
+			<onStarted >
+				<set-flag key="fairground_alive" value="false"/>
+			</onStarted>
+
+			<objectives timeout="3" operator="and">
+				<building type="building_fairground" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_QUEST01_SUCESS">
+				<set-flag key="fairground_alive" value="true"/>
+			</onSuccess>
+
+			<rewards >
+				<start-quest id="CHECK_FOR_FAIRGROUND"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SPRING_01" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SPRING_01_NAME" description="T_SCENARIO_2016_FESTIVITIES_SPRING_01_DESC" start="custom" avatar="farmer">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SPRING_01_DESC"/>
+
+			<start_condition timeout="12" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<produce resource="wood" amount="15"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			
+			<onSuccess >
+				<start-quest id="SPRING_02"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="brew" amount="10"/>
+				<resource amount="10" resource="juice"/>
+			</rewards>
+		</quest>
+
+		<quest id="SPRING_02" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SPRING_02_NAME" description="T_SCENARIO_2016_FESTIVITIES_SPRING_02_DESC" start="custom" avatar="client">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SPRING_02_DESC" >
+				<start-quest id="SPRING_04"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<produce resource="fabric" amount="14"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess >
+				<start-quest id="SPRING_03"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="sausage" amount="10"/>
+				<resource amount="250" resource="coins"/>
+			</rewards>
+		</quest>
+
+		<!-- Bandits attack the HQ and try to steal the maypole. IF the player defeats them the maypole is secure and the attack banditcamp quest will be skipped -->
+
+		<quest id="SPRING_03" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SPRING_03_NAME" description="T_SCENARIO_2016_FESTIVITIES_SPRING_03_DESC" start="custom" avatar="bandit">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SPRING_03_DESC">
+				<bandit-attack intention="steal" resource="wood" amount="10" source="any" count="2" target="building_hq"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and">
+				<flag-has-value key="camp_already_destr" value="false"/>
+			</start_condition>
+
+			<objectives timeout="2" operator="or">
+				<raid-defeated count="1"/>
+				<flag-has-value key="camp_already_destr" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="3" operator="or">
+				<raid-successful count="1"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onFailed notification="T_SCENARIO_2016_FESTIVITIES_SPRING_03_FAILED">
+				<!--<spawn-bandit-camp count="1" upgrade_level="0"/>-->
+				<start-quest id="SPRING_05"/>
+			</onFailed>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_SPRING_03_SUCESS"/>
+
+			<rewards>
+				<start-quest id="start_spring_feast"/>
+				<resource resource="weapons" amount="15"/>
+				<resource resource="coins" amount="150"/>
+			</rewards>
+		</quest>
+		
+		<quest id="CAMP_CHECKER" start="instant" visible="false">
+
+			<start_condition timeout="1" operator="and"/>
+			
+			<objectives timeout="2" operator="and">
+				<destroy-building target="bandit_lair" count="1"/>
+			</objectives>
+
+			<onSuccess>
+				<set-flag key="camp_already_destr" value="true"/>
+				<enable-bandits enable="false"/>
+				<start-quest id="start_spring_feast"/>
+			</onSuccess>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<quest id="SPRING_04" title="T_SCENARIO_2016_FESTIVITIES_SPRING_04_NAME" description="T_SCENARIO_2016_FESTIVITIES_SPRING_04_DESC" start="custom" avatar="knight" repeatable="custom">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SPRING_04_DESC"/>
+
+			<start_condition timeout="4" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<building type="building_watchtower" count="2"/>
+				<soldiers-in-town count="4"/>
+			</objectives>
+
+			<fail_condition timeout="1"  operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="armor" amount="5"/>
+				<resource resource="weapons" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="SPRING_05" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SPRING_05_NAME" description="T_SCENARIO_2016_FESTIVITIES_SPRING_05_DESC" start="custom" avatar="knight" repeatable="custom">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SPRING_05_DESC">
+				<center-to-building target="bandit_lair"/>
+			</onStarted>
+
+			<start_condition timeout="4" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<destroy-building target="building_banditcamp"  count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_SPRING_05_SUCESS"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<enable-bandits enable="false"/>
+				<start-quest id="start_spring_feast"/>
+				<resource resource="jewelry" amount="20"/>
+				<resource amount="500" resource="coins"/>
+			</rewards>
+		</quest>
+
+		<quest id="start_spring_feast" isKeyQuest="true" start="custom" avatar="client" visible="false" finish="instant">
+
+			<start_condition timeout="8" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<quest-done id="SPRING_02"/>
+				<quest-done id="SPRING_01"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess>
+				<start-quest id="timeout_spring"/>
+			</onSuccess>
+			
+		</quest>
+	</group>
+	<!-- End of: Spring festival quests-->
+
+	<!-- Summer festival quests-->
+	<group>
+		<quest id="SUMMER_01" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SUMMER_01_NAME" description="T_SCENARIO_2016_FESTIVITIES_SUMMER_01_DESC" start="custom" avatar="farmer">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_01_DESC" >
+				<set-flag key="weather_disabled" value="true"/>
+				<start-fire target="building_farm" amount="1" state="burning"/>
+				<center-to-building target="building_farm"/>
+				<start-quest id="SUMMER_06"/>
+			</onStarted>
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<purge-fire />
+			</objectives>
+
+			<fail_condition timeout="3" operator="or">
+				<destroy-building count="1" target="building_farm"/>
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			
+			<onFailed notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_01_FAILED">
+				<start-quest id="SUMMER_02"/>
+			</onFailed>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_01_SUCESS">
+				<start-quest id="SUMMER_03"/>
+			</onSuccess>
+			
+			<rewards>
+				<resource resource="fish" amount="10"/>
+				<resource resource="meat" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="SUMMER_02" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SUMMER_02_NAME" description="T_SCENARIO_2016_FESTIVITIES_SUMMER_02_DESC" start="custom" avatar="farmer">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_02_DESC"/>
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<building count="1" type="building_farm"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			
+			<rewards>
+				<resource resource="coins" amount="250"/>
+				<resource resource="nuggets" amount="15"/>
+				<start-quest id="SUMMER_03"/>
+			</rewards>
+		</quest>
+
+		<quest id="SUMMER_03" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SUMMER_03_NAME" description="T_SCENARIO_2016_FESTIVITIES_SUMMER_03_DESC" start="custom" avatar="client">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_03_DESC">
+				<start-quest id="SUMMER_FEAST_CHECKER"/>
+				<set-modifier name="mod_event_fire_timeout" tag="drought_Stuff" value="50"/>
+		<!--	<set-game-state state="draught" enable="true"/> -->
+				<disallow key="cornfield_1x1_growth" />
+				<disallow key="hopfield_1x1_growth" />
+				<disallow key="vinefield_1x1_growth" />
+				<set-modifier name="mod_consumption_rate_water" tag="drought_Stuff" value="150"/>
+				<set-modifier name="mod_event_fire_chance" tag="drought_Stuff" value="1"/>
+				<start-quest id="SUMMER_04"/>
+				<start-quest id="GAME_STATE_TICKET_NO_WEAT" />
+			</onStarted>
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<produce resource="corn" amount="45"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="planks" amount="18"/>
+				<resource resource="cloths" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="SUMMER_04" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SUMMER_04_NAME" description="T_SCENARIO_2016_FESTIVITIES_SUMMER_04_DESC" start="custom" avatar="farmer">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_04_DESC"/>
+
+			<start_condition timeout="15" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<building type="building_well" count="3"/>
+			</objectives>
+
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_04_SUCESS">
+				<set-modifier name="mod_consumption_rate_decoration" tag="deco_happ" value="5"/>
+				<start-quest id="DROUGHT_FINISHER"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="hops" amount="35"/>
+				<resource resource="tools" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="DROUGHT_FINISHER" start="custom" avatar="farmer" visible="false" finish="instant">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<onStarted>
+				<start-fire amount="1" state="burning"/>
+			</onStarted>
+			
+			<objectives timeout="30" operator="and"/>
+			
+			<fail_condition operator="and" timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_DISASTER_DROUGHT_SUCCESS" >
+		<!--	<set-game-state state="draught" enable="false"/> -->
+				<allow key="cornfield_1x1_growth" />
+				<allow key="hopfield_1x1_growth" />
+				<allow key="vinefield_1x1_growth" />
+				<set-flag key="weather_disabled" value="false"/>
+				<remove-modifier-by-tag tag="drought_Stuff"/>
+			</onSuccess>
+
+		</quest>
+
+        <quest id="GAME_STATE_TICKET_NO_WEAT" visible="false" finish="instant" start="custom"  >
+            <objectives timeout="1" operator="or">
+                <quest-done id="DROUGHT_FINISHER"/>
+                <flag-has-value key="delete_quests" value="true"/>
+            </objectives>
+            <ticket title="T_GAME_WARNING_FIELDS_DROUGHT" type="negative"/>
+        </quest>
+        
+		<quest id="SUMMER_05" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_SUMMER_05_NAME" description="T_SCENARIO_2016_FESTIVITIES_SUMMER_05_DESC" start="custom" avatar="farmer">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_05_DESC"/>
+
+			<start_condition timeout="6" operator="and">
+				<quest-done id="SUMMER_03"/>
+				<quest-done id="SUMMER_04"/>
+			</start_condition>
+
+			<objectives timeout="4" operator="and">
+				<produce resource="bread" amount="20"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+			
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_05_SUCESS">
+				<start-fire amount="1" state="burning"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="tools" amount="15"/>
+				<resource resource="coins" amount="200"/>
+			</rewards>
+		</quest>
+
+		<quest id="SUMMER_06" isKeyQuest="true" title="T_QUESTS_PRODUCE_BREW" description="T_SCENARIO_2016_FESTIVITIES_SUMMER_06_DESC" start="custom" avatar="client">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_SUMMER_06_DESC">
+				<start-fire amount="1" state="burning"/>
+			</onStarted>
+
+			<start_condition timeout="20" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<produce resource="brew" amount="10"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess >
+				<start-quest id="SUMMER_05"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="tools" amount="15"/>
+				<resource resource="cloths" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="SUMMER_FEAST_CHECKER"  isKeyQuest="true" start="custom" visible="false" finish="instant">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<!--<quest-done id="SUMMER_01"/>-->
+				<!--<quest-done id="SUMMER_02"/>-->
+				<quest-done id="SUMMER_03"/>
+				<quest-done id="SUMMER_04"/>
+				<quest-done id="SUMMER_05"/>
+				<quest-done id="SUMMER_06"/>
+				<building type="building_fairground" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="timeout_summer"/>
+			</rewards>
+		</quest>
+
+	</group>
+	<!-- End of: Summer festival quests-->
+
+	<!-- Autumn festival quests-->
+	<group>
+		<quest id="AUTUMN_01" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_AUTUMN_01_NAME" description="T_SCENARIO_2016_FESTIVITIES_AUTUMN_01_DESC" start="custom" avatar="girl">
+			
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_01_DESC">
+				<set-flag key="weather_disabled" value="true"/>
+				<start-quest id="AUTUMN_FEAST_CHECKER"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+			
+			<objectives timeout="3" operator="and">
+				<happyness type="deco" value="100"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_01_SUCESS">
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+			</onSuccess>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="planks" amount="12"/>
+				<resource resource="tools" amount="10"/>
+				<remove-modifier-by-tag tag="deco_happ"/>
+				<start-quest id="AUTUMN_04"/>
+				<start-quest id="AUTUMN_02"/>
+			</rewards>
+		</quest>
+
+		<quest id="AUTUMN_02" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_NAME" description="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_DESC" start="custom" avatar="girl">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_DESC">
+				<set-modifier name="mod_strike_chance" tag="prod_strike" value="200"/>
+				<set-modifier name="mod_happiness" tag="prod_strike" value="20"/>
+				<set-modifier name="mod_effort" tag="prod_strike" value="50"/>
+			</onStarted>
+
+			<start_condition timeout="6" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<building type="building_jugglercamp" count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_SUCESS">
+				<remove-modifier-by-tag tag="prod_strike"/>
+				<set-durability type="building_residence_00" value="45"/>
+				<set-durability type="building_residence_01" value="45"/>
+				<weather-set-intensity type="rain" intensity="heavy"/>
+				<start-quest id="THUNDERSTORM_START"/>
+			</onSuccess>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="jewelry" amount="15"/>
+				<resource resource="cloths" amount="8"/>
+			</rewards>
+		</quest>
+
+		<quest id="THUNDERSTORM_START" isKeyQuest="true"  start="custom" visible="false" avatar="client">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_03_THUNDERSTORM">
+				<center-to-castle/>
+				<!-- The thunderstorm desaster should start here and damage/start fire to several buildings-->
+				<set-modifier name="mod_decay" tag="STORM" value="2"/>
+				<weather-set-intensity type="thunderstorm" intensity="heavy"/>
+			</onStarted>
+
+			<start_condition timeout="15" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<objectives timeout="3" operator="and"/>
+
+			<onSuccess>
+				<lightningstrike bottomRightX="175" bottomRightY="110"  topLeftX="148" topLeftY="85" minValue="-10" maxValue="-30" destroyOnNoDurability="false" produceFire="true" targetCountMin="1" targetCountMax="2"/>
+				<start-quest id="THUNDERSTORM_01"/>
+			</onSuccess>
+
+		</quest>
+
+		<quest id="THUNDERSTORM_01" isKeyQuest="true"  start="custom" visible="false" avatar="client">
+
+			<onStarted>
+				<center-to-building target="building_market"/>
+				<!--TODO: The thunderstorm desaster should start here and damage/start fire to several buildings-->
+			</onStarted>
+
+			<start_condition timeout="2" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<objectives timeout="3" operator="and"/>
+
+			<onSuccess>
+				<lightningstrike bottomRightX="149" bottomRightY="120"  topLeftX="130" topLeftY="102" minValue="-10" maxValue="-30" destroyOnNoDurability="false" produceFire="true" targetCountMin="1" targetCountMax="2"/>
+				<start-quest id="THUNDERSTORM_02"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="THUNDERSTORM_02" isKeyQuest="true"  start="custom" visible="false" avatar="client">
+
+			<onStarted>
+				<center-to-building target="scarecrow"/>
+				<!--TODO: The thunderstorm desaster should start here and damage/start fire to several buildings-->
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<objectives timeout="5" operator="and"/>
+
+			<onSuccess>
+				<lightningstrike bottomRightX="185" bottomRightY="83"  topLeftX="163" topLeftY="62" minValue="-10" maxValue="-30" destroyOnNoDurability="false" produceFire="true" targetCountMin="1" targetCountMax="2"/>
+				<start-quest id="AUTUMN_03"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="AUTUMN_03" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_AUTUMN_03_NAME" description="T_SCENARIO_2016_FESTIVITIES_AUTUMN_03_DESC" start="custom" avatar="client">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_03_DESC">
+				<weather-set-intensity type="thunderstorm" intensity="default"/>
+				<weather-set-intensity type="cloudyness" intensity="default"/>
+				<weather-set-intensity type="rain" intensity="default"/>
+				<set-flag key="weather_disabled" value="false"/>
+				<start-quest id="QUEST_WEATHER_REPEATER"/>
+			</onStarted>
+
+			<start_condition timeout="15" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<happyness type="decay" value="90"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_03_SUCESS"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="tools" amount="15"/>
+				<resource resource="wood" amount="25"/>
+				<remove-modifier-by-tag tag="STORM"/>
+			</rewards>
+		</quest>
+
+		<quest id="AUTUMN_04" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_AUTUMN_04_NAME" description="T_SCENARIO_2016_FESTIVITIES_AUTUMN_04_DESC" start="custom" avatar="monk">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_04_DESC"/>
+
+			<start_condition timeout="15" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<produce resource="grapes" amount="50"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_04_SUCESS"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="coins" amount="350"/>
+				<resource resource="meat" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="AUTUMN_FEAST_CHECKER"  start="custom" visible="false" finish="instant">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<quest-done id="AUTUMN_01"/>
+				<quest-done id="AUTUMN_02"/>
+				<quest-done id="AUTUMN_03"/>
+				<quest-done id="AUTUMN_04"/>
+				<building type="building_fairground" count="1"/>
+			</objectives>
+			
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="timeout_autumn"/>
+			</rewards>
+		</quest>
+	</group>
+	<!-- End of: autumn festival quests-->
+
+	<!-- winter festival quests-->
+	<group>
+		<quest id="WINTER_01" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_WINTER_01_NAME" description="T_SCENARIO_2016_FESTIVITIES_WINTER_01_DESC" start="custom" avatar="merchant">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_WINTER_01_DESC">
+				<start-quest id="WINTER_FEAST_CHECKER"/>
+				<start-quest id="WINTER_02"/>
+				<start-quest id="WINTER_06"/>
+				<spawn-bandit-camp count="1" upgrade_level="1"/>
+			</onStarted>
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<tribute amount="20" resource="juice"/>
+				<tribute amount="15" resource="herbs"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_WINTER_01_SUCESS">
+				<start-quest id="WINTER_01B"/>
+			</onSuccess>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="tools" amount="15"/>
+				<resource resource="flour" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="WINTER_02" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_WINTER_02_NAME" description="T_SCENARIO_2016_FESTIVITIES_WINTER_02_DESC" start="custom" avatar="girl">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_WINTER_02_DESC"/>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<produce amount="15" resource="nuggets"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_WINTER_02_SUCESS"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="cloths" amount="10"/>
+				<resource resource="juice" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="WINTER_01B" title="T_GAME_QUEST_SCEN_WW_PRODUCTION_20_NAME" description="T_GAME_QUEST_SCEN_WW_PRODUCTION_20_DESC" start="custom" avatar="client">
+
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_20_DESC">
+				<start-quest id="WINTER_03"/>
+				<start-quest id="WINTER_05"/>
+			</onStarted>
+
+			<start_condition timeout="6" operator="and"/>
+
+			<objectives timeout="6" operator="and">
+				<construct type="building_warehouse" count="1"/>
+				<assign type="building_hq" count="2" trigger="is_assigned"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="coins" amount="500"/>
+				<resource resource="prestige" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="WINTER_03" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_WINTER_03_NAME" description="T_SCENARIO_2016_FESTIVITIES_WINTER_03_DESC" start="custom" avatar="knight">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_WINTER_03_DESC"/>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<tribute resource="leather" amount="15"/>
+				<!--<tribute resource="weapons" amount="8"/>-->
+				<tribute resource="cloths" amount="10"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_WINTER_03_SUCESS">
+				<start-quest id="WINTER_04"/>
+			</onSuccess>
+			
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="corn" amount="15"/>
+				<resource resource="nuggets" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="WINTER_04" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_WINTER_04_NAME" description="T_SCENARIO_2016_FESTIVITIES_WINTER_04_DESC" start="custom" avatar="medicus">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_WINTER_04_DESC"/>
+
+			<start_condition timeout="15" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="flour" amount="10"/>
+				<tribute resource="juice" amount="10"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_WINTER_04_SUCESS"/>
+
+			<rewards>
+				<resource resource="leather" amount="10"/>
+				<resource resource="brew" amount="15"/>
+			</rewards>
+		</quest>
+		
+		<quest id="WINTER_06" title="T_GAME_QUEST_MIL_TUT_21_TITLE" description="T_SCENARIO_2016_FESTIVITIES_WINTER_06_DESC" start="custom" avatar="merchant">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_WINTER_06_DESC" >
+				<set-merchant state="disabled"/>
+				<enable-bandits enable="any"/>
+				<center-to-building target="bandit_camp"/>
+<!--				<set-modifier name="mod_event_bandit_cooldown" tag="bandits_mode" value="-80"/>-->
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<destroy-building count="1" target="building_banditcamp"/>
+			</objectives>
+			
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_WINTER_06_SUCESS"/>
+
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+				<resource resource="coins" amount="250"/>
+				<set-merchant state="available"/>
+				<enable-bandits enable="false"/>
+			</rewards>
+		</quest>
+
+		<quest id="WINTER_05" isKeyQuest="true" title="T_SCENARIO_2016_FESTIVITIES_WINTER_05_NAME" description="T_SCENARIO_2016_FESTIVITIES_WINTER_05_DESC" start="custom" avatar="monk">
+
+			<onStarted notification="T_SCENARIO_2016_FESTIVITIES_WINTER_05_DESC"/>
+
+			<start_condition timeout="4" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tax-collected amount="1550"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_WINTER_05_SUCESS"/>
+
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+			</rewards>
+		</quest>
+
+		<quest id="WINTER_FEAST_CHECKER"  isKeyQuest="true" start="custom" visible="false" finish="instant">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<fail_condition operator="and"  timeout="1">
+				<flag-has-value key="delete_quests" value="true"/>
+			</fail_condition>
+
+			<objectives timeout="2" operator="and">
+				<quest-done id="WINTER_01"/>
+				<quest-done id="WINTER_02"/>
+				<quest-done id="WINTER_03"/>
+				<quest-done id="WINTER_04"/>
+				<quest-done id="WINTER_05"/>
+				<flag-has-value key="fairground_alive" value="true"/>
+			</objectives>
+
+			<rewards>
+				<start-quest id="timeout_winter"/>
+			</rewards>
+		</quest>
+	</group>
+
+	<!--End scenario & start sandbox mode-->
+	<group>
+		<quest id="END_SCENARIO"  start="custom" finish="instant" visible="false" >
+			<start_condition timeout="10" operator="and"/>
+
+			<onStarted >
+				<!--TODO: remove all modifiers still active here please!-->
+				<set-modifier name="mod_seasonal_parties_enabled" tag="party_on" value="100" />
+				<remove-modifier-by-tag tag="drought_Stuff"/>
+				<remove-modifier-by-tag tag="deco_happ"/>
+				<remove-modifier-by-tag tag="prod_strike"/>
+				<remove-modifier-by-tag tag="STORM"/>
+<!--				<remove-modifier-by-tag tag="bandits_mode"/>-->
+				<set-flag key="delete_quests" value="true"/>
+				<enable-bandits enable="any"/>
+			</onStarted>
+
+			<objectives timeout="10" operator="and">
+				<flag-has-value key="MISSION_COMPLETE" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="6" operator="and">
+				<flag-has-value key="festival_failed" value="true"/>
+			</fail_condition>
+
+			<onFailed>
+				<start-quest id="METASTART"/>
+				<scenario-failed/>
+			</onFailed>
+			
+			<onSuccess >
+				<start-quest id="METASTART"/>
+				<scenario-finished />
+			</onSuccess>
+			
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"  avatar="king" >
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT">
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards >
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+			</rewards>
+		</quest>
+
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" /> 
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="135" topLeftY="59" bottomRightX="187" bottomRightY="127" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+
+	</group>
+</questdb>
+

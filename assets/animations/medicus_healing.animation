@@ -1,0 +1,10 @@
+[heal_1]
+
+frame-delay: 0.4
+
+frame:	juicer_work_1.0.png
+frame:	juicer_work_1.1.png
+frame:	juicer_work_1.2.png
+frame:	juicer_work_1.3.png	
+
+next:	heal_1

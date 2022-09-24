@@ -1,0 +1,93 @@
+[random_start]
+
+next:	writing1			1
+next:	writing2			1
+next:	writing3			1
+next:	thinking			1
+
+
+[writing1]
+play_ambient: sfx_townies_monk_laughing_5
+play_ambient_chance: 0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+
+delay:	0		0.8
+
+next:	writing1			0.75
+next:	writing2			1
+next:	writing3			1
+next:	thinking			1
+
+[writing2]
+play_ambient: sfx_townies_monk_praying_7
+play_ambient_chance: 0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+
+next:	writing1			1
+next:	writing2			0.75
+next:	writing3			0.75
+next:	thinking			1
+
+
+[writing3]
+play_ambient: sfx_townies_monk_singing_3
+play_ambient_chance: 0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+frame:	ani_monestary_02.1.png		0.2
+frame:	ani_monestary_02.2.png		0.2
+
+
+next:	writing1			1
+next:	writing2			0.75
+next:	thinking			1
+
+
+[thinking]
+
+ani_monestary_02.0.png 0.1
+play_ambient: sfx_townies_monk_praying_9
+play_ambient_chance: 0.3
+delay:	0.5		3
+
+next:	writing1			1
+next:	writing2			1
+next:	writing3			1
+
+
+
+

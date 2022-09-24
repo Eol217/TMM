@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:184338a01d659a01fdb9e9b80b19f854:63347dc76fbe6f5805f6e6e3b54dcfd4:a90bdd40f2a7450f044c1cd3a5989702$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="hud.png" width="1024" height="1024">
+    <sprite n="bandit_fight_bandit" x="893" y="553" w="55" h="41" pX="0.5" pY="0.5" oX="37" oY="18" oW="78" oH="93" r="y"/>
+    <sprite n="bandit_fight_soldier" x="293" y="238" w="33" h="47" pX="0.5" pY="0.5" oX="7" oY="25" oW="78" oH="93"/>
+    <sprite n="bandit_igniting" x="373" y="556" w="47" h="51" pX="0.5" pY="0.5" oX="15" oY="25" oW="78" oH="93"/>
+    <sprite n="bandit_indicator" x="850" y="1" w="166" h="80" pX="0.5" pY="0.5"/>
+    <sprite n="bandit_inhouse" x="754" y="653" w="47" h="46" pX="0.5" pY="0.5" oX="17" oY="26" oW="78" oH="93"/>
+    <sprite n="banner_lft" x="1011" y="94" w="8" h="71" pX="0.5" pY="0.5" oX="0" oY="1" oW="8" oH="72"/>
+    <sprite n="banner_mid" x="422" y="408" w="48" h="71" pX="0.5" pY="0.5" oX="0" oY="1" oW="48" oH="72"/>
+    <sprite n="banner_military_icon" x="807" y="623" w="49" h="44" pX="0.5" pY="0.5" oX="4" oY="9" oW="48" oH="58" r="y"/>
+    <sprite n="banner_np" x="357" y="608" w="63" h="70" pX="0.5" pY="0.5"/>
+    <sprite n="banner_rt" x="451" y="87" w="8" h="71" pX="0.5" pY="0.5" oX="0" oY="1" oW="8" oH="72"/>
+    <sprite n="book_nextpage_arrow" x="197" y="514" w="82" h="52" pX="0.5" pY="0.5"/>
+    <sprite n="build_info_9patch_0" x="422" y="480" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="buildmenu_deco" x="465" y="1" w="384" h="152" pX="0.5" pY="0.5" oX="0" oY="0" oW="405" oH="152"/>
+    <sprite n="burgler_indicator" x="197" y="567" w="81" h="68" pX="0.5" pY="0.5" oX="5" oY="5" oW="78" oH="86" r="y"/>
+    <sprite n="burgler_indicator_progress" x="780" y="441" w="54" h="54" pX="0.5" pY="0.5" oX="12" oY="12" oW="78" oH="86"/>
+    <sprite n="but_attack" x="143" y="384" w="53" h="59" pX="0.5" pY="0.5" oX="21" oY="19" oW="94" oH="94"/>
+    <sprite n="but_entertainment" x="218" y="253" w="74" h="62" pX="0.5" pY="0.5" oX="14" oY="25" oW="94" oH="94"/>
+    <sprite n="but_influence_area" x="289" y="507" w="83" h="70" pX="0.5" pY="0.5" oX="8" oY="11" oW="98" oH="98"/>
+    <sprite n="but_instant_build" x="850" y="82" w="160" h="44" pX="0.5" pY="0.5" oX="7" oY="7" oW="172" oH="56"/>
+    <sprite n="but_newspage_bubble" x="293" y="286" w="33" h="33" pX="0.5" pY="0.5"/>
+    <sprite n="but_refill_mine" x="268" y="638" w="75" h="75" pX="0.5" pY="0.5" oX="17" oY="16" oW="94" oH="94"/>
+    <sprite n="but_research" x="221" y="709" w="46" h="58" pX="0.5" pY="0.5" oX="24" oY="14" oW="94" oH="94"/>
+    <sprite n="but_research_instant" x="1" y="591" w="75" h="72" pX="0.5" pY="0.5" oX="20" oY="16" oW="94" oH="94" r="y"/>
+    <sprite n="but_research_steam" x="110" y="498" w="86" h="88" pX="0.5" pY="0.5" oX="2" oY="2" oW="94" oH="94"/>
+    <sprite n="buttonpress" x="769" y="496" w="62" h="62" pX="0.5" pY="0.5"/>
+    <sprite n="buy_res_button" x="1" y="253" w="216" h="38" pX="0.5" pY="0.5" oX="0" oY="1" oW="216" oH="39"/>
+    <sprite n="context_alert_9patch_0" x="373" y="507" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="context_alert_9patch_1" x="422" y="529" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="context_craftsman" x="647" y="567" w="53" h="46" pX="0.5" pY="0.5" oX="4" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_farmer" x="754" y="610" w="52" h="42" pX="0.5" pY="0.5" oX="6" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_female_01" x="143" y="444" w="53" h="53" pX="0.5" pY="0.5" oX="0" oY="0" oW="97" oH="121"/>
+    <sprite n="context_female_02" x="828" y="572" w="54" h="50" pX="0.5" pY="0.5" oX="0" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_hunter" x="769" y="559" w="58" h="50" pX="0.5" pY="0.5" oX="5" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_juicer" x="754" y="610" w="52" h="42" pX="0.5" pY="0.5" oX="6" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_lumberjack" x="769" y="559" w="58" h="50" pX="0.5" pY="0.5" oX="5" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_miller" x="883" y="595" w="54" h="50" pX="0.5" pY="0.5" oX="0" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_sheriff" x="780" y="383" w="54" h="57" pX="0.5" pY="0.5" oX="0" oY="0" oW="97" oH="121" r="y"/>
+    <sprite n="context_soldier" x="899" y="449" w="61" h="42" pX="0.5" pY="0.5" oX="7" oY="2" oW="97" oH="121" r="y"/>
+    <sprite n="context_switch_selector" x="938" y="608" w="53" h="53" pX="0.5" pY="0.5" oX="20" oY="8" oW="96" oH="70"/>
+    <sprite n="context_townie" x="701" y="610" w="52" h="44" pX="0.5" pY="0.5" oX="5" oY="1" oW="97" oH="121" r="y"/>
+    <sprite n="double_xp_font" x="290" y="401" w="30" h="43" pX="0.5" pY="0.5" oX="7" oY="6" oW="51" oH="45" r="y"/>
+    <sprite n="double_xp_shine" x="329" y="231" w="110" h="109" pX="0.5" pY="0.5"/>
+    <sprite n="group_indicator" x="713" y="221" w="37" h="15" pX="0.5" pY="0.5" oX="3" oY="16" oW="44" oH="44"/>
+    <sprite n="happy_bar_bg" x="460" y="154" w="253" h="30" pX="0.5" pY="0.5" oX="1" oY="4" oW="254" oH="34"/>
+    <sprite n="icon_modifier_map" x="471" y="522" w="85" h="58" pX="0.5" pY="0.5" oX="2" oY="12" oW="90" oH="90"/>
+    <sprite n="icon_modifier_rain" x="191" y="636" w="76" h="72" pX="0.5" pY="0.5" oX="7" oY="12" oW="90" oH="90"/>
+    <sprite n="icon_modifier_snow" x="560" y="496" w="86" h="84" pX="0.5" pY="0.5" oX="2" oY="0" oW="90" oH="90" r="y"/>
+    <sprite n="icon_modifier_storm" x="678" y="482" w="90" h="84" pX="0.5" pY="0.5" oX="2" oY="0" oW="90" oH="90" r="y"/>
+    <sprite n="menu_but" x="442" y="216" w="247" h="74" pX="0.5" pY="0.5"/>
+    <sprite n="menubutton_01" x="1" y="123" w="328" h="70" pX="0.5" pY="0.5" oX="2" oY="2" oW="330" oH="73"/>
+    <sprite n="mood_tax_bar" x="451" y="185" w="253" h="30" pX="0.5" pY="0.5" oX="1" oY="4" oW="254" oH="34"/>
+    <sprite n="notification_alert" x="151" y="709" w="69" h="67" pX="0.5" pY="0.5" oX="1" oY="2" oW="69" oH="72" r="y"/>
+    <sprite n="notification_bar_9patch" x="440" y="291" w="240" h="49" pX="0.5" pY="0.5"/>
+    <sprite n="notification_bar_fadeout" x="421" y="578" w="49" h="80" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="notification_bg" x="1" y="1" w="463" h="49" pX="0.5" pY="0.5"/>
+    <sprite n="notification_quest" x="77" y="728" w="69" h="67" pX="0.5" pY="0.5" oX="1" oY="2" oW="69" oH="72" r="y"/>
+    <sprite n="notification_quest_solved" x="1" y="732" w="69" h="67" pX="0.5" pY="0.5" oX="1" oY="2" oW="69" oH="72" r="y"/>
+    <sprite n="onscreen_count" x="1" y="292" w="195" h="49" pX="0.5" pY="0.5"/>
+    <sprite n="popup_9patch" x="690" y="238" w="144" h="144" pX="0.5" pY="0.5"/>
+    <sprite n="popup_achievement_back" x="857" y="646" w="47" h="43" pX="0.5" pY="0.5" oX="4" oY="2" oW="50" oH="50" r="y"/>
+    <sprite n="popup_achievement_info" x="802" y="668" w="47" h="43" pX="0.5" pY="0.5" oX="4" oY="2" oW="50" oH="50" r="y"/>
+    <sprite n="popup_buttonbar_9patch" x="835" y="275" w="144" h="31" pX="0.5" pY="0.5"/>
+    <sprite n="popup_shop_9patch" x="850" y="127" w="148" h="147" pX="0.5" pY="0.5" oX="3" oY="2" oW="150" oH="150" r="y"/>
+    <sprite n="popup_shop_bar" x="329" y="208" w="112" h="22" pX="0.5" pY="0.5"/>
+    <sprite n="popup_shop_highlight" x="835" y="307" w="141" h="141" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_close" x="290" y="320" w="38" h="40" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_info" x="290" y="361" w="37" h="39" pX="0.5" pY="0.5" oX="1" oY="1" oW="38" oH="40"/>
+    <sprite n="preview_border_9patch" x="1011" y="82" w="11" h="11" pX="0.5" pY="0.5" oX="1" oY="1" oW="12" oH="12"/>
+    <sprite n="quest_button" x="1" y="194" w="291" h="58" pX="0.5" pY="0.5"/>
+    <sprite n="questslot_9patch" x="899" y="492" w="60" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="questslot_9patch_gold" x="330" y="87" w="120" h="120" pX="0.5" pY="0.5"/>
+    <sprite n="questslot_9patch_golden" x="960" y="547" w="60" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="questslot_close" x="111" y="451" w="29" h="29" pX="0.5" pY="0.5" oX="9" oY="9" oW="48" oH="48"/>
+    <sprite n="questslot_lit_9patch" x="832" y="511" w="60" h="60" pX="0.5" pY="0.5"/>
+    <sprite n="res_count" x="1" y="451" w="109" h="42" pX="0.5" pY="0.5" oX="0" oY="3" oW="109" oH="45"/>
+    <sprite n="res_count_big" x="1" y="342" w="180" h="41" pX="0.5" pY="0.5" oX="0" oY="4" oW="180" oH="45"/>
+    <sprite n="research_banner_buyme" x="1" y="384" w="141" h="66" pX="0.5" pY="0.5"/>
+    <sprite n="research_banner_check" x="77" y="665" w="73" h="62" pX="0.5" pY="0.5"/>
+    <sprite n="research_banner_done" x="329" y="341" w="141" h="66" pX="0.5" pY="0.5"/>
+    <sprite n="research_banner_locked" x="714" y="154" w="120" h="66" pX="0.5" pY="0.5"/>
+    <sprite n="science_bar_bg" x="977" y="307" w="21" h="239" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="science_bar_icon" x="905" y="662" w="44" h="41" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="scrollbar_bottom" x="293" y="217" w="35" h="20" pX="0.5" pY="0.5"/>
+    <sprite n="scrollbar_button" x="751" y="221" w="32" h="15" pX="0.5" pY="0.5" oX="10" oY="0" oW="35" oH="35" r="y"/>
+    <sprite n="scrollbar_mid" x="330" y="51" w="127" h="35" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="scrollbar_top" x="293" y="194" w="35" h="22" pX="0.5" pY="0.5"/>
+    <sprite n="shop_bought" x="1" y="664" w="75" h="67" pX="0.5" pY="0.5" oX="4" oY="5" oW="81" oH="74"/>
+    <sprite n="shop_cloudsave" x="279" y="578" w="77" h="59" pX="0.5" pY="0.5" oX="11" oY="11" oW="97" oH="88"/>
+    <sprite n="shop_fb-like" x="835" y="449" w="63" h="61" pX="0.5" pY="0.5" oX="27" oY="23" oW="108" oH="98" r="y"/>
+    <sprite n="shop_ffw" x="577" y="341" w="101" h="84" pX="0.5" pY="0.5" oX="6" oY="8" oW="108" oH="98"/>
+    <sprite n="shop_prestige_01" x="110" y="587" w="80" h="77" pX="0.5" pY="0.5" oX="16" oY="9" oW="108" oH="98" r="y"/>
+    <sprite n="shop_prestige_02" x="471" y="440" w="88" h="81" pX="0.5" pY="0.5" oX="10" oY="8" oW="108" oH="98"/>
+    <sprite n="shop_prestige_03" x="321" y="408" w="100" h="98" pX="0.5" pY="0.5" oX="4" oY="0" oW="108" oH="98"/>
+    <sprite n="shop_prestige_04" x="679" y="383" w="100" h="98" pX="0.5" pY="0.5" oX="5" oY="0" oW="108" oH="98"/>
+    <sprite n="shop_prestige_05" x="471" y="341" w="105" h="98" pX="0.5" pY="0.5" oX="2" oY="0" oW="108" oH="98"/>
+    <sprite n="shop_prestige_06" x="197" y="316" w="92" h="108" pX="0.5" pY="0.5" oX="0" oY="2" oW="108" oH="98" r="y"/>
+    <sprite n="shop_prestige_07" x="1" y="494" w="108" h="96" pX="0.5" pY="0.5" oX="0" oY="2" oW="108" oH="98"/>
+    <sprite n="shop_video_01" x="197" y="425" w="91" h="88" pX="0.5" pY="0.5" oX="7" oY="0" oW="108" oH="98" r="y"/>
+    <sprite n="shop_xp" x="577" y="426" w="100" h="69" pX="0.5" pY="0.5" oX="3" oY="15" oW="108" oH="98"/>
+    <sprite n="soldier_inhouse" x="701" y="567" w="53" h="42" pX="0.5" pY="0.5" oX="16" oY="11" oW="78" oH="86" r="y"/>
+    <sprite n="thiefcloud_ko" x="690" y="216" w="22" h="21" pX="0.5" pY="0.5"/>
+    <sprite n="thiefcloud_soldieronway" x="999" y="407" w="20" h="19" pX="0.5" pY="0.5"/>
+    <sprite n="toshop_button" x="1" y="51" w="328" h="71" pX="0.5" pY="0.5" oX="2" oY="2" oW="330" oH="73"/>
+    <sprite n="totalhappy_bar_bg" x="451" y="185" w="253" h="30" pX="0.5" pY="0.5" oX="1" oY="4" oW="254" oH="34"/>
+    <sprite n="xp_bar_bg" x="999" y="166" w="23" h="240" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="xp_bar_icon" x="850" y="690" w="42" h="41" pX="0.5" pY="0.5" oX="0" oY="1" oW="42" oH="42"/>
+</TextureAtlas>

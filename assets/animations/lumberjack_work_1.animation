@@ -1,0 +1,25 @@
+[chop_1]
+frame-delay: 0.1
+frame:	lumberjack_work_1.0.png
+frame:	lumberjack_work_1.1.png
+frame:	lumberjack_work_1.2.png
+frame:	lumberjack_work_1.3.png
+play_ambient: sfx_townies_lumberjack
+frame:	lumberjack_work_1.4.png
+frame:	lumberjack_work_1.5.png
+delay:	0.05 0.1
+next:	chop_1
+next:	chop_2
+
+[chop_2]
+frame-delay: 0.1
+frame:	lumberjack_work_1.0.png
+frame:	lumberjack_work_1.1.png
+frame:	lumberjack_work_1.2.png
+frame:	lumberjack_work_1.3.png
+play_ambient: sfx_townies_lumberjack
+frame:	lumberjack_work_1.4.png
+frame:	lumberjack_work_1.5.png
+delay:	0.05 0.1
+next:	chop_1
+next:	chop_2

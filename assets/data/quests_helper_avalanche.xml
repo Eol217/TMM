@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- Helper Quest to automatically increase the danger of an avalanche -->
+<!-- Explanations:
+    INCREASE_1_IS_100   if this flag is true, there is a 100% chance to increase the danger of an avalanche by 1 level
+    If false, then there is a 50% chance to increase the danger by 1 level
+    If the maximum danger level is reached and it would increase the danger even more, then a flag "Avalanche_launched" will be changed to true
+    Use that flag to launch an avalanche in the main questfile
+-->
+<questdb>
+    <group avatar="client" >
+        
+        <quest id="AVALANCHE_INITIALIZER" start="custom" finish="instant" visible="false" repeatable="no" >
+            <onStarted >
+                <set-flag key="CURRENT_STATE_NO" value="true"/>
+                <set-flag key="CURRENT_STATE_MED" value="false"/>
+                <set-flag key="CURRENT_STATE_HIGH" value="false"/>
+                <set-flag key="INCREASE_1_IS_100" value="false"/>
+                <set-flag key="AVALANCHE_HAS_COOLDOWN" value="false"/>
+            </onStarted>
+        </quest>
+        
+        <quest id="AVALANCHE_CONTROLLER_RANDOM_INCREASE" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <start_condition timeout="1" operator="and">
+                <flag-has-value key="AVALANCHE_HAS_COOLDOWN" value="false" />
+            </start_condition>
+            <objectives timeout="1" operator="and"/>
+            <rewards >
+                <start-quest id="STATE_NO" />
+                <start-quest id="STATE_MED" />
+                <start-quest id="STATE_HIGH" />
+            </rewards>
+        </quest>
+        
+        <quest id="STATE_NO" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="and">
+                <flag-has-value value="true" key="CURRENT_STATE_NO"/>
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="INCRESE_CHANCE_NO_01" />
+            </rewards>
+        </quest>
+        
+        <quest id="STATE_MED" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="and">
+                <flag-has-value value="true" key="CURRENT_STATE_MED"/>
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="INCRESE_CHANCE_MED_01" />
+            </rewards>
+        </quest>
+        
+        <quest id="STATE_HIGH" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="and">
+                <flag-has-value value="true" key="CURRENT_STATE_HIGH"/>
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="INCRESE_CHANCE_HIGH_01" />
+            </rewards>
+        </quest>
+
+        <quest id="INCRESE_CHANCE_NO_01" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="or">
+                <flag-has-value value="true" key="INCREASE_1_IS_100"/>
+                <random chance="65" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="STATE_CHANGE_MED" />
+            </rewards>
+        </quest>
+        
+        <quest id="INCRESE_CHANCE_MED_01" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="or">
+                <flag-has-value value="true" key="INCREASE_1_IS_100"/>
+                <random chance="65" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="STATE_CHANGE_HIGH" />
+            </rewards>
+        </quest>
+        
+        <quest id="INCRESE_CHANCE_HIGH_01" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="1" operator="or">
+                <flag-has-value value="true" key="INCREASE_1_IS_100"/>
+                <random chance="65" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards >
+                <start-quest id="LAUNCH_AVALANCHE" />
+            </rewards>
+        </quest>
+        
+        <quest id="STATE_CHANGE_NO" start="custom" finish="instant" visible="false" repeatable="custom" title="T_SCENARIO_HELPER_AVALANCHE_CHANGE_NO_NAME" >
+            <onStarted >
+                <set-flag key="CURRENT_STATE_NO" value="true"/>
+                <set-flag key="CURRENT_STATE_MED" value="false"/>
+                <set-flag key="CURRENT_STATE_HIGH" value="false"/>
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="CURRENT_STATE_NO" value="false" />
+            </objectives>
+            <ticket title="T_SCENARIO_HELPER_AVALANCHE_CHANGE_NO_NAME" type="negative" notification-sound="disasters/sfx_avalanche_indicator_intensity1" />
+        </quest>
+
+        
+        <quest id="STATE_CHANGE_MED" start="custom" finish="instant" visible="false" ticket="true" repeatable="custom" title="T_SCENARIO_HELPER_AVALANCHE_CHANGE_MED_NAME" >
+            <onStarted>
+                <set-flag key="CURRENT_STATE_NO" value="false"/>
+                <set-flag key="CURRENT_STATE_MED" value="true"/>
+                <set-flag key="CURRENT_STATE_HIGH" value="false"/>
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="CURRENT_STATE_MED" value="false" />
+            </objectives>
+            <ticket title="T_SCENARIO_HELPER_AVALANCHE_CHANGE_MED_NAME" type="negative" notification-sound="disasters/sfx_avalanche_indicator_intensity2" />
+        </quest>
+        
+        <quest id="STATE_CHANGE_HIGH" start="custom" finish="instant" visible="false" ticket="true" repeatable="custom" title="T_SCENARIO_HELPER_AVALANCHE_CHANGE_HIGH_NAME">
+            <onStarted >
+                <set-flag key="CURRENT_STATE_NO" value="false"/>
+                <set-flag key="CURRENT_STATE_MED" value="false"/>
+                <set-flag key="CURRENT_STATE_HIGH" value="true"/>
+            </onStarted>
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="CURRENT_STATE_HIGH" value="false" />
+            </objectives>
+            <ticket title="T_SCENARIO_HELPER_AVALANCHE_CHANGE_HIGH_NAME" type="negative" notification-sound="disasters/sfx_avalanche_indicator_intensity3" />
+        </quest>
+        
+        <quest id="LAUNCH_AVALANCHE" start="custom" finish="instant" visible="false" ticket="true" repeatable="custom" >
+            <onStarted >
+                <set-flag key="Avalanche_launched" value="true" />
+				<start-quest id="AVALANCHE_COOLDOWN" />
+                <set-flag key="CURRENT_STATE_NO" value="false"/>
+                <set-flag key="CURRENT_STATE_MED" value="false"/>
+                <set-flag key="CURRENT_STATE_HIGH" value="false"/>
+            </onStarted>
+			<ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" notification-sound="disasters/sfx_avalanche_going_down" />
+        </quest>
+        
+        <quest id="AVALANCHE_COOLDOWN" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <start_condition timeout="65" operator="and"/>
+            <onStarted >
+                <start-quest id="STATE_CHANGE_NO" />
+                <set-flag key="AVALANCHE_HAS_COOLDOWN" value="true" />
+            </onStarted>
+            <objectives timeout="180" operator="and"/>
+            <rewards >
+                <set-flag key="AVALANCHE_HAS_COOLDOWN" value="false" />
+            </rewards>
+        </quest>
+        
+        <quest id="AVALANCHE_REMOVE" start="custom" finish="instant" visible="false" > <!-- should be called when the scenario is over -->
+            <onStarted >
+                <set-flag key="CURRENT_STATE_NO" value="false"/>
+                <set-flag key="CURRENT_STATE_LOW" value="false"/>
+                <set-flag key="CURRENT_STATE_MED" value="false"/>
+                <set-flag key="CURRENT_STATE_HIGH" value="false"/>
+            </onStarted>
+        </quest>
+    </group>
+</questdb>

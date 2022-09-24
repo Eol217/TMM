@@ -1,0 +1,158 @@
+[random_start]
+
+next:	fem_chatter			1
+next:	fem_to_booth		1
+next:	fem_powder			1
+next:	fem_tug				1
+next:	fem_back			1
+
+
+
+[fem_chatter]
+
+frame:	ani_market_04.0.png		1.5
+
+next: randomchatter
+
+[randomchatter]
+
+next:	sfx_chatter1	1
+next:	sfx_chatter2	1
+next:	sfx_chatter3	1
+next:	sfx_chatter4	1
+next:	sfx_chatter5	1
+
+[sfx_chatter1]
+
+play_ambient: sfx_townies_chatter_female_marketplace_1
+
+next:	fem_chatter_1	1
+
+[sfx_chatter2]
+
+play_ambient: sfx_townies_chatter_female_marketplace_4
+
+next:	fem_chatter_1	1
+
+[sfx_chatter3]
+
+play_ambient: sfx_townies_chatter_female_marketplace_5
+
+next:	fem_chatter_1	1
+
+[sfx_chatter4]
+
+play_ambient: sfx_townies_chatter_female_marketplace_7
+
+next:	fem_chatter_1	1
+
+[sfx_chatter5]
+
+play_ambient: sfx_townies_chatter_female_marketplace_8
+
+next:	fem_chatter_1	1
+
+
+
+[fem_chatter_1]
+
+frame:	ani_market_04.1.png		0.5
+frame:	ani_market_04.0.png		0.2
+frame:	ani_market_04.1.png		0.2
+frame:	ani_market_04.0.png		0.2
+frame:	ani_market_04.1.png		0.2
+frame:	ani_market_04.0.png		0.2
+
+
+delay:	0.10	5.00
+
+next:	fem_chatter			0.85
+next:	fem_powder			1
+next: 	fem_tug				1
+next:	fem_to_booth			1
+
+
+[fem_powder]
+
+frame:	ani_market_04.2.png		0.2
+frame:	ani_market_04.3.png		0.5
+
+frame:	ani_market_04.4.png	0.1
+frame:	ani_market_04.5.png	0.3
+frame:	ani_market_04.6.png	0.1
+frame:	ani_market_04.7.png	0.1
+frame:	ani_market_04.6.png	0.1
+frame:	ani_market_04.7.png	0.1
+frame:	ani_market_04.6.png	0.1
+frame:	ani_market_04.7.png	0.1
+frame:	ani_market_04.6.png	0.1
+frame:	ani_market_04.7.png	0.1
+frame:	ani_market_04.5.png	0.3
+frame:	ani_market_04.4.png	0.1
+
+frame:	ani_market_04.3.png		0.2
+
+delay:	0.10	2.00
+
+
+next:	fem_chatter			0.85
+next: 	fem_tug				1
+next:	fem_to_booth		1
+
+
+[fem_tug]
+
+frame:	ani_market_04.2.png			0.2
+frame:	ani_market_04.3.png		0.5
+
+frame:	ani_market_04.8.png		0.1
+frame:	ani_market_04.9.png		0.1
+frame:	ani_market_04.8.png		0.1
+frame:	ani_market_04.9.png		0.1
+frame:	ani_market_04.8.png		0.1
+frame:	ani_market_04.9.png		0.1
+
+frame:	ani_market_04.3.png		0.2
+
+delay:	0.10	2.00
+
+next:	fem_chatter			0.85
+next:	fem_powder			1
+next:	fem_to_booth			1
+
+[fem_to_booth]
+
+frame:	ani_market_04.3.png		0.1
+
+frame:	ani_market_04.10.png		0.1
+frame:	ani_market_04.11.png		0.1
+frame:	ani_market_04.12.png		0.1
+frame:	ani_market_04.13.png		0.1
+frame:	ani_market_04.14.png		0.1
+frame:	ani_market_04.15.png		3
+
+delay:	0.10	3.00
+
+next:	fem_back			1
+
+
+[fem_back]
+
+frame:	ani_market_04.16.png		0.1
+frame:	ani_market_04.17.png		0.1
+frame:	ani_market_04.18.png		0.1
+frame:	ani_market_04.19.png		0.1
+frame:	ani_market_04.20.png		0.1
+frame:	ani_market_04.21.png		0.1
+frame:	ani_market_04.22.png		0.1
+frame:	ani_market_04.23.png		0.1
+frame:	ani_market_04.0.png			1.5
+
+
+delay:	0.10	2.00
+
+next:	fem_chatter			1
+next:	fem_powder			1
+next: 	fem_tug				1
+next:	fem_to_booth		0.75
+

@@ -1,0 +1,35 @@
+[mint_work_1]
+
+play_ambient: sfx_buildings_smelter
+frame:	ani_mint_02.0.png		1.0
+frame:	ani_mint_02.1.png		0.1
+frame:	ani_mint_02.2.png		0.1
+frame:	ani_mint_02.3.png		0.1
+frame:	ani_mint_02.4.png		0.1
+frame:	ani_mint_02.5.png		0.1
+frame:	ani_mint_02.6.png		0.1
+frame:	ani_mint_02.7.png		0.1
+frame:	ani_mint_02.8.png		0.1
+frame:	ani_mint_02.9.png		0.1
+frame:	ani_mint_02.10.png		0.1
+frame:	ani_mint_02.11.png		0.1
+frame:	ani_mint_02.12.png		0.1
+frame:	ani_mint_02.13.png		0.3
+
+frame:	ani_mint_02.14.png		0.3
+frame:	ani_mint_02.15.png		0.2
+frame:	ani_mint_02.14.png		0.2
+frame:	ani_mint_02.16.png		0.2
+frame:	ani_mint_02.14.png		0.2
+frame:	ani_mint_02.15.png		0.2
+frame:	ani_mint_02.14.png		0.2
+frame:	ani_mint_02.16.png		0.2
+frame:	ani_mint_02.14.png		0.1
+frame:	ani_mint_02.13.png		0.1
+frame:	ani_mint_02.0.png		0.1
+
+delay:	0.10	0.30
+
+
+next:	mint_work_1
+

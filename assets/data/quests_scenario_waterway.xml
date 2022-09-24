@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: Waterways -->
+<!-- prestige: 205 + 80 (bonus for perfect play) -->
+
+<questdb>
+    <group avatar="client">
+        <include file = "data/quests_sandbox.xml"/>
+        <include file = "data/common-quests.xml"/>
+  
+<!-- Szenario Start Quest -->
+        <quest id="QUEST_STARTER" visible="false" start="instant" finish="instant">
+            <objectives timeout="1" operator="and"/>
+            <rewards>
+                <set-flag key="scenario-finished" value="false" />
+                <set-flag key="quest_population_end" value= "false" />
+                <set-modifier name="mod_event_plague_timeout" tag="map" value="1000"/>
+                <!-- <set-modifier name="mod_event_fire_timeout" tag="map" value="200"/> -->
+                <set-modifier name="mod_event_fire_chance" tag="map" value="10"/>
+                <start-quest id="PRODUCTION_START" />
+                <start-quest id="MAIN_QUEST" />
+                <start-quest id="DISASTER_START" />
+                <start-quest id="TOWNIE_LEAVE" />
+                <start-quest id="HAPPYNESS_START" />
+                <start-quest id="SCENARIO_BONUS" />
+                <start-quest id="POPULATION_WARNING_175" />
+            </rewards>
+        </quest>
+        
+<!-- Main Quest: Complete all challenges and never get below 150 townies--> 
+        <quest id="MAIN_QUEST" avatar="king" title="T_GAME_QUEST_SCEN_WW_POPULATION_START_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_END_DESC" start="custom" finish="user" isKeyQuest="true" visible="true">
+            <onStarted notification="T_GAME_QUEST_SCEN_WW_POPULATION_END_DESC">
+            </onStarted>
+
+            <start_condition timeout="1" operator="and"/>
+               
+            <objectives timeout="3" operator="and">
+                <flag-has-value key="population_fail" value="false" /> 
+                <population count="150" />
+                <quest-done id="HAPPYNESS_END"/>
+                <quest-done id="PRODUCTION_35" />
+            </objectives>
+
+            <onSuccess > <!-- Bonus Reward Quest starten -->
+                <start-quest id="SCENARIO_SUCCESS" />
+            </onSuccess>
+            
+            <rewards >     
+                <resource amount="80" resource="prestige" />
+                <set-flag key="quest_population_end" value="true"/>
+                <set-flag key="scenario-finished" value="true" />
+            </rewards>
+            
+            <fail_condition timeout="5400" operator="and" >
+            </fail_condition>
+            
+            <onFailed notification="T_GAME_QUEST_SCEN_WW_MAIN_END" >
+                <start-quest id="SCENARIO_FAILED" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SCENARIO_SUCCESS" start="custom" finish="instant" visible="false">
+            <objectives timeout="1" operator="and">
+                <flag-has-value key="scenario-bonus" value="true"/>
+            </objectives>
+                       
+            <fail_condition timeout="2" operator="and">
+                <flag-has-value key="scenario-bonus" value="false"/>
+            </fail_condition>
+            
+            <rewards >
+                <start-quest id="SCENARIO_ENDING_01" />
+            </rewards>
+            
+            <onFailed >
+                <start-quest id="SCENARIO_ENDING_02" />
+            </onFailed>
+        </quest>
+        
+        <quest id="SCENARIO_ENDING_01" isKeyQuest="true" title="T_ADCOLONY_DOUBLE_REWARD" description="T_GAME_QUEST_SCEN_WW_MAIN_SUCCESS_01" avatar="king" start="custom" finish="user" visible="true"> <!-- Perfect Ending -->
+            <objectives timeout="1" operator="and"/>
+            
+            <onSuccess notification="T_GAME_QUEST_SCEN_WW_MAIN_SUCCESS_01" />
+            
+            <rewards >
+                <set-flag key="scenario-finished" value="true" />
+                <start-quest id="scenario-finished"/>
+                <resource amount="80" resource="prestige"/>
+            </rewards>
+        </quest>
+        
+        <quest id="SCENARIO_ENDING_02" avatar="king" start="custom" finish="instant" visible="false"> <!-- Okay Ending -->
+            <objectives timeout="1" operator="and"/>
+            
+            <onSuccess notification="T_GAME_QUEST_SCEN_WW_MAIN_SUCCESS_02" /> 
+            
+            <rewards >
+                <set-flag key="scenario-finished" value="true" />
+                <start-quest id="scenario-finished"/>
+            </rewards>
+        </quest>
+        
+        
+        <quest id="SCENARIO_FAILED" start="custom" finish="instant" visible="false">
+            <objectives timeout="1" operator="and"/>    
+            
+            <rewards >
+                <set-flag key="scenario-finished" value="true" />
+                <scenario-failed />
+                <start-quest id="sandbox_start"/>
+				<remove-modifier-by-tag tag="map" />
+				<!--
+                <set-modifier name="mod_event_plague_timeout" tag="map" value="100"/>
+                <set-modifier name="mod_event_fire_timeout" tag="map" value="100"/>
+                <set-modifier name="mod_event_fire_chance" tag="map" value="100"/>
+				-->
+            </rewards>
+        </quest>
+               
+        <quest id="SCENARIO_BONUS" start="custom" finish="instant" visible="false">
+            <onStarted >
+                <set-flag key="scenario-bonus" value="true" />
+            </onStarted>
+            
+            <objectives timeout="1" operator="and">    
+                <flag-has-value key="scenario-finished" value="true" /> 
+            </objectives>
+            
+            <fail_condition timeout="1" operator="or_not">
+                <building count="19" type="building_residence_00" />
+                <building count="10" type="building_residence_01" />
+            </fail_condition>
+            
+            <onFailed >
+                <set-flag key="scenario-bonus" value="false" />
+            </onFailed>
+        </quest>
+        
+<!-- Main Quest ends -->
+
+<!-- Population Quests Starts-->
+        <!-- removed Quest
+        <quest id="POPULATION_START" title="T_GAME_QUEST_SCEN_WW_POPULATION_START_NAME"   finish="instant" visible="true" >
+            <objectives timeout="5400"> 
+            </objectives>
+            
+            <rewards >
+                <set-flag key="quest_population_timeup" value="true" />
+            </rewards>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="scenario-finished" value="true"/>
+            </fail_condition>
+        </quest>
+        -->
+        <quest id="POPULATION_END" title="T_GAME_QUEST_SCEN_WW_POPULATION_END_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_150_DESC" finish="instant" start="custom" repeatable="custom" isKeyQuest="true">
+            <onStarted />
+
+            <start_condition timeout="2" operator="and"/>
+               
+            <objectives timeout="1" operator="and">
+                <population count="150" />
+            </objectives>
+            
+            <fail_condition timeout="239" operator="and">
+            </fail_condition>
+            
+            <onFailed >
+                <set-flag key="population_fail" value="true" />
+                <set-quest-state id="MAIN_QUEST" state="failed" />
+            </onFailed>
+            
+            <rewards>     
+                <resource amount="5" resource="fish" />
+                <resource amount="3" resource="wood" />
+                <start-quest id="POPULATION_WARNING_150" />
+                <start-quest id="POPULATION_WARNING_160_RESET" />
+            </rewards>
+          
+        </quest>
+    <!-- Population Warnings -->
+        <!-- 175 -->
+        <quest id="POPULATION_WARNING_175" title="T_GAME_QUEST_SCEN_WW_POPULATION_175_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_175_DESC" repeatable="custom" start="custom" visible="false" finish="instant">
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="3" operator="and_not">
+                <population count="175" />
+            </objectives>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario-finished" value="true"/>
+            </fail_condition>
+            <onSuccess notification="T_GAME_QUEST_SCEN_WW_POPULATION_175_DESC"/>
+            <rewards>     
+                <start-quest id="POPULATION_WARNING_175_RESET" />
+                <start-quest id="POPULATION_WARNING_160" />
+            </rewards>
+        </quest>
+        
+        <quest id="POPULATION_WARNING_175_RESET" title="T_GAME_QUEST_SCEN_WW_POPULATION_175_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_175_DESC" repeatable="custom" start="custom" visible="false" finish="instant" >
+            <onStarted />
+
+            <start_condition timeout="1" operator="and"/>
+               
+            <objectives timeout="3"  operator="and">
+                <population count="175" />
+            </objectives>
+            
+            <fail_condition timeout="1"  operator="and">
+                <flag-has-value key="scenario-finished" value="true"/>
+            </fail_condition>
+            
+            <rewards>     
+                <start-quest id="POPULATION_WARNING_175" />
+                <set-quest-state id="POPULATION_WARNING_160" state="failed" />
+            </rewards>
+        </quest>
+        <!-- 160 -->
+        <quest id="POPULATION_WARNING_160" title="T_GAME_QUEST_SCEN_WW_POPULATION_160_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_160_DESC" repeatable="custom" start="custom" visible="false" finish="instant">
+            <onStarted />
+
+            <start_condition timeout="1" operator="and"/>
+               
+            <objectives timeout="3" operator="and_not">
+                <population count="159" />
+            </objectives>
+            
+            <fail_condition timeout="1"  operator="and">
+                <flag-has-value key="scenario-finished" value="true"/>
+            </fail_condition>
+            
+            <onSuccess notification="T_GAME_QUEST_SCEN_WW_POPULATION_160_DESC"/>
+            
+            <rewards> 
+                <start-quest id="POPULATION_WARNING_160_RESET" />
+                <start-quest id="POPULATION_WARNING_150" />
+                <set-quest-state id="POPULATION_WARNING_175_RESET" state="failed" />
+            </rewards>
+        </quest>
+        
+        <quest id="POPULATION_WARNING_160_RESET" title="T_GAME_QUEST_SCEN_WW_POPULATION_160_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_160_DESC" repeatable="custom" start="custom" visible="true" finish="instant" >
+            <onStarted />
+
+            <start_condition timeout="1" operator="and"/>
+               
+            <objectives timeout="3" operator="and" >
+                <population count="160" />
+            </objectives>
+            
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario-finished" value="true"/>
+            </fail_condition>
+            
+            <rewards>
+                <resource amount="4" resource="fish" />
+                <resource amount="4" resource="wood" />     
+                <start-quest id="POPULATION_WARNING_160" />
+                <start-quest id="POPULATION_WARNING_175_RESET" />
+                <set-quest-state id="POPULATION_WARNING_150" state="failed" />
+            </rewards>
+        </quest>
+        <!-- 150 -->
+        <quest id="POPULATION_WARNING_150" title="T_GAME_QUEST_SCEN_WW_POPULATION_150_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_150_DESC" repeatable="custom" start="custom" visible="false" finish="instant">
+            <onStarted />
+
+            <start_condition timeout="1" operator="and"/>
+               
+            <objectives timeout="3" operator="and_not">
+                <population count="150" />
+            </objectives>
+            
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="scenario-finished" value="true"/>
+            </fail_condition>
+            
+            <onSuccess notification="T_GAME_QUEST_SCEN_WW_POPULATION_150_DESC"/>
+            
+            <rewards>     
+                <start-quest id="POPULATION_END" />
+                <set-quest-state id="POPULATION_WARNING_160_RESET" state="failed" />
+            </rewards>
+        </quest>
+        
+        <!-- 
+        <quest id="POPULATION_WARNING_150_RESET" title="T_GAME_QUEST_SCEN_WW_POPULATION_150_NAME" description="T_GAME_QUEST_SCEN_WW_POPULATION_150_DESC" repeatable="custom"   start="custom" visible="false" finish="instant" >
+            <onStarted />
+
+            <start_condition timeout="1"/>
+               
+            <objectives timeout="3" >
+                <population count="150" />
+            </objectives>
+            
+            <fail_condition timeout="1" >
+                <flag-has-value key="scenario-finished" value="true"/>
+            </fail_condition>
+            
+			<rewards>
+				<start-quest id="POPULATION_WARNING_150" />
+				<start-quest id="POPULATION_WARNING_160_RESET" />
+			</rewards>
+		</quest>
+		-->
+		<!-- Population Quests Ends -->
+
+		<!-- Production Quests Starts -->
+		<quest id="PRODUCTION_START" title="T_GAME_QUEST_SCEN_WW_PRODUCTION_START_NAME" description="T_GAME_QUEST_SCEN_WW_PRODUCTION_START_DESC" repeatable="custom" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_START_DESC" >
+				<center-to-building target="building_lumberjack" />
+			</onStarted>
+
+			<start_condition timeout="8" operator="and"/>
+               
+			<objectives timeout="1" operator="and">
+				<street count="1" type="stone"/>
+				<assign type="building_lumberjack" count="1" trigger="is_assigned" />
+			</objectives>
+            
+			<rewards>
+				<start-quest id="PRODUCTION_30" /> <!-- Changed Quest order
+                <start-quest id="PRODUCTION_20" />  -->
+				<resource amount="12" resource="fish" />
+				<resource amount="16" resource="planks" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="PRODUCTION_20" title="T_GAME_QUEST_SCEN_WW_PRODUCTION_20_NAME" description="T_GAME_QUEST_SCEN_WW_PRODUCTION_20_DESC" repeatable="custom" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_20_DESC" >
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+               
+			<objectives timeout="1" operator="and" >
+				<construct count="1" type="building_warehouse" />
+				<assign type="building_hq" count="4" trigger="is_assigned" />
+			</objectives>
+            
+			<rewards>
+				<start-quest id="PRODUCTION_40" />
+				<resource amount="9" resource="tools" />
+				<resource amount="13" resource="planks" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="PRODUCTION_30" title="T_GAME_CONSTRUCT_ON_COAST" description="T_GAME_QUEST_SCEN_WW_PRODUCTION_30_DESC" repeatable="custom" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_30_DESC" >
+			</onStarted>
+            
+			<start_condition timeout="3" operator="and"/>
+			<objectives timeout="1" operator="or">
+				<construct count="1" type="building_fishing_lodge" />
+			</objectives>
+
+			<rewards>
+				<start-quest id="PRODUCTION_END" />
+				<resource amount="11" resource="bread" />
+				<resource amount="19" resource="stone" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="PRODUCTION_35" title="T_GAME_QUEST_SCEN_WW_PRODUCTION_35_NAME" description="T_GAME_QUEST_SCEN_WW_PRODUCTION_35_DESC" repeatable="custom" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_35_DESC" >
+				<unlock key="building_level_2_food" />
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+            
+			<objectives timeout="1" operator="or">
+				<building count="1" type="building_bakery_x2" />
+				<assign count="2" trigger="is_assigned" type="building_bakery_x2" />
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_FINISHED"/>
+            
+			<rewards >
+				<resource amount="20" resource="prestige" />
+				<set-flag key="Production_Finished" value="true" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="PRODUCTION_END" title="T_GAME_QUEST_SCEN_WW_PRODUCTION_END_NAME" description="T_GAME_QUEST_SCEN_WW_PRODUCTION_END_DESC" repeatable="custom" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_END_DESC" >
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+            
+			<objectives timeout="1" operator="or">
+				<construct count="1" type="building_hunters_cabin" />
+				<construct count="1" type="building_butcher" />
+			</objectives>
+            
+			<rewards>
+				<resource amount="9" resource="pig" />
+				<resource amount="15" resource="corn" />
+				<start-quest id="PRODUCTION_20" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="PRODUCTION_40" title="T_GAME_QUEST_SCEN_WW_PRODUCTION_40_NAME" description="T_GAME_QUEST_SCEN_WW_PRODUCTION_40_DESC" repeatable="custom" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_PRODUCTION_40_DESC" >
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+            
+			<objectives timeout="1" operator="and" >
+				<building count="5" type="building_well" />
+			</objectives>
+            
+			<rewards>
+				<start-quest id="PRODUCTION_35" />
+				<resource amount="9" resource="planks" />
+				<resource amount="12" resource="stone" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+		<!-- Production Quests Ends -->
+
+
+		<!-- Happyness Quests Starts -->
+		<quest id="HAPPYNESS_START" title="T_GAME_QUEST_SCEN4_2_NAME" description="T_GAME_QUEST_SCEN_WW_HAPPYNESS_START_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_HAPPYNESS_START_DESC" >
+				<unlock key="building_level_2_needs" />
+			</onStarted>
+
+			<start_condition timeout="165" operator="and"/>
+            
+			<objectives timeout="1"  operator="and">
+				<happyness type="market" value="80" />
+			</objectives>
+            
+			<rewards>
+				<start-quest id="HAPPYNESS_20" />
+				<resource amount="7" resource="cloths" />
+				<resource amount="5" resource="jewelry" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="HAPPYNESS_20" title="T_GAME_QUEST_SCEN3_14_NAME" description="T_GAME_QUEST_SCEN_WW_HAPPYNESS_20_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_HAPPYNESS_20_DESC" >
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+            
+			<objectives timeout="1" operator="and" >
+				<happyness type="religion" value="85" />
+			</objectives>
+            
+			<rewards>
+				<start-quest id="HAPPYNESS_40" /> <!-- swapped Quest Happyness_30 with _40 -->
+				<resource amount="9" resource="cloths" />
+				<resource amount="6" resource="jewelry" />
+			</rewards>
+            
+			<fail_condition timeout="1"  operator="and">
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="HAPPYNESS_30" title="T_GAME_QUEST_SCEN3_15_NAME" description="T_GAME_QUEST_SCEN_WW_HAPPYNESS_30_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_HAPPYNESS_30_DESC" >
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+            
+			<objectives timeout="1" operator="and" >
+				<happyness type="tavern_complete" value="70" />
+			</objectives>
+            
+			<rewards>
+				<start-quest id="HAPPYNESS_END" />
+				<resource amount="15" resource="prestige"/>
+			</rewards>
+		</quest>
+        
+		<quest id="HAPPYNESS_40" title="T_GAME_QUEST_SCEN7_GUY_6_NAME" description="T_GAME_QUEST_SCEN_WW_HAPPYNESS_40_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_HAPPYNESS_40_DESC" >
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+            
+			<objectives timeout="1" operator="and">
+				<!-- <happyness type="entertainment" value="80" /> replaced happyness check with building check -->
+				<building count="1" type="building_jousting" />
+			</objectives>
+            
+			<rewards>
+				<start-quest id="HAPPYNESS_30" />
+				<resource amount="10" resource="prestige" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="HAPPYNESS_END" title="T_GAME_TUTORIAL_QUEST_NAME_12" description="T_GAME_QUEST_SCEN_WW_HAPPYNESS_END_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_HAPPYNESS_END_DESC" >
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+            
+			<objectives timeout="3" operator="or">
+				<happyness type="cloths" value="50" />
+				<happyness type="jewelry" value="50" />
+			</objectives>
+            
+			<rewards>
+				<resource amount="20" resource="prestige" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+		<!-- Happyness Quests Ends -->
+
+		<!-- Disaster Quests Starts -->
+		<quest id="DISASTER_START" title="T_GAME_QUEST_SCEN_WW_DISASTER_START_NAME" description="T_GAME_QUEST_SCEN_WW_DISASTER_START_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_DISASTER_START_DESC" >
+				<start-plague amount="1" />
+				<!-- <set-modifier name="mod_event_plague_timeout" tag="map" value="50"/> -->
+			</onStarted>
+
+			<start_condition timeout="1020" operator="and_not">
+				<flag-has-value key="scenario-finished" value="true" />
+			</start_condition>
+            
+			<objectives timeout="3" operator="and">
+				<building count="1" type="building_medicus" />
+				<purge-plague />
+			</objectives>
+            
+			<rewards>
+				<set-modifier name="mod_event_plague_timeout" tag="map" value="200"/>
+				<start-quest id="DISASTER_20" />
+				<resource amount="150" resource="coins" />
+				<resource amount="15" resource="prestige" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="DISASTER_20" title="T_GAME_QUEST_SCEN_WW_DISASTER_20_NAME" description="T_GAME_QUEST_SCEN_WW_DISASTER_20_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_DISASTER_20_DESC" >
+				<start-fire amount="1" state="burning" target="building_residence_01" />
+				<start-fire amount="1" state="burning" target="building_residence_00" />
+				<!--<set-modifier name="mod_event_fire_timeout" tag="map" value="20"/>-->
+				<set-modifier name="mod_event_fire_chance" tag="map" value="150"/>
+			</onStarted>
+
+			<start_condition timeout="540" operator="and_not">
+				<flag-has-value key="scenario-finished" value="true" />
+			</start_condition>
+            
+			<objectives timeout="3" operator="and">
+				<coverage coverage="80" type="firefighters" />
+				<!-- <purge-fire /> -->
+			</objectives>
+            
+			<rewards>
+				<!--<set-modifier name="mod_event_fire_timeout" tag="map" value="200"/>-->
+				<set-modifier name="mod_event_fire_chance" tag="map" value="0"/>
+				<start-quest id="DISASTER_30" />
+				<resource amount="250" resource="coins" />
+				<resource amount="15" resource="prestige" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="DISASTER_30" title="T_GAME_QUEST_SCEN_WW_DISASTER_30_NAME" avatar="knight" description="T_GAME_QUEST_SCEN_WW_DISASTER_30_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_DISASTER_30_DESC" >
+				<bandit-attack amount="2" intention="blow_up" source="outside" target="building_residence_01" />
+				<enable-bandits enable="outside"/>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="20"/>
+			</onStarted>
+
+			<start_condition timeout="800" operator="and_not">
+				<flag-has-value key="scenario-finished" value="true" />
+			</start_condition>
+            
+			<objectives timeout="3" operator="and" >
+				<building count="3" type="building_watchtower" />
+				<soldiers-in-town count="6" />
+			</objectives>
+            
+			<rewards>
+				<enable-bandits enable="false"/>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="200"/>
+				<start-quest id="DISASTER_END" />
+				<resource amount="350" resource="coins" />
+				<resource amount="15" resource="prestige" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+        
+		<quest id="DISASTER_END" title="T_GAME_QUEST_SCEN_WW_DISASTER_START_NAME" description="T_GAME_QUEST_SCEN_WW_DISASTER_END_DESC" start="custom" isKeyQuest="true" >
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_DISASTER_END_DESC" >
+				<start-plague amount="3" />
+				<set-modifier name="mod_event_plague_timeout" tag="map" value="20"/>
+			</onStarted>
+
+			<start_condition timeout="700" operator="and_not">
+				<flag-has-value key="scenario-finished" value="true" />
+			</start_condition>
+            
+			<objectives timeout="3" operator="and" >
+				<building count="2" type="building_medicus" />
+				<purge-plague />
+			</objectives>
+            
+			<rewards>
+				<set-modifier name="mod_event_plague_timeout" tag="map" value="200"/>
+				<start-quest id="DISASTER_20" />
+				<resource amount="15" resource="prestige" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</fail_condition>
+		</quest>
+
+		<!-- Disaster Quests Ends -->
+
+		<!-- Twnie Leave Quests Starts -->
+		<quest id="TOWNIE_LEAVE" title="T_GAME_QUEST_SCEN_WW_TOWNIE_LEAVE_NAME" avatar="farmer" description="T_GAME_QUEST_SCEN_WW_TOWNIE_LEAVE_DESC" visible="false" finish="instant" start="custom" repeatable="instant">
+			<onStarted >
+			</onStarted>
+
+			<start_condition timeout="240" operator="and_not">
+				<flag-has-value key="scenario-finished" value="true" />
+			</start_condition>
+            
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="scenario-finished" value="true"/>
+			</objectives>
+            
+			<fail_condition timeout="2" operator="and_not">
+				<happyness value="90" />
+			</fail_condition>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN_WW_TOWNIE_LEAVE_DESC" >
+				<destruct-building count="1" type="building_residence_01"/>
+				<start-quest id="TOWNIE_LEAVE" />
+			</onFailed>
+            
+			<rewards>
+			</rewards>
+		</quest>
+		<!-- Twnie Leave Quests Ends -->
+
+		<!-- Scenario End quest-->
+                  
+		<quest id="scenario-finished" start="custom"   visible="false" >
+			
+			<start_condition timeout="5" operator="and"/>
+                        
+			<objectives timeout="1" operator="and"/>
+            
+			<rewards>
+				<scenario-finished/>
+				<start-quest id="sandbox_start"/>
+				<remove-modifier-by-tag tag="map" />
+				<!--
+				<set-modifier name="mod_event_plague_timeout" tag="map" value="100"/>
+				<set-modifier name="mod_event_fire_timeout" tag="map" value="100"/>
+				<set-modifier name="mod_event_fire_chance" tag="map" value="100"/>
+				-->
+			</rewards>
+		</quest>
+                                                          
+		<quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START"   visible="false" >
+			<onStarted notification="T_GAME_SANDBOX_START"/>        
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and"/>
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2"  operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="40" topLeftY="40" bottomRightX="76" bottomRightY="80" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+
+	</group>
+</questdb>
+

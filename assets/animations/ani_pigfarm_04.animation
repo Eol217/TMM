@@ -1,0 +1,213 @@
+[random_start]
+
+next:	standleft1			1
+next:	standleft2			1
+next:	standleft3			1
+next:	standleft4			1
+next:	walkright			1
+next:	walkdown			1
+
+[standleft1]
+frame:	ani_pigfarm_04.0.png		2.00
+
+delay:	1.00	4.00
+
+next:	standleft1			1
+next:	standleft2			1
+next:	standleft3			1
+next:	standleft4			1
+next:	walkright			1
+next:	walkdown			1
+
+[standleft2]
+frame:	ani_pigfarm_04.1.png		2.00
+
+delay:	1.00	4.00
+
+next:	standleft1			1
+next:	standleft2			1
+next:	standleft3			1
+next:	standleft4			1
+next:	walkright			1
+next:	walkdown			1
+
+[standleft3]
+frame:	ani_pigfarm_04.2.png		2.00
+
+delay:	1.00	4.00
+
+next:	standleft1			1
+next:	standleft2			1
+next:	standleft3			1
+next:	standleft4			1
+next:	walkright			1
+next:	walkdown			1
+
+[standleft4]
+frame:	ani_pigfarm_04.3.png		2.00
+
+delay:	1.00	4.00
+
+next:	standleft1			1
+next:	standleft2			1
+next:	standleft3			1
+next:	standleft4			1
+next:	walkright			1
+next:	walkdown			1
+
+[walkdown]
+frame:	ani_pigfarm_04.3.png		0.15
+frame:	ani_pigfarm_04.4.png		0.15
+frame:	ani_pigfarm_04.5.png		0.15
+frame:	ani_pigfarm_04.6.png		0.15
+frame:	ani_pigfarm_04.7.png		0.15
+frame:	ani_pigfarm_04.8.png		0.15
+frame:	ani_pigfarm_04.9.png		0.3
+
+delay:	0.10	4.00
+
+next:	standdown1			1
+next:	standdown2			1
+next:	standdown3			1
+next:	standdown4			1
+next:	walkup				1
+
+[standdown1]
+frame:	ani_pigfarm_04.9.png		2.00
+
+delay:	1.00	4.00
+
+next:	standdown1			1
+next:	standdown2			1
+next:	standdown3			1
+next:	standdown4			1
+next:	walkup				1
+
+[standdown2]
+frame:	ani_pigfarm_04.10.png		2.00
+
+delay:	1.00	4.00
+
+next:	standdown1			1
+next:	standdown2			1
+next:	standdown3			1
+next:	standdown4			1
+next:	walkup				1
+
+[standdown3]
+frame:	ani_pigfarm_04.11.png		2.00
+
+delay:	1.00	4.00
+
+next:	standdown1			1
+next:	standdown2			1
+next:	standdown3			1
+next:	standdown4			1
+next:	walkup				1
+
+[standdown4]
+frame:	ani_pigfarm_04.12.png		2.00
+
+delay:	1.00	4.00
+
+next:	standdown1			1
+next:	standdown2			1
+next:	standdown3			1
+next:	standdown4			1
+next:	walkup				1
+
+[walkup]
+frame:	ani_pigfarm_04.13.png		0.15
+frame:	ani_pigfarm_04.14.png		0.15
+frame:	ani_pigfarm_04.15.png		0.15
+frame:	ani_pigfarm_04.16.png		0.15
+play_ambient: sfx_environment_pig_var1
+frame:	ani_pigfarm_04.17.png		0.15
+frame:	ani_pigfarm_04.18.png		0.15
+frame:	ani_pigfarm_04.19.png		0.3
+
+delay:	0.10	4.00
+
+next:	standleft1			1
+next:	standleft2			1
+next:	standleft3			1
+next:	standleft4			1
+next:	walkright			1
+next:	walkdown			1
+
+[walkright]
+frame:	ani_pigfarm_04.20.png		0.15
+frame:	ani_pigfarm_04.21.png		0.15
+frame:	ani_pigfarm_04.22.png		0.15
+frame:	ani_pigfarm_04.23.png		0.15
+frame:	ani_pigfarm_04.24.png		0.15
+frame:	ani_pigfarm_04.25.png		0.15
+frame:	ani_pigfarm_04.26.png		0.15
+frame:	ani_pigfarm_04.27.png		0.3
+
+delay:	0.10	4.00
+
+next:	standright1			1
+next:	standright2			1
+next:	standright3			1
+next:	standright4			1
+next:	walkleft			1
+
+[standright1]
+frame:	ani_pigfarm_04.27.png		2.00
+
+delay:	1.00	4.00
+
+next:	standright1			1
+next:	standright2			1
+next:	standright3			1
+next:	standright4			1
+next:	walkleft			1
+
+
+[standright2]
+frame:	ani_pigfarm_04.28.png		2.00
+
+delay:	1.00	4.00
+
+next:	standright1			1
+next:	standright2			1
+next:	standright3			1
+next:	standright4			1
+next:	walkleft			1
+
+[standright3]
+frame:	ani_pigfarm_04.29.png		2.00
+
+delay:	1.00	4.00
+
+next:	standright1			1
+next:	standright2			1
+next:	standright3			1
+next:	standright4			1
+next:	walkleft			1
+
+[standright4]
+frame:	ani_pigfarm_04.30.png		2.00
+
+delay:	1.00	4.00
+
+next:	standright1			1
+next:	standright2			1
+next:	standright3			1
+next:	standright4			1
+next:	walkleft			1
+
+[walkleft]
+frame:	ani_pigfarm_04.31.png		0.15
+frame:	ani_pigfarm_04.32.png		0.15
+frame:	ani_pigfarm_04.33.png		0.15
+frame:	ani_pigfarm_04.34.png		0.15
+play_ambient: sfx_environment_pig_var2
+frame:	ani_pigfarm_04.35.png		0.15
+frame:	ani_pigfarm_04.36.png		0.15
+frame:	ani_pigfarm_04.2.png		0.3
+
+delay:	0.10	4.00
+
+next:	random_start		1

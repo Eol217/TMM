@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group avatar="farmer">
+
+		<quest id="SANDBOX_STARTQUEST" title="Welcome to sandbox mode." description="T_GAME_QUEST_SANDBOX_DIVIDEDSHORELINE_WELCOME" start="instant" finish="instant" visible="false" avatar="farmer">
+			<start_condition timeout="5"/>
+			<onSuccess  notification="T_GAME_QUEST_SANDBOX_DIVIDEDSHORELINE_WELCOME">
+			</onSuccess>
+			<objectives timeout="2"/>
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_START_VALUES" start="instant" visible="false" finish="instant" repeatable="custom" >
+			<rewards>
+				<set-flag key="sandbox_map_has_avalanche" value="false" />
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+<!-- STORM -->
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards>
+				<lightningstrike topLeftX="86" topLeftY="47" bottomRightX="104" bottomRightY="63" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->
+
+
+		<quest id="SANDBOX_AVALANCHE_LAUNCHER" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<onStarted >
+				<start-quest id="SANDBOX_AVALANCHE_TICKET" />
+			</onStarted>
+			<objectives timeout="1" operator="and" >
+				<random chance="50" />
+			</objectives>
+			<fail_condition timeout="2" operator="and"/>
+			<rewards >
+				<start-quest id="SANDBOX_AVALANCHE_1" />
+			</rewards>
+			<onFailed >
+				<start-quest id="SANDBOX_AVALANCHE_0" />
+			</onFailed>
+		</quest>
+                
+                <quest id="SANDBOX_AVALANCHE_TICKET" start="custom" finish="instant" repeatable="custom" >
+			<objectives timeout="10" />
+			<ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" />
+		</quest>
+                
+                <quest id="SANDBOX_AVALANCHE_1" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" >
+				<random chance="50" />
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards>
+				<!--These coordinates need to be updated for each map-->
+				<avalanche topLeftX="72" topLeftY="80" bottomRightX="57" bottomRightY="111" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="1" startOrientation="topLeft" />
+			</rewards>
+			<!--<onFailed notification="DEBUG: AVALANCHE_1_FAILED">-->
+			<onFailed>
+				<!--These coordinates need to be updated for each map-->
+				<avalanche topLeftX="72" topLeftY="80" bottomRightX="57" bottomRightY="111" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="1" startOrientation="topLeft" />
+			</onFailed>
+		</quest>
+
+		<quest id="SANDBOX_AVALANCHE_0" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" >
+				<random chance="50" />
+			</objectives>
+			<fail_condition timeout="2" />
+			<!--<onFailed notification="DEBUG: AVALANCHE_0_FAILED"/>-->
+			<rewards>
+				<!--These coordinates need to be updatAVALANCHE ed for each map-->
+				<avalanche topLeftX="72" topLeftY="80" bottomRightX="57" bottomRightY="111" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="1" startOrientation="topLeft" />
+			</rewards>
+			<onFailed>
+				<!--These coordinates need to be updated for each map-->
+				<avalanche topLeftX="72" topLeftY="80" bottomRightX="57" bottomRightY="111" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="1" startOrientation="topLeft" />
+			</onFailed>
+		</quest>                           
+                             
+                               
+     </group>
+
+</questdb>

@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: MONUMENTAL -->
+<!--Max Prestige earned 200 -->
+
+<questdb>
+	
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+    
+	<group avatar="client">
+            
+		<quest id="SCENARIO_6_QUEST_ERASE" description="T_GAME_QUEST_SCEN6_ERASE_DESC" start="instant" isKeyQuest="false" visible="false" finish="instant" avatar="client">
+                    
+			<start_condition timeout="67" operator="and"/>
+                    
+			<onStarted notification="T_GAME_QUEST_SCEN6_ERASE_DESC">
+				<highlight key="BTN_HUD_ERASE" mode="normal" highlight="true"/>
+			</onStarted>
+
+		</quest>
+                
+		<quest id="SCENARIO_6_QUEST_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN6_1_NAME" description="T_GAME_QUEST_SCEN6_1_DESC" start="instant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN6_1_DESC">
+				<set-enable-trade lock="true" resource="gold"/>
+				<set-enable-trade lock="true" resource="iron"/>
+				<set-enable-trade lock="true" resource="stone"/>
+				<set-enable-trade lock="true" resource="nuggets"/>
+				<set-enable-trade lock="true" resource="ore"/>
+				<set-modifier tag="map" name="mod_production_building_mine" value="65"/>
+				<set-modifier tag="map" name="mod_production_building_farm" value="15"/>
+				<start-quest id="SCENARIO_6_QUEST_3"/>
+				<start-quest id="SCENARIO_6_QUEST_4" />
+			</onStarted>
+                          
+			<start_condition timeout="5" operator="and"/>
+                           
+			<objectives timeout="1" operator="and">
+				<tribute    resource="stone"   amount="50"/>
+				<tribute    resource="iron"    amount="50"/>
+				<tribute    resource="gold"    amount="50"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="25" />
+				<!--                <resource resource="meat" amount="25" />-->
+				<start-quest id="SCENARIO_6_QUEST_2_START_NAME"/>
+				<start-quest id="SCENARIO_6_QUEST_1_1" />
+				
+			</rewards>
+		</quest>
+		<quest id="SCENARIO_6_QUEST_1_1" isKeyQuest="false" title="T_GAME_QUEST_SCEN6_1_NAME" description="T_GAME_QUEST_SCEN6_1_DESC" start="custom">
+			<onStarted >
+				<start-quest id="SCENARIO_6_QUEST_8A"/>
+			</onStarted>                 
+			<start_condition timeout="5" operator="and"/>
+                           
+			<objectives timeout="1" operator="and">
+				<tribute    resource="stone"   amount="100"/>
+				<tribute    resource="iron"    amount="100"/>
+				<tribute    resource="gold"    amount="100"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="60" />
+				<!--<resource resource="bread" amount="30" />-->
+				<start-quest id="SCENARIO_6_QUEST_1_2" />
+				
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_6_QUEST_1_2" isKeyQuest="true" title="T_GAME_QUEST_SCEN6_1_NAME" description="T_GAME_QUEST_SCEN6_1_DESC" start="custom">
+                          
+			<start_condition timeout="5" operator="and"/>
+			
+            <onStarted >
+				<start-quest id="SCENARIO_6_QUEST_9A"/>
+				<start-quest id="JUGGLER_QUEST"/>
+				<start-quest id="CARPENTER_QUEST"/>
+			</onStarted>  
+			          
+			<objectives timeout="1" operator="and">
+				<tribute    resource="stone"   amount="150"/>
+				<tribute    resource="iron"    amount="150"/>
+				<tribute    resource="gold"    amount="150"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="75" />
+			</rewards>
+		</quest>
+		
+		
+		<quest id="SCENARIO_6_QUEST_3" isKeyQuest="false" title="T_GAME_QUEST_SCEN6_3_NAME" description="T_GAME_QUEST_SCEN6_3_DESC" start="custom">
+			
+			<onStarted    notification="T_GAME_QUEST_SCEN6_3_DESC" />
+                           
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_mine"  count="1"/>
+			</objectives>
+			
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                        
+			<rewards>
+				<resource resource="flour" amount="25" />
+				<resource resource="coins" amount="250" />
+				<start-quest id="SCENARIO_6_QUEST_3_1" />
+				<start-quest  id="SCENARIO_6_QUEST_2_START_NAME"/>
+				<start-quest id="SCENARIO_6_QUEST_5"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_6_QUEST_3_1" title="T_SCENARIO_2016_06_QUEST_KEEP_MINE_ALIVE_02_NAME" description="T_GAME_QUEST_SCEN6_3_DESC" start="custom">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_3_DESC"/>
+			
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<construct type="building_mine"  count="2"/>
+			</objectives>
+                        
+			<rewards>
+				<resource resource="prestige" amount="5" />
+				<resource resource="bread" amount="15" />
+				<start-quest id="SCENARIO_6_QUEST_3_2" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+		</quest>
+	
+		<quest id="SCENARIO_6_QUEST_3_2" title="T_SCENARIO_2016_06_QUEST_KEEP_MINE_ALIVE_02_NAME" description="T_GAME_QUEST_SCEN6_3_DESC" start="custom">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_3_DESC"/>
+			
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<construct type="building_mine"  count="3"/>
+			</objectives>
+                        
+			<rewards>
+				<resource resource="prestige" amount="15" />
+				<resource resource="fish" amount="50" />
+			</rewards>
+            
+			<fail_condition timeout="1"  operator="and">    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="SCENARIO_6_QUEST_2_START_NAME" title="T_GAME_QUEST_SCEN7_GIRL_2_NAME" description="T_GAME_QUEST_SCEN6_2_START_DESC" start="custom" avatar="merchant">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_2_START_DESC" />
+                       
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_market" count="1" />
+				<happyness type="market"  value="75"/>
+			</objectives>
+                            
+			<rewards>
+				<resource resource="prestige" amount="5" />
+				<resource resource="coins" amount="150" />
+				<start-quest id="SCENARIO_6_QUEST_2"/>
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+		</quest>
+	
+		<quest id="SCENARIO_6_QUEST_2" title="T_GAME_QUEST_SCEN6_2_NAME" start="custom">
+                       
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute    resource="planks" amount="10" />
+			</objectives>
+                            
+			<rewards>
+				<resource resource="fish" amount="10" />
+			</rewards>
+            
+			<fail_condition timeout="1"  operator="and">    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+		</quest>
+                
+		<quest id="SCENARIO_6_QUEST_2_1" title="T_GAME_QUEST_SCEN9_20_NAME" start="custom" repeatable="no">
+                           
+			<start_condition timeout="25" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="tools" amount="20" />
+			</objectives>
+                        
+			<rewards>
+				<resource resource="fish" amount="30" />
+				<resource resource="coins" amount="150" />
+				<start-quest id="SCENARIO_4_QUEST_8"/>
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="SCENARIO_6_QUEST_4" isKeyQuest="false" title="T_GAME_QUEST_SCEN6_4_NAME" description="T_GAME_QUEST_SCEN6_4_DESC" start="custom">
+
+			<onStarted notification="T_GAME_QUEST_SCEN6_4_DESC" />
+                        
+			<start_condition timeout="6" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_bakery" count="1" />
+				<produce resource="bread" amount="20" />
+			</objectives>
+            
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                        
+			<rewards>
+				<resource resource="prestige" amount="5" />
+				<resource resource="fish" amount="25" />
+				<start-quest id="SCENARIO_6_QUEST_7" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_6_QUEST_5" isKeyQuest="false" title="T_GAME_QUEST_SCEN6_5_NAME" description="T_GAME_QUEST_SCEN6_5_DESC" start="custom">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_5_DESC" />
+                        
+			<start_condition timeout="10" operator="and"/>
+                        
+			<objectives timeout="1" operator="and">
+				<building type="building_mint" count="2" />
+				<produce resource="iron" amount="15" />
+			</objectives>
+           
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                                                  
+			<rewards>
+				<resource resource="prestige" amount="15" />
+				<resource resource="meat" amount="30" />
+				<start-quest id="SCENARIO_6_QUEST_6" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_6_QUEST_6" isKeyQuest="false" title="T_GAME_QUEST_SCEN6_6_NAME" description="T_GAME_QUEST_SCEN6_6_DESC" start="custom">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_6_DESC" />
+			
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="cloths" amount="25"/>
+			</objectives>
+            
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                                                      
+			<rewards>
+				<resource resource="prestige" amount="20" />
+				<resource resource="coins" amount="500" />
+			</rewards>
+     
+		</quest>
+
+		<quest id="SCENARIO_6_QUEST_7" title="T_GAME_QUEST_SCEN6_7_NAME" description="T_GAME_QUEST_SCEN6_7_DESC" start="custom">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_7_DESC" />
+                        
+			<start_condition timeout="5" operator="and"/>
+                               
+			<objectives timeout="1" operator="and">
+				<building type="building_warehouse"  count="2"/>
+			</objectives>
+                        
+			<rewards>
+				<resource resource="prestige" amount="15" />
+				<resource resource="coins" amount="250" />
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+		</quest>
+        
+        
+		<quest id="SCENARIO_6_QUEST_9A" title="T_GAME_QUEST_SCEN4_1b_NAME" description="T_GAME_QUEST_SCEN4_1b_DESC" start="custom" isKeyQuest="false" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN4_1b_DESC" />
+                        
+			<start_condition timeout="30" operator="and"/>
+            
+			<objectives timeout="1" operator="and">
+				<population count="100" />
+			</objectives>
+           
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                               			
+			<rewards>
+				<resource resource="prestige" amount="20" />
+				<resource resource="juice" amount="30" />
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_6_QUEST_8A" isKeyQuest="false" title="T_GAME_QUEST_SCEN4_6_NAME" description="T_GAME_QUEST_SCEN4_6_DESC" start="custom" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN4_6_DESC" />
+                            
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="coal" amount="35"/>
+			</objectives>
+			
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+			
+			<rewards>
+				<resource resource="prestige" amount="5" />
+				<resource resource="coins" amount="500" />
+				<start-quest id="SCENARIO_6_QUEST_2_1"/>
+			</rewards>
+		</quest>
+
+		
+		<quest id="CARPENTER_QUEST" start="custom" description="T_SCENARIO_2016_10_QUEST_16_DESC" title="T_GAME_QUEST_SCEN8_2_NAME">
+			<start_condition timeout="7" operator="and">
+				<population count="48" />
+			</start_condition>
+			<onStarted notification="T_SCENARIO_2016_10_QUEST_16_DESC" />
+			<objectives timeout="2" operator="or">
+				<building count="1" type="building_carpenter" />
+			</objectives>
+			<rewards >
+				<resource amount="350" resource="coins" />
+				<resource amount="15" resource="prestige" />
+			</rewards>
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="JUGGLER_QUEST" isKeyQuest="false" title="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_NAME" description="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_DESC" start="custom" avatar="townie">
+
+			<onStarted notification="T_GAME_QUEST_DESIRES_12_START">
+				<set-modifier name="mod_strike_chance" tag="prod_strike" value="200"/>
+				<set-modifier name="mod_happiness" tag="prod_strike" value="20"/>
+				<set-modifier name="mod_effort" tag="prod_strike" value="50"/>
+			</onStarted>
+
+			<start_condition timeout="6" operator="and"/>
+
+			<objectives timeout="3" operator="or">
+				<building type="building_jugglercamp" count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_SCENARIO_2016_FESTIVITIES_AUTUMN_02_SUCESS">
+				<remove-modifier-by-tag tag="prod_strike"/>
+			</onSuccess>
+           
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                               
+			<rewards>
+				<resource resource="jewelry" amount="15"/>
+				<resource resource="prestige" amount="18"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_4_QUEST_8" isKeyQuest="false" title="T_GAME_QUEST_SCEN6_8_NAME" description="T_GAME_QUEST_SCEN6_8_DESC" start="custom">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_8_DESC" />
+                        
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_tavern"  count="1"/>
+				<happyness type="tavern" value="75"/>
+			</objectives>
+            
+			<fail_condition timeout="1" operator="and" >    
+				<flag-has-value key="scenario_complete" value="true" />
+			</fail_condition>
+                                                      
+			<rewards>
+				<resource resource="prestige" amount="5" />
+				<resource resource="meat" amount="30" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_END" isKeyQuest="true" title="SCENARIOEND" description="T_GAME_QUEST_SCEN6_END_DESC" start="instant" visible="false">
+			
+			<onStarted notification="T_GAME_QUEST_SCEN6_END_DESC" />
+                           
+			<start_condition timeout="5" operator="and">
+				<quest-done id="SCENARIO_6_QUEST_1_2"/>
+			</start_condition>
+                        
+			<objectives timeout="1" operator="and"/>
+			<onSuccess >
+				<set-enable-trade lock="false" resource="gold"/>
+				<set-enable-trade lock="false" resource="iron"/>
+				<set-enable-trade lock="false" resource="stone"/>
+				<set-enable-trade lock="false" resource="nuggets"/>
+				<set-enable-trade lock="false" resource="ore"/>
+				<remove-modifier-by-tag tag="map"/>
+				<remove-modifier-by-tag tag="prod_strike"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="scenario-finished"/>
+				<set-flag key="scenario_complete" value="true" />
+			</rewards>
+ 
+		</quest>
+                  
+		<quest id="scenario-finished" start="custom" visible="false" >
+                           
+			<start_condition timeout="10" operator="and"/>
+                        
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<scenario-finished/>
+				<start-quest id="sandbox_start"/>
+			</rewards>
+		</quest>
+                  
+		<quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START" visible="false" >		
+			<onStarted notification="T_GAME_SANDBOX_START"/>
+			<start_condition timeout="10"  operator="and"/>
+			<objectives timeout="1"  operator="and"/>
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+		<!-- STORM --> 
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards>
+				<lightningstrike topLeftX="73" topLeftY="84" bottomRightX="113" bottomRightY="124" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->  
+
+	</group>
+</questdb>
+

@@ -1,0 +1,55 @@
+[random_start]
+
+next:	work_1				1.00
+next:	work_3				1.00
+next:	work_3				0.80
+
+
+
+[work_1]
+
+play_ambient: sfx_buildings_tannery_single_sweep_var3
+play_ambient_chance: 0.3
+
+frame:	ani_tailor_01.0.png		0.15
+frame:	ani_tailor_01.1.png		0.50
+frame:	ani_tailor_01.2.png		0.15
+frame:	ani_tailor_01.3.png		0.15
+frame:	ani_tailor_01.4.png		0.20
+frame:	ani_tailor_01.3.png		0.15
+frame:	ani_tailor_01.4.png		0.15
+frame:	ani_tailor_01.3.png		0.15
+frame:	ani_tailor_01.4.png		0.30
+
+delay:	0.10	0.20
+
+next:	random_start
+
+[work_2]
+
+play_ambient: sfx_buildings_tannery_single_sweep_var4
+play_ambient_chance: 0.3
+
+frame:	ani_tailor_01.0.png		0.15
+frame:	ani_tailor_01.1.png		0.50
+frame:	ani_tailor_01.2.png		0.15
+frame:	ani_tailor_01.3.png		0.15
+frame:	ani_tailor_01.4.png		0.20
+frame:	ani_tailor_01.3.png		0.15
+frame:	ani_tailor_01.4.png		0.15
+frame:	ani_tailor_01.3.png		0.15
+frame:	ani_tailor_01.4.png		0.50
+
+delay:	0.10	0.50
+
+next:	random_start
+
+[work_3]
+
+frame:	ani_tailor_01.4.png		0.15
+frame:	ani_tailor_01.3.png		0.15
+frame:	ani_tailor_01.2.png		0.20
+
+delay:	0.5	1.0
+
+next:	random_start

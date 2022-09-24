@@ -1,0 +1,34 @@
+
+daily_effect.png
+size: 512,256
+format: RGBA4444
+filter: Linear,Linear
+repeat: none
+daily_effect_crown
+  rotate: true
+  xy: 2, 7
+  size: 231, 176
+  orig: 231, 176
+  offset: 0, 0
+  index: -1
+daily_effect_crownwhite_s
+  rotate: false
+  xy: 367, 150
+  size: 116, 88
+  orig: 116, 88
+  offset: 0, 0
+  index: -1
+daily_effect_shine
+  rotate: false
+  xy: 180, 45
+  size: 185, 193
+  orig: 185, 193
+  offset: 0, 0
+  index: -1
+resource_count
+  rotate: false
+  xy: 180, 2
+  size: 107, 41
+  orig: 109, 45
+  offset: 1, 0
+  index: -1

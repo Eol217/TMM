@@ -1,0 +1,32 @@
+[get_out]
+
+frame-delay: 0.15
+frame:	ani_mine_r_01.00.png
+frame:	ani_mine_r_01.01.png
+frame:	ani_mine_r_01.02.png
+frame:	ani_mine_r_01.03.png
+frame:	ani_mine_r_01.04.png
+frame:	ani_mine_r_01.05.png
+frame:	ani_mine_r_01.06.png
+frame:	ani_mine_r_01.07.png
+frame:	ani_mine_r_01.08.png
+frame:	ani_mine_r_01.09.png
+frame:	ani_mine_r_01.10.png
+frame:	ani_mine_r_01.11.png
+frame:	ani_mine_r_01.12.png
+
+next:	shake			1
+
+
+[shake]
+
+frame-delay: 0.15
+
+frame:	ani_mine_r_01.13.png
+frame:	ani_mine_r_01.14.png
+frame:	ani_mine_r_01.15.png
+frame:	ani_mine_r_01.16.png
+
+next:	shake			1
+
+

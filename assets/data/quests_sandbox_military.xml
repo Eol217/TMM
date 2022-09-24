@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<questdb>
+
+	<group>
+
+		<quest id="SANDBOX_QUEST_META_MILITARY_IF_ENABLED" visible="false" finish="instant" start="custom" >
+			<!--
+			<onStarted>
+				<enable-bandits enable="false"/>
+			</onStarted>
+
+			<start_condition timeout="15"/>
+			-->
+			<objectives timeout="1">
+				<!-- check game mode for "bandits" enabled -->
+				<property name="mode" value="bandits" />
+			</objectives>
+
+			<fail_condition timeout="2" />
+
+			<rewards>
+				<!--
+				<start-quest id="SANDBOX_QUEST_META_MILITARY" />
+				-->
+			</rewards>
+		</quest>
+
+
+		<quest id="SANDBOX_QUEST_META_MILITARY" title="SANDBOX_QUEST_META" start="custom" visible="false" repeatable="no" finish="instant" avatar="knight">
+
+			<start_condition timeout="15"/>
+
+			<objectives timeout="1"/>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_ACTIVATE_BANDITS"/>
+				<start-quest id="SANDBOX_QUEST_SAUSAGES_01"/>
+				<start-quest id="SANDBOX_QUEST_EQUIPMENT_01"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_ACTIVATE_BANDITS" title="title" start="custom" visible="false" finish="instant" repeatable="custom" avatar="client">
+
+			<onStarted notification="T_GAME_QUEST_BANDIT_ATTACK_WARNING"/>
+
+			<start_condition timeout="15">
+				<population count="75"/>
+			</start_condition>
+
+			<objectives timeout="120"/>
+
+			<rewards>
+				<enable-bandits enable="any"/>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="125"/>
+				<start-quest id="SANDBOX_QUEST_SPAWNCAMP_01"/>
+				<start-quest id="SANDBOX_QUEST_RAID_01"/>
+				<start-quest id="SANDBOX_QUEST_CAMP_01"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_SPAWNCAMP_01" title="title" start="custom" visible="false" finish="instant" repeatable="custom">
+
+			<onStarted notification="T_MOD_MAP_MODIFIER_BANDITS_1">
+				<spawn-bandit-camp count="1" upgrade_level="0"/>
+				<set-flag key="adjust_prices" value="true"/>
+				<center-to-building target="building_banditcamp"/>
+			</onStarted>
+
+			<start_condition timeout="300"/>
+
+			<objectives timeout="1">
+				<destroy-building count="1" target="building_banditcamp"/>
+			</objectives>
+
+			<fail_condition timeout="1">
+				<quest-done id="SANDBOX_QUEST_CAMP_01"/>
+			</fail_condition>
+
+			<!--			DEBUG XXX: Camp gone! Prices back to normal!"-->
+
+			<onFailed>
+				<remove-modifier-by-tag tag="military_1"/>
+				<start-quest id="SANDBOX_QUEST_SPAWNCAMP_02"/>
+			</onFailed>
+
+			<rewards>
+				<remove-modifier-by-tag tag="military_1"/>
+				<start-quest id="SANDBOX_QUEST_SPAWNCAMP_01"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_SPAWNCAMP_02" title="title" start="custom" visible="false" finish="instant" repeatable="custom">
+
+			<onStarted notification="T_MOD_MAP_MODIFIER_BANDITS_1">
+				<spawn-bandit-camp count="1" upgrade_level="1"/>
+				<set-flag key="adjust_prices" value="true"/>
+				<center-to-building target="building_banditcamp"/>
+			</onStarted>
+
+			<start_condition timeout="600"/>
+
+			<objectives timeout="1">
+				<destroy-building count="1" target="building_banditcamp"/>
+			</objectives>
+
+			<fail_condition timeout="1">
+				<quest-done id="SANDBOX_QUEST_CAMP_02"/>
+			</fail_condition>
+
+			<onFailed>
+				<remove-modifier-by-tag tag="military_1"/>
+				<start-quest id="SANDBOX_QUEST_SPAWNCAMP_03"/>
+			</onFailed>
+
+			<!--			<"DEBUG XXX: Camp gone! Prices back to normal!"-->
+
+			<rewards>
+				<remove-modifier-by-tag tag="military_1"/>
+				<start-quest id="SANDBOX_QUEST_SPAWNCAMP_02"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_SPAWNCAMP_03" title="title" start="custom" visible="false" finish="instant" repeatable="custom">
+
+			<onStarted notification="T_MOD_MAP_MODIFIER_BANDITS_1">
+				<spawn-bandit-camp count="1" upgrade_level="2"/>
+				<set-flag key="adjust_prices" value="true"/>
+				<center-to-building target="building_banditcamp"/>
+			</onStarted>
+
+			<start_condition timeout="900"/>
+
+			<objectives timeout="1">
+				<destroy-building count="1" target="building_banditcamp"/>
+			</objectives>
+
+			<!--DEBUG XXX: Camp gone! Prices back to normal!"-->
+
+			<rewards>
+				<remove-modifier-by-tag tag="military_1"/>
+				<start-quest id="SANDBOX_QUEST_SPAWNCAMP_03"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_SAUSAGES_01" title="T_GAME_QUEST_SANDBOX_TRIBUTE_06" start="custom" repeatable="no" avatar="knight">
+			<start_condition timeout="900"/>
+			<objectives timeout="1">
+				<tribute resource="coins" amount="350"/>
+				<tribute resource="sausage" amount="30"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="6" />
+				<!--
+				<start-quest id="SANDBOX_QUEST_SAUSAGES_02"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_SAUSAGES_02" title="T_GAME_QUEST_SANDBOX_TRIBUTE_06" start="custom" repeatable="no" avatar="knight">
+			<start_condition timeout="1600"/>
+			<objectives timeout="1">
+				<tribute resource="coins" amount="600"/>
+				<tribute resource="sausage" amount="55"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="16" />
+				<!--
+				<start-quest id="SANDBOX_QUEST_SAUSAGES_03"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_SAUSAGES_03" title="T_GAME_QUEST_SANDBOX_TRIBUTE_06" start="custom" repeatable="instant" avatar="knight">
+			<start_condition timeout="3600"/>
+			<objectives timeout="1">
+				<tribute resource="coins" amount="11000"/>
+				<tribute resource="sausage" amount="85"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="48" />
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_EQUIPMENT_01" title="T_GAME_QUEST_SANDBOX_TRIBUTE_07" start="custom" repeatable="no">
+			<start_condition timeout="1200"/>
+			<objectives timeout="1">
+				<tribute resource="armor" amount="20"/>
+				<tribute resource="weapons" amount="20"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="8" />
+				<!--
+				<start-quest id="SANDBOX_QUEST_EQUIPMENT_02"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_EQUIPMENT_02" title="T_GAME_QUEST_SANDBOX_TRIBUTE_07" start="custom" repeatable="no">
+			<start_condition timeout="600"/>
+			<objectives timeout="1">
+				<tribute resource="armor" amount="40"/>
+				<tribute resource="weapons" amount="40"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="22"/>
+				<!--
+				<start-quest id="SANDBOX_QUEST_EQUIPMENT_03"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_EQUIPMENT_03" title="T_GAME_QUEST_SANDBOX_TRIBUTE_07" start="custom" repeatable="instant">
+			<start_condition timeout="2400"/>
+			<objectives timeout="1">
+				<tribute resource="armor" amount="80"/>
+				<tribute resource="weapons" amount="80"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="56" />
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_RAID_01" title="T_GAME_QUEST_SANDBOX_TRIBUTE_08" start="custom" repeatable="no">
+			<start_condition timeout="30"/>
+			<objectives timeout="1">
+				<raid-defeated count="5"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="4" />
+				<!--
+				<start-quest id="SANDBOX_QUEST_RAID_02"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_RAID_02" title="T_GAME_QUEST_SANDBOX_TRIBUTE_08" start="custom" repeatable="no">
+			<start_condition timeout="120"/>
+			<objectives timeout="1">
+				<raid-defeated count="15"/>
+			</objectives>
+			<rewards>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="100"/>
+				<resource resource="prestige" amount="8"/>
+				<!--
+				<start-quest id="SANDBOX_QUEST_RAID_03"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_RAID_03" title="T_GAME_QUEST_SANDBOX_TRIBUTE_08" start="custom" repeatable="instant">
+			<start_condition timeout="1200"/>
+			<objectives timeout="1">
+				<raid-defeated count="50"/>
+			</objectives>
+			<rewards>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="75"/>
+				<resource resource="prestige" amount="16"/>
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_CAMP_01" title="T_GAME_QUEST_SANDBOX_TRIBUTE_09" start="custom" repeatable="no">
+			<onStarted>
+				<spawn-bandit-camp count="1" upgrade_level="0" />
+			</onStarted>
+			<start_condition timeout="1200"/>
+			<objectives timeout="1">
+				<destroy-building count="3" target="building_banditcamp"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="6" />
+				<!--
+				<start-quest id="SANDBOX_QUEST_CAMP_02"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_CAMP_02" title="T_GAME_QUEST_SANDBOX_TRIBUTE_09" start="custom" repeatable="no">
+			<start_condition timeout="2400"/>
+			<objectives timeout="1">
+				<destroy-building count="6" target="building_banditcamp"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="12" />
+				<!--
+				<start-quest id="SANDBOX_QUEST_CAMP_03"/>
+				-->
+			</rewards>
+		</quest>
+
+		<quest id="SANDBOX_QUEST_CAMP_03" title="T_GAME_QUEST_SANDBOX_TRIBUTE_09" start="custom" repeatable="instant">
+			<start_condition timeout="3600"/>
+			<objectives timeout="1">
+				<destroy-building count="12" target="building_banditcamp"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="24" />
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_CAMP" start="custom" visible="false" finish="instant" repeatable="instant">
+			<!--check for any bandit camps on the map-->
+			<start_condition timeout="10"/>
+
+			<objectives timeout="10" operator="or">
+				<flag-has-value key="adjust_prices" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="30"/>
+
+			<!--			XXX: Camp present! Prices increased!"/-->
+
+			<rewards>
+				<!--Increade military resource prices as long as bandits are on the map -->
+				<set-trade-costs-group name="military_resources" buy="120" sell="120" tag="military_1"/>
+			</rewards>
+		</quest>
+
+	</group>
+</questdb>
+

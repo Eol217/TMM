@@ -1,0 +1,23 @@
+{
+	"path": "",
+	"member-separator": "_",
+	"frame-prefix": "",
+	"frame-suffix": ".png",
+
+	"directions": {
+		"north":		{ "suffix": "0", "flip": false },
+		"north-west":	{ "suffix": "1", "flip": false },
+		"west":			{ "suffix": "2", "flip": false },
+		"south-west":	{ "suffix": "3", "flip": false },
+		"south":		{ "suffix": "4", "flip": false },
+		"south-east":	{ "suffix": "3", "flip": true  },
+		"east":			{ "suffix": "2", "flip": true  },
+		"north-east":	{ "suffix": "1", "flip": true  }
+	},
+
+	"layers": {
+		"body": {
+			"default-values": [ "deer", "bunny", "boar" ]
+		}
+	}
+}

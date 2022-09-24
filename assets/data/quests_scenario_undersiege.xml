@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: Under Siege -->
+<!-- prestige: 205 -->
+
+      
+<questdb>  
+    <group avatar="client" >
+        <include file = "data/common-quests.xml"/>
+        <include file = "data/quests_sandbox.xml"/>
+        
+<!-- Main Quest-->   
+        <quest id="SCENARIO_STARTER" finish="instant" start="instant" visible="false" ticket="false" >
+            <start_condition timeout="1" operator="and"/>
+            <onStarted >
+                <start-quest id="BESIEGEMENT_MAINQUEST" /> <!-- Mainquest -->
+				<start-quest id="BESIEGEMENT_HELPQUEST_31" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_32" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_33" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_34" />
+				<!-- Destroy buildings with rebuild option -->
+				<start-fire amount="1" state="burning" target="building_mint" />
+				<start-fire amount="1" state="burning" target="building_coaler" />
+				<start-fire amount="1" state="burning" target="building_blacksmith" />
+				<start-fire amount="1" state="burning" target="tower_bl" />
+				<start-fire amount="1" state="burning" target="tower_tl" />
+				<start-fire amount="1" state="burning" target="tower_br" />
+				<start-fire amount="1" state="burning" target="tower_tr" />
+				<!-- Set modifier -->
+				<enable-bandits enable="false" />
+				<set-merchant state="disabled" />
+				<disallow key="building_residence_00" />
+				<disallow key="building_residence_01" />
+				<disallow key="building_residence_02" />
+				<disallow key="building_residence_03" />
+				<set-flag key="weather_disabled" value="true"/>
+            </onStarted>
+			<objectives timeout="2" operator="and" />
+			<rewards >
+				<!-- Destroy buildings with rebuild option -->
+					<!-- Removed because it reduced the performance
+				<set-durabilitychange destroyOnNoDurability="true" topLeftX="93" topLeftY="112" bottomRightX="105" bottomRightY="125" minValue="-100" maxValue="-100" destroyReason="disaster"/>
+				<set-durabilitychange destroyOnNoDurability="true" topLeftX="105" topLeftY="80" bottomRightX="116" bottomRightY="102" minValue="-10" maxValue="-10" destroyReason="disaster"/>
+				<set-durabilitychange destroyOnNoDurability="true" topLeftX="62" topLeftY="82" bottomRightX="63" bottomRightY="84" minValue="-100" maxValue="-100" destroyReason="disaster"/>
+				<set-durabilitychange destroyOnNoDurability="true" topLeftX="78" topLeftY="67" bottomRightX="81" bottomRightY="68" minValue="-100" maxValue="-100" destroyReason="disaster"/>
+					-->
+			</rewards>
+        </quest>
+		
+        <quest id="BESIEGEMENT_MAINQUEST" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_BESIEGEMENT_MAINQUEST_NAME" description="T_SCENARIO_BESIEGEMENT_MAINQUEST_DESC" >
+            <onStarted notification="T_SCENARIO_BESIEGEMENT_MAINQUEST_DESC">
+				<start-quest id="BESIEGEMENT_QUEST_01" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_TOWNHOUSES" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+                <flag-has-value key="besiegement_quest_02_2" value="true" />
+				<flag-has-value key="besiegement_campquest_04" value="true" />
+            </objectives>
+            <rewards>
+                <set-flag key="scenario_over" value="true" />
+                <start-quest id="scenario-finished" />
+                <resource amount="60" resource="prestige" />
+            </rewards>
+            <onSuccess notification="T_SCENARIO_BESIEGEMENT_MAINQUEST_END" />
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_01" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_07_TITLE" description="T_SCENARIO_BESIEGEMENT_QUEST_01_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_01_DESC">
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_0" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_01" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+                <raid-defeated count="2" including-interceptions="true" />
+            </objectives>
+			<onSuccess notification="T_SCENARIO_BESIEGEMENT_QUEST_01_END"/>
+            <rewards>
+				<resource amount="25" resource="wood" />
+				<resource amount="12" resource="bread" />
+				<start-quest id="BESIEGEMENT_QUEST_02" />
+				<set-flag key="besiegement_start_over" value="true" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_02" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_WATCHTOWERS" description="T_SCENARIO_BESIEGEMENT_QUEST_02_DESC" >
+            <start_condition timeout="3" operator="and" />
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_02_DESC">
+				<start-quest id="BESIEGEMENT_SIDEQUEST_01" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+                <construct count="1" type="building_watchtower" />
+            </objectives>
+            <rewards>
+                <resource amount="20" resource="stone" />
+				<resource amount="10" resource="tools" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_03" />
+				<start-quest id="BESIEGEMENT_QUEST_02_2" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_02_2" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_WATCHTOWERS" description="T_SCENARIO_BESIEGEMENT_QUEST_02_2_DESC" >
+            <start_condition timeout="7" operator="and" />
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_02_2_DESC"/>
+            <objectives timeout="2" operator="and">
+                <construct count="1" type="building_watchtower" />
+            </objectives>
+            <rewards>
+				<resource amount="400" resource="coins" />
+				<resource amount="12" resource="sausage" />
+                <set-flag key="besiegement_quest_02_2" value="true" />
+				<start-quest id="BESIEGEMENT_QUEST_CAMPQUEST_01" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_03" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_01_TITLE" description="T_SCENARIO_BESIEGEMENT_QUEST_03_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_03_DESC">
+				<destruct-building count="1" type="building_barracks" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+				<building count="1" type="building_barracks" />
+            </objectives>
+            <rewards>
+				<resource amount="8" resource="armor" />
+				<resource amount="500" resource="coins" />
+				<start-quest id="BESIEGEMENT_QUEST_04" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_04" start="custom" visible="true" isKeyQuest="true" title="T_GAME_QUEST_SCEN14_01A_TITLE" description="T_SCENARIO_BESIEGEMENT_QUEST_04_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_04_DESC"/>
+            <objectives timeout="2" operator="and">
+                <tribute amount="15" resource="fabric" />
+            </objectives>
+            <rewards>
+				<resource amount="10" resource="skins" />
+				<resource amount="10" resource="stone" />
+				<start-quest id="BESIEGEMENT_QUEST_05" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_05" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_BESIEGEMENT_QUEST_05_NAME" description="T_SCENARIO_BESIEGEMENT_QUEST_05_DESC" >
+            <start_condition timeout="3" operator="and" />
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_05_DESC"/>
+            <objectives timeout="2" operator="and">
+                <tribute amount="8" resource="leather" />
+            </objectives>
+            <rewards>
+				<resource amount="400" resource="coins" />
+				<resource amount="15" resource="hops" />
+				<start-quest id="BESIEGEMENT_QUEST_06" />
+				<start-quest id="BESIEGEMENT_SIDEQUEST_21" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_06" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_BESIEGEMENT_QUEST_06_NAME" description="T_SCENARIO_BESIEGEMENT_QUEST_06_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_06_DESC"/>
+            <objectives timeout="2" operator="and">
+                <tribute amount="10" resource="wool" />
+            </objectives>
+            <rewards>
+				<resource amount="15" resource="prestige" />
+				<start-quest id="BESIEGEMENT_QUEST_07" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_07" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_PRODUCE_ARMORS" description="T_SCENARIO_BESIEGEMENT_QUEST_07_DESC" >
+            <start_condition timeout="3" operator="and" />
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_07_DESC"/>
+            <objectives timeout="2" operator="and">
+                <produce amount="8" resource="armor" />
+            </objectives>
+            <rewards>
+				<resource amount="10" resource="herbs" />
+				<resource amount="10" resource="hops" />
+				<start-quest id="BESIEGEMENT_QUEST_08" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_08" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_BESIEGEMENT_QUEST_08_NAME" description="T_SCENARIO_BESIEGEMENT_QUEST_08_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_08_DESC">
+				<bandit-attack count="3" intention="steal" source="any" target="building_barracks" />
+				<bandit-attack count="3" intention="steal" source="any" target="building_barracks" />
+				<bandit-attack count="3" intention="blow_up" source="any" target="building_barracks" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+				<raid-defeated count="1" including-interceptions="true" target="building_barracks" />
+            </objectives>
+			<fail_condition timeout="1" operator="and" >
+				<raid-successful count="1" target="building_barracks" />
+			</fail_condition>
+			<onFailed >
+				<start-quest id="BESIEGEMENT_QUEST_08_2" />
+			</onFailed>
+            <rewards>
+				<resource amount="15" resource="prestige" />
+				<start-quest id="BESIEGEMENT_QUEST_09" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_08_2" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_2017_ELECTION_MILITARY_QUEST_01_TITLE" description="T_SCENARIO_BESIEGEMENT_QUEST_08_2_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_08_2_DESC"/>
+            <objectives timeout="2" operator="and">
+                <construct count="1" type="building_barracks" />
+            </objectives>
+            <rewards>
+				<resource amount="12" resource="armor" />
+				<resource amount="350" resource="coins" />
+				<start-quest id="BESIEGEMENT_QUEST_09" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_09" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_QUESTS_PRODUCE_WEAPONS" description="T_SCENARIO_BESIEGEMENT_QUEST_09_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_09_DESC">
+				<start-quest id="BESIEGEMENT_SIDEQUEST_11" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+                <produce amount="8" resource="weapons" />
+            </objectives>
+            <rewards>
+				<resource amount="10" resource="armor" />
+				<resource amount="450" resource="coins" />
+				<start-quest id="BESIEGEMENT_QUEST_CAMPQUEST_04" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_CAMPQUEST_04" avatar="knight" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_04_NAME" description="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_04_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_04_DESC"/>
+            <objectives timeout="2" operator="or">
+                <destroy-building count="1" target="camp_lowground" />
+				<flag-has-value key="besiegement_camp_04_destroyed" value="true" />
+            </objectives>
+            <rewards>
+				<resource amount="20" resource="prestige" />
+				<set-flag key="besiegement_campquest_04" value="true" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_CAMPQUEST_01" avatar="soldier" start="custom" visible="true" title="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_01_NAME" description="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_01_DESC" >
+            <start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_01_DESC"/>
+            <objectives timeout="2" operator="or">
+                <destroy-building count="1" target="camp_forest" />
+				<flag-has-value key="besiegement_camp_01_destroyed" value="true" />
+            </objectives>
+			<onSuccess notification="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_01_END" />
+            <rewards>
+				<resource amount="20" resource="prestige" />
+				<allow key="building_residence_00" />
+				<allow key="building_residence_01" />
+				<allow key="building_residence_02" />
+				<allow key="building_residence_03" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_04" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_CAMPQUEST_02" avatar="soldier" start="custom" visible="true" title="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_02_NAME" description="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_02_DESC" >
+            <start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_02_DESC"/>
+            <objectives timeout="2" operator="or">
+                <destroy-building count="1" target="camp_river" />
+				<flag-has-value key="besiegement_camp_02_destroyed" value="true" />
+            </objectives>
+			<onSuccess notification="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_02_END" />
+            <rewards>
+				<resource amount="20" resource="prestige" />
+				<set-merchant state="available" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_QUEST_CAMPQUEST_03" avatar="soldier" start="custom" visible="true" title="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_03_NAME" description="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_03_DESC" >
+            <start_condition timeout="15" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_QUEST_CAMPQUEST_03_DESC"/>
+            <objectives timeout="2" operator="or">
+                <destroy-building count="1" target="camp_mountain" />
+				<flag-has-value key="besiegement_camp_03_destroyed" value="true" />
+            </objectives>
+            <rewards>
+				<resource amount="20" resource="prestige" />
+				<set-flag key="camp_mountain_destroyed" value="true" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_SIDEQUEST_01" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_BESIEGEMENT_SIDEQUEST_01_NAME" description="T_SCENARIO_BESIEGEMENT_SIDEQUEST_01_DESC" >
+            <start_condition timeout="7" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_SIDEQUEST_01_DESC"/>
+            <objectives timeout="2" operator="and">
+                <produce amount="12" resource="planks" />
+            </objectives>
+            <rewards>
+				<resource amount="18" resource="planks" />
+				<resource amount="16" resource="wood" />
+				<start-quest id="BESIEGEMENT_SIDEQUEST_02" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_SIDEQUEST_02" start="custom" visible="true" isKeyQuest="true" title="T_GAME_QUEST_SCEN7_GIRL_1_1_NAME" description="T_SCENARIO_BESIEGEMENT_SIDEQUEST_02_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_SIDEQUEST_02_DESC"/>
+            <objectives timeout="2" operator="and">
+                <building count="1" type="building_farm" />
+            </objectives>
+            <rewards>
+				<resource amount="8" resource="brew" />
+				<resource amount="12" resource="tools" />
+				<start-quest id="BESIEGEMENT_SIDEQUEST_03" />
+				<start-quest id="BESIEGEMENT_BANDITS_01" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_SIDEQUEST_03" start="custom" visible="true" isKeyQuest="true" title="T_SCENARIO_BESIEGEMENT_SIDEQUEST_03_NAME" description="T_SCENARIO_BESIEGEMENT_SIDEQUEST_03_DESC" >
+            <start_condition timeout="4" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_SIDEQUEST_03_DESC"/>
+            <objectives timeout="2" operator="and">
+                <produce amount="10" resource="bread" />
+            </objectives>
+            <rewards>
+				<resource amount="10" resource="prestige" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_SIDEQUEST_11" start="custom" visible="true" title="T_QUESTS_PRODUCE_BREW" description="T_SCENARIO_BESIEGEMENT_SIDEQUEST_11_DESC" >
+            <start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_SIDEQUEST_11_DESC"/>
+            <objectives timeout="2" operator="and">
+                <produce amount="10" resource="brew" />
+            </objectives>
+            <rewards>
+				<resource amount="450" resource="coins" />
+				<resource amount="10" resource="armor" />
+				<start-quest id="BESIEGEMENT_SIDEQUEST_12" /> 
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_SIDEQUEST_12" start="custom" visible="true" title="T_QUESTS_PRODUCE_SAUSAGES" description="T_SCENARIO_BESIEGEMENT_SIDEQUEST_12_DESC" >
+            <start_condition timeout="3" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_SIDEQUEST_12_DESC"/>
+            <objectives timeout="2" operator="and">
+                <produce amount="10" resource="sausage" />
+            </objectives>
+            <rewards>
+				<resource amount="500" resource="coins" />
+				<resource amount="10" resource="weapons" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_SIDEQUEST_21" avatar="soldier" start="custom" visible="true" title="T_SCENARIO_BESIEGEMENT_SIDEQUEST_21_NAME" description="T_SCENARIO_BESIEGEMENT_SIDEQUEST_21_DESC" >
+            <start_condition timeout="7" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_SIDEQUEST_21_DESC">
+				<start-quest id="BESIEGEMENT_HELPQUEST_21" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_23" />
+			</onStarted>
+            <objectives timeout="120" operator="and">
+				<flag-has-value key="besiegement_noneassigned" value="true" />
+            </objectives>
+            <rewards>
+				<resource amount="15" resource="prestige" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+
+		<quest id="BESIEGEMENT_HELPQUEST_TOWNHOUSES" start="custom" visible="false" repeatable="custom">
+			<start_condition timeout="1" operator="and" >
+				<destroy-building count="1" target="building_residence_00" />
+			</start_condition>
+            <objectives timeout="2" operator="and_not">
+				<building count="5" type="building_residence_00" />
+			</objectives>
+            <rewards>
+				<start-quest id="BESIEGEMENT_HELPQUEST_TOWNHOUSES_2" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="BESIEGEMENT_QUEST_CAMPQUEST_01" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_TOWNHOUSES_2" start="custom" visible="false" repeatable="custom">
+			<onStarted >
+				<allow key="building_residence_00" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+				<construction-started count="1" include_constructed="true" type="building_residence_00" />
+			</objectives>
+            <rewards>
+				<start-quest id="BESIEGEMENT_HELPQUEST_TOWNHOUSES" />
+				<disallow key="building_residence_00" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="BESIEGEMENT_QUEST_CAMPQUEST_01" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_21" start="custom" visible="false" repeatable="custom">
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="or">
+				<deassign count="1" trigger="command" type="building_bakery"/>
+				<deassign count="1" trigger="command" type="building_blacksmith"/>
+				<deassign count="1" trigger="command" type="building_carpenter"/>
+				<deassign count="1" trigger="command" type="building_church"/>
+				<deassign count="1" trigger="command" type="building_coaler"/>
+				<deassign count="1" trigger="command" type="building_collector"/>
+				<deassign count="1" trigger="command" type="building_farm"/>
+				<deassign count="1" trigger="command" type="building_firewatch"/>
+				<deassign count="1" trigger="command" type="building_fishing_lodge"/>
+				<deassign count="1" trigger="command" type="building_goldsmith"/>
+				<deassign count="1" trigger="command" type="building_hunters_cabin"/>
+				<deassign count="1" trigger="command" type="building_hq"/>
+				<deassign count="1" trigger="command" type="building_lumberjack"/>
+				<deassign count="1" trigger="command" type="building_medicus"/>
+				<deassign count="1" trigger="command" type="building_mine"/>
+				<deassign count="1" trigger="command" type="building_mint"/>
+				<deassign count="1" trigger="command" type="building_sawmill"/>
+				<deassign count="1" trigger="command" type="building_tailor"/>
+				<deassign count="1" trigger="command" type="building_vineyard"/>
+				<deassign count="1" trigger="command" type="building_warehouse"/>
+				<deassign count="1" trigger="command" type="building_weaver"/>
+				<deassign count="1" trigger="command" type="building_windmill"/>
+				<deassign count="1" trigger="command" type="building_barracks"/>
+				<deassign count="1" trigger="command" type="building_watchtower"/>
+				<deassign count="1" trigger="command" type="building_pigfarm"/>
+				<deassign count="1" trigger="command" type="building_tanner"/>
+				<deassign count="1" trigger="command" type="building_armory"/>
+				<deassign count="1" trigger="command" type="building_monestary"/>
+				<deassign count="1" trigger="command" type="building_butcher"/>
+				<deassign count="1" trigger="command" type="building_winefarm"/>
+				<deassign count="1" trigger="command" type="building_hopsfarm"/>		
+            </objectives>
+            <rewards>
+				<set-flag key="besiegement_check_noneassigned" value="true" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_22" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="BESIEGEMENT_SIDEQUEST_21" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_22" start="custom" visible="false" repeatable="custom">
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="or">
+				<assign count="1" trigger="is_assigned" type="building_bakery"/>
+				<assign count="1" trigger="is_assigned" type="building_blacksmith"/>
+				<assign count="1" trigger="is_assigned" type="building_carpenter"/>
+				<assign count="1" trigger="is_assigned" type="building_church"/>
+				<assign count="1" trigger="is_assigned" type="building_coaler"/>
+				<assign count="1" trigger="is_assigned" type="building_collector"/>
+				<assign count="1" trigger="is_assigned" type="building_farm"/>
+				<assign count="1" trigger="is_assigned" type="building_firewatch"/>
+				<assign count="1" trigger="is_assigned" type="building_fishing_lodge"/>
+				<assign count="1" trigger="is_assigned" type="building_goldsmith"/>
+				<assign count="1" trigger="is_assigned" type="building_hunters_cabin"/>
+				<assign count="1" trigger="is_assigned" type="building_hq"/>
+				<assign count="1" trigger="is_assigned" type="building_lumberjack"/>
+				<assign count="1" trigger="is_assigned" type="building_medicus"/>
+				<assign count="1" trigger="is_assigned" type="building_mine"/>
+				<assign count="1" trigger="is_assigned" type="building_mint"/>
+				<assign count="1" trigger="is_assigned" type="building_sawmill"/>
+				<assign count="1" trigger="is_assigned" type="building_tailor"/>
+				<assign count="1" trigger="is_assigned" type="building_vineyard"/>
+				<assign count="1" trigger="is_assigned" type="building_warehouse"/>
+				<assign count="1" trigger="is_assigned" type="building_weaver"/>
+				<assign count="1" trigger="is_assigned" type="building_windmill"/>
+				<assign count="1" trigger="is_assigned" type="building_barracks"/>
+				<assign count="1" trigger="is_assigned" type="building_watchtower"/>
+				<assign count="1" trigger="is_assigned" type="building_pigfarm"/>
+				<assign count="1" trigger="is_assigned" type="building_tanner"/>
+				<assign count="1" trigger="is_assigned" type="building_armory"/>
+				<assign count="1" trigger="is_assigned" type="building_monestary"/>
+				<assign count="1" trigger="is_assigned" type="building_butcher"/>
+				<assign count="1" trigger="is_assigned" type="building_winefarm"/>
+				<assign count="1" trigger="is_assigned" type="building_hopsfarm"/>		
+            </objectives>
+            <rewards>
+				<set-flag key="besiegement_check_noneassigned" value="false" />
+				<set-flag key="besiegement_noneassigned" value="false" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_21" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="BESIEGEMENT_SIDEQUEST_21" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_23" start="custom" visible="false" repeatable="custom">
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="5" operator="and">
+				<flag-has-value key="besiegement_check_noneassigned" value="true" />
+			</objectives>
+            <rewards>
+				<set-flag key="besiegement_noneassigned" value="true" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_23" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="BESIEGEMENT_SIDEQUEST_21" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_01" repeatable="custom" start="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="200" operator="and"/>
+            <rewards>
+				<bandit-attack count="1" intention="steal" source="outside" />
+				<bandit-attack count="1" intention="steal" source="outside" />
+				<bandit-attack count="1" intention="steal" source="outside" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_01" />
+            </rewards>
+			<fail_condition timeout="1" operator="and" >
+				<quest-done id="BESIEGEMENT_QUEST_01" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_02" start="custom" repeatable="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="1000" operator="and" />
+            <rewards>
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_0" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_02_0" start="custom" finish="instant" repeatable="custom" title="T_SCENARIO_BESIEGEMENT_HELPQUEST_02_0_NAME" visible="true" >
+            <start_condition timeout="5" operator="and"/>
+			<onStarted notification="T_SCENARIO_BESIEGEMENT_HELPQUEST_02_0_DESC" >
+				<!-- Set bad starting weather -->
+				<weather-set-intensity type="cloudyness" intensity="heavy"/>
+				<weather-set-intensity type="rain" intensity="heavy"/>
+				<weather-set-intensity type="thunderstorm" intensity="heavy"/>
+				<set-modifier name="mod_decay" tag="weather_storm" value="115" />
+				<!-- to enable weather again: <start-quest id="QUEST_WEATHER_REPEATER"/> -->
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_WEATHER" />
+			</onStarted>
+            <objectives timeout="2" operator="and" >
+				<soldiers-in-town count="8" />
+			</objectives>
+			<fail_condition timeout="120" operator="and" />
+			<onFailed >
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_1" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_2" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_3" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_4" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02" />
+			</onFailed>
+			<rewards >
+				<resource amount="3" resource="armor" />
+				<resource amount="3" resource="sausage" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_1" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_2" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_3" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02_4" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02" />
+			</rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_02_WEATHER" start="custom" repeatable="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="240" operator="and" />
+            <rewards>
+				<!-- Set bad starting weather -->
+				<weather-set-intensity type="cloudyness" intensity="default"/>
+				<weather-set-intensity type="rain" intensity="default"/>
+				<weather-set-intensity type="thunderstorm" intensity="default"/>
+				<remove-modifier-by-tag tag="weather_storm" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_02_1" start="custom" repeatable="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="and" />
+            <rewards>
+				<bandit-attack count="1" intention="steal" source="any" />
+				<bandit-attack count="1" intention="steal" source="any" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_02_2" start="custom" repeatable="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="and" />
+            <rewards>
+				<bandit-attack count="1" intention="lay_fire" source="any" />
+				<bandit-attack count="1" intention="lay_fire" source="any" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+				<flag-has-value key="camp_mountain_destroyed" value="true" />
+				<flag-has-value key="besiegement_start_over" value="false" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_02_3" start="custom" repeatable="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="and" />
+            <rewards>
+				<bandit-attack count="2" intention="steal" source="any" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+				<quest-done id="BESIEGEMENT_QUEST_CAMPQUEST_01" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_02_4" start="custom" repeatable="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="and" />
+            <rewards>
+				<bandit-attack count="2" intention="steal" source="any" />
+            </rewards>
+			<fail_condition timeout="1" operator="or" >
+				<flag-has-value key="scenario_over" value="true" />
+				<quest-done id="BESIEGEMENT_QUEST_CAMPQUEST_02" />
+			</fail_condition>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_03" start="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="and">
+				<quest-done id="BESIEGEMENT_QUEST_02" />
+				<quest-done id="BESIEGEMENT_SIDEQUEST_03" />	
+            </objectives>
+            <rewards>
+				<start-quest id="BESIEGEMENT_QUEST_03" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_04" start="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+            <objectives timeout="2" operator="and">
+				<quest-done id="BESIEGEMENT_QUEST_06" />
+				<quest-done id="BESIEGEMENT_QUEST_CAMPQUEST_01" />	
+            </objectives>
+            <rewards>
+				<start-quest id="BESIEGEMENT_QUEST_CAMPQUEST_02" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_31" start="custom" visible="false" >
+            <objectives timeout="2" operator="and">
+				<destroy-building count="1" target="camp_lowground" />
+            </objectives>
+            <rewards>
+				<set-flag key="besiegement_camp_04_destroyed" value="true" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_32" start="custom" visible="false" >
+            <objectives timeout="2" operator="and">
+				<destroy-building count="1" target="camp_forest" />
+            </objectives>
+            <rewards>
+				<set-flag key="besiegement_camp_01_destroyed" value="true" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_33" start="custom" visible="false" >
+            <objectives timeout="2" operator="and">
+				<destroy-building count="1" target="camp_river" />
+            </objectives>
+            <rewards>
+				<set-flag key="besiegement_camp_02_destroyed" value="true" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_HELPQUEST_34" start="custom" visible="false" >
+            <objectives timeout="2" operator="and">
+				<destroy-building count="1" target="camp_mountain" />
+            </objectives>
+            <rewards>
+				<set-flag key="besiegement_camp_03_destroyed" value="true" />
+            </rewards>
+        </quest>
+		
+		<quest id="BESIEGEMENT_BANDITS_01" start="custom" visible="false" >
+            <start_condition timeout="1" operator="and"/>
+			<onStarted >
+				<bandit-attack count="3" intention="lay_fire" source="camp" target="building_farm" />
+				<start-quest id="BESIEGEMENT_HELPQUEST_02" />
+			</onStarted>
+            <objectives timeout="2" operator="and">
+				<raid-successful count="1" target="building_farm" />
+            </objectives>
+			<fail_condition timeout="1" operator="and" >
+				<raid-defeated count="1" target="building_farm" />
+			</fail_condition>
+            <rewards>
+				<start-quest id="BESIEGEMENT_QUEST_CAMPQUEST_03" />
+            </rewards>
+			<onFailed >
+				<start-quest id="BESIEGEMENT_QUEST_CAMPQUEST_03" />
+			</onFailed>
+        </quest>
+		
+<!-- Scenario End quest-->   
+        <quest id="scenario-finished" start="custom" ticket="false" visible="false" >
+            <start_condition timeout="4" operator="and"/>
+            <rewards>
+                <scenario-finished/>
+                <start-quest id="sandbox_start"/>
+                <start-quest id="QUEST_WEATHER_REPEATER"/>  
+				<remove-modifier-by-tag tag="weather_storm" />
+            </rewards>
+        </quest>         
+                                                   
+        <quest id="sandbox_start" start="custom" description="T_GAME_SANDBOX_START" ticket="false" visible="false" >
+            <onStarted notification="T_GAME_SANDBOX_START"/>
+            <start_condition timeout="8" operator="and"/>
+            <rewards>
+                <enable-bandits enable="any" />
+                <start-quest id="SANDBOX_QUEST_META"/>
+                <start-quest id="SANDBOX_QUEST_META_DISASTER"/>	
+				<set-flag key="sandbox_map_has_avalanche" value="false" />
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+            </rewards>
+        </quest>      
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="2" operator="and">
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="75" topLeftY="75" bottomRightX="112" bottomRightY="118" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+
+    </group>
+</questdb>
+

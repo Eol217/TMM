@@ -1,0 +1,681 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- Behind the blinders scenario 13
+	x prestige earned
+-->
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group avatar="client">
+
+		<quest id="mainquest1" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_01_TITLE" description="T_GAME_QUEST_SCEN13_01_START" start="instant" avatar="king">
+
+			<onStarted notification="T_GAME_QUEST_SCEN13_01_START">
+				<set-modifier name="mod_taxes" tag="map" value="125"/>
+				<set-modifier name="mod_happiness" tag="map" value="90"/>
+                <set-merchant state="disabled"/>
+				<enable-bandits enable="any"/>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="200"/>
+				<bandit-attack amount="10" intention="steal" target="building_hq" count="1" resource="corn" source="any"/>
+				<bandit-attack count="1" intention="lay_fire" target="building_coaler" source="any"/>
+                <start-quest id="repairsawmill5_1" />
+				<set-modifier name="mod_happiness" tag="map" value="50"/>
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<flag-has-value key="quest_main2_done" value="true"/>
+			</objectives>
+
+			<onFailed>
+                <set-flag key="questline_finished" value="true" />
+				<start-quest id="faildialogue"/>
+			</onFailed>
+
+            <fail_condition timeout="3" operator="and" >
+                <flag-has-value key="quest_failed" value="true" />
+            </fail_condition>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_01_SUCCESS"/>
+            
+			<rewards>
+                <set-flag key="questline_finished" value="true" />
+				<resource resource="prestige" amount="60"/>
+				<start-quest id="SCENARIO_FINISHED" />
+			</rewards>
+		</quest>
+
+		<!-- empty quest if failed to create more time between dialogues-->
+		<quest id="faildialogue" visible="false" start="custom" avatar="king">
+			<start_condition timeout="5" operator="and"/>
+
+			<onStarted notification="T_GAME_QUEST_SCEN13_01_FAIL"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<start-quest id="SCENARIO_FAILED" />
+			</rewards>
+		</quest>
+
+		<!--start mainquest2 if barracks build
+		(cannot be as start conditin into mainquest2 because it should also be started after the announce timeout)
+        Update: It can with flags => no longer neeeded Quest-->
+		<quest id="startmain2" start="custom" visible="false">
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_barracks" count="1"/>
+			</objectives>
+
+			<rewards>
+                <!--
+				<start-quest id="mainquest2"/>
+                -->
+			</rewards>
+		</quest>
+
+		<quest id="mainquest2" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_02_TITLE" description="T_GAME_QUEST_SCEN13_02_START" start="custom" finish="instant" avatar="king">
+
+			<onStarted notification="T_GAME_QUEST_SCEN13_02_START">
+				<start-quest id="kingsarrival9"/>
+			</onStarted>
+
+			<start_condition timeout="90" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<flag-has-value key="success" value="true"/>
+			</objectives>
+            
+            <fail_condition timeout="3"  operator="and">
+                <flag-has-value key="mainquest2_failed" value="true" />
+            </fail_condition>
+            
+			<onFailed>
+				<set-flag key="quest_failed" value="true"/>
+			</onFailed>
+            		
+			<rewards>
+				<resource amount="25" resource="prestige"/>
+                <set-flag key="quest_main2_done" value="true" />
+			</rewards>
+		</quest>
+        
+		<!--30 min timeout before the king appears, can also be set successful by kingsarrival9-->
+		<quest id="announce5" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_01_1_TITLE" description="T_GAME_QUEST_SCEN13_05_START" start="instant" finish="instant" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_05_START"/>
+                           
+			<start_condition timeout="10" operator="and"/>
+                        
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="prepare_complete" value="true"/>
+			</objectives>
+            
+			<fail_condition timeout="1800" operator="and"/>
+            
+			<onFailed>
+				<start-quest id="mainquest2"/>
+			</onFailed>
+            
+            <rewards >
+                <start-quest id="mainquest2"/>
+                <resource amount="10" resource="prestige" />
+            </rewards>
+		</quest>
+        
+		<!--helperquest to check if sawmill already repaired and forrester assigned-->
+		<quest id="checkrepair" visible="false" start="custom">
+
+			<start_condition timeout="1" operator="and"/>
+                        
+			<objectives timeout="1" operator="and">
+				<assign count="1" trigger="command" type="building_lumberjack"/>
+				<repair count="1" type="building_sawmill"/>
+			</objectives>
+
+			<rewards>
+				<start-quest id="buildhouse8"/>
+				<start-quest id="buildmarket6"/>
+			</rewards>
+		</quest>
+        
+		<quest id="repairsawmill5_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_05_1_TITLE" description="T_GAME_QUEST_SCEN13_05_1_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_05_1_START">
+				<center-to-building target="building_lumberjack"/>
+			</onStarted>
+                           
+			<start_condition timeout="10" operator="and">
+                <!--
+				<quest-done id="checkrepair"/>
+                -->
+			</start_condition>
+                        
+			<objectives timeout="1" operator="and">
+				<assign count="1" trigger="is_assigned" type="building_lumberjack"/>
+				<repair count="1" type="building_sawmill"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_05_1_SUCCESS"/>
+			
+			<rewards>
+				<resource resource="coins" amount="450"/>
+				<resource resource="wood" amount="10"/>
+				<start-quest id="buildhouse8"/>
+				<start-quest id="buildmarket6"/>
+			</rewards>
+            
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="questline_finished" value="true"/>
+            </fail_condition>
+		</quest>
+        
+		<quest id="buildmarket6" isKeyQuest="true" title="T_GAME_TUTORIAL_QUEST_NAME_8" description="T_GAME_QUEST_SCEN13_06_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_06_START" />
+                           
+			<start_condition timeout="45" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+            <!--
+				<building count="1" type="building_market"/>
+			</start_condition>
+            -->            
+			<objectives timeout="1" operator="and">
+				<building count="1" type="building_market"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+				<resource resource="coins" amount="650"/>
+                <start-quest id="nomerchant" />
+			</rewards>
+		</quest>
+        
+		<quest id="activatetax7" title="T_GAME_QUEST_SCEN3_7_NAME" description="T_GAME_QUEST_SCEN13_07_START" start="instant" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_07_START" />
+                           
+			<start_condition timeout="25" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+			
+			<objectives timeout="1" operator="and">
+				<tax-collected amount="1500"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_07_SUCCESS"/>
+			
+			<rewards>
+				<resource resource="bread" amount="15"/>
+				<resource resource="tools" amount="10"/>
+				<start-quest id="buildcarpenter"/>            
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="questline_finished" value="true"/>
+            </fail_condition>
+		</quest>
+        
+		<quest id="buildcarpenter" title="T_GAME_QUEST_SCEN9_19_NAME" description="T_GAME_QUEST_SCEN13_07_1_START" start="custom" avatar="client">
+			<start_condition timeout="1" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+			
+			<onStarted notification="T_GAME_QUEST_SCEN13_07_1_START" />
+            <!--               
+			<start_condition timeout="180" operator="and_not">
+				<building count="1" type="building_carpenter"/>
+			</start_condition>
+            -->            
+			<objectives timeout="1" operator="and">
+				<building count="1" type="building_carpenter"/>
+			</objectives>
+
+			<rewards>
+				<resource resource="bread" amount="20"/>
+				<resource resource="brew" amount="15"/>
+			</rewards>
+            <fail_condition timeout="1" operator="and">
+                <flag-has-value key="questline_finished" value="true"/>
+            </fail_condition>
+            
+		</quest>
+        
+		<quest id="buildhouse8" title="T_GAME_QUEST_DESIRES_03_TITLE" description="T_GAME_QUEST_SCEN13_08_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_08_START" />
+                           
+			<start_condition timeout="35" operator="and_not">
+				<population count="50"/>
+				<flag-has-value key="questline_finished" value="true"/>
+			</start_condition>
+                        
+			<objectives timeout="1" operator="and">
+				<population count="50"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_08_SUCCESS"/>
+			
+			<rewards>
+				<bandit-attack count="1" source="any"/>
+				<resource resource="coins" amount="550"/>
+				<resource resource="meat" amount="15"/>
+			</rewards>
+            
+			<fail_condition timeout="1" operator="and">
+                <flag-has-value key="questline_finished" value="true"/>
+            </fail_condition>
+		</quest>
+        
+		<quest id="kingsarrival9" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_09_TITLE" description="T_GAME_QUEST_SCEN13_09_START" start="custom" finish="instant" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_09_START"/>
+                <!--
+				<set-quest-state id="announce5" state="successful"/>
+                -->
+                           
+			<start_condition timeout="2" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+                        
+			<objectives timeout="180" operator="and"/>
+			
+			<rewards>
+				<start-quest id="preventraid19"/>
+				<!-- <start-quest id="failbyraid_hidden"/> Quest is no longer needed -->
+				<start-quest id="destroycamp10"/>
+			</rewards>
+		</quest>
+        
+		<quest id="destroycamp10" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_10_TITLE" description="T_GAME_QUEST_SCEN13_10_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_10_START">
+                <start-quest id="spawncamp20" />
+            </onStarted>
+                           
+			<start_condition timeout="12" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+            
+			<fail_condition timeout="1500" operator="and"/>
+                        
+			<objectives timeout="5" operator="and">
+				<destroy-building target="building_banditcamp" count="1"/>
+			</objectives>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN13_10_FAIL">
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="150"/>
+				<start-quest id="employsoldiers12"/>
+			</onFailed>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_10_SUCCESS">
+                <set-flag key="camp_destroyed" value="true" />
+			</onSuccess>
+			
+			<rewards>
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="150"/>
+				<resource resource="brew" amount="20"/>
+				<resource resource="sausage" amount="15"/>
+				<start-quest id="buildstatue11"/>
+			</rewards>
+		</quest>
+
+        <quest id="build_statue_quest" start="custom" visible="true" title="T_GAME_TUTORIAL_QUEST_NAME_13" description="T_GAME_QUEST_SCEN13_11_START" repeatable="custom" finish="user" avatar="client" >
+
+			<start_condition timeout="3" operator="and"/>
+			<objectives operator="and" timeout="1" >
+				<construct type="deco_2x2_statue_01" count="1"/>
+            </objectives>
+
+            <fail_condition operator="and" timeout="1" >
+                <flag-has-value key="questline_finished" value="true"/>
+            </fail_condition>
+            <rewards>
+				<resource resource="prestige" amount="5"/>
+			</rewards>
+			
+        </quest>
+
+		<quest id="buildstatue11" isKeyQuest="true" title="T_GAME_QUEST_SCEN9_4_NAME" description="T_GAME_QUEST_SCEN13_11_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_11_START" >
+				<start-quest id="build_statue_quest" />
+                <start-quest id="buildstatue11_failer" />
+            </onStarted>
+
+			<start_condition timeout="60" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+            
+            <fail_condition timeout="300" operator="and">
+<!--                 <happyness value="100"/>
+				 Replaced with a helper quest so only the timer can be seen in the questlog  -->
+                <flag-has-value key="buildstatue11_fail_condition" value="true" />
+            </fail_condition>
+
+			<objectives timeout="300" operator="and">
+				<happyness value="100"/>
+			</objectives>
+			
+			<onFailed notification="T_GAME_QUEST_SCEN13_11_FAIL">
+				<start-quest id="festivity13"/>
+			</onFailed>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_11_SUCCESS"/>
+			
+			<rewards>
+				<set-flag key="success" value="true"/>
+				<resource resource="prestige" amount="10"/>
+			</rewards>
+		</quest>
+
+        <quest id="buildstatue11_failer" start="custom" visible="false" repeatable="custom" finish="instant" >
+            <objectives operator="and_not" timeout="1" >
+                <happyness value="100"/>
+            </objectives>
+            <rewards >
+                <set-flag key="buildstatue11_fail_condition" value="true" />
+                <start-quest id="buildstatue11_failer_2" />
+            </rewards>
+            <fail_condition operator="and" timeout="1" >
+                <quest-done id="buildstatue11" />
+            </fail_condition>       
+        </quest>
+		
+        <quest id="buildstatue11_failer_2" start="custom" visible="false" repeatable="custom" finish="instant" >
+            <objectives operator="and" timeout="1" >
+                <happyness value="100"/>
+            </objectives>
+            <rewards >
+                <set-flag key="buildstatue11_fail_condition" value="false" />
+                <start-quest id="buildstatue11_failer" />
+            </rewards>
+            <fail_condition operator="and" timeout="1" >
+                <quest-done id="buildstatue11" />
+            </fail_condition>    
+        </quest>
+
+		<quest id="employsoldiers12" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_12_TITLE" description="T_GAME_QUEST_SCEN13_12_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_12_START" />
+                           
+			<start_condition timeout="60" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+            
+			<fail_condition timeout="900"  operator="and"/>
+                        
+			<objectives timeout="15"  operator="and">
+				<soldiers-in-town count="8"/>
+			</objectives>
+			
+			<onFailed notification="T_GAME_QUEST_SCEN13_12_FAIL">
+				<bandit-attack count="1" source="outside"/>
+				<start-quest id="festivity13"/>
+			</onFailed>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_12_SUCCESS"/>
+			
+			<rewards>
+				<bandit-attack count="1" source="outside"/>
+				<start-quest id="festivity13"/>
+				<resource resource="prestige" amount="6"/>
+				<resource resource="coins" amount="450"/>
+			</rewards>
+		</quest>
+        
+		<quest id="festivity13" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_13_TITLE" description="T_GAME_QUEST_SCEN13_13_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_13_START"/>
+                           
+			<start_condition timeout="60" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+            
+			<fail_condition timeout="1200" operator="and"/>
+                                    
+			<objectives timeout="5"  operator="and">
+				<tribute resource="cloths" amount="10"/>
+				<tribute resource="jewelry" amount="15"/>
+			</objectives>
+			
+			<onFailed notification="T_GAME_QUEST_SCEN13_13_FAIL">
+                <set-flag key="mainquest2_failed" value="true" />
+			</onFailed>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_13_SUCCESS"/>
+			
+			<rewards>
+				<set-flag key="success" value="true"/>
+				<resource resource="prestige" amount="18"/>
+				<resource resource="coins" amount="550"/>
+			</rewards>
+		</quest>
+        
+		<quest id="nomerchanthelper" start="custom" visible="false">
+		                          
+			<start_condition timeout="1" operator="and"/>
+                        
+			<objectives timeout="2" operator="and">
+				<building count="1" type="building_market"/>
+			</objectives>
+            
+			<fail_condition timeout="1" operator="and">
+				<destroy-building count="1" target="building_banditcamp"/>
+			</fail_condition>
+			
+			<rewards>
+                <!--
+				<start-quest id="nomerchant"/>
+                -->
+			</rewards>
+		</quest>
+        
+		<quest id="nomerchant" start="custom" visible="false" finish="instant" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_14_START">
+				<start-quest id="buildbarracks16"/>
+			</onStarted>
+                           
+			<start_condition timeout="1" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+			
+			<objectives timeout="1" operator="and">
+                <flag-has-value key="camp_destroyed" value="true" />
+			</objectives>
+            
+			<fail_condition timeout="2" operator="and">
+				<destroy-building count="1" target="building_banditcamp"/>
+			</fail_condition>
+			
+			<rewards>
+				<start-quest id="merchantarrival15"/>
+			</rewards>
+		</quest>
+        
+		<quest id="merchantarrival15" title="merchantarrival" description="T_GAME_QUEST_SCEN13_15_START" start="custom" visible="false" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_15_START" />
+                           
+			<start_condition timeout="10" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+			
+			<objectives timeout="1" operator="and">
+                <flag-has-value key="camp_destroyed" value="true" />
+            </objectives>
+			
+			<rewards>
+				<set-merchant state="available"/>
+			</rewards>
+		</quest>
+        
+		<quest id="buildbarracks16" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_16_TITLE" description="T_GAME_QUEST_SCEN13_16_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_16_START"/>
+			<start_condition timeout="10" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+			<objectives timeout="1" operator="and">
+				<building type="building_barracks" count="1"/>
+				<building type="building_watchtower" count="1"/>
+			</objectives>
+            
+			<onSuccess notification="T_GAME_QUEST_SCEN13_16_SUCCESS"/>
+			
+			<rewards>
+				<resource resource="weapons" amount="15"/>
+				<resource resource="armor" amount="10"/>
+                <set-flag key="prepare_complete" value="true" />
+			</rewards>
+		</quest>
+        
+		<quest id="preventraid19" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_07_TITLE" description="T_GAME_QUEST_SCEN13_19_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN13_19_START">
+				<set-modifier name="mod_event_bandit_cooldown" tag="map" value="300"/>
+			</onStarted>
+                           
+			<start_condition timeout="60" operator="and">
+				<building count="1" type="building_barracks" />
+				<flag-has-value key="questline_finished" value="false"/>
+			</start_condition>
+                        
+			<objectives timeout="1" operator="or">
+                <raid-defeated count="5" including-interceptions="true" />
+                <flag-has-value key="camp_destroyed" value="true" />
+			</objectives>
+			
+            <fail_condition timeout="1" operator="or" >
+                <raid-successful count="5" />
+                <flag-has-value key="quest_failed" value="true"/>
+            </fail_condition>
+            
+            <onFailed notification="T_GAME_QUEST_SCEN13_19_FAIL">
+				<set-flag key="mainquest2_failed" value="true" />
+			</onFailed>
+            
+			<rewards>
+				<resource resource="prestige" amount="45"/>
+				<resource resource="coins" amount="750"/>               
+			</rewards>
+		</quest>
+        
+		<!--hidden quest to intercept if questline is failed by raid or by other quest-->
+		<quest id="failbyraid_hidden" visible="false" start="custom" avatar="knight">
+                           
+			<start_condition timeout="60" operator="and">
+				<flag-has-value key="questline_finished" value="false"/>
+				<building count="1" type="building_barracks"/>
+			</start_condition>
+                        
+			<objectives timeout="1" operator="and">
+				<quest-done id="mainquest1"/>
+			</objectives>
+            
+			<fail_condition timeout="10" operator="or">
+				<raid-successful count="5"/>
+				<flag-has-value key="quest_failed" value="true"/>
+			</fail_condition>
+            
+			<onFailed notification="T_GAME_QUEST_SCEN13_19_FAIL">
+				<set-flag key="mainquest2_failed" value="true" />
+			</onFailed>
+			
+			<rewards>
+			</rewards>
+		</quest>
+        
+		<quest id="spawncamp20" title="title" description="description" start="custom" visible="false" repeatable="custom">                       
+			<objectives timeout="1" operator="and_not">
+                <building count="1" type="building_banditcamp" />
+			</objectives>
+            
+			<fail_condition timeout="2" operator="and"/>
+            
+			<rewards>
+				<spawn-bandit-camp count="1" upgrade_level="0"/>
+				<bandit-attack count="1" source="any"/>
+				<center-to-building target="building_banditcamp"/>
+			</rewards>
+		</quest>
+        
+		<quest id="SCENARIO_FAILED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" start="custom" visible="false" >
+
+			<onStarted>
+				<set-flag key="camp_destroyed" value="true" />
+			</onStarted>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+                
+			<rewards >
+				<set-modifier name="mod_happiness" tag="map" value="100"/>
+				<start-quest id="METASTART"/>
+				<scenario-failed/>
+			</rewards>
+
+		</quest>
+        
+		<quest id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" start="custom" visible="false" >
+
+			<onStarted  >
+				<set-flag key="camp_destroyed" value="true" />
+			</onStarted>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards >
+				<set-modifier name="mod_happiness" tag="map" value="100"/>
+				<start-quest id="METASTART"/>
+				<scenario-finished />
+			</rewards>
+            
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"  avatar="king">
+
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT">
+				<remove-modifier-by-tag tag="map" />
+                <set-merchant state="available"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2"  operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="65" topLeftY="44" bottomRightX="105" bottomRightY="86" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END --> 
+    
+	</group>
+</questdb>
+

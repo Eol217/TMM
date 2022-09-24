@@ -1,0 +1,31 @@
+[random_start]
+
+next:	work_1		1
+next:	work_2		1
+
+[work_1]
+
+play_ambient: sfx_buildings_tannery_single_sweep_var1
+play_ambient_chance: 0.3
+
+frame:	ani_tailor_00.1.png		0.20
+frame:	ani_tailor_00.2.png		0.10
+frame:	ani_tailor_00.3.png		0.10
+frame:	ani_tailor_00.0.png		0.25
+
+delay:	0.10	0.35
+
+next:	work_2
+
+[work_2]
+
+play_ambient: sfx_buildings_tannery_single_sweep_var2
+play_ambient_chance: 0.3
+frame:	ani_tailor_00.1.png		0.20
+frame:	ani_tailor_00.2.png		0.10
+frame:	ani_tailor_00.3.png		0.10
+frame:	ani_tailor_00.0.png		0.25
+
+delay:	0.10	0.35
+
+next:	work_1

@@ -1,0 +1,715 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- "The perfect brew" scenario 12		200 prestige earned -->
+
+<questdb>
+    
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+		
+	<group avatar="client">
+
+		<quest id="SCENARIO_START" isKeyQuest="true" visible="false" description="T_GAME_QUEST_SCEN12_01_START" start="instant" avatar="monk">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_01_START">
+				<disallow key="building_monestary"/>
+			</onStarted>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_01_SUCCESS"/>
+ 
+			<objectives timeout="2" operator="and"/>
+
+			<fail_condition operator="and_not" timeout="1">
+				<building count="1" type="building_monestary" />
+			</fail_condition>
+			
+			<onFailed >
+				<start-quest id="SCEN12_FAILED"/>
+			</onFailed>
+			
+			<rewards>
+				<enable-bandits enable="any"/>
+				<set-flag key="brew_complete" value="false"/>
+				<set-flag key="scenario_over" value="false"/>
+				<start-quest id="MAINQUEST" />
+				<start-quest id="SCEN12_08"/>
+				<set-modifier name="mod_consumption_rate_church" tag="map" value="150"/>
+				<set-modifier name="mod_rest" tag="map" value="135"/>
+			</rewards>
+		</quest>
+
+		<!--            MAIN QUEST	                        -->
+
+		<quest id="MAINQUEST" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN12_MAINQUEST" description="T_GAME_QUEST_SCEN12_06_START" start="custom"  avatar="king" >
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<quest-done id="SCEN12_20" /> <!--protect the monastery-->
+				<quest-done id="SCEN12_21" /> <!--destroy camps-->
+				<flag-has-value key="brew_complete" value="true"/>
+                <flag-has-value key="protected" value="true"/>
+			</objectives>
+
+			<fail_condition operator="or" timeout="1" >
+				<!-- <destroy-building target="vip_building" count="1"/> -->
+				<building count="0" type="building_monestary" />
+				<destroy-building target="vip_building"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_END_SUCCESS"/>
+
+			<onFailed >
+				<start-quest id="SCEN12_FAILED"/>
+			</onFailed>
+
+			<rewards>
+				<allow key="building_monestary"/>
+				<set-flag key="scenario_over" value="true"/>
+				<resource resource="prestige" amount="75"/>
+				<start-quest id="SCEN12_END"/>
+			</rewards>
+		</quest>
+
+		<!--            MAIN QUEST	END                        -->
+
+		<quest id="build_meat_industry" isKeyQuest="true" title="T_GAME_QUEST_SCEN16_11_TITLE" description="T_GAME_QUEST_SCEN12_09_START2" start="custom" avatar="client">
+
+			<onStarted notification="T_GAME_QUEST_SCEN12_09_START2"/>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building type="building_pigfarm" count="1"/>
+				<building type="building_butcher" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="tools" amount="10"/>
+				<resource resource="prestige" amount="5"/>
+				<start-quest id="SCEN12_15"/>
+			</rewards>
+
+		</quest>
+
+		<!-- banditzs come and steal some wood: this triggers the forester_hut quest-->
+		<quest id="banditswoods" isKeyQuest="true" visible="false" start="instant"   >
+			
+			<onStarted>
+				<bandit-attack resource="wood" intention="steal" amount="50" source="any"/>
+			</onStarted>
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<raid-successful count="1"/>
+			</objectives>
+            
+            <fail_condition timeout="180" operator="and" />
+			<!-- in case the attacks are never successful -->
+			<rewards>
+				<start-quest id="SCEN12_02"/>
+			</rewards>
+
+            <onFailed>
+				<start-quest id="SCEN12_02"/>
+            </onFailed>
+		</quest>
+
+		<quest id="SCEN12_02" isKeyQuest="true" title="T_GAME_QUEST_SCEN12_02_TITLE" description="T_GAME_QUEST_SCEN12_02_START" start="custom" avatar="monk">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_02_START"/>
+			
+			<start_condition timeout="2" operator="and">
+				<quest-done id="banditswoods"/>
+				<flag-has-value key="scenario_over" value="false" />
+			</start_condition>
+
+			<objectives timeout="5" operator="and" >
+				<building type="building_lumberjack" count="3" />
+				<produce resource="wood" amount="30" />
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_02_SUCCESS"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="coins" amount="750" />
+				<resource resource="sausage" amount="5" />
+				<start-quest id="build_meat_industry" />
+			</rewards>
+		</quest>
+
+		<quest id="SCEN12_08" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_16_TITLE" description="T_GAME_QUEST_SCEN12_08_START" start="custom" avatar="monk">
+
+			<onStarted notification="T_GAME_QUEST_SCEN12_06_START"/>
+
+			<start_condition timeout="10" operator="and">
+				<flag-has-value key="scenario_over" value="false"/>
+			</start_condition>
+
+			<objectives timeout="5" operator="and" >
+				<building count="1" type="building_watchtower"/>
+				<building count="1" type="building_barracks"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_14_SUCCESS"/>
+			
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="weapons" amount="5"/>
+				<resource resource="armor" amount="5" />
+				<start-quest id="more_soldiers"/>
+				<start-quest id="Protect_monastery"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="more_soldiers" isKeyQuest="true" visible="true" start="custom" avatar="client" title="T_GAME_QUEST_SCEN_WW_DISASTER_30_NAME" description="T_GAME_QUEST_SCEN_WW_DISASTER_30_DESC" repeatable="no" >
+
+			<onStarted notification="T_GAME_QUEST_SCEN_WW_DISASTER_30_DESC"/>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<soldiers-in-town count="6"/>
+				<building type="building_watchtower" count="3"/>
+			</objectives>
+			
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN13_16_SUCCESS"/>
+
+			<rewards >
+				<resource resource="weapons" amount="15"/>
+				<resource resource="prestige" amount="5"/>
+				<start-quest id="SCEN12_10"/>
+			</rewards>
+		</quest>
+
+		<quest id="Protect_monastery" isKeyQuest="true" visible="true" start="custom" avatar="bandit" title="T_GAME_QUEST_SCEN12_16_TITLE" repeatable="no">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_16_START">
+				<start-quest id="bandit_attack_quest"/>
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<keep-building-alive count="1" target="vip_building"/>
+				<flag-has-value key="brew_complete" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or">
+				<destroy-building target="vip_building" count="1"/>
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards >
+				<set-flag key="protected" value="true"/>
+				<resource resource="prestige" amount="50"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCEN12_10" isKeyQuest="true" title="T_GAME_QUEST_SCEN12_10_TITLE" description="T_GAME_QUEST_SCEN12_10_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_10_START"/>
+			
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1"  operator="and">
+				<building type="building_armory" count="1"/>
+				<building type="building_tanner" count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_10_SUCCESS"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="tools" amount="15"/>
+				<resource resource="iron" amount="20"/>
+				<start-quest id="SCEN12_11"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SCEN12_11" isKeyQuest="true" title="T_GAME_QUEST_SCEN12_11_TITLE" description="T_GAME_QUEST_SCEN12_11_START" start="custom" avatar="client">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_11_START"/>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<produce resource="armor" amount="30"/>
+				<produce resource="weapons" amount="25"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_11_SUCCESS"/>
+
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+				<resource resource="coins" amount="1000"/>
+				<spawn-bandit-camp count="2" upgrade_level="1"/>
+				<start-quest id="SCEN12_21"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SCEN12_15" isKeyQuest="true" title="T_GAME_QUEST_SCEN12_15_TITLE_NEW" description="T_GAME_QUEST_SCEN12_15_START" start="custom" avatar="monk">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_15_START"/>
+			
+			<start_condition timeout="25" operator="and"/>
+
+			<objectives timeout="5" operator="and" >
+				<building type="building_hopsfarm" count="1"/>
+				<building type="hopfield_1x1" count="20"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="armor" amount="5"/>
+				<resource resource="prestige" amount="5"/>
+				<start-quest id="SCEN12_17"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SCEN12_17" isKeyQuest="true" title="T_GAME_QUEST_SCEN14_HEALER_04_TITLE" description="T_GAME_QUEST_SCEN12_17_START" start="custom" avatar="monk">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_17_START"/>
+
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="5" operator="and" >
+				<produce resource="brew" amount="35"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_17_SUCCESS">
+
+			</onSuccess>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+			
+			<rewards>
+				<resource resource="prestige" amount="5"/>
+				<resource resource="tools" amount="15"/>
+				<start-quest id="SCEN12_19"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SCEN12_19" isKeyQuest="true" title="T_GAME_QUEST_SCEN12_19_TITLE" description="T_GAME_QUEST_SCEN12_19_START" start="custom" avatar="monk">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_19_START"/>
+
+			<start_condition timeout="25" operator="and"/>
+			
+			<objectives timeout="5" operator="and" >
+				<tribute resource="herbs" amount="30"/>
+				<tribute resource="nuggets" amount="30"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<resource resource="sausage" amount="10"/>
+				<resource resource="weapons" amount="10"/>
+				<start-quest id="SCEN12_20"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SCEN12_20" isKeyQuest="true" visible="true" title="T_GAME_QUEST_SCEN12_20_TITLE" description="T_GAME_QUEST_SCEN12_20_START" start="custom" avatar="monk" repeatable="no">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN12_20_START">
+				<bandit-attack  count="2" intention="lay_fire" target="vip_building" source="any"/>
+				<bandit-attack  count="2" intention="blow_up" source="any" target="vip_building"/>
+			</onStarted>
+			
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="600" operator="and"/>
+
+			<fail_condition timeout="1" operator="or">
+				<flag-has-value key="scenario_over" value="true"/>
+				<destroy-building target="vip-building"/>
+			</fail_condition>
+
+			<onFailed>
+				<start-quest id="SCEN12_FAILED"/>
+			</onFailed>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_20_SUCCESS">
+				<set-flag key="brew_complete" value="true"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+			</rewards>
+		</quest>
+		
+		<quest id="SCEN12_21" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_10_TITLE" description="T_GAME_QUEST_DESIRES_18_START" repeatable="no" start="custom" avatar="monk">
+		
+			<onStarted notification="T_GAME_QUEST_DESIRES_18_START" />
+
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="5" operator="and" >
+				<destroy-building target="building_banditcamp" count="2"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_DESIRES_18_SUCCESS">
+				<!--				<set-flag key="camps_destroyed" value="true"/>-->
+				<enable-bandits enable="false"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="prestige" amount="35" />
+			</rewards>
+		</quest>
+
+		<!-- Scenario Ending-->
+
+		<quest id="SCEN12_END" start="custom" finish="instant" visible="false" >
+	
+			<start_condition timeout="3" operator="and"/>
+				
+			<onStarted>
+				<set-modifier value="100" tag="map" name="mod_rest"/>
+				<set-modifier name="mod_consumption_rate_church" tag="map" value="100"/>
+			</onStarted>
+
+			<objectives timeout="3" operator="and">
+				<quest-done id="MAINQUEST"/>
+				<flag-has-value key="brew_complete" value="true"/>
+			</objectives>
+
+			<rewards>
+				<set-flag key="scenario_over" value="true"/>
+				<start-quest id="METASTART"/>
+				<allow key="building_monestary"/>
+				<scenario-finished/>
+			</rewards>
+		</quest>
+
+		<quest id="SCEN12_FAILED" start="custom" finish="instant" visible="false"  avatar="bandit">
+
+			<start_condition timeout="2" operator="and" />
+
+			<onStarted notification="T_GAME_QUEST_SCEN12_16_FAILED">
+				
+				<set-modifier value="100" tag="map" name="mod_rest"/>
+				<set-modifier name="mod_consumption_rate_church" tag="map" value="100"/>
+			</onStarted>
+			
+			<objectives timeout="3" operator="and"/>
+			
+			<rewards>
+				<allow key="building_monestary"/>
+				<start-quest id="METASTART"/>
+				<set-flag key="scenario_over" value="true"/>
+				<scenario-failed/>
+			</rewards>
+
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"  >
+			<!--game goes over into sandbox mode-->
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT">
+				<enable-bandits enable="any"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+
+		<!-- bandit attacks are strated and controlled here-->
+		<quest id="bandit_attack_quest" title="T_GAME_QUEST_SCEN12_06_TITLE" description="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER" start="custom" avatar="client" repeatable="custom" visible="false" finish="instant">
+
+			<onStarted notification="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER">
+				<bandit-attack count="1" intention="lay_fire" source="any" target="vip_building"/>
+				<bandit-attack count="1" intention="blow_up" source="any" target="vip_building"/>
+				<center-to-building target="vip_building"/>
+			</onStarted>
+			
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="240" operator="and"/>
+						
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+			
+			<rewards>
+				<start-quest id="bandit_attack_quest_2"/>
+			</rewards>
+		</quest>
+
+		<quest id="bandit_attack_quest_2" title="T_GAME_QUEST_SCEN12_06_TITLE" description="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER" start="custom" avatar="client" repeatable="custom" visible="false" finish="instant">
+
+			<onStarted notification="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER">
+				<bandit-attack count="2" intention="blow_up" source="any" target="vip_building"/>
+				<center-to-building target="vip_building"/>
+			</onStarted>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="300" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="bandit_attack_quest_3"/>
+			</rewards>
+		</quest>
+
+		<quest id="bandit_attack_quest_3" title="T_GAME_QUEST_SCEN12_06_TITLE" description="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER" start="custom" avatar="client" repeatable="custom" visible="false" finish="instant">
+
+			<onStarted notification="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER">
+				<bandit-attack  count="3" intention="blow_up" source="any" target="vip_building"/>
+				<bandit-attack  count="3" intention="lay_fire" source="any" target="vip_building"/>
+				<center-to-building target="vip_building"/>
+			</onStarted>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="240" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="bandit_attack_quest_4"/>
+			</rewards>
+		</quest>
+
+		<quest id="bandit_attack_quest_4" title="T_GAME_QUEST_SCEN12_06_TITLE" description="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER" start="custom" avatar="client" repeatable="custom" visible="false" finish="instant">
+
+			<onStarted notification="T_GAME_QUEST_BANDIT_ATTACK_WARNING_KLOSTER">
+				<bandit-attack count="4" intention="blow_up" source="any" target="vip_building"/>
+				<bandit-attack count="4" intention="lay_fire" source="any" target="vip_building"/>
+				<center-to-building target="vip_building"/>
+			</onStarted>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="180" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="scenario_over" value="true"/>
+			</fail_condition>
+
+			<rewards>
+                <start-quest id="last_bandit_wave_repeater" />
+            </rewards>
+
+		</quest>
+        
+        <quest id="last_bandit_wave_repeater" start="custom" finish="instant" visible="false" repeatable="custom" >
+            <objectives timeout="2" operator="and" />
+            <fail_condition timeout="1" operator="and" >
+                <flag-has-value key="scenario_over" value="true"/>
+            </fail_condition>
+            <rewards>
+                <start-quest id="bandit_attack_quest_4" />
+            </rewards>
+        </quest>
+
+		<!--Old quest parts: For old savegames (otherwise ignore the quests below!-->
+
+		<quest id="SCEN12_21_PRE"  start="custom" avatar="monk" visible="false" >
+
+			<start_condition timeout="60" operator="or">
+				<building count="1" type="building_barracks"/>
+			</start_condition>
+
+			<objectives timeout="5" operator="and_not">
+				<building count="2" type="building_banditcamp"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<building count="2" type="building_banditcamp"/>
+			</fail_condition>
+
+			<onFailed >
+				<start-quest id="SCEN12_21"/>
+			</onFailed>
+
+			<rewards>
+				<spawn-bandit-camp count="2" upgrade_level="1"/>
+				<start-quest id="SCEN12_21"/>
+			</rewards>
+		</quest>
+
+		<quest id="repeat_attacks" start="custom" visible="false"   repeatable="custom" >
+
+			<start_condition timeout="5" operator="and_not">
+				<quest-done id="METASTART"/>
+			</start_condition>
+
+			<objectives timeout="60" operator="and"/>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="protected" value="true"/>
+			</fail_condition>
+
+			<onSuccess>
+				<start-quest id="CHECK_KLOSTER"/>
+			</onSuccess>
+			<rewards>
+				<start-quest id="repeat_attacks"/>
+			</rewards>
+		</quest>
+
+		<quest id="CHECK_KLOSTER" isKeyQuest="true" start="custom" repeatable="custom" avatar="bandit" finish="instant" visible="false">
+
+			<start_condition timeout="5" operator="and">
+				<flag-has-value key="camps_destroyed" value="false"/>
+				<flag-has-value key="attack_active" value="false"/>
+			</start_condition>
+
+			<onStarted >
+				<set-flag key="attack_active" value="true"/>
+			</onStarted>
+
+			<objectives timeout="1" operator="and">
+				<flag-has-value key="rebuilt" value="true"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or">
+				<destroy-building target="vip_building" count="1"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN12_16_START"/>
+
+			<rewards>
+				<bandit-attack target="vip_building" count="2" intention="blow_up"/>
+				<bandit-attack target="vip_building" count="2" intention="lay_fire"/>
+				<start-quest id="wait_for_attack"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="wait_for_attack" start="custom" finish="instant" visible="false"  avatar="bandit" repeatable="custom">
+
+			<start_condition timeout="120" operator="and" />
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<set-flag key="attack_active" value="false"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="SCEN12_07" isKeyQuest="true" title="T_GAME_QUEST_SCEN12_07_TITLE" start="custom" avatar="monk" repeatable="custom">
+
+			<onStarted />
+
+			<start_condition timeout="3" operator="and">
+				<flag-has-value key="rebuilt" value="false"/>
+			</start_condition>
+
+			<objectives timeout="5" operator="and" >
+				<building type="building_monestary" count="1"/>
+			</objectives>
+
+			<onSuccess>
+				<set-flag key="rebuilt" value="true"/>
+				<start-quest id="SCEN12_20"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="tools" amount="15"/>
+				<start-quest id="SCEN12_06"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="BREWING" visible="false"  start="custom"  finish="instant">
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="1"  operator="and">
+				<quest-done id="SCEN12_19" />
+				<quest-done id="SCEN12_17" />
+				<quest-done id="SCEN12_20" />
+			</objectives>
+
+			<rewards>
+				<set-flag key="brew_complete" value="true"/>
+			</rewards>
+		</quest>
+
+
+		<quest id="show_400years_text" visible="false" start="custom"  avatar="monk" finish="instant" >
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="5" operator="and" />
+
+			<rewards>
+				<start-quest id="SCEN12_06"/>
+			</rewards>
+		</quest>
+		<!--END OF :Old quest parts: For old savegames -->
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1"  operator="and">
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards>
+                <lightningstrike topLeftX="59" topLeftY="41" bottomRightX="100" bottomRightY="82" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+
+	</group>
+</questdb>

@@ -1,0 +1,92 @@
+[farmer_medicus]
+
+next:	medicus_work_1			1
+next:	medicus_work_2			0.75
+next:	medicus_work_3			0.75
+next:	medicus_work_4			0.75
+
+
+
+[medicus_work_1]
+frame:	ani_herbgarden_00.0.png		0.2
+delay:	0.00	0.5
+
+next:	medicus_work_1			0.5
+next:	medicus_work_2			1
+next:	medicus_work_3			1
+next:	medicus_work_4			1
+
+
+[medicus_work_2]
+frame:	ani_herbgarden_00.1.png		0.2
+delay:	0.00	0.10
+
+next:	medicus_work_1			1
+next:	medicus_work_2			0.5
+next:	medicus_work_3			0.75
+next:	medicus_work_4			0.75
+
+[medicus_work_3]
+frame:	ani_herbgarden_00.2.png		0.2
+delay:	0.00	0.10
+
+next:	medicus_work_1			1
+next:	medicus_work_2			0.75
+next:	medicus_work_3			0.5
+next:	medicus_work_4			0.75
+
+[medicus_work_4]
+frame:	ani_herbgarden_00.3.png		0.2
+delay:	0.00	0.10
+
+next:	medicus_work_1			1
+next:	medicus_work_2			0.75
+next:	medicus_work_3			0.75
+next:	medicus_work_4			0.5
+
+//farmer
+
+[farmer]
+
+next:	farmer_work_1			1
+next:	farmer_work_2			0.75
+next:	farmer_work_3			0.75
+next:	farmer_work_4			0.75
+
+
+[farmer_work_1]
+frame:	ani_herbgarden_03.0.png		0.2
+delay:	0.00	0.5
+
+next:	farmer_work_1			0.5
+next:	farmer_work_2			1
+next:	farmer_work_3			1
+next:	farmer_work_4			1
+
+
+[farmer_work_2]
+frame:	ani_herbgarden_03.1.png		0.2
+delay:	0.00	0.10
+
+next:	farmer_work_1			1
+next:	farmer_work_2			0.5
+next:	farmer_work_3			0.75
+next:	farmer_work_4			0.75
+
+[farmer_work_3]
+frame:	ani_herbgarden_03.2.png		0.2
+delay:	0.00	0.10
+
+next:	farmer_work_1			1
+next:	farmer_work_2			0.75
+next:	farmer_work_3			0.5
+next:	farmer_work_4			0.75
+
+[farmer_work_4]
+frame:	ani_herbgarden_03.3.png		0.2
+delay:	0.00	0.10
+
+next:	farmer_work_1			1
+next:	farmer_work_2			0.75
+next:	farmer_work_3			0.75
+next:	farmer_work_4			0.5

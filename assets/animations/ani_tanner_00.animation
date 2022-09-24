@@ -1,0 +1,67 @@
+[random_start]
+
+next:	looking1			1
+next:	looking2			1
+next:	looking3			1
+next:	working		1
+
+
+[looking1]
+frame:	ani_tanner_00.0.png		0.50
+
+
+delay:	1.00	2.00
+
+next:	looking2			1
+next:	looking3			1
+next:	working		1
+
+[looking2]
+frame:	ani_tanner_00.1.png		0.50
+
+
+delay:	1.00	2.00
+
+next:	looking1			1
+next:	looking3			1
+next:	working		1
+
+[looking3]
+frame:	ani_tanner_00.2.png		0.50
+
+
+delay:	1.00	2.00
+
+next:	looking2			1
+next:	looking1			1
+next:	working		1
+
+[working]
+play_ambient: sfx_buildings_tannery_5sweeps
+frame:	ani_tanner_00.3.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.5.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.3.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.5.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.3.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.5.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.3.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.5.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.3.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.5.png		0.2
+frame:	ani_tanner_00.4.png		0.15
+frame:	ani_tanner_00.3.png		0.2
+
+
+next:	looking1			1
+next:	looking2			1
+next:	looking3			1
+next:	working			0.8

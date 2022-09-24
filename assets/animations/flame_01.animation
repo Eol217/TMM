@@ -1,0 +1,22 @@
+[start]
+
+frame:	flame_01.0.png		0.1
+frame:	flame_01.1.png		0.1
+frame:	flame_01.2.png		0.1
+frame:	flame_01.3.png		0.1
+
+play_ambient: sfx_fire_building_burning
+
+next:	sound
+
+[sound]
+
+frame:	flame_01.0.png		0.1
+frame:	flame_01.1.png		0.1
+frame:	flame_01.2.png		0.1
+frame:	flame_01.3.png		0.1
+
+play_ambient: sfx_fire_building_burning
+play_ambient_chance: 0.1
+
+next:	sound

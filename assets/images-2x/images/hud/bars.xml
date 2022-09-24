@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:234cb004c6e71bdecf8d7811142c93fc:69713b3f515868f3b571276709652658:b9cd4e7dc4af576839c0e8504ceca25a$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="bars.png" width="64" height="512">
+    <sprite n="context_decay_01" x="37" y="1" w="9" h="102" pX="0.5" pY="0.5" oX="2" oY="2" oW="106" oH="13" r="y"/>
+    <sprite n="context_gold_01" x="47" y="1" w="9" h="102" pX="0.5" pY="0.5" oX="2" oY="2" oW="106" oH="13" r="y"/>
+    <sprite n="happy_bar" x="22" y="1" w="14" h="236" pX="0.5" pY="0.5" oX="9" oY="9" oW="254" oH="32" r="y"/>
+    <sprite n="loading_bar" x="1" y="1" w="20" h="276" pX="0.5" pY="0.5" oX="7" oY="63" oW="290" oH="90" r="y"/>
+    <sprite n="loading_bar_new" x="37" y="104" w="8" h="220" pX="0.5" pY="0.5" oX="6" oY="6" oW="232" oH="20" r="y"/>
+    <sprite n="loading_bg_new" x="1" y="278" w="20" h="232" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="mood_tax_bar_invisible" x="53" y="104" w="3" h="3" pX="0.5" pY="0.5" oX="0" oY="0" oW="254" oH="32"/>
+    <sprite n="science_bar" x="46" y="104" w="6" h="234" pX="0.5" pY="0.5" oX="5" oY="5" oW="239" oH="21" r="y"/>
+    <sprite n="xp_bar" x="57" y="1" w="6" h="235" pX="0.5" pY="0.5" oX="0" oY="6" oW="240" oH="23" r="y"/>
+</TextureAtlas>

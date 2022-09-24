@@ -1,0 +1,111 @@
+[random_start]
+
+next:	fem_booth_1			1
+next:	fem_booth_2			1
+next:	fem_booth_3			1
+next:	fem_walk			1
+next:	fem_back_1			1
+next:	fem_to_next			1
+next:	fem_back_2			1
+
+
+
+[fem_booth_1]
+frame:	ani_market_02.0.png		2
+
+delay:	0.10	4.00
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_booth_3		1
+next:	fem_walk		1
+
+[fem_booth_2]
+frame:	ani_market_02.1.png		0.2
+
+delay:	0.10	0.80
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_booth_3		1
+next:	fem_walk		1
+
+[fem_booth_3]
+frame:	ani_market_02.2.png		2
+
+delay:	0.10	4.00
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_booth_3		1
+next:	fem_walk		1
+
+
+[fem_walk]
+
+frame:	ani_market_02.3.png		0.1
+frame:	ani_market_02.4.png		0.1
+frame:	ani_market_02.5.png		0.1
+frame:	ani_market_02.6.png		0.1
+frame:	ani_market_02.7.png		0.1
+frame:	ani_market_02.8.png		0.1
+frame:	ani_market_02.9.png		1
+
+delay:	1.00	5.00
+
+next:	fem_back_1			1
+next:	fem_to_next			1
+
+[fem_back_1]
+
+frame:	ani_market_02.10.png		0.1
+frame:	ani_market_02.11.png		0.1
+frame:	ani_market_02.12.png		0.1
+frame:	ani_market_02.13.png		0.1
+
+frame:	ani_market_02.0.png		0.1
+
+delay:	0.1		2
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_booth_3		1
+next:	fem_walk		0.75
+
+[fem_to_next]
+
+frame:	ani_market_02.14.png		0.1
+frame:	ani_market_02.15.png		0.1
+frame:	ani_market_02.16.png		0.1
+frame:	ani_market_02.17.png		0.1
+frame:	ani_market_02.18.png		0.1
+frame:	ani_market_02.19.png		0.1
+frame:	ani_market_02.20.png		0.1
+frame:	ani_market_02.21.png		2
+
+
+
+delay:	0.1		6.0
+
+next:	fem_back_2			1
+
+[fem_back_2]
+
+frame:	ani_market_02.22.png		0.1
+frame:	ani_market_02.23.png		0.1
+frame:	ani_market_02.24.png		0.1
+frame:	ani_market_02.25.png		0.1
+frame:	ani_market_02.26.png		0.1
+frame:	ani_market_02.27.png		0.1
+frame:	ani_market_02.28.png		0.1
+frame:	ani_market_02.29.png		0.1
+frame:	ani_market_02.30.png		0.1
+
+frame:	ani_market_02.0.png		0.1
+
+delay:	0.1		2
+
+next:	fem_booth_1		1
+next:	fem_booth_2		1
+next:	fem_booth_3		1
+next:	fem_walk		0.75

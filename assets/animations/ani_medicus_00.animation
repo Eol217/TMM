@@ -1,0 +1,44 @@
+[random_start]
+
+next:	start			1
+
+
+
+[start]
+frame:	ani_medicus_00.0.png		0.2
+delay:	0.0		1.00
+
+next:	work_1			1
+next:	work_2			0.5
+
+
+[work_1]
+frame:	ani_medicus_00.1.png		0.2
+frame:	ani_medicus_00.0.png		0.2
+frame:	ani_medicus_00.1.png		0.2
+frame:	ani_medicus_00.0.png		0.2
+
+
+next:	start			0.5
+next:	work_1			1
+next:	work_2			1
+
+
+[work_2]
+frame:	ani_medicus_00.2.png		0.1
+frame:	ani_medicus_00.3.png		0.5
+
+delay:	0.50	2
+
+next:	work_3			1
+
+[work_3]
+frame:	ani_medicus_00.2.png		0.1
+frame:	ani_medicus_00.0.png		0.2
+
+next:	start			1
+next:	work_1			1
+next:	work_2			0.75
+
+
+

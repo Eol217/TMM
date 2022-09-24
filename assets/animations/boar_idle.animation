@@ -1,0 +1,124 @@
+[random_start]
+
+next: random_start3
+
+next: looking1	1
+next: looking2	1
+next: looking3	1
+
+next: eat_dn	0.5
+
+
+[looking1]
+
+boar_idle.0.png 2
+
+delay: 1.00	8.00
+
+next: random_start
+
+[looking2]
+
+boar_idle.1.png 2
+
+delay: 1.00	8.00
+
+next: random_start
+
+[looking3]
+
+boar_idle.2.png 2
+
+delay: 1.00	8.00
+
+next: random_start
+
+[eat_dn]
+
+boar_idle.3.png 0.1
+boar_idle.4.png 2
+
+delay: 1.00	4.00
+
+next: eat_up	1
+next: eat_look	1
+
+[eat_up]
+
+boar_idle.2.png 0.1
+boar_idle.0.png 2
+
+delay: 1.00	4.00
+
+next: random_start
+
+[eat_look]
+
+boar_idle.2.png 0.1
+boar_idle.1.png 2.5
+
+delay: 1.00	2.5
+
+next: eat_dn
+
+[random_start3]
+
+next: looking31	1
+next: looking32	1
+next: looking33	1
+
+next: eat_dn3	0.5
+
+
+[looking31]
+
+boar_idle.10.png 2
+
+delay: 1.00	8.00
+
+next: random_start3
+
+[looking32]
+
+boar_idle.11.png 2
+
+delay: 1.00	8.00
+
+next: random_start3
+
+[looking33]
+
+boar_idle.12.png 2
+
+delay: 1.00	8.00
+
+next: random_start3
+
+[eat_dn3]
+
+boar_idle_3.3.png 0.1
+boar_idle_3.4.png 2
+
+delay: 1.00	4.00
+
+next: eat_up3	1
+next: eat_look3	1
+
+[eat_up3]
+
+boar_idle.12.png 0.1
+boar_idle.10.png 2
+
+delay: 1.00	4.00
+
+next: random_start3
+
+[eat_look3]
+
+boar_idle.12.png 0.1
+boar_idle.11.png 2.5
+
+delay: 1.00	2.5
+
+next: eat_dn3
+

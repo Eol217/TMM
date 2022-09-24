@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<questdb>
+	<group>
+
+
+		<quest id="additional_starter"  start="custom" visible="false" finish="instant"  repeatable="no">
+
+			<objectives timeout="5">
+				<flag-has-value key="note_quests_enabled" value="true" />
+			</objectives>
+
+			<onSuccess>
+				<start-quest id="tavern_note" />
+				<start-quest id="vineyard_note" />
+				<start-quest id="carpenter_note" />
+				<start-quest id="taxman_note" />
+			</onSuccess>
+		</quest>
+
+		<quest id="tavern_note" title="T_GAME_QUEST_SCEN6_8_NAME" description="T_GAME_QUEST_SCEN8_11_DESC"  start="custom" visible="false" finish="instant"  repeatable="no">
+			<start_condition timeout="300">
+				<building type="building_market" count="1"/>
+				<population count="25"/>
+			</start_condition>
+
+			<fail_condition timeout="1">
+				<building type="building_tavern" count="1"/>
+			</fail_condition>
+
+			<objectives timeout="5"/>
+
+			<onSuccess>
+				<start-quest id="tavern_reward" />
+			</onSuccess>
+		</quest>
+
+		<quest id="tavern_reward"  title="T_GAME_QUEST_SCEN6_8_NAME" description="T_GAME_QUEST_SCEN8_11_DESC" start="custom" finish="user" visible="true" repeatable="no">
+		
+			<onStarted   notification="T_GAME_QUEST_SCEN8_11_DESC"/>
+
+			<objectives timeout="1">
+				<building type="building_tavern" count="1"/>
+			</objectives>
+
+			<rewards>
+				<resource resource="juice" amount="15" />
+			</rewards>
+		</quest>
+
+		<quest id="vineyard_note" title="T_GAME_QUEST_SCEN7_GUY_3_NAME"  start="custom" finish="instant" visible="false"  repeatable="no">
+
+			<start_condition timeout="60">
+				<building type="building_tavern" count="1"/>
+				<population count="30"/>
+			</start_condition>
+
+			<objectives timeout="5"/>
+
+			<fail_condition timeout="1">
+				<building type="building_vineyard" count="1"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="vineyard_reward"/>
+			</rewards>
+		</quest>
+
+		<quest id="vineyard_reward"  title="T_GAME_QUESTS_VINEYARD_JUICEMANUFACTURE_TITLE" description="T_GAME_LOADINGTIP_003" start="custom" finish="user" visible="true"  repeatable="no">
+		
+			<onStarted  notification="T_GAME_LOADINGTIP_003"/>
+
+			<objectives timeout="5">
+				<building type="building_vineyard" count="1" />
+				<building type="building_winefarm" count="1" />
+			</objectives>
+
+			<rewards>
+				<resource resource="grapes" amount="30" />
+			</rewards>
+		</quest>
+
+		<quest id="carpenter_note" title="T_GAME_QUEST_SCEN9_19_NAME"  start="custom" finish="instant" visible="false"  repeatable="no">
+
+			<start_condition timeout="120">
+				<building type="building_blacksmith" count="1"/>
+				<population count="30"/>
+			</start_condition>
+
+			<objectives timeout="5"/>
+
+			<fail_condition timeout="1">
+				<building type="building_carpenter" count="1"/>
+			</fail_condition>
+ 
+			<rewards>
+				<start-quest id="carpenter_reward"/>
+			</rewards>
+		</quest>
+
+		<quest id="carpenter_reward"  title="T_GAME_QUEST_SCEN9_19_NAME" description="T_GAME_LOADINGTIP_019" start="custom" finish="user" visible="true" repeatable="no">
+		
+			<onStarted  notification="T_GAME_LOADINGTIP_019"/>
+
+			<objectives timeout="5">
+				<building type="building_carpenter" count="1"/>
+			</objectives>
+
+			<rewards>
+				<resource resource="planks" amount="10" />
+				<resource resource="stone" amount="10" />
+			</rewards>
+		</quest>
+
+		<quest id="taxman_note" title="T_GAME_QUEST_SCEN9_19_NAME"  start="custom" finish="instant" visible="false"  repeatable="no" avatar="client">
+		
+			<start_condition timeout="300">
+				<building type="building_blacksmith" count="1"/>
+				<population count="35"/>
+			</start_condition>
+
+			<objectives timeout="5"/>
+
+			<fail_condition timeout="1">
+				<building type="building_collector" count="1"/>
+				<tax-collected amount="250"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="taxman_reward"/>
+			</rewards>
+		</quest>
+
+		<quest id="taxman_reward"  title="T_GAME_QUEST_SCEN10_16_NAME" description="T_GAME_QUEST_SCEN10_16_DESC" start="custom" finish="user" visible="true" repeatable="no" avatar="king">
+		
+			<onStarted  notification="T_GAME_QUEST_SCEN10_16_DESC"/>
+
+			<objectives timeout="5">
+				<building type="building_collector" count="1"/>
+				<tax-collected amount="250"/>
+			</objectives>
+
+			<rewards>
+				<resource resource="jewelry" amount="10" />
+			</rewards>
+		</quest>
+
+	</group>
+
+</questdb>

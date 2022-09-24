@@ -1,0 +1,43 @@
+[random_start]
+
+next:	duck_swim_1		1
+next:	duck_swim_2		1
+
+
+[duck_swim_1]
+
+flip_x	0
+
+frame-delay: 0.1
+
+frame:	ani_duck_00.00.png
+frame:	ani_duck_00.01.png
+frame:	ani_duck_00.02.png
+frame:	ani_duck_00.03.png
+frame:	ani_duck_00.04.png
+frame:	ani_duck_00.05.png
+frame:	ani_duck_00.06.png
+frame:	ani_duck_00.07.png
+frame:	ani_duck_00.08.png
+
+next:	duck_swim_1			1
+
+
+[duck_swim_2]
+
+flip_x	1
+
+frame-delay: 0.1
+
+frame:	ani_duck_00.00.png
+frame:	ani_duck_00.01.png
+frame:	ani_duck_00.02.png
+frame:	ani_duck_00.03.png
+frame:	ani_duck_00.04.png
+frame:	ani_duck_00.05.png
+frame:	ani_duck_00.06.png
+frame:	ani_duck_00.07.png
+frame:	ani_duck_00.08.png
+
+next:	duck_swim_2			1
+

@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<questdb>
+	<!--           -->
+	<!-- PC_VERSION-->
+	<!--           -->
+	
+	<include file = "data/quests_sandbox.xml"/>
+	<include file="data/xp-quests.xml" />
+	<include file="data/events-quests.xml" />
+	<group>
+		<quest id="TUTORIAL_NOTIFICATION_1" title="T_GAME_TUTORIAL_NOTIFICATION_1" description="T_GAME_TUTORIAL_NOTIFICATION_1" start="instant" isKeyQuest="true" visible="false">
+		
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_1" >
+				<disallow key="buildings"/>
+				<disallow key="BTN_HUD_ERASE"/>
+				<disallow key="BTN_CONTEXTMENU_ERASE"/>
+				<disallow key="BTN_HUD_SPEEDUP"/>
+				<disallow key="BTN_HUD_CAMERA"/>
+				<disallow key="BTN_HUD_SHOP"/>
+				<!--disallow key="BTN_CONTEXTMENU_REPAIR"/-->
+				<disallow key="BTN_CONTEXTMENU_SELECT_1"/>
+				<disallow key="BTN_CONTEXTMENU_SELECT_2"/>
+				<disallow key="BTN_CONTEXTMENU_SELECT_3"/>
+				<disallow key="BTN_CONTEXTMENU_SELECT_4"/>
+				<disallow key="BTN_HUD_BUILD"/>
+				<set-flag key="new_savegame" value="true"/>
+				<!--disallow key="BTN_BOOK_TAB_INSTANTBUILD"/-->
+				<!--disallow key="BTN_CONTEXTMENU_INSTANT" /-->
+			</onStarted>
+			
+			<start_condition timeout="1" operator="and"/>
+			<!--welcome screen-->
+			<objectives timeout="2" operator="and"/>
+			
+			<rewards>
+				<start-quest id="TUTORIAL_NOTIFICATION_2" />
+			</rewards>
+		</quest>
+                
+		<quest id="TUTORIAL_NOTIFICATION_2" title="{T_GAME_TUTORIAL_NOTIFICATION_2_{CONTROL_TYPE}}" description="{T_GAME_TUTORIAL_NOTIFICATION_2_{CONTROL_TYPE}}" start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted notification="{T_GAME_TUTORIAL_NOTIFICATION_2_{CONTROL_TYPE}}"/>
+                           
+			<start_condition timeout="3" operator="and"/>
+
+			<!--Move camera note-->
+			<objectives timeout="2" operator="and"/>
+			
+			<rewards>
+				<start-quest id="TUTORIAL_NOTIFICATION_3" />
+			</rewards>
+		</quest>
+                
+		<quest id="TUTORIAL_NOTIFICATION_3" title="T_GAME_TUTORIAL_NOTIFICATION_3" description="T_GAME_TUTORIAL_NOTIFICATION_3" start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_3" >
+				<center-to-castle/>
+				<!--highlight-building building="building_hq"/-->
+			</onStarted>
+                        
+			<start_condition timeout="3" operator="and"/>
+			<!--center camera on castle-->
+			<objectives timeout="2" operator="and"/>
+			
+			<rewards>
+				<!--highlight-building building="building_hq" highlight="false"/-->
+				<start-quest id="TUTORIAL_NOTIFICATION_4" />
+			</rewards>
+		</quest>
+                
+		<quest id="TUTORIAL_NOTIFICATION_4" title="T_GAME_TUTORIAL_NOTIFICATION_4" description="T_GAME_TUTORIAL_NOTIFICATION_4" start="custom" isKeyQuest="true" visible="false">
+			<ticket type="neutral" title="T_GAME_TICKET_HAPPYNESSDOWN"/> <!-- example event-->
+                        
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_4">
+				<highlight key="BTN_HUD_WARNING" mode="normal"/>
+			</onStarted>
+			
+			<start_condition timeout="3" operator="and"/>               <!--Describe HUD-->
+
+			<objectives timeout="5" operator="and"/>
+
+			<rewards>
+				<start-quest id="TUTORIAL_NOTIFICATION_FF" />
+				<highlight key="BTN_HUD_WARNING" highlight="false"/>
+			</rewards>
+		</quest>
+     
+		<quest id="TUTORIAL_NOTIFICATION_FF" title="T_GAME_TUTORIAL_NOTIFICATION_FF" description="T_GAME_TUTORIAL_NOTIFICATION_FF" start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted  notification="T_GAME_TUTORIAL_NOTIFICATION_FF" >
+				<allow key="BTN_HUD_SPEEDUP"/>
+				<highlight key="BTN_HUD_SPEEDUP" mode="normal"/>
+			</onStarted >
+
+			<start_condition timeout="2" operator="and"/>               <!--Describe FF-->
+
+			<objectives timeout="3" operator="and"/>
+			
+			<rewards>
+				<start-quest id="TUTORIAL_QUEST_CONST_1" />
+				<start-quest id="TUTORIAL_QUEST_1" />
+				<highlight key="BTN_HUD_SPEEDUP" highlight="false"/>
+			</rewards>
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_CONST_1"  start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted>
+				<allow key="BTN_HUD_BUILD"/>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="building_lumberjack" mode="normal"/>
+			</onStarted>
+                        
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST 1-->
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<highlight key="building_lumberjack" highlight="false"/>
+				<disallow key="building_lumberjack" />
+			</onSuccess>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_lumberjack" count="1" />
+			</objectives>
+
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_1" title="T_GAME_TUTORIAL_QUEST_NAME_1" description="T_GAME_TUTORIAL_QUEST_DESC_1" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_1">
+				<allow key="building_lumberjack"/>                               <!-- FIRST QUEST NOTE: BUILD LUMBERJACK-->
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<enable-hint hint="buildmenu"/>                                  <!-- ENABLE BUILD MENU HINT SCREEN-->
+				<highlight key="building_lumberjack" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+			</onStarted>
+                        
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_1" >
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<disallow key="building_lumberjack"/>
+			</onSuccess>
+
+			<objectives timeout="2" operator="and">
+				<construct  type="building_lumberjack"	count="1" />
+			</objectives>
+			
+			<rewards xp="off">
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<resource resource="prestige" amount="5" />
+				<resource resource="bread" amount="20" />
+				<highlight key="building_lumberjack" highlight="false"/>
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<start-quest id="TUTORIAL_NOTIFICATION_5" />
+			</rewards>
+		 
+		</quest>
+              
+		<quest id="TUTORIAL_NOTIFICATION_5" title="T_GAME_TUTORIAL_NOTIFICATION_5" description="T_GAME_TUTORIAL_NOTIFICATION_5" start="custom" isKeyQuest="false" finish="instant" visible="false">
+		
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_5"/>
+                                 
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="5" operator="and"/>
+			<!--Describe Prestige-->
+			<rewards>
+				<start-quest id="TUTORIAL_QUEST_2_DEASSIGN" />
+			</rewards>
+                        
+		</quest>
+               
+		<quest id="TUTORIAL_QUEST_2_DEASSIGN" title="T_GAME_TUTORIAL_QUEST_NAME_DEASSIGN_2" description="{T_GAME_TUTORIAL_QUEST_DESC_DEASSIGN_2_{CONTROL_TYPE}}" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="{T_GAME_TUTORIAL_QUEST_DESC_DEASSIGN_2_{CONTROL_TYPE}}" >        <!-- DEASSIGN quest-->
+                            
+				<allow key="BTN_CONTEXTMENU_SELECT_1"/>
+				<allow key="BTN_CONTEXTMENU_SELECT_2"/>
+				<allow key="BTN_CONTEXTMENU_SELECT_3"/>
+				<allow key="BTN_CONTEXTMENU_SELECT_4"/>
+				<highlight-building building="building_lumberjack"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_1" mode="normal" context="building_lumberjack"/>
+			</onStarted>
+                                                
+			<onSuccess>
+				<highlight-building building="building_lumberjack" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="tutorial"/>
+				<disallow key="BTN_CONTEXTMENU_SELECT_1"/>
+				<disallow key="BTN_CONTEXTMENU_SELECT_2"/>
+				<disallow key="BTN_CONTEXTMENU_SELECT_3"/>
+				<disallow key="BTN_CONTEXTMENU_SELECT_4"/>
+			</onSuccess>
+
+			<objectives timeout="5" operator="and">
+				<deassign  count="1" trigger="command" type="building_lumberjack"/>
+			</objectives>
+			
+			<rewards xp="off">
+				<resource resource="prestige" amount="5" />
+				<resource resource="coins" amount="250" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<highlight-building building="building_lumberjack" highlight="false" />
+				<start-quest id="TUTORIAL_QUEST_2" />
+				<start-quest id="TUTORIAL_QUEST_CONST_2" />
+			</rewards>
+                         
+		</quest>
+             
+		<quest id="TUTORIAL_QUEST_CONST_2"  start="custom" isKeyQuest="true" visible="false">
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_residence_00" count="1" />
+			</objectives>
+
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST 2-->
+				<highlight key="BTN_HUD_BUILD" highlight="false" />
+				<highlight key="building_residence_00" highlight="false" />
+			</onSuccess>
+
+			<rewards>
+				<disallow key="building_residence_00" />
+			</rewards>
+		 
+		</quest>
+              
+		<quest id="TUTORIAL_QUEST_2" title="T_GAME_TUTORIAL_QUEST_NAME_2" description="T_GAME_TUTORIAL_QUEST_DESC_2" start="custom" isKeyQuest="true">
+		
+			
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_2" >        <!-- Build a townhouse quest-->
+				<allow key="building_residence_00"/>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="building_residence_00" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+			</onStarted>
+
+			<onSuccess  notification="T_GAME_TUTORIAL_QUEST_SUCESS_2">
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<highlight key="building_residence_00" highlight="false"/>
+				<disallow key="building_residence_00" />
+			</onSuccess>
+
+			<objectives timeout="2" operator="and">
+				<construct type="building_residence_00" count="1"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="coins" amount="150" />
+				<resource resource="stone" amount="15" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_NOTIFICATION_6" />
+				<disallow key="BTN_CONTEXTMENU_SELECT_1"/>
+			</rewards>
+
+		</quest>
+             
+		<quest id="TUTORIAL_NOTIFICATION_6" title="T_GAME_TUTORIAL_NOTIFICATION_6" description="T_GAME_TUTORIAL_NOTIFICATION_6" start="custom" isKeyQuest="true" finish="instant" visible="false">
+		
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_6" />             <!--townhouses create workers NOTE-->
+  
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="5" operator="and"/>
+
+			<rewards>
+				<start-quest id="TUTORIAL_QUEST_3" />
+			</rewards>
+                        
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_3" title="T_GAME_TUTORIAL_QUEST_NAME_3" description="T_GAME_TUTORIAL_QUEST_DESC_3" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_3" >           <!--Buildings are on standby without workers-->
+				<allow key="BTN_CONTEXTMENU_SELECT_1"/>
+				<highlight-building building="building_lumberjack"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_1" mode="normal" context="building_lumberjack"/>
+			</onStarted>
+                         
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_3" >          <!--without workers constructions will be unmanned-->
+				<disallow key="BTN_CONTEXTMENU_SELECT_1"/>
+				<highlight-building building="building_lumberjack" highlight="false"/>
+			</onSuccess>
+
+			<objectives timeout="2" operator="and">
+				<assign count="1" trigger="is_assigned" type="building_lumberjack"/>
+			</objectives>
+			
+			<rewards xp="off">
+				<resource resource="coins" amount="150" />
+				<resource resource="tools" amount="10" />
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_NOTIFICATION_7" />
+			</rewards>
+		</quest>
+                
+		<quest id="TUTORIAL_NOTIFICATION_7" title="T_GAME_TUTORIAL_NOTIFICATION_7" description="T_GAME_TUTORIAL_NOTIFICATION_7" start="custom" isKeyQuest="false" finish="instant" visible="false">
+		
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_7" >
+				<enable-hint hint="happiness"/>             <!-- HAPPINESS HINT -->
+				<highlight key="BTN_BOOK_TURN_RIGHT" mode="normal"/>
+				<highlight key="BTN_HUD_TRADE" mode="normal"/>
+			</onStarted>
+                         
+			<onSuccess>
+				<highlight key="BTN_BOOK_TURN_RIGHT" highlight="false"/>
+			</onSuccess>
+			<!--take care of your townies needs-->
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="5" operator="and"/>
+			
+			<rewards>
+				<start-quest id="TUTORIAL_QUEST_4" />
+				<start-quest id="TUTORIAL_QUEST_CONST_FISHER" />
+			</rewards>
+                 
+		</quest>
+                  
+		<quest id="TUTORIAL_QUEST_CONST_FISHER"  start="custom" isKeyQuest="true" visible="false">
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_fishing_lodge" count="1" />
+			</objectives>
+
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST 4-->
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_HAPPINESS" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<highlight key="building_fishing_lodge" highlight="false"/>
+			</onSuccess>
+
+			<rewards>
+				<disallow key="building_fishing_lodge"/>
+			</rewards>
+		 
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_4" title="T_GAME_TUTORIAL_QUEST_NAME_4" description="T_GAME_TUTORIAL_QUEST_DESC_4" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_4">       <!--Build fishing lodge quest-->
+				<allow key="building_fishing_lodge" />
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+				<highlight key="building_fishing_lodge" mode="normal"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<construct type="building_fishing_lodge" count="1"/>
+			</objectives>
+			
+			<rewards xp ="off">
+				<resource resource="prestige" amount="10"/>
+				<resource resource="meat" amount="15"/>
+				<start-quest id="TUTORIAL_QUEST_4_WELL"/>
+				<start-quest id="TUTORIAL_QUEST_CONST_WELL"/>
+				<disallow key="building_fishing_lodge"/>
+			</rewards>
+                        
+		</quest>
+                          
+		<quest id="TUTORIAL_QUEST_CONST_WELL"  start="custom" isKeyQuest="true" visible="false">
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_well" count="1" />
+			</objectives>
+
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST 4-->
+				<disallow key="building_well"/>
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<highlight key="building_well" highlight="false"/>
+				<highlight key="BTN_BOOK_TURN_RIGHT" highlight="false"/>
+			</onSuccess>
+
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_4_WELL" title="T_GAME_TUTORIAL_QUEST_4_WELL" description="T_GAME_TUTORIAL_QUEST_DESC_4_WELL" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_4_WELL" >       <!--Build well quest-->
+				<allow key="building_well"/>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+				<highlight key="building_well" mode="normal"/>
+				<highlight key="BTN_BOOK_TURN_RIGHT" mode="normal"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<construct type="building_well" count="1"/>
+			</objectives>
+			
+			<rewards xp="off">
+				<set-modifier name="mod_taxes" tag="map" value="100" />
+				<resource resource="stone" amount="20" />
+				<resource resource="wood" amount="20" />
+				<start-quest id="TUTORIAL_QUEST_5" />
+			</rewards>
+		</quest>
+                                                
+		<quest id="TUTORIAL_QUEST_5" title="T_GAME_TUTORIAL_QUEST_NAME_5" description="{T_GAME_TUTORIAL_QUEST_DESC_5_{CONTROL_TYPE}}" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="{T_GAME_TUTORIAL_QUEST_DESC_5_{CONTROL_TYPE}}" >        <!-- Depending on happiness... text: TAXES-->
+				<enable-hint hint="taxes"/>                                             <!-- TAX screen hint-->
+				<highlight key="BTN_HUD_SPEEDUP" highlight="false"/>
+				<highlight key="BTN_HUD_TRADE" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_HAPPINESS" mode="normal"/>
+				<highlight key="BTN_BOOK_TURN_RIGHT" mode="normal"/>
+				<set-resource building="building_residence_00" resource="coins" value="20" />
+				<highlight-building building="building_residence_00"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<tax-collected amount="40"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_5">          <!-- Fullfill wishes to raise taxes TEXT-->
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_HAPPINESS" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight-building building="building_residence_00" highlight="false"/>
+				<highlight key="BTN_BOOK_TURN_RIGHT" highlight="false"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="bread" amount="20" />
+				<resource resource="coins" amount="400" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_NOTIFICATION_8" />
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+			</rewards>
+
+		</quest>
+                
+		<quest id="TUTORIAL_NOTIFICATION_8" title="T_GAME_TUTORIAL_NOTIFICATION_8" description="T_GAME_TUTORIAL_NOTIFICATION_8" start="custom" isKeyQuest="false" finish="instant" visible="false">
+			<ticket type="negative" title="T_GAME_TICKET_HAPPYNESSDOWN"/>
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_8" >      <!-- ALERT MESSAGES text-->
+				<highlight key="BTN_HUD_WARNING"/>
+			</onStarted >
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="5" operator="and"/>
+
+			<rewards>
+				<highlight key="BTN_HUD_WARNING" highlight="false"/>
+				<start-quest id="TUTORIAL_QUEST_7" />
+				<start-quest id="TUTORIAL_QUEST_CONST_7" />
+			</rewards>
+
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_CONST_7" start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted>
+				<highlight key="BTN_HUD_BUILD" mode="normal" />
+				<highlight key="building_residence_00" />
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+			</onStarted>
+                        
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST 7-->
+				<highlight key="BTN_HUD_BUILD" highlight="false" />
+				<highlight key="building_residence_00" highlight="false" />
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+			</onSuccess>
+                        
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_residence_00" count="2" />
+			</objectives>
+			
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_7" title="T_GAME_TUTORIAL_QUEST_NAME_7" description="T_GAME_TUTORIAL_QUEST_DESC_7" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_7" >        <!-- Build another townhouse quest-->
+				<allow key="building_residence_00"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<construct type="building_residence_00" count="2"/>
+			</objectives>
+			
+			<rewards xp="off">
+				<resource resource="prestige" amount="10" />
+				<resource resource="wood" amount="30" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<highlight key="building_residence_00" highlight="false"/>
+				<start-quest id="TUTORIAL_STOCK" />
+			</rewards>
+                         
+		</quest>
+                
+		<quest id="TUTORIAL_STOCK" description="T_GAME_TUTORIAL_NOTIFICATION_STOCK" start="custom" isKeyQuest="true" visible="false" finish="instant">
+		
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_STOCK">
+				<enable-hint hint="stocktab"/>
+				<highlight key="BTN_HUD_TRADE" mode="normal" />
+				<highlight key="BTN_BOOK_TAB_RESOURCES" mode="normal" />
+				<disallow key="building_residence_00"/>
+			</onStarted>
+                        
+			<onSuccess>
+				<highlight key="BTN_HUD_TRADE" highlight="false" />
+				<highlight key="BTN_BOOK_TAB_RESOURCES" highlight="false"/>
+			</onSuccess>
+                        
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="4" operator="and"/>
+
+			<rewards>
+				<start-quest id="TUTORIAL_QUEST_6" />
+				<start-quest id="TUTORIAL_QUEST_CONST_6" />
+			</rewards>
+		 
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_CONST_6"  start="custom" isKeyQuest="true" visible="false">
+
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_sawmill" count="1" />
+			</objectives>
+
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST 6-->
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_INSTANTBUILD" highlight="false" />
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="building_sawmill" highlight="false" />
+				<allow key="BTN_CONTEXTMENU_INSTANT"/>
+				<allow key="BTN_BOOK_TAB_INSTANTBUILD"/>
+			</onSuccess>
+
+			<rewards>
+				<disallow key="building_sawmill"/>
+			</rewards>
+		 
+		</quest>
+
+		<quest id="TUTORIAL_QUEST_6" title="T_GAME_TUTORIAL_QUEST_NAME_6" description="{T_GAME_TUTORIAL_QUEST_DESC_6_{CONTROL_TYPE}}" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="{T_GAME_TUTORIAL_QUEST_DESC_6_{CONTROL_TYPE}}" >        <!-- USE "instant build" Note-->
+				<allow key="BTN_BOOK_TAB_INSTANTBUILD"/>
+				<allow key="building_sawmill"/>
+				<disallow key="BTN_BOOK_TAB_NORMALBUILD" />
+				<highlight key="BTN_BOOK_TAB_INSTANTBUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="building_sawmill" mode="normal"/>
+			</onStarted>
+                         
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_6" >              <!-- Sawmill and production chains note-->
+				<highlight key="BTN_HUD_BUILD" highlight="false" />
+			</onSuccess>
+                        
+			<start_condition timeout="5" operator="and"/>
+                        
+			<objectives timeout="3" operator="and">
+				<construct type="building_sawmill"  />
+			</objectives>
+			
+			<rewards xp="off">
+				<resource resource="stone" amount="30" />
+				<resource resource="wood" amount="20" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<disallow key="building_sawmill"/>
+				<allow key="BTN_BOOK_TAB_NORMALBUILD" />
+				<!--allow key="building_lumberjack"/-->
+				<!--start-quest id="TUTORIAL_QUEST_CONST_MINE"/>
+				<start-quest id="TUTORIAL_QUEST_MINE"/-->
+				<start-quest id="TUTORIAL_QUEST_CONST_8"/>
+				<start-quest id="TUTORIAL_QUEST_8"/>
+			</rewards>
+                        
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_CONST_MINE"  start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="building_mine" mode="normal" />
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_3" mode="normal"/>
+			</onStarted>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_mine" count="1" />
+			</objectives>
+
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST mine-->
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false" />
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="building_mine" highlight="false" />
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_3" highlight="false"/>
+				<disallow key="building_mine"/>
+			</onSuccess>
+			
+		</quest>
+               
+		<quest id="TUTORIAL_QUEST_MINE" title="T_GAME_TUTORIAL_QUEST_NAME_MINE" description="T_GAME_TUTORIAL_QUEST_DESC_MINE" start="custom" isKeyQuest="true">
+			
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_MINE" >        <!-- Build mine quest-->
+				<allow key="building_mine"/>
+			</onStarted>
+                                                
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_MINE"/>
+
+			<objectives timeout="2" operator="and">
+				<construct type="building_mine" count="1"/>
+			</objectives>
+			
+			<rewards xp="off">
+				<resource resource="prestige" amount="10" />
+				<resource resource="planks" amount="20" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_QUEST_8" />
+				<start-quest id="TUTORIAL_QUEST_CONST_8" />
+				<disallow key="building_mine"/>
+			</rewards>
+                         
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_CONST_8"  start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_1" mode="normal"/>
+				<highlight key="building_market" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+			</onStarted>
+                        
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_market" count="1" />
+			</objectives>
+                        
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST 8-->
+				<highlight key="BTN_HUD_BUILD" highlight="false" />
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_1" highlight="false"/>
+				<highlight key="building_market" highlight="false" />
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<disallow key="building_market" />
+			</onSuccess>
+
+			<rewards>
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+			</rewards>
+		 
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_8" title="T_GAME_TUTORIAL_QUEST_NAME_8" description="T_GAME_TUTORIAL_QUEST_DESC_8" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_8" >        <!-- BUILD MARKET quest-->
+				<allow key="building_market" />
+				<highlight key="building_market" mode="normal"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<construct type="building_market" count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_8">
+				<highlight key="building_market" highlight="false" />
+				<highlight key="BTN_HUD_BUILD" highlight="true" mode="normal" />
+				<highlight key="BTN_HUD_XPBAR" mode="normal"/>
+			</onSuccess>	<!-- You can trade at the market MESSAGE-->
+			
+			<rewards xp="off">
+				<resource resource="cloths" amount="20" />
+				<resource resource="jewelry" amount="20" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="SHOW_RESEARCHSTUFF"/>
+				<disallow key="building_market" />
+			</rewards>
+                         
+		</quest>
+
+		<quest id="SHOW_RESEARCHSTUFF" start="custom" visible="false">
+			
+			<start_condition timeout="2" operator="and"/>
+			<onStarted>
+				<enable-hint hint="researchmenu" avatar="client" text="T_GAME_NOTIFICATION_RESEARCHSCREEN_02" />
+			</onStarted>
+			<objectives timeout="1"  operator="and"/>
+			<onSuccess notification="T_GAME_NOTIFICATION_RESEARCHSCREEN_01"/>		<!--adjusted to gameroom to not mention the profil anymore-->
+			<rewards>
+				<highlight key="BTN_HUD_XPBAR" highlight="false"/>
+				<start-quest id="TUTORIAL_QUEST_9" />
+			</rewards>
+		</quest>
+
+		<quest id="TUTORIAL_QUEST_9" title="T_GAME_TUTORIAL_QUEST_NAME_9" description="T_GAME_TUTORIAL_QUEST_DESC_9" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_9" >            <!--trade at the market QUEST-->
+				
+				<highlight key="BTN_HUD_TRADE" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_TRADE" mode="normal"/>
+				<highlight-building building="building_market"/>
+				<highlight highlight="true" mode="normal" key="BTN_CONTEXTMENU_INFO"/>
+				<highlight key="BTN_BOOK_TAB_TRADE_MINUS" mode="normal"/>
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+			
+			<objectives timeout="2" operator="and">
+				<trade-profit amount="50" />
+			</objectives>
+
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_9" >          <!-- TRADE when low on money text-->
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_TRADE_MINUS" highlight="false"/>
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_TRADE" highlight="false"/>
+				<highlight-building building="building_market" highlight="false"/>
+			</onSuccess>
+
+			<rewards xp="off">
+				<resource resource="wood" amount="15" />
+				<resource resource="tools" amount="15" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<!--start-quest id="TUTORIAL_QUEST_CARRIER" /-->
+				<start-quest id="TUTORIAL_QUEST_10"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="TUTORIAL_QUEST_CARRIER" title="T_GAME_TUTORIAL_QUEST_NAME_CARRIER" description="{T_GAME_TUTORIAL_QUEST_DESC_CARRIER_{CONTROL_TYPE}}" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="{T_GAME_TUTORIAL_QUEST_DESC_CARRIER_{CONTROL_TYPE}}" >           <!--assign more carriers-->
+				<highlight-building building="building_hq"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_2" mode="normal" context="building_hq"/>
+			</onStarted>
+
+			<objectives timeout="2" operator="and">
+				<assign type="building_hq" trigger="command" count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_CARRIER" >
+				<highlight-building building="building_hq" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_2" highlight="false" context="building_hq"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_1" highlight="false" context="building_hq"/>
+			</onSuccess>
+			
+			<rewards>
+				<resource resource="coins" amount="200" />
+				<resource resource="jewelry" amount="15" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_QUEST_10" />
+			</rewards>
+		</quest>
+
+		<quest id="emergency_unlock_streets" start="instant" visible="false" finish="instant">
+			<!-- This quest was added (along a second that unlocks the statues) in case the player had before the streets/statues are unlocked correctly. This could happen because of the new placemnet of streets and decos-->
+			<start_condition operator="and" timeout="1"/>
+			<!--                        
+			<onStarted>
+					<allow key="build_street"/>
+	<allow key="build_street_stone"/>
+			</onStarted>-->
+
+			<objectives timeout="1"  operator="and">
+				<quest-done id="TUTORIAL_QUEST_9"/>
+			</objectives>
+
+			<fail_condition timeout="2" operator="or">
+				<quest-done id="TUTORIAL_QUEST_10"/>
+				<flag-has-value key="new_savegame" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<allow key="build_street"/>
+				<allow key="build_street_stone"/>
+			</rewards>
+		</quest>
+
+		<quest id="TUTORIAL_QUEST_10" title="T_GAME_TUTORIAL_QUEST_NAME_10" description="T_GAME_TUTORIAL_QUEST_DESC_10" start="custom" isKeyQuest="true">
+			
+			<start_condition operator="and" timeout="3"/>
+			
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_10" >           <!-- Build roads quest-->
+				<allow key="build_street"/>
+				<allow key="build_street_stone"/>
+				<highlight key="BTN_HUD_BUILD"/>
+				<highlight key="build_Street"/>
+				<highlight key="deco_1x1_statue_01" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_1" mode="normal"/>
+			</onStarted>
+
+			<objectives timeout="2" operator="and">
+				<street type="dirt" count="2"/>
+			</objectives>
+
+			<onSuccess>
+				<highlight key="BTN_HUD_BUILD" highlight="false" />
+				<highlight key="build_street" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_1" highlight="false"/>
+				<disallow key="build_street"/>
+				<disallow key="build_street_stone"/>
+			</onSuccess>
+			
+			<rewards xp="off">
+				<resource resource="coins" amount="150" />
+				<resource resource="fish" amount="10" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_QUEST_13" />
+			</rewards>
+
+		</quest>
+
+		<quest id="emergency_unlock_statues" start="instant" visible="false" finish="instant">
+
+			<start_condition operator="and" timeout="1"/>
+
+			<objectives timeout="2"  operator="and">
+				<quest-done id="TUTORIAL_QUEST_10"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="or">
+				<quest-done id="TUTORIAL_QUEST_13"/>
+				<flag-has-value key="new_savegame" value="true"/>
+			</fail_condition>
+
+			<rewards>
+				<allow key="deco_1x1_statue_01"/>
+				<allow key="deco_1x1_statue_02"/>
+				<allow key="deco_1x1_statue_03"/>
+				<allow key="deco_2x2_statue_01"/>
+				<allow key="deco_2x2_excalibur"/>
+			</rewards>
+		</quest>
+
+		<quest id="TUTORIAL_QUEST_13" title="T_GAME_TUTORIAL_QUEST_NAME_13" description="T_GAME_TUTORIAL_QUEST_DESC_13" start="custom" isKeyQuest="true">
+		
+			<start_condition operator="and" timeout="1"/>
+			
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_13" >           <!-- Build Deco quest-->
+				<allow key="deco_1x1_statue_01"/>
+				<allow key="deco_1x1_statue_02"/>
+				<allow key="deco_1x1_statue_03"/>
+				<allow key="deco_2x2_statue_01"/>
+				<allow key="deco_2x2_excalibur"/>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_DECORATION" mode="normal"/>
+				<highlight key="deco_1x1_statue_01" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+			</onStarted>
+
+			<objectives timeout="3" operator="and">
+				<construct type="deco_1x1_statue_01" count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_13" >         <!-- Deco decreases HINT-->
+				<disallow key="deco_1x1_statue_01"/>
+				<disallow key="deco_1x1_statue_02"/>
+				<disallow key="deco_1x1_statue_03"/>
+				<disallow key="deco_2x2_statue_01"/>
+				<disallow key="deco_2x2_excalibur"/>
+				<highlight key="BTN_HUD_ERASE" highlight="false" />
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_DECORATION" highlight="false"/>
+				<highlight key="deco_1x1_statue_01" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+			</onSuccess>
+			
+			<rewards>
+				<resource resource="prestige" amount="5" />
+				<resource resource="coins" amount="250" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="fire_tower_quest_init"/>
+			</rewards>
+
+		</quest>
+
+		<quest id="fire_tower_quest_init" start="custom" visible="false">
+
+			<objectives timeout="5"  operator="and"/>
+
+			<onSuccess notification="T_GAME_TUTORIAL_FIRETOWER" >
+			
+				<allow key="building_firewatch"/>
+				<!--<unlock key="building_firewatch"/>-->
+			</onSuccess>
+                       
+			<rewards>
+				<start-quest id="fire_tower_quest"/>
+				<start-quest id="fire_tower_quest_const"/>
+			</rewards>
+		</quest>
+
+		<quest id="fire_tower_quest_const"  title="T_GAME_HINT_FIRE_TITLE" description="T_GAME_TUTORIAL_FIRETOWER2" start="custom" finish="instant" visible="false" repeatable="no">
+		
+			<onStarted >
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_4" mode="normal"/>
+				<highlight key="building_firewatch" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+			</onStarted>
+                        
+			<start_condition  timeout="1" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_firewatch" count="1"/>
+			</objectives>
+                        
+			<onSuccess>
+				<!--disallow key="building_firewatch"/-->
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_4" highlight="false"/>
+				<highlight key="building_firewatch" highlight="false"/>
+			</onSuccess>
+
+		</quest>
+
+		<quest id="fire_tower_quest"  title="T_GAME_HINT_FIRE_TITLE" description="T_GAME_TUTORIAL_FIRETOWER" start="custom" visible="true" repeatable="no">
+		
+			<onStarted notification="T_GAME_TUTORIAL_FIRETOWER2">
+				<allow key="BTN_HUD_BUILD"/>
+				<highlight key="BTN_HUD_BUILD"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_4" mode="normal"/>
+				<highlight key="building_firewatch" mode="normal"/>
+			</onStarted>
+
+			<start_condition  timeout="1" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<building type="building_firewatch" count="1"/>
+			</objectives>
+
+			<onSuccess  notification="T_GAME_TUTORIAL_FIRERISK">
+				<!--disallow key="building_firewatch"/-->
+				<highlight key="BTN_HUD_BUILD" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_3" highlight="false"/>
+				<highlight key="building_firewatch" highlight="false"/>
+			</onSuccess>
+
+			<rewards>
+				<start-fire target="building_residence_00" amount="2" state="burning"/>
+				<resource resource="prestige" amount="15" />
+				<resource resource="tools" amount="15" />
+				<!--disallow key="building_firewatch" /-->
+				<start-quest id="TUTORIAL_QUEST_11" />
+			</rewards>
+		</quest>
+
+		<quest id="TUTORIAL_QUEST_11" title="T_GAME_TUTORIAL_QUEST_NAME_11" description="{T_GAME_TUTORIAL_QUEST_DESC_11_{CONTROL_TYPE}}" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="{T_GAME_TUTORIAL_QUEST_DESC_11_{CONTROL_TYPE}}" >               <!-- Repair houses quest-->
+				<enable-hint hint="wishes"/>                                            <!-- ENABLING WISHES - HINT-->
+				<allow key="BTN_CONTEXTMENU_REPAIR"/>
+				<highlight key="BTN_HUD_TRADE" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_HAPPINESS" mode="normal"/>
+				<highlight-building building="building_residence_00"/>
+				<highlight key="BTN_CONTEXTMENU_REPAIR" mode="tutorial"/>
+				<highlight key="BTN_BOOK_TURN_RIGHT" mode="normal"/>
+				<set-durability type="building_residence_00" value="10"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and">
+				<purge-fire />
+			</start_condition>
+
+			<objectives timeout="5" operator="and">
+				<repair	type="building_residence_00" count="4"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_11" >             <!-- Decreasing productivity and happiness through decay HINT-->
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_HAPPINESS" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight-building building="building_residence_00" highlight="false"/>
+				<highlight key="BTN_CONTEXTMENU_REPAIR" highlight="false"/>
+				<highlight key="BTN_BOOK_TURN_RIGHT" highlight="false"/>
+			</onSuccess>
+
+			<rewards xp="off">
+				<resource resource="coins" amount="450" />
+				<resource resource="stone" amount="20" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_QUEST_CHURCH" />
+				<start-quest id="TUTORIAL_QUEST_CONST_CHURCH" />
+			</rewards>
+
+		</quest>
+     
+		<quest id="TUTORIAL_QUEST_CONST_CHURCH"  start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted>
+				<allow key="building_church"/>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_1" mode="normal"/>
+				<highlight key="building_church" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+				<highlight key="BTN_HUD_TRADE" mode="normal" />
+				<highlight key="BTN_BOOK_TAB_HAPPINESS" mode="normal" />
+				<highlight key="BTN_BOOK_TURN_RIGHT" mode="normal" />
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_church" count="1" />
+			</objectives>
+
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST CHURCH-->
+				<highlight key="BTN_HUD_BUILD" highlight="false" />
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_1" highlight="false"/>
+				<highlight key="building_church" highlight="false" />
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<disallow key="building_church"/>
+				<highlight key="BTN_HUD_TRADE" highlight="false" />
+				<highlight key="BTN_BOOK_TAB_HAPPINESS" highlight="false" />
+				<highlight key="BTN_BOOK_TURN_RIGHT" highlight="false" />
+			</onSuccess>
+			
+			<rewards>
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+			</rewards>
+		 
+		</quest>
+                
+		<quest id="TUTORIAL_QUEST_CHURCH" title="T_GAME_TUTORIAL_QUEST_NAME_CHURCH" description="T_GAME_TUTORIAL_QUEST_DESC_CHURCH" visible="true" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_CHURCH" >           <!-- Build CHURCH quest-->
+				<allow key="building_church"/>
+			</onStarted>
+                            
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_CHURCH" >         <!-- Deco decreases HINT-->
+				<disallow key="building_church"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+			</onSuccess>
+                        
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="4" operator="and">
+				<construct type="building_church" count="1"/>
+			</objectives>
+			
+			<rewards xp="off">
+				<resource resource="prestige" amount="10" />
+				<resource resource="jewelry" amount="10" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_NOTIFICATION_SCREENSHOT" />
+			</rewards>
+                        
+		</quest>
+               
+		<quest id="TUTORIAL_NOTIFICATION_SCREENSHOT" title="T_GAME_TUTORIAL_NOTIFICATION_SCREENSHOT" description="{T_GAME_TUTORIAL_NOTIFICATION_SCREENSHOT_{CONTROL_TYPE}}" start="custom" isKeyQuest="false" visible="false">
+		
+			<onStarted notification="{T_GAME_TUTORIAL_NOTIFICATION_SCREENSHOT_{CONTROL_TYPE}}" >      <!-- Screenshot-->
+				<allow key="BTN_HUD_CAMERA"/>
+				<highlight key="BTN_HUD_CAMERA" mode="normal"/>
+			</onStarted>
+
+			<start_condition timeout="2" operator="and"/>
+
+			<objectives timeout="5" operator="and"/>
+
+			<rewards>
+				<highlight key="BTN_HUD_CAMERA" highlight="false"/>
+				<!--start-quest id="TUTORIAL_QUEST_FARM" />
+				<start-quest id="TUTORIAL_QUEST_CONST_FARM" /-->
+				<start-quest id="TUTORIAL_NOTIFICATION_SHOP"/>
+			</rewards>
+                        
+		</quest>
+               
+		<quest id="TUTORIAL_QUEST_FARM" title="T_GAME_QUEST_SCEN7_GIRL_1_1_NAME" description="T_GAME_TUTORIAL_QUEST_DESC_FARM" start="custom" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_FARM" >           <!-- Build FARM quest-->
+				<allow key="building_farm"/>
+			</onStarted>
+                            
+			<onSuccess notification="T_GAME_TUTORIAL_QUEST_SUCESS_FARM" >         <!-- Production chain FARM HINT-->
+				<disallow key="building_farm"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+			</onSuccess>
+
+			<objectives timeout="2" operator="and">
+				<construct type="building_farm" count="1"/>
+			</objectives>
+			
+			<rewards xp="off">
+				<resource resource="prestige" amount="5" />
+				<resource resource="coins" amount="160" />
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<start-quest id="TUTORIAL_NOTIFICATION_SHOP"/>
+			</rewards>
+                        
+		</quest>
+               
+		<quest id="TUTORIAL_QUEST_CONST_FARM"  start="custom" isKeyQuest="true" visible="false">
+		
+			<onStarted>
+				<highlight key="BTN_HUD_BUILD" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_2" mode="normal"/>
+				<highlight key="building_farm" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" mode="normal"/>
+			</onStarted>
+                        
+			<onSuccess>              <!-- CONSTRUCTION SITE QUEST farm-->
+				<highlight key="BTN_HUD_BUILD" highlight="false" />
+				<highlight key="BTN_BOOK_TAB_BUILDINGS_2" highlight="false"/>
+				<highlight key="building_farm" highlight="false" />
+				<highlight key="BTN_BOOK_TAB_NORMALBUILD" highlight="false"/>
+				<disallow key="building_farm"/>
+			</onSuccess>
+
+			<objectives timeout="1" operator="and">
+				<construction-started type="building_farm" count="1" />
+			</objectives>
+
+		</quest>
+
+               
+		<quest id="TUTORIAL_NOTIFICATION_SHOP" title="T_GAME_TUTORIAL_NOTIFICATION_SHOP" description="T_GAME_TUTORIAL_NOTIFICATION_SHOP_GAMEROOM" start="custom" isKeyQuest="true" visible="false" finish="instant">
+		
+			<onStarted notification="T_GAME_TUTORIAL_NOTIFICATION_SHOP_GAMEROOM" >           <!--townshop-->
+				<allow key="BTN_HUD_SHOP"/>
+				<highlight key="BTN_HUD_SHOP" mode="normal"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="7" operator="and"/>
+
+			<rewards>
+				<start-quest id="TUTORIAL_NOTE_ERASE" />
+			</rewards>
+		</quest>
+               
+		<quest id="TUTORIAL_NOTE_ERASE" description="{T_GAME_TUTORIAL_QUEST_SUCESS_10_{CONTROL_TYPE}}" start="custom" isKeyQuest="true" visible="false" finish="instant">
+			<onStarted notification="{T_GAME_TUTORIAL_QUEST_SUCESS_10_{CONTROL_TYPE}}">
+				<highlight key="BTN_HUD_ERASE" mode="normal"/>
+				<allow key="BTN_CONTEXTMENU_ERASE"/>
+				<allow key="BTN_HUD_ERASE"/>
+				<highlight key="BTN_HUD_SHOP" highlight="false"/>
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="5" operator="and"/>
+				
+			<rewards>
+				<start-quest id="TUTORIAL_QUEST_12"/>
+				<allow key="buildings"/>
+				<allow key="building_market" />
+				<allow key="deco_1x1_statue_01"/>
+				<allow key="deco_1x1_statue_02"/>
+				<allow key="deco_1x1_statue_03"/>
+				<allow key="deco_2x2_statue_01"/>
+				<allow key="deco_2x2_excalibur"/>
+				<allow key="build_street"/>
+				<allow key="build_street_stone"/>
+				<allow key="building_residence_00"/>
+				<allow key="building_fishing_lodge" />
+				<allow key="building_well"/>
+				<allow key="building_lumberjack"/>
+				<allow key="building_sawmill"/>
+				<allow key="building_mine"/>
+				<allow key="building_church"/>
+				<allow key="building_farm"/>
+				<allow key="building_hunters_cabin"/>
+				<allow key="building_firewatch"/>
+			</rewards>
+		</quest>
+               
+		<quest id="TUTORIAL_QUEST_12" title="T_GAME_TUTORIAL_QUEST_NAME_12" description="T_GAME_TUTORIAL_QUEST_DESC_12" start="custom" finish="instant" isKeyQuest="true">
+		
+			<onStarted notification="T_GAME_TUTORIAL_QUEST_DESC_12" >           <!-- Reach happiness quest-->
+				<highlight key="BTN_HUD_TRADE" mode="normal"/>
+				<highlight key="building_residence_00" highlight="false"/>
+			</onStarted>
+                        
+			<onSuccess>         <!-- Tutorial conclusing text -->
+				<highlight key="BTN_HUD_TRADE" highlight="false"/>
+				<highlight key="BTN_HUD_STATISTIC" mode="normal"/>
+				<highlight key="BTN_HUD_ERASE" highlight="false"/>
+			</onSuccess>
+                        
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+				
+			<rewards xp="off">
+				<highlight key="BTN_HUD_STATISTIC" highlight="false"/>
+				<resource resource="prestige" amount="15" />
+				<start-quest id="TUTORIAL_FINISHED"/>
+			</rewards>
+                        
+		</quest>
+                 
+                
+		<quest id="TUTORIAL_FINISHED"  start="custom" isKeyQuest="true" visible="false">
+		
+			<onSuccess  notification="T_GAME_TUTORIAL_QUEST_SUCESS_12" />
+                            
+			<start_condition timeout="10" operator="and"/>
+                           
+			<rewards>
+				<tutorial-finished type="normal"/>
+				<scenario-finished/>
+				<start-quest id="METASTART"/>
+			</rewards>
+                        
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"  avatar="king" >
+			
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+                       
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<onSuccess/>
+			
+			<rewards >
+				<set-season season="summer"/>
+				<start-quest id="SANDBOX_QUEST_META"/>
+			</rewards>
+		</quest>
+	</group>
+</questdb>
+

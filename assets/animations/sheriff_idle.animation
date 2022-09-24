@@ -1,0 +1,213 @@
+[random_start]
+
+delay:	1.00	5.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// next: looking1	1
+// next: looking2	1
+// next: looking3	1
+
+// // next: scratch	0.75
+// // // next: scratch1	0.5
+// // next: music_1	0.25
+// // next: music_2	0.25
+
+
+
+[dir0]
+
+frame-delay: 1
+
+sheriff_stand_0.0.png
+flip_x	0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: scratch	0.75
+
+[dir1]
+
+frame-delay: 1
+
+sheriff_stand_1.0.png
+flip_x	0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: music_2	0.5
+// next: scratch	0.75
+
+[dir2]
+
+frame-delay: 1
+
+sheriff_stand_2.0.png
+flip_x	0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: music_2	0.5
+// next: scratch	0.75
+
+[dir3]
+
+frame-delay: 1
+
+sheriff_stand_3.0.png
+flip_x	0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: music_2	0.5
+// next: scratch	0.75
+
+[dir4]
+
+frame-delay: 1
+
+sheriff_stand_4.0.png
+flip_x	0
+
+delay:	0.30	4.00
+
+// next: looking1	1
+// next: looking2	1
+// next: looking3	1
+
+next: dir0	0.75
+next: dir1	0.75
+next: dir2	0.75
+next: dir3	0.75
+next: dir4	0.75
+next: dir5	0.75
+next: dir6	0.75
+next: dir7	0.75
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: music_2	0.5
+// next: scratch	0.75
+
+[dir5]
+
+frame-delay: 1
+play_ambient: sfx_townies_monk_singing_3
+sheriff_stand_3.0.png
+flip_x	0
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: music_2	0.5
+// next: scratch	0.75
+
+[dir6]
+
+frame-delay: 1
+play_ambient: sfx_townies_monk_singing_1
+play_ambient_chance: 0.5
+sheriff_stand_2.0.png
+flip_x	1
+
+delay:	0.30	4.00
+
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: music_2	0.5
+// next: scratch	0.75
+
+[dir7]
+
+frame-delay: 1
+
+sheriff_stand_1.0.png
+flip_x	1
+
+delay:	0.30	4.00
+
+next: dir0	1
+next: dir1	1
+next: dir2	1
+next: dir3	1
+next: dir4	1
+next: dir5	1
+next: dir6	1
+next: dir7	1
+
+// // next: scratch1	1
+// next: music_1	0.5
+// next: music_2	0.5
+// next: scratch	0.75
+

@@ -1,0 +1,12 @@
+[idle]
+
+
+frame:	ani_tavern_00.0.png		0.25
+frame:	ani_tavern_00.1.png		0.15
+frame:	ani_tavern_00.2.png		0.15
+frame:	ani_tavern_00.3.png		0.25
+frame:	ani_tavern_00.2.png		0.15
+frame:	ani_tavern_00.1.png		0.15
+
+next:	idle
+

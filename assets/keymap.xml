@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keymappings>
+	
+	<!-- Generic Keymap -->
+	<keyMap vendorId="0000" productId="0000" name="Generic Controller">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="305" keyCode="8"/>
+		<button scanCode="307" keyCode="7"/>
+		<button scanCode="308" keyCode="5"/>
+		<button scanCode="310" keyCode="9"/>
+		<button scanCode="311" keyCode="10"/>
+		<button scanCode="317" keyCode="11"/>
+		<button scanCode="318" keyCode="12"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="11" axis="3"/>
+		<axis scanCode="14" axis="4"/>
+		<axis scanCode="17" axis="5"/>
+		<axis scanCode="18" axis="6"/>
+		
+		<axisToButton scanCode="15" keyCodeNegative="3" keyCodePositive="4"/>
+		<axisToButton scanCode="16" keyCodeNegative="1" keyCodePositive="2"/>
+		
+		<flags value="1"/>
+	</keyMap>
+	
+	<!-- Internal Keyboard/Trackball/Remote Control -->
+	<!-- This device does not use device dependant scancodes but android keycodes -->
+	<keyMap vendorId="0000" productId="0001" name="Internal Device" layout="device">
+		<button scanCode="19" keyCode="1"/>
+		<button scanCode="20" keyCode="2"/>
+		<button scanCode="21" keyCode="3"/>
+		<button scanCode="22" keyCode="4"/>
+		
+		<button scanCode="23" keyCode="6"/>
+	</keyMap>
+	
+	<!-- XBOX 360 Controller -->
+	<keyMap vendorId="045e" productId="028e" name="XBox 360 Controller" layout="xbox">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="305" keyCode="8"/>
+		<button scanCode="307" keyCode="7"/>
+		<button scanCode="308" keyCode="5"/>
+		<button scanCode="310" keyCode="9"/>
+		<button scanCode="311" keyCode="10"/>
+		<button scanCode="317" keyCode="11"/>
+		<button scanCode="318" keyCode="12"/>
+		<button scanCode="314" keyCode="13"/>
+		<button scanCode="315" keyCode="14"/>
+		<button scanCode="316" keyCode="15"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="17" axis="5"/>
+		<axis scanCode="11" axis="3"/>
+		<axis scanCode="14" axis="4"/>
+		<axis scanCode="18" axis="6"/>
+		
+		<axisToButton scanCode="15" keyCodeNegative="3" keyCodePositive="4"/>
+		<axisToButton scanCode="16" keyCodeNegative="1" keyCodePositive="2"/>
+		
+		<flags value="1"/>
+	</keyMap>
+	
+	<!-- XBOX 360 Wireless Receiver -->
+	<keyMap vendorId="045e" productId="0719" name="XBox 360 Wireless Controller" layout="xbox">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="305" keyCode="8"/>
+		<button scanCode="307" keyCode="7"/>
+		<button scanCode="308" keyCode="5"/>
+		<button scanCode="310" keyCode="9"/>
+		<button scanCode="311" keyCode="10"/>
+		<button scanCode="317" keyCode="11"/>
+		<button scanCode="318" keyCode="12"/>
+		<button scanCode="314" keyCode="13"/>
+		<button scanCode="315" keyCode="14"/>
+		<button scanCode="316" keyCode="15"/>
+		<button scanCode="704" keyCode="3"/>
+		<button scanCode="705" keyCode="4"/>
+		<button scanCode="706" keyCode="1"/>
+		<button scanCode="707" keyCode="2"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="11" axis="5"/>
+		<axis scanCode="12" axis="3"/>
+		<axis scanCode="13" axis="4"/>
+		<axis scanCode="14" axis="6"/>
+	</keyMap>
+	
+	<!-- Playstation 3 Wireless Receiver -->
+	<keyMap vendorId="054c" productId="0268" name="Playstation 3 Wireless Controller" layout="playstation">
+		<button scanCode="302" keyCode="6"/>
+		<button scanCode="301" keyCode="8"/>
+		<button scanCode="303" keyCode="7"/>
+		<button scanCode="300" keyCode="5"/>
+		<button scanCode="298" keyCode="9"/>
+		<button scanCode="299" keyCode="10"/>
+		<button scanCode="289" keyCode="11"/>
+		<button scanCode="290" keyCode="12"/>
+		<button scanCode="288" keyCode="13"/>
+		<button scanCode="291" keyCode="14"/>
+		<button scanCode="295" keyCode="3"/>
+		<button scanCode="293" keyCode="4"/>
+		<button scanCode="292" keyCode="1"/>
+		<button scanCode="294" keyCode="2"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="17" axis="5"/>
+		<axis scanCode="11" axis="3"/>
+		<axis scanCode="14" axis="4"/>
+		<axis scanCode="18" axis="6"/>
+		
+		<flags value="1"/>
+	</keyMap>
+	
+	<!-- Nyko Playpad Pro -->
+	<keyMap vendorId="1d79" productId="0009" name="Nyko Playpad Pro">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="305" keyCode="8"/>
+		<button scanCode="307" keyCode="7"/>
+		<button scanCode="308" keyCode="5"/>
+		<button scanCode="310" keyCode="9"/>
+		<button scanCode="311" keyCode="10"/>
+		<button scanCode="317" keyCode="11"/>
+		<button scanCode="318" keyCode="12"/>
+		<button scanCode="315" keyCode="14"/>
+		<button scanCode="103" keyCode="1"/>
+		<button scanCode="108" keyCode="2"/>
+		<button scanCode="105" keyCode="3"/>
+		<button scanCode="106" keyCode="4"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="23" axis="5"/>
+		<axis scanCode="11" axis="3"/>
+		<axis scanCode="14" axis="4"/>
+		<axis scanCode="22" axis="6"/>
+		
+		<axisToButton scanCode="15" keyCodeNegative="3" keyCodePositive="4"/>
+		<axisToButton scanCode="16" keyCodeNegative="1" keyCodePositive="2"/>
+		
+		<flags value="1"/>
+	</keyMap>
+	
+	<!-- Ouya controller -->
+	<keyMap vendorId="2836" productId="0001" name="Ouya Controller" layout="ouya">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="307" keyCode="8"/>
+		<button scanCode="305" keyCode="7"/>
+		<button scanCode="306" keyCode="5"/>
+		<button scanCode="308" keyCode="9"/>
+		<button scanCode="309" keyCode="10"/>
+		<button scanCode="310" keyCode="11"/>
+		<button scanCode="311" keyCode="12"/>
+		<button scanCode="314" keyCode="3"/>
+		<button scanCode="315" keyCode="4"/>
+		<button scanCode="312" keyCode="1"/>
+		<button scanCode="313" keyCode="2"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="11" axis="5"/>
+		<axis scanCode="12" axis="3"/>
+		<axis scanCode="13" axis="4"/>
+		<axis scanCode="14" axis="6"/>
+	</keyMap>
+	
+	<!-- MOGA Pro -->
+	<keyMap vendorId="20d6" productId="0dad" name="MOGA Pro Controller" layout="xbox">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="305" keyCode="8"/>
+		<button scanCode="307" keyCode="7"/>
+		<button scanCode="308" keyCode="5"/>
+		<button scanCode="310" keyCode="9"/>
+		<button scanCode="311" keyCode="10"/>
+		<button scanCode="317" keyCode="11"/>
+		<button scanCode="318" keyCode="12"/>
+		<button scanCode="315" keyCode="14"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="23" axis="5"/>
+		<axis scanCode="11" axis="3"/>
+		<axis scanCode="14" axis="4"/>
+		<axis scanCode="22" axis="6"/>
+		
+		<axisToButton scanCode="15" keyCodeNegative="3" keyCodePositive="4"/>
+		<axisToButton scanCode="16" keyCodeNegative="1" keyCodePositive="2"/>
+		
+		<flags value="1"/>
+	</keyMap>
+	
+	<!-- Jess Tech Dual Analog Pad -->
+	<keyMap vendorId="0f30" productId="0112" name="Jess Tech Dual Analog Pad">
+		<button scanCode="290" keyCode="6"/>
+		<button scanCode="291" keyCode="8"/>
+		<button scanCode="288" keyCode="7"/>
+		<button scanCode="289" keyCode="5"/>
+		<button scanCode="292" keyCode="9"/>
+		<button scanCode="294" keyCode="10"/>
+		<button scanCode="298" keyCode="11"/>
+		<button scanCode="299" keyCode="12"/>
+		<button scanCode="296" keyCode="13"/>
+		<button scanCode="297" keyCode="14"/>
+		<buttonToAxis scanCode="293" axis="5"/>
+		<buttonToAxis scanCode="295" axis="6"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="14" axis="3"/>
+		<axis scanCode="11" axis="4"/>
+		
+		<axisToButton scanCode="15" keyCodeNegative="3" keyCodePositive="4"/>
+		<axisToButton scanCode="16" keyCodeNegative="1" keyCodePositive="2"/>
+	</keyMap>
+
+		<!-- Samsung Game Pad EI-GP20 -->
+	<keyMap vendorId="04e8" productId="a000" name="Samsung Game Pad EI-GP20" layout="samsung_ei_gp20">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="305" keyCode="8"/>
+		<button scanCode="307" keyCode="7"/>
+		<button scanCode="308" keyCode="5"/>
+		<button scanCode="310" keyCode="9"/>
+		<button scanCode="311" keyCode="10"/>
+		<button scanCode="314" keyCode="13"/>
+		<button scanCode="315" keyCode="14"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="12" axis="3"/>
+		<axis scanCode="13" axis="4"/>
+		
+		<axisToButton scanCode="16" keyCodeNegative="1" keyCodePositive="2"/>
+		<axisToButton scanCode="15" keyCodeNegative="3" keyCodePositive="4"/>
+	</keyMap>
+	
+	<!-- NVIDIA Shield -->
+	<keyMap vendorId="0955" productId="7203" name="NVIDIA Shield" layout="xbox">
+		<button scanCode="304" keyCode="6"/>
+		<button scanCode="305" keyCode="8"/>
+		<button scanCode="307" keyCode="7"/>
+		<button scanCode="308" keyCode="5"/>
+		<button scanCode="310" keyCode="9"/>
+		<button scanCode="311" keyCode="10"/>
+		<button scanCode="317" keyCode="11"/>
+		<button scanCode="318" keyCode="12"/>
+		<button scanCode="314" keyCode="13"/>
+		<button scanCode="315" keyCode="14"/>
+		<button scanCode="316" keyCode="15"/>
+		
+		<axis scanCode="0" axis="1"/>
+		<axis scanCode="1" axis="2"/>
+		<axis scanCode="17" axis="5"/>
+		<axis scanCode="11" axis="3"/>
+		<axis scanCode="14" axis="4"/>
+		<axis scanCode="18" axis="6"/>
+		
+		<axisToButton scanCode="15" keyCodeNegative="3" keyCodePositive="4"/>
+		<axisToButton scanCode="16" keyCodeNegative="1" keyCodePositive="2"/>
+		
+		<flags value="1"/>
+	</keyMap>
+</keymappings>

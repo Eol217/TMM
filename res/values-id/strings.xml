@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="T_ANDROIDM_PERMISSION_BUTTON_RETRY">Coba lagi</string>
+    <string name="T_ANDROIDM_PERMISSION_BUTTON_SURE">Yakin</string>
+    <string name="T_ANDROIDM_PERMISSION_DOWNLOAD_FAILED">App ini memerlukan izin membaca agar dapat memuat gambar!</string>
+    <string name="T_ANDROIDM_PERMISSION_HEADLINE">Izin ditolak</string>
+    <string name="T_ANDROIDM_PERMISSION_OBB_READ">App ini memerlukan izin menulis agar dapat menyimpan data tambahan untuk instalasi.</string>
+    <string name="T_ANDROIDM_PERMISSION_OBB_TEXT">Unduhan gagal karena izin menulis untuk app ini belum diberikan.</string>
+    <string name="T_ANDROIDM_PERMISSION_STORAGE_TEXT">App ini memerlukan izin menulis agar dapat menyimpan tangkapan layar.</string>
+    <string name="T_ANDROIDM_PERMISSION_SURE">Kamu yakin mau menolak memberi izin?</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_ACKNOWLEDGED">Diketahui</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_CONTINUE">Lanjutkan</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_GTC">GTC</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_TEXT">Kami menggunakan pengidentifikasi perangkat atau data serupa untuk iklan yang disesuaikan dan untuk menganalisis penggunaan produk kami. Untuk detail lebih lanjut, silakan pelajari Syarat &amp; Ketentuan atau Kebijakan Privasi kami. Dengan menggunakan produk ini, Anda mengetahui ketentuan tersebut.</string>
+    <string name="T_INFO_PRIVACY_POLICY_TRANSLATED">Kebijakan Privasi</string>
+</resources>

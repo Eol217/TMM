@@ -1,0 +1,55 @@
+[random_start]
+
+next:	complain_1		0.75
+next:	complain_2		1
+
+[complain_1]
+
+frame:	monk_stand_4.0.png 0.5
+frame:	monk_complain_4.0.png 0.1
+play_ambient: sfx_townies_monk_praying_9
+
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.0.png 0.1
+
+
+delay:	0.5 1.5
+next:	random_start
+
+[complain_2]
+
+frame:	monk_stand_4.0.png 0.5
+frame:	monk_complain_4.0.png 0.1
+play_ambient: sfx_townies_monk_praying_1
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.2.png 0.2
+
+frame:	monk_complain_4.1.png 0.2
+frame:	monk_complain_4.0.png 0.1
+
+
+delay:	0.5 1.5
+next:	random_start

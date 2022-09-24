@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- harsh winter scenario
+	260 prestige earned
+-->
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+	<group avatar="client">
+
+		<quest id="SCENARIO_8_MAINQUEST" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_MAIN_NAME" description="T_GAME_QUEST_SCEN8_MAIN_DESC" start="instant">
+			<onStarted notification="T_GAME_QUEST_SCEN8_MAIN_DESC" >
+				<set-modifier name="mod_consumption_rate_idle" tag="map" value="150"/>
+				<start-quest id="SNOW_STORM"/>
+				<start-quest id="SCENARIO_8_QUEST_4"/>
+				<start-quest id="SCENARIO_8_QUEST_6"/>
+				<start-quest id="SCENARIO_8_QUEST_1"/>
+			</onStarted>
+
+			<start_condition timeout="5"/>
+
+			<objectives timeout="8">
+				<quest-done id="SCENARIO_8_QUEST_7"/>
+				<quest-done id="SCENARIO_8_QUEST_2"/>
+				<quest-done id="SCENARIO_8_QUEST_11"/>
+				<quest-done id="SCENARIO_8_QUEST_5"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_SCEN8_SCENENDTEXT"/>
+
+			<rewards>
+				<set-modifier name="mod_consumption_rate_food" tag="map" value="100"/>
+				<set-modifier name="mod_effort" tag="map" value="100"/>
+				<set-modifier name="mod_consumption_rate_idle" tag="map" value="100"/>
+				<resource resource="prestige" amount="100"/>
+				<start-quest id="SCENARIO_FINISHED" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_1_NAME" description="T_GAME_QUEST_SCEN8_1_DESC" start="custom" avatar="farmer">
+			<onStarted notification="T_GAME_QUEST_SCEN8_1_DESC"/>
+			<start_condition timeout="3"/>
+			<objectives timeout="1">
+				<produce resource="wood" amount="75"/>
+			</objectives>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<onSuccess >
+				<start-quest id="SCENARIO_8_QUEST_12"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="prestige" amount="10" />
+				<resource resource="cloths" amount="15" />
+				<set-modifier name="mod_effort" tag="map" value="130"/>
+				<start-quest id="SCENARIO_8_QUEST_3" />
+			</rewards>
+		</quest>
+
+		<quest id="SNOW_STORM" start="custom" finish="instant" repeatable="custom" visible="false" avatar="client">
+			<start_condition timeout="5"/>
+			<onStarted >
+				<set-flag key="weather_disabled" value="true"/>
+				<weather-set-intensity type="snow" intensity="heavy"/>
+				<weather-set-intensity type="cloudyness" intensity="medium"/>
+				<set-flag key="sandbox_enable_snowstorm" value="true"/>
+			</onStarted>
+			<objectives timeout="900"/>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<onFailed >
+				<set-flag key="weather_disabled" value="false"/>
+				<start-quest id="QUEST_WEATHER_REPEATER"/>
+			</onFailed>
+
+			<onSuccess>
+				<weather-set-intensity type="cloudyness" intensity="default"/>
+				<weather-set-intensity type="snow" intensity="default"/>
+				<set-flag key="weather_disabled" value="false"/>
+				<start-quest id="QUEST_WEATHER_REPEATER"/>
+				<set-flag key="sandbox_enable_snowstorm" value="false"/>
+			</onSuccess>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_2" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_2_NAME" description="T_GAME_QUEST_SCEN8_2_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_2_DESC" />
+			<start_condition timeout="10"/>
+			<objectives timeout="1">
+				<building type="building_carpenter" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<onSuccess >
+				<start-quest id="SCENARIO_8_QUEST_8" />
+			</onSuccess>
+			<rewards>
+				<resource resource="prestige" amount="25"/>
+				<resource resource="coins" amount="200"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_3" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_3_NAME" description="T_GAME_QUEST_SCEN8_3_DESC" start="custom" avatar="girl">
+			<onStarted notification="T_GAME_QUEST_SCEN8_3_DESC" />
+			<start_condition timeout="12"/>
+			<objectives timeout="1">
+				<building type="building_church" count="1"/>
+				<happyness type="religion" value="75"/>
+			</objectives>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+				<resource resource="corn" amount="15"/>
+				<start-quest id="SCENARIO_8_QUEST_7" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_4" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_4_NAME" description="T_GAME_QUEST_SCEN8_4_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_4_DESC" />
+			<start_condition timeout="15"/>
+			<objectives timeout="1">
+				<produce resource="wool" amount="55"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="150"/>
+				<resource resource="bread" amount="10"/>
+				<set-modifier name="mod_consumption_rate_food" tag="map" value="100"/>				
+				<start-quest id="SCENARIO_8_QUEST_5" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_5" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_5_NAME" description="T_GAME_QUEST_SCEN8_5_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_5_DESC">
+				<start-quest id="SCENARIO_8_QUEST_10" />
+			</onStarted>
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<tribute resource="cloths" amount="40"/>
+			</objectives>
+			<rewards>
+				<resource resource="coins" amount="200"/>
+				<resource resource="juice" amount="10"/>
+				<start-quest id="SCENARIO_8_QUEST_2" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_6" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_6_NAME" description="T_GAME_QUEST_SCEN8_6_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_6_DESC" />
+			<start_condition timeout="25"/>
+			<objectives timeout="1">
+				<building type="building_hunters_cabin" count="2"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<resource resource="bread" amount="20"/>
+				<set-modifier name="mod_effort" tag="map" value="200"/>
+				<start-quest id="SCENARIO_8_QUEST_9" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_7" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_7_NAME" description="T_GAME_QUEST_SCEN8_7_DESC" start="custom" avatar="king">
+			<onStarted notification="T_GAME_QUEST_SCEN8_7_DESC" />
+			<start_condition timeout="4"/>
+			<objectives timeout="1">
+				<building type="building_collector" count="1" />
+				<tribute resource="coins" amount="1000"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<resource resource="jewelry" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_8" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_8_NAME" description="T_GAME_QUEST_SCEN8_8_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_8_DESC" >
+				<set-durability type="building_residence_00" value="33"/>
+			</onStarted>
+			<start_condition timeout="4"/>
+			<objectives timeout="1">
+				<happyness type="decay" value="100"/>
+			</objectives>
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+				<resource resource="tools" amount="20"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_9" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_9_NAME" description="T_GAME_QUEST_SCEN8_9_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_9_DESC" />
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<produce resource="meat" amount="50"/>
+			</objectives>
+			
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<resource resource="fish" amount="30"/>
+				<start-quest id="SCENARIO_8_QUEST_11" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_10" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_10_NAME" description="T_GAME_QUEST_SCEN8_10_DESC" start="custom" avatar="farmer">
+			<onStarted notification="T_GAME_QUEST_SCEN8_10_DESC" />
+			<start_condition timeout="15"/>
+			<objectives timeout="1">
+				<building type="building_warehouse" count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+				<resource resource="corn" amount="40"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_11" isKeyQuest="true" title="T_GAME_QUEST_GENERIC_COMMUNITY_NAME" description="T_GAME_QUEST_SCEN8_11_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_11_DESC" />
+			<start_condition timeout="15"/>
+			<objectives timeout="1">
+				<building type="building_tavern" count="1"/>
+				<happyness type="tavern" value="65"/>
+			</objectives>
+			
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<rewards>
+				<resource resource="brew" amount="10"/>
+				<resource resource="juice" amount="10"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_8_QUEST_12" isKeyQuest="true" title="T_GAME_QUEST_SCEN8_12_NAME" description="T_GAME_QUEST_SCEN8_12_DESC" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_SCEN8_12_DESC" />
+			<start_condition timeout="5"/>
+			<objectives timeout="1">
+				<produce resource="coal" amount="50"/>
+			</objectives>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+				<resource resource="juice" amount="20"/>
+				<start-quest id="SCENARIO_8_QUEST_10"/>
+			</rewards>
+		</quest>
+		<!-- start of relict of old version-->
+		<quest id="SCENARIO_8_QUEST_ENDTRIGGER" isKeyQuest="true" start="instant" finish="instant" description="T_GAME_QUEST_SCEN8_SCENENDTEXT" visible="false">
+
+			<objectives timeout="1">
+				<!--				<building type="building_tavern" count="1"/>
+				<building type="building_carpenter" count="1"/>
+				<building type="building_collector" count="1"/>
+				<building type="building_warehouse" count="1"/>
+				<building type="building_church" count="1"/>-->
+			</objectives>
+
+			<fail_condition timeout="1" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+		</quest>
+
+		<!-- end of relict of old version-->
+		<quest id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" start="custom" visible="false"  >
+			<start_condition timeout="5"/>
+			<onStarted>
+				<set-flag key="questline_finished" value="true"/>
+			</onStarted>
+			<rewards >
+				<start-quest id="METASTART"/>
+				<scenario-finished />
+			</rewards>
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"  avatar="king">
+			<onStarted>
+				<set-season season="spring"/>
+			</onStarted>
+			<start_condition timeout="10"/>
+			<objectives timeout="1" />
+			<onSuccess notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+			<rewards >
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+		<!-- STORM -->
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2" />
+			<rewards>
+				<lightningstrike topLeftX="124" topLeftY="106" bottomRightX="167" bottomRightY="135" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->
+	</group>
+</questdb>
+

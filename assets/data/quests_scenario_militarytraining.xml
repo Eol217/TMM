@@ -1,0 +1,567 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- "military training" scenario 17
+	200 prestige earned
+-->
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+		
+	<group avatar="client">
+
+		<quest id="basictraining" isKeyQuest="true" title="T_GAME_QUEST_MIL_TUT_MAINQUEST_TITLE" description="T_GAME_QUEST_MIL_TUT_MAINQUEST_START" start="instant" avatar="client">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_MAINQUEST_START">
+				<disallow key="building_barracks"/>
+				<disallow key="building_watchtower"/>
+				<set-modifier name="mod_production_building_mine" tag="mines_prod" value="25"/>
+				<set-modifier name="mod_happiness" tag="unhappy" value="75"/>
+				<start-quest id="context"/>
+			</onStarted>
+
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="3" operator="and">
+				<flag-has-value key="camp_destroyed" value="true"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_MIL_TUT_MAINQUEST_SUCCESS">
+				<!--<center-to-building target="bandit_lair"/>-->
+				<highlight-building building="building_banditcamp" highlight="false"/>
+			</onSuccess>
+
+			<rewards>
+				<start-quest id="SCENARIO_FINISHED"/>
+				<resource amount="25" resource="prestige"/>
+				<set-flag key="questline_finished" value="true" />
+			</rewards>
+		</quest>
+
+		<quest id="context"  description="T_GAME_QUEST_MIL_TUT_02_START" start="custom" avatar="client" finish="user" visible="true" title="T_GAME_TUTORIAL_QUEST_NAME_DEASSIGN_3">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_02_START">
+				<highlight-building building="building_sawmill" highlight="true"/>
+				<center-to-building target="building_sawmill"/>
+				<highlight key="BTN_CONTEXTMENU_SELECT_1" mode="normal" highlight="true" context="building_sawmill"/>
+				<highlight highlight="true" mode="normal" key="BTN_CONTEXTMENU_INFO"/>
+				<enable-hint text="T_GAME_QUEST_MIL_TUT_02_SUCCESS" avatar="client" hint="contextmenu"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<deassign type="building_sawmill" trigger="command" count="1"/>
+			</objectives>
+
+			<onSuccess>
+				<highlight-building building="building_sawmill" highlight="false"/>
+			</onSuccess>
+
+			<rewards>
+				<resource resource="sausage" amount="10"/>
+				<start-quest id="deleteresource"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<onFailed >
+				<highlight-building building="building_sawmill" highlight="false"/>
+			</onFailed>
+		</quest>
+
+		<quest id="deleteresource" title="T_GAME_QUEST_MIL_TUT_04_TITLE_NEW" description="T_GAME_QUEST_MIL_TUT_04_START" start="custom" visible="true" avatar="client" finish="user">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_04_START">
+				<resource amount="270" resource="planks"/>
+				<highlight key="BTN_HUD_TRADE" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_TRASH" mode="tutorial"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="2" operator="and_not">
+				<stock resource="planks" amount="100"/>
+			</objectives>
+
+			<onSuccess>
+				<highlight key="BTN_HUD_TRADE" mode="normal" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_TRASH" mode="normal" highlight="false"/>
+			</onSuccess>
+
+			<rewards>
+				<highlight key="BTN_BOOK_TAB_TRASH" mode="normal" highlight="false"/>
+				<resource resource="weapons" amount="10"/>
+				<resource resource="coins" amount="250"/>
+				<start-quest id="influence_02"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<onFailed >
+				<highlight key="BTN_HUD_TRADE" mode="normal" highlight="false"/>
+				<highlight key="BTN_BOOK_TAB_TRASH" mode="normal" highlight="false"/>
+			</onFailed>
+		</quest>
+
+		<quest id="influence_02" start="custom" visible="false" description="T_GAME_LOADINGTIP_070" finish="instant" avatar="client" >
+			<onStarted notification="T_GAME_LOADINGTIP_070">
+				<enable-hint hint="pausemenu" avatar="client" text="T_GAME_QUEST_MIL_TUT_01_SUCCESS"/>
+				<highlight key="BTN_HUD_MENU" highlight="true" mode="normal"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="10" operator="and"/>
+
+			<rewards>
+				<start-quest id="blackmail"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<onFailed >
+				<highlight key="BTN_HUD_MENU" mode="normal" highlight="false"/>
+			</onFailed>
+		</quest>
+
+		<quest id="blackmail" title="T_GAME_QUEST_MIL_TUT_05_TITLE" description="T_GAME_QUEST_MIL_TUT_05_START" start="custom" avatar="bandit">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_05_START">
+				<remove-modifier-by-tag tag="unhappy"/>
+			</onStarted>
+  
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute amount="5" resource="cloths"/>
+				<tribute amount="5" resource="jewelry"/>
+			</objectives>
+
+			<fail_condition timeout="60" operator="and"/>
+
+			<onFailed notification="T_GAME_QUEST_MIL_TUT_05_FAILED">
+				<start-quest id="robbery"/>
+			</onFailed>
+
+			<rewards>
+				<resource resource="fish" amount="1"/>
+				<start-quest id="gaveresources"/>
+			</rewards>
+		</quest>
+
+		<quest id="gaveresources" start="custom" visible="false"  finish="instant" avatar="bandit" >
+			<start_condition timeout="6" operator="and"/>
+
+			<objectives timeout="2" operator="and"/>
+
+			<onSuccess  notification="T_GAME_QUEST_MIL_TUT_05_SUCCESS"/>
+
+			<rewards>
+				<start-quest id="robbery"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="robbery"  start="custom" visible="false" avatar="bandit">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_08_NOTIFICATION">
+				<center-to-building target="bandit_lair"/>
+				<bandit-attack count="1" intention="steal" resource="coins" source="any"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<raid-successful count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_MIL_TUT_08_SUCESS"/>
+
+			<rewards>
+				<start-quest id="learntodefend"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="learntodefend" description="T_GAME_QUEST_SCEN13_16_TITLE" start="custom" visible="false"  finish="instant" avatar="knight" >
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_09_START">
+				<bandit-attack count="1" intention="steal" resource="coins" source="any"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="2" operator="and"/>
+
+			<rewards>
+				<start-quest id="buildbarracks"/>
+				<start-quest id="barracks_hint"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="barracks_hint"  start="custom" visible="false"  finish="instant" avatar="knight" >
+			<start_condition timeout="1" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<building type="building_barracks" count="1"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_HINT_BARRACKS_SOI"/>
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="buildbarracks" title="T_GAME_QUEST_SCEN13_16_TITLE" description="T_GAME_QUEST_MIL_TUT_10_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_10_START">
+				<allow key="building_barracks"/>
+				<allow key="building_watchtower"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building count="1" type="building_barracks"/>
+				<building count="1" type="building_watchtower"/>
+			</objectives>
+
+			<rewards>
+				<resource amount="15" resource="tools"/>
+				<resource amount="8" resource="prestige"/>
+				<start-quest id="raisestrength"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and">
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="attackresult" title="title" description="T_GAME_QUEST_MIL_TUT_12_NOTIFICATION" start="custom" visible="false" avatar="bandit">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_12_NOTIFICATION">
+				<enable-bandits enable="any"    />
+				<center-to-building target="bandit_lair"/>
+				<bandit-attack  count="1" intention="lay_fire" source="any"/>
+			</onStarted>
+			<start_condition timeout="5" operator="and"/>
+			<objectives timeout="1" operator="and">
+				<!-- bandits prevented-->
+				<raid-defeated count="1"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<!-- bandits successful-->
+				<raid-successful count="1"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_MIL_TUT_16_SUCCESS"/>
+
+			<onFailed notification="T_GAME_QUEST_MIL_TUT_16_FAILED">
+				<start-quest id="searchfireman"/>
+			</onFailed>
+
+		</quest>
+
+		<quest id="raisestrength" title="T_GAME_QUEST_SCEN12_10_TITLE" description="T_GAME_QUEST_MIL_TUT_19_START" start="custom" avatar="knight">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_19_START">
+				<allow key="building_tanner"/>
+				<allow key="building_armory"/>
+			</onStarted>
+
+			<start_condition timeout="15" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<building count="1" type="building_tanner"/>
+				<building count="1" type="building_armory"/>
+			</objectives>
+
+			<rewards>
+				<resource amount="16" resource="armor"/>
+				<resource amount="16" resource="weapons"/>
+				<start-quest id="raisearmy"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="searchfireman" description="T_GAME_QUEST_MIL_TUT_12_NOTIFICATION_FIND_TOWNIE_1" visible="false" start="custom" avatar="client" finish="instant">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_12_NOTIFICATION_FIND_TOWNIE_1">
+				<highlight-building building="building_firewatch" highlight="true"/>
+				<center-to-building target="building_firewatch"/>
+				<highlight highlight="true" mode="normal" key="BTN_CONTEXTMENU_STALK"/>
+			</onStarted>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<onSuccess>
+				<highlight-building building="building_firewatch" highlight="false"/>
+			</onSuccess>
+
+			<onFailed >
+				<highlight-building building="building_firewatch" highlight="false"/>
+			</onFailed>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<!-- removed brew questline part in newest version-->
+		<quest id="buildmonastery" title="T_GAME_QUEST_MIL_TUT_14_TITLE" description="T_GAME_QUEST_MIL_TUT_14_START" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_14_START">
+				<allow key="building_monestary"/>
+				<allow key="building_hopsfarm"/>
+				<allow key="hopfield_1x1"/>
+			</onStarted>
+
+			<start_condition timeout="25" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<building count="1" type="building_monestary"/>
+				<building count="1" type="building_hopsfarm"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_MIL_TUT_14_SUCCESS"/>
+
+			<rewards>
+				<resource amount="24" resource="hops"/>
+				<resource amount="15" resource="tools"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+        
+		<quest id="raisearmy" title="T_GAME_QUEST_SCEN_WW_DISASTER_30_NAME" description="T_GAME_QUEST_MIL_TUT_20_START" start="custom" avatar="knight">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_20_START">
+				<start-quest id="defendtown"/>
+			</onStarted>
+
+			<start_condition timeout="10" operator="and"/>
+
+			<objectives timeout="5" operator="and">
+				<soldiers-in-town count="4" />
+				<building type="building_watchtower" count="2"/>
+			</objectives>
+
+			<rewards>
+				<resource resource="prestige" amount="20"/>
+				<resource amount="24" resource="meat"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="buildbutcher" visible="false" description="T_GAME_QUEST_MIL_TUT_15_START" start="custom" avatar="client">
+			<onStarted notification="T_GAME_QUEST_MIL_TUT_15_START">
+				<center-to-building target="building_butcher"/>
+				<allow key="building_butcher"/>
+				<bandit-attack count="1" intention="steal" source="any"/>
+			</onStarted>
+
+			<start_condition timeout="12" operator="and"/>
+
+			<objectives timeout="3" operator="and"/>
+
+			<onSuccess notification="T_GAME_QUEST_MIL_TUT_15_SUCCESS"/>
+
+			<rewards>
+				<start-quest id="raisearmy"/>
+				<start-quest id="raisecoverage"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="defendtown" title="T_GAME_QUEST_MIL_TUT_16_TITLE" description="T_GAME_QUEST_DESIRES_10_FAIL" start="custom" avatar="bandit" visible="true">
+			<onStarted notification="T_GAME_QUEST_DESIRES_10_FAIL">
+				<bandit-attack count="3" resource="coins" amount="150" intention="steal" source="any"/>
+				<start-quest id="militarystatistics"/>
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<raid-defeated count="3"/>
+			</objectives>
+
+			<fail_condition timeout="1" operator="and">
+				<raid-successful count="1"/>
+			</fail_condition>
+
+			<onSuccess notification="T_GAME_QUEST_MIL_TUT_16_SUCCESS">
+				<start-quest id="raisecoverage"/>
+			</onSuccess>
+
+			<onFailed notification="T_GAME_QUEST_MIL_TUT_16_FAILED">
+				<start-quest id="raisecoverage"/>
+			</onFailed>
+
+			<rewards>
+				<resource amount="250" resource="coins"/>
+				<resource amount="26" resource="prestige"/>
+			</rewards>
+		</quest>
+
+		<quest id="raisecoverage" title="T_GAME_QUEST_COVERAGE_TITLE" description="T_GAME_QUEST_COVERAGE_DESC" start="custom" avatar="knight" visible="true">
+			<onStarted notification="T_GAME_QUEST_COVERAGE_DESC">
+				<bandit-attack count="1" intention="steal" source="any"/>
+			</onStarted>
+
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="2" operator="and">
+				<coverage coverage="75" type="military"/>
+			</objectives>
+
+			<onSuccess  notification="T_GAME_QUEST_MIL_TUT_17_SUCCESS"/>
+
+			<rewards>
+				<resource amount="25" resource="brew"/>
+				<resource amount="25" resource="sausage"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+		</quest>
+
+		<quest id="militarystatistics" start="custom" avatar="knight" visible="false">
+			<onStarted >
+				<highlight key="BTN_HUD_TRADE" mode="normal"/>
+				<highlight key="BTN_BOOK_TAB_MILITARY" highlight="true" mode="normal"/>
+				<enable-hint avatar="knight" hint="military" text="T_GAME_QUEST_MIL_TUT_18_NOTIFICATION_STATISTICS_1"/>
+			</onStarted>
+
+			<start_condition timeout="180" operator="and"/>
+
+			<objectives timeout="5" operator="and"/>
+			
+			<onSuccess>
+				<highlight key="BTN_BOOK_TAB_MILITARY" highlight="false"/>
+			</onSuccess>
+
+			<rewards>
+				<resource amount="3" resource="prestige"/>
+				<resource amount="10" resource="sausage"/>
+			</rewards>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+
+			<onFailed >
+				<highlight key="BTN_BOOK_TAB_MILITARY" highlight="false"/>
+			</onFailed>
+		</quest>
+
+		<quest id="EVERYTHING_RDY" start="instant" avatar="knight" visible="false" >
+		<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="1" operator="or">
+				<quest-done id="raisearmy"/>
+				<!--				<quest-done id="buildmonastery"/>-->
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_MIL_TUT_21_START">
+				<start-quest id="destroycamp"/>
+			</onSuccess>
+
+			<fail_condition timeout="1" operator="and" >
+				<flag-has-value key="questline_finished" value="true" />
+			</fail_condition>
+			
+			<rewards>
+				<center-to-building target="bandit_lair"/>
+				<highlight-building building="building_banditcamp" highlight="true"/>
+			</rewards>
+		</quest>
+
+		<quest id="destroycamp" isKeyQuest="true" title="T_GAME_QUEST_SCEN13_10_TITLE" description="T_GAME_QUEST_DESIRES_18_START" start="custom" avatar="knight">
+			<onStarted notification="T_GAME_QUEST_DESIRES_18_START"/>
+ 
+			<start_condition timeout="3"/>
+
+			<objectives timeout="1">
+				<destroy-building count="1" target="building_banditcamp"/>
+			</objectives>
+
+			<onSuccess notification="T_GAME_QUEST_DESIRES_18_SUCCESS">
+				<set-flag key="camp_destroyed" value="true"/>
+				<remove-modifier-by-tag tag="mines_prod" />
+			</onSuccess>
+
+			<rewards>
+				<resource amount="35" resource="prestige"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" start="custom" visible="false"  >
+			<start_condition timeout="3" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<set-trade-costs resource="planks" sell="100"/>
+				<start-quest id="METASTART"/>
+				<tutorial-finished type="military"/>
+				<scenario-finished/>
+			</rewards>
+
+		</quest>
+
+		<quest id="METASTART" start="custom" visible="false"   >
+			
+			<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+
+			<start_condition timeout="5" operator="and"/>
+
+			<objectives timeout="1" operator="and"/>
+
+			<rewards>
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+
+<!-- STORM --> 
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2" operator="and" />
+			<rewards>
+				<lightningstrike topLeftX="56" topLeftY="58" bottomRightX="91" bottomRightY="96" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+<!-- STORM END -->  
+
+	</group>
+</questdb>
+

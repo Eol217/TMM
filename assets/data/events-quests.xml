@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<questdb>
+	<group>
+
+
+		<quest id="START_EVENTS" start="custom" finish="instant" visible="false" repeatable="no">
+
+			<objectives timeout="25"/>
+			
+			<rewards>
+                <start-quest id="fire_note"/>
+			</rewards>
+		</quest>
+
+		<quest id="plague_note" title="T_GAME_HINT_PLAGUE_TITLE"  start="custom" finish="instant" visible="false" repeatable="no">
+
+			<start_condition timeout="10">
+				<population count="75"/>
+			</start_condition>
+
+			<objectives timeout="5"/>
+			<fail_condition timeout="1">
+				<building type="building_medicus" count="1"/>
+			</fail_condition>
+
+			<rewards>
+				<start-quest id="plague_reward"/>
+			</rewards>
+		</quest>
+
+		<quest id="plague_reward"  title="T_GAME_HINT_PLAGUE_TITLE" description="T_GAME_HINT_PLAGUE_NEW" start="custom" finish="user" visible="true" repeatable="no">
+		
+			<onStarted  notification="T_GAME_HINT_PLAGUE"/>
+           
+			<objectives timeout="5">
+				<building type="building_medicus" count="1"/>
+				<building type="building_herbgarden" count="1"/>
+			</objectives>
+         
+			<rewards>
+				<resource resource="prestige" amount="12" />
+				<resource resource="herbs" amount="40" />
+			</rewards>
+		</quest>
+
+		<quest id="fire_note" title="T_GAME_HINT_FIRE_TITLE" description="T_GAME_HINT_FIRE"  start="custom" visible="false" finish="instant"  repeatable="no">
+
+			<start_condition timeout="10">
+				<population count="50"/>
+			</start_condition>
+            
+            <onStarted >
+                <start-quest id="plague_note"/>
+            </onStarted>
+            
+			<fail_condition timeout="1">
+				<building type="building_firewatch" count="1"/>
+			</fail_condition>
+                        
+			<objectives timeout="5" />
+            
+			<onSuccess>
+				<start-quest id="fire_reward" />
+			</onSuccess>
+                        
+		</quest>
+                
+		<quest id="fire_reward"  title="T_GAME_HINT_FIRE_TITLE" description="T_GAME_HINT_FIRE" start="custom" finish="user" visible="true" repeatable="no">
+		
+			<onStarted   notification="T_GAME_HINT_FIRE"/>
+             
+			<objectives timeout="1">
+				<building type="building_firewatch" count="1"/>
+			</objectives>
+        
+			<rewards>
+				<resource resource="prestige" amount="12" />
+				<resource resource="tools" amount="15" />
+			</rewards>
+		</quest>
+            
+	</group>
+                
+</questdb>    

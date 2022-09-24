@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:f291b9bc4e69290d001e00aac4e45317:43c2ba07d54aa2529c8a603f7b48b5f1:d950601e2515af5912b1ec089fd59862$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="offerscreen.png" width="512" height="1024">
+    <sprite n="big_red_banner_edge_01" x="1" y="562" w="71" h="55" pX="0.5" pY="0.5" oX="0" oY="0" oW="98" oH="61"/>
+    <sprite n="big_red_banner_edge_02" x="412" y="477" w="84" h="48" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="big_red_banner_edge_03" x="1" y="276" w="236" h="29" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="big_red_banner_edge_04" x="1" y="513" w="156" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="book_decorts_01" x="211" y="477" w="200" h="96" pX="0.5" pY="0.5"/>
+    <sprite n="book_decorts_connections_01" x="1" y="1" w="285" h="96" pX="0.5" pY="0.5"/>
+    <sprite n="flag_01" x="1" y="306" w="209" h="206" pX="0.5" pY="0.5"/>
+    <sprite n="flag_02" x="412" y="526" w="81" h="178" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="offers_gameroom_character_01" x="1" y="98" w="256" h="177" pX="0.5" pY="0.5" oX="34" oY="12" oW="222" oH="268" r="y"/>
+    <sprite n="offers_gameroom_character_02" x="258" y="270" w="252" h="206" pX="0.5" pY="0.5" oX="15" oY="15" oW="222" oH="268" r="y"/>
+    <sprite n="offers_gameroom_character_03" x="287" y="1" w="222" h="268" pX="0.5" pY="0.5"/>
+</TextureAtlas>

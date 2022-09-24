@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="T_ANDROIDM_PERMISSION_BUTTON_RETRY">重试</string>
+    <string name="T_ANDROIDM_PERMISSION_BUTTON_SURE">我确认</string>
+    <string name="T_ANDROIDM_PERMISSION_DOWNLOAD_FAILED">APP 需要读取权限，才能加载图像！</string>
+    <string name="T_ANDROIDM_PERMISSION_HEADLINE">权限不足</string>
+    <string name="T_ANDROIDM_PERMISSION_OBB_READ">APP 需要写入权限，才能保存安装所需的其它数据！</string>
+    <string name="T_ANDROIDM_PERMISSION_OBB_TEXT">APP 的写入权限未设置，下载失败。</string>
+    <string name="T_ANDROIDM_PERMISSION_STORAGE_TEXT">APP 需要写入权限，才能保存截屏！</string>
+    <string name="T_ANDROIDM_PERMISSION_SURE">您确认想要拒绝这一请求吗？</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_ACKNOWLEDGED">明白</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_CONTINUE">继续</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_GTC">GTC</string>
+    <string name="T_INFO_PRIVACYPOLICYUPDATE_TEXT">我们使用设备识别软件及类似的数据为您定制广告并分析我们产品的使用情况。请阅读我们的条款或保密政策了解更多细节。使用该产品即视为您已知以上条款。</string>
+    <string name="T_INFO_PRIVACY_POLICY_TRANSLATED">隐私权政策</string>
+</resources>

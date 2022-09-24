@@ -1,0 +1,219 @@
+[start]
+
+frame:	ani_jousting_02.30.png		1
+
+delay:	30	60
+
+next:	spawn_1		1
+
+
+
+[spawn_1]
+
+play_ambient: sfx_buildings_jousting_start_fanfare
+frame:	ani_jousting_02.31.png	0.03
+frame:	ani_jousting_02.32.png	0.03
+frame:	ani_jousting_02.33.png	0.03
+frame:	ani_jousting_02.34.png	0.03
+frame:	ani_jousting_02.35.png	0.03
+frame:	ani_jousting_02.36.png	0.03
+
+frame:	ani_jousting_02.0.png	1
+
+delay:	0.5		3	
+
+next:	fight_1	1
+
+[fight_1]
+
+frame:	ani_jousting_02.1.png	0.1
+frame:	ani_jousting_02.2.png	0.1
+frame:	ani_jousting_02.3.png	0.1
+frame:	ani_jousting_02.4.png	0.1
+frame:	ani_jousting_02.5.png	0.1
+play_ambient: sfx_buildings_jousting_collision
+frame:	ani_jousting_02.6.png	0.1
+frame:	ani_jousting_02.7.png	0.1
+play_ambient: sfx_building_fairground_cheering_var2
+
+next:	blackwins_1	1
+next:	whitewins_1	1
+
+[blackwins_1]
+
+frame:	ani_jousting_02.10.png	0.1
+frame:	ani_jousting_02.11.png	0.1
+frame:	ani_jousting_02.12.png	0.1
+frame:	ani_jousting_02.13.png	0.1
+frame:	ani_jousting_02.14.png	0.1
+frame:	ani_jousting_02.15.png	0.1
+frame:	ani_jousting_02.16.png	3
+
+frame:	ani_jousting_02.17.png	0.1
+frame:	ani_jousting_02.18.png	0.1
+frame:	ani_jousting_02.19.png	0.1
+frame:	ani_jousting_02.30.png	0.1
+
+
+next:	spawn_2	1
+
+[whitewins_1]
+
+frame:	ani_jousting_02.20.png	0.1
+frame:	ani_jousting_02.21.png	0.1
+frame:	ani_jousting_02.22.png	0.1
+frame:	ani_jousting_02.23.png	0.1
+frame:	ani_jousting_02.24.png	0.1
+frame:	ani_jousting_02.25.png	0.1
+frame:	ani_jousting_02.26.png	3
+
+frame:	ani_jousting_02.27.png	0.1
+frame:	ani_jousting_02.28.png	0.1
+frame:	ani_jousting_02.29.png	0.1
+frame:	ani_jousting_02.30.png	0.1
+
+
+next:	spawn_2	1
+
+
+
+[spawn_2]
+
+play_ambient: sfx_buildings_jousting_start_fanfare
+frame:	ani_jousting_02.31.png	0.03
+frame:	ani_jousting_02.32.png	0.03
+frame:	ani_jousting_02.33.png	0.03
+frame:	ani_jousting_02.34.png	0.03
+frame:	ani_jousting_02.35.png	0.03
+frame:	ani_jousting_02.36.png	0.03
+
+frame:	ani_jousting_02.0.png	1
+
+delay:	0.5		3	
+
+next:	fight_2	1
+
+[fight_2]
+
+frame:	ani_jousting_02.1.png	0.1
+frame:	ani_jousting_02.2.png	0.1
+frame:	ani_jousting_02.3.png	0.1
+frame:	ani_jousting_02.4.png	0.1
+frame:	ani_jousting_02.5.png	0.1
+play_ambient: sfx_buildings_jousting_collision
+frame:	ani_jousting_02.6.png	0.1
+frame:	ani_jousting_02.7.png	0.1
+play_ambient: sfx_building_fairground_cheering_var1
+
+next:	blackwins_2	1
+next:	whitewins_2	1
+
+[blackwins_2]
+
+frame:	ani_jousting_02.10.png	0.1
+frame:	ani_jousting_02.11.png	0.1
+frame:	ani_jousting_02.12.png	0.1
+frame:	ani_jousting_02.13.png	0.1
+frame:	ani_jousting_02.14.png	0.1
+frame:	ani_jousting_02.15.png	0.1
+frame:	ani_jousting_02.16.png	3
+
+frame:	ani_jousting_02.17.png	0.1
+frame:	ani_jousting_02.18.png	0.1
+frame:	ani_jousting_02.19.png	0.1
+frame:	ani_jousting_02.30.png	0.1
+
+
+next:	spawn_3	1
+
+[whitewins_2]
+
+frame:	ani_jousting_02.20.png	0.1
+frame:	ani_jousting_02.21.png	0.1
+frame:	ani_jousting_02.22.png	0.1
+frame:	ani_jousting_02.23.png	0.1
+frame:	ani_jousting_02.24.png	0.1
+frame:	ani_jousting_02.25.png	0.1
+frame:	ani_jousting_02.26.png	3
+
+frame:	ani_jousting_02.27.png	0.1
+frame:	ani_jousting_02.28.png	0.1
+frame:	ani_jousting_02.29.png	0.1
+frame:	ani_jousting_02.30.png	0.1
+
+
+next:	spawn_3	1
+
+[spawn_3]
+
+play_ambient: sfx_buildings_jousting_start_fanfare
+frame:	ani_jousting_02.31.png	0.03
+frame:	ani_jousting_02.32.png	0.03
+frame:	ani_jousting_02.33.png	0.03
+frame:	ani_jousting_02.34.png	0.03
+frame:	ani_jousting_02.35.png	0.03
+frame:	ani_jousting_02.36.png	0.03
+
+frame:	ani_jousting_02.0.png	1
+
+delay:	0.5		3	
+
+next:	fight_3	1
+
+[fight_3]
+
+frame:	ani_jousting_02.1.png	0.1
+frame:	ani_jousting_02.2.png	0.1
+frame:	ani_jousting_02.3.png	0.1
+frame:	ani_jousting_02.4.png	0.1
+frame:	ani_jousting_02.5.png	0.1
+play_ambient: sfx_buildings_jousting_collision
+frame:	ani_jousting_02.6.png	0.1
+frame:	ani_jousting_02.7.png	0.1
+play_ambient: sfx_building_fairground_cheering_var3
+
+next:	blackwins_3	1
+next:	whitewins_3	1
+
+[blackwins_3]
+
+frame:	ani_jousting_02.10.png	0.1
+frame:	ani_jousting_02.11.png	0.1
+frame:	ani_jousting_02.12.png	0.1
+frame:	ani_jousting_02.13.png	0.1
+frame:	ani_jousting_02.14.png	0.1
+frame:	ani_jousting_02.15.png	0.1
+frame:	ani_jousting_02.16.png	3
+
+frame:	ani_jousting_02.17.png	0.1
+frame:	ani_jousting_02.18.png	0.1
+frame:	ani_jousting_02.19.png	0.1
+frame:	ani_jousting_02.30.png	0.1
+
+
+next:	start	1
+
+[whitewins_3]
+
+frame:	ani_jousting_02.20.png	0.1
+frame:	ani_jousting_02.21.png	0.1
+frame:	ani_jousting_02.22.png	0.1
+frame:	ani_jousting_02.23.png	0.1
+frame:	ani_jousting_02.24.png	0.1
+frame:	ani_jousting_02.25.png	0.1
+frame:	ani_jousting_02.26.png	3
+
+frame:	ani_jousting_02.27.png	0.1
+frame:	ani_jousting_02.28.png	0.1
+frame:	ani_jousting_02.29.png	0.1
+frame:	ani_jousting_02.30.png	0.1
+
+
+next:	start	1
+
+
+
+
+
+
+

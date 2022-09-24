@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: LEGACY -->
+<!--Max Prestige earned 200 -->
+
+<questdb>
+<group>
+
+<include file = "data/common-quests.xml"/>
+<include file = "data/quests_sandbox.xml"/>
+
+		<!--INTRODUCTION-->
+	
+	<quest id="LEGACY_INTRODUCTION_001" start="instant" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="king">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_INTRODUCTION_001_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_INTRODUCTION_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_INTRODUCTION_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="king">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_INTRODUCTION_002_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_INTRODUCTION_003"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_INTRODUCTION_003" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="king">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_INTRODUCTION_003_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_INTRODUCTION_004"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_INTRODUCTION_004" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="king">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_INTRODUCTION_004_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_MAINQUEST"/>
+		</rewards>
+	</quest>
+
+	
+	<!--MAIN QUEST-->
+
+	<quest id="LEGACY_MAINQUEST" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_LEGACY_MAINQUEST_TITLE" 
+		   description="T_LEGACY_MAINQUEST_DESC" 
+		   avatar="king">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_MAINQUEST_DESC">
+			<start-quest id="LEGACY_LETTER_001_DESCRIPTION_001"/>
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="scenario_win" value="true"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_MAINQUEST_SUCCESS"/>
+		<rewards>
+<!--			<scenario-finished/>-->
+			<resource resource="prestige" amount="80"/>
+			<start-quest id="SCENARIO_FINISHED"/>
+		</rewards>
+	</quest>
+	
+	
+<!--	LETTER 001-->
+<!--TAVERN-->
+<quest id="LEGACY_LETTER_001_DESCRIPTION_001" start="custom" visible="false" finish="user" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_001_DESCRIPTION_001_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_001_DESCRIPTION_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_001_DESCRIPTION_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_001_DESCRIPTION_002_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_001_DESCRIPTION_003"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_001_DESCRIPTION_003" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_001_DESCRIPTION_003_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_001_DESCRIPTION_004"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_001_DESCRIPTION_004" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_001_DESCRIPTION_004_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_001"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_001" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN6_8_NAME" 
+		   description="T_LEGACY_LETTER_001_DESC" 
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_001_DESC">
+			<start-quest id="LEGACY_HOUSE"/>
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<building type="building_tavern" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_LETTER_001_SUCCESS"/>
+		<rewards>
+			<set-flag key="letter_001_done" value="true"/>
+			<start-quest id="LEGACY_LETTER_002_DESCRIPTION_001"/>
+			<resource resource="tools" amount="10"/>
+			<resource resource="coins" amount="200"/>
+		</rewards>
+	</quest>
+	
+	<!--MORE HOUSE-->
+	<quest id="LEGACY_HOUSE" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN_CC_61_TITEL" 
+		   description="T_LEGACY_HOUSE_DESC" 
+		   avatar="client">
+		<start_condition timeout="12" operator="and" />
+		<onStarted notification="T_LEGACY_HOUSE_DESC"/>
+		<objectives timeout="5" operator="and">
+			<building type="building_residence_02" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_HOUSE_SUCCESS"/>
+		<rewards>
+			<set-flag key="house_done" value="true"/>
+			<resource resource="prestige" amount="10"/>
+		</rewards>
+	</quest>
+	
+	
+<!--	LETTER 002
+	 Vineyard-wine-->
+<!--2 explanations texts and then the quest-->
+
+	<quest id="LEGACY_LETTER_002_DESCRIPTION_001" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and">
+			<flag-has-value key="house_done" value="true"/>
+			<flag-has-value key="letter_001_done" value="true"/>
+		</start_condition>
+		<onStarted notification="T_LEGACY_LETTER_002_DESCRIPTION_001_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_002_DESCRIPTION_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_002_DESCRIPTION_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_002_DESCRIPTION_002_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_002" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_CONSTRUCT_WINEFARM" 
+		   description="T_LEGACY_LETTER_002_DESC" 
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_002_DESC">
+			<start-quest id="LEGACY_MINE"/>
+		</onStarted>
+		<objectives timeout="5" operator="and">
+			<building type="building_winefarm" count="1"/>
+			<building type="vinefield_1x1" count="15"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_LETTER_002_SUCCESS"/>
+		<rewards>
+			<set-flag key="letter_002_done" value="true"/>
+<!--			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_001"/>-->
+<!--TODO TEST-->
+			<start-quest id="LEGACY_FISHER_HUNTER_HUT"/>
+			<resource resource="prestige" amount="10"/>
+			<resource resource="tools" amount="7"/>
+		</rewards>
+	</quest>
+		
+		
+		<!--MINE-->
+	<quest id="LEGACY_MINE" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN3_5_NAME" 
+		   description="T_LEGACY_MINE_DESC" 
+		   avatar="townie">
+		<start_condition timeout="15" operator="and" />
+		<onStarted notification="T_LEGACY_MINE_DESC"/>
+		<objectives timeout="5" operator="and">
+			<building type="building_mine" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_MINE_SUCCESS"/>
+		<rewards>
+			<set-flag key="mine_done" value="true"/>
+			<resource resource="coins" amount="200"/>
+		</rewards>
+	</quest>
+	
+	<!--	LETTER 003-->
+<!--WAREHOUSE-->
+
+	<quest id="LEGACY_LETTER_003_DESCRIPTION_001" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and">
+			<flag-has-value key="mine_done" value="true"/>
+			<flag-has-value key="letter_002_done" value="true"/>
+		</start_condition>
+		<onStarted notification="T_LEGACY_LETTER_003_DESCRIPTION_001_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_003_DESCRIPTION_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_003_DESCRIPTION_002_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_003"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_003_DESCRIPTION_003" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_003_DESCRIPTION_003_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_004"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_003_DESCRIPTION_004" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_003_DESCRIPTION_004_DESC"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_003"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_003" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN8_10_NAME" 
+		   description="T_LEGACY_LETTER_003_DESC" 
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_003_DESC"/>
+		<objectives timeout="3" operator="and">
+			<building type="building_warehouse" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_LETTER_003_SUCCESS"/>
+		<rewards>
+<!--			<start-quest id="LEGACY_FISHER_HUNTER_HUT"/>-->
+			<start-quest id="LEGACY_LETTER_004_DESCRIPTION_001"/>
+			<resource resource="prestige" amount="10"/>
+			<resource resource="tools" amount="6"/>
+		</rewards>
+	</quest>
+	
+<!--	GIRL QUEST -->
+<!--	FISHER HUT -->
+<!--	HUNTER HUT-->
+<!--TODO CONDITION TO START THE LETTER 004-->
+	
+<quest id="LEGACY_FISHER_HUNTER_HUT" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_LEGACY_FISHER_HUNTER_HUT_TITLE" 
+		   description="T_LEGACY_FISHER_HUNTER_HUT_DESC" 
+		   avatar="girl">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_FISHER_HUNTER_HUT_DESC"/>
+		<objectives timeout="3" operator="and">
+			<building type="building_hunters_cabin" count="1"/>
+			<building type="building_fishing_lodge" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_FISHER_HUNTER_HUT_SUCCESS"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_001"/>
+<!--			<start-quest id="LEGACY_LETTER_004_DESCRIPTION_001"/>-->
+			<resource resource="brew" amount="10"/>
+			<resource resource="juice" amount="6"/>
+		</rewards>
+	</quest>
+	
+	<!--QUEST WITH TIMER-->
+
+	<quest id="LEGACY_COUNTRY_NEED_001" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_LEGACY_COUNTRY_NEED_TITLE" 
+		   description="T_LEGACY_COUNTRY_NEED_DESC" 
+		   avatar="client">
+		<start_condition timeout="20" operator="and" />
+		<onStarted notification="T_LEGACY_COUNTRY_NEED_DESC">
+			<start-quest id="LEGACY_COUNTRY_NEED_ONLY_TIMER"/>
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<tribute resource="fish" amount="10"/>
+			<tribute resource="meat" amount="10"/>
+			<flag-has-value key="timer_over" value="false"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_COUNTRY_NEED_SUCCESS_001">
+			<start-quest id="LEGACY_COUNTRY_NEED_003_TIMER"/>
+			<set-flag key="tribute_done_one" value="true"/>
+		</onSuccess>
+		<fail_condition operator="and" timeout="2">
+			<flag-has-value key="timer_over" value="true"/>
+		</fail_condition>
+		<onFailed>
+			<set-flag key="tribute_done" value="false"/>
+			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_001"/>
+		</onFailed>
+		<rewards>
+			<set-flag key="tribute_done" value="true"/>
+			<start-quest id="LEGACY_COUNTRY_NEED_002"/>
+			<resource resource="prestige" amount="25"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_COUNTRY_NEED_ONLY_TIMER" start="custom" visible="true" finish="instant" isKeyQuest="true"
+		   title="T_LEGACY_COUNTRY_NEED_ONLY_TIMER_TITLE"
+		   avatar="client">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted/>
+		<objectives timeout="120" operator="and"/>
+		<onSuccess>
+			<set-quest-state id="LEGACY_COUNTRY_NEED_001" state="failed"/>
+			<set-flag key="timer_over" value="true"/>
+		</onSuccess>
+		<fail_condition operator="and" timeout="2">
+			<flag-has-value key="timer_over_done_alright" value="true"/>
+ 		</fail_condition>
+		<rewards/>
+	</quest>
+	
+	<quest id="LEGACY_COUNTRY_NEED_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="5" operator="and"/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="tribute_done" value="true"/>
+			<quest-done id="LEGACY_COUNTRY_NEED_001"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_COUNTRY_NEED_SUCCESS_002"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_001"/>
+			<set-flag key="timer_over_done_alright" value="true"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_COUNTRY_NEED_003_TIMER" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="1" operator="and">
+			<flag-has-value key="tribute_done_one" value="true"/>
+		</start_condition>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="tribute_done" value="true"/>
+		</objectives>
+		<fail_condition operator="and" timeout="3">
+			<flag-has-value key="timer_over" value="true"/>
+		</fail_condition>
+		<onFailed notification="T_LEGACY_COUNTRY_NEED_FAILED">
+			<set-quest-state id="LEGACY_COUNTRY_NEED_001" state="failed"/>
+		</onFailed>
+		<rewards>
+<!--			<start-quest id="LEGACY_LETTER_003_DESCRIPTION_001"/>-->
+		</rewards>
+	</quest>
+			
+		<!--	LETTER 004-->
+<!--KING STATUE-->
+
+<quest id="LEGACY_LETTER_004_DESCRIPTION_001" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_004_DESCRIPTION_001_DESC">
+			<start-quest id="LEGACY_COUNTRY_NEED_001"/>
+		</onStarted>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_004_DESCRIPTION_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_004_DESCRIPTION_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_004_DESCRIPTION_002_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_004"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_004" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_LEGACY_LETTER_004_TITLE" 
+		   description="T_LEGACY_LETTER_004_DESC" 
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_004_DESC"/>
+		<objectives timeout="3" operator="and">
+			<building type="deco_3x3_kingstatue" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_LETTER_004_SUCCESS"/>
+		<rewards>
+			<resource resource="tools" amount="10"/>
+			<start-quest id="LEGACY_BEER"/>
+		</rewards>
+	</quest>
+	
+	
+	<!--Additionnal quest-->
+	<!--Build a beer things-->
+	<quest id="LEGACY_BEER" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_SCENARIO_2017_ELECTION_RELIGIOUS_QUEST_04_TITLE" 
+		   description="T_LEGACY_BEER_DESC" 
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_BEER_DESC"/>
+		<objectives timeout="3" operator="and">
+			<building type="building_hopsfarm" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_BEER_SUCCESS"/>
+		<rewards>
+			<resource resource="cloths" amount="15"/>
+			<resource resource="brew" amount="20"/>
+			<start-quest id="LEGACY_LETTER_005_DESCRIPTION_001"/>
+		</rewards>
+	</quest>
+	
+<!--	LETTER 005-->
+<!--WRITE A BOOK-->
+
+<quest id="LEGACY_LETTER_005_DESCRIPTION_001" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_005_DESCRIPTION_001_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_005_DESCRIPTION_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_005_DESCRIPTION_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_005_DESCRIPTION_002_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_005"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_005" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_LEGACY_LETTER_005_TITLE" 
+		   description="T_LEGACY_LETTER_005_DESC" 
+		   avatar="client">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_005_DESC">
+			<start-quest id="LEGACY_SECURITY"/>
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<tribute resource="skins" amount="50"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_LETTER_005_SUCCESS"/>
+		<rewards>
+			<set-flag key="book_here" value="true"/>
+			<start-quest id="LEGACY_LETTER_005_BOOK_HERE"/>
+			<resource resource="coins" amount="100"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_005_BOOK_HERE" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="monk">
+		<start_condition timeout="5" operator="and" />
+		<onStarted/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="book_here" value="true"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_LETTER_005_BOOK_HERE"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_006_DESCRIPTION_001"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_SECURITY" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_HINT_FIRE_TITLE" 
+		   description="T_LEGACY_SECURITY_DESC" 
+		   avatar="nobleman">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_SECURITY_DESC">
+			<start-quest id="LEGACY_SECURITY"/>
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<building type="building_firewatch" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_SECURITY_SUCCESS"/>
+		<rewards>
+			<resource resource="cloths" amount="10"/>
+			<start-quest id="LEGACY_DECO"/>
+			<set-flag key="security_done" value="true"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_DECO" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_SCENARIO_DIPLOMATICVISIT_DECORATION_TITLE" 
+		   description="T_LEGACY_DECO_DESC" 
+		   avatar="nobleman">
+		<start_condition timeout="5" operator="and" />
+		<onStarted notification="T_LEGACY_DECO_DESC"/>
+		<objectives timeout="3" operator="and">
+			<happyness type="deco" value="700"/>
+			<building type="deco_1x1_birdhouse" count="1"/>
+			<building type="deco_1x1_statue_01" count="1"/>
+		</objectives>
+		<onSuccess notification="T_LEGACY_DECO_SUCCESS"/>
+		<rewards>
+			<resource resource="jewelry" amount="10"/>
+			<set-flag key="deco_done" value="true"/>
+		</rewards>
+	</quest>
+	
+<!--	!LETTER 006-->
+<!--KING ARRIVE-->
+
+	<quest id="LEGACY_LETTER_006_DESCRIPTION_001" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="2" operator="and">
+			<flag-has-value key="deco_done" value="true"/>
+			<flag-has-value key="security_done" value="true"/>
+		</start_condition>
+		<onStarted notification="T_LEGACY_LETTER_006_DESCRIPTION_001_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_006_DESCRIPTION_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_006_DESCRIPTION_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="king">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_006_DESCRIPTION_002_DESC"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="LEGACY_LETTER_006"/>
+		</rewards>
+	</quest>
+	
+	<quest id="LEGACY_LETTER_006" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="king">
+		<start_condition timeout="2" operator="and" />
+		<onStarted notification="T_LEGACY_LETTER_006_SUCCESS"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<set-flag key="scenario_win" value="true"/>
+		</rewards>
+	</quest>
+	
+	<!--___________________________________________________________END OF THE SCENARIO_________________________________________________________________________-->
+
+	<quest visible="false" id="SCENARIO_FINISHED" 
+		 start="custom" 
+		   avatar="queen">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted >
+			<scenario-finished />
+		</onStarted>
+		<objectives timeout="2" operator="and"/>
+		<rewards >
+			<start-quest id="METASTART"/>
+		</rewards>
+	</quest>
+
+	<quest id="METASTART" start="custom" visible="false"   >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+		<start_condition timeout="2"/>
+		<objectives timeout="1"/>
+		<rewards>
+			<start-quest id="SANDBOX_QUEST_META"/>
+			<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+			<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+			<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+		</rewards>
+	</quest>
+
+	<!-- STORM -->
+	<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+		</objectives>
+		<fail_condition timeout="2"  operator="and"/>
+		<rewards>
+			<lightningstrike topLeftX="38" topLeftY="45" bottomRightX="82" bottomRightY="83" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+		</rewards>
+	</quest>
+	<!-- STORM END -->
+
+</group>
+</questdb>

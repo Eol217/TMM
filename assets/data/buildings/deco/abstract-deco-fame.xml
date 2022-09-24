@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE abstract-building-class SYSTEM "../.buildingclass.dtd">
+
+<abstract-building-class
+		class="DecoFameBuildingClass"
+		width="{width}"
+		height="{height}"
+>
+	<name textId="{nameId}" />
+	<drawable file="{drawable}.json" />
+	<decoration value="{deco_value}" />
+	<placement textId="T_GAME_CONSTRUCT_DECO" />
+
+	<properties>
+		<property name="buildmenu.groupId"  value="{buildmenu_group}" />
+		<property name="buildmenu.offset.1x.x" value="{buildmenu_offset_1x_x}" />
+		<property name="buildmenu.offset.1x.y" value="{buildmenu_offset_1x_y}" />
+		<property name="buildmenu.offset.2x.x" value="{buildmenu_offset_2x_x}" />
+		<property name="buildmenu.offset.2x.y" value="{buildmenu_offset_2x_y}" />
+		<property name="buildmenu.offset.4x.x" value="{buildmenu_offset_4x_x}" />
+		<property name="buildmenu.offset.4x.y" value="{buildmenu_offset_4x_y}" />
+	</properties>
+
+	<requirements>
+		<require-key key="{requirement_key}"/>
+	</requirements>
+	
+	<construction-costs>
+		<resource type="coins" amount="{cost_coins}" />
+		<resource type="prestige" amount="{cost_prestige}" />
+	</construction-costs>
+
+</abstract-building-class>

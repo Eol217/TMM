@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: ECONOMY CRISIS -->
+<!-- MAX Prestige earned: 200 -->
+
+<questdb>
+    <group avatar="girl">
+		<include file = "data/common-quests.xml"/>
+		<include file = "data/quests_sandbox.xml"/>
+        
+        <quest id="SCENARIO_3_QUEST_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_1_NAME" description="T_GAME_QUEST_SCEN3_1_DESC" start="instant" >
+		
+            <onStarted notification="T_GAME_QUEST_SCEN3_1_DESC" >
+				<set-modifier name="mod_rest" tag="map" value="150"/>
+				<set-modifier name="mod_happiness"  tag="map" value="75"/>
+				<set-modifier name="mod_taxes" tag="map" value="85"/>
+				<set-enable-trade lock="true" resource="tools"/>
+				<set-enable-trade lock="true" resource="cloths"/>
+				<set-enable-trade lock="true" resource="jewelry"/>
+			</onStarted>
+                           
+            <start_condition timeout="5"/>
+			
+            <objectives timeout="1">
+                <tribute	resource="tools"	amount="75" />
+                <tribute	resource="cloths"	amount="60" />
+                <tribute	resource="jewelry"	amount="80" />
+            </objectives>
+			
+            <rewards>
+                <resource resource="prestige" amount="80" />
+            </rewards>        
+        </quest>		
+              
+        <quest id="SCENARIO_3_QUEST_2" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_2_NAME" description="T_GAME_QUEST_SCEN3_2_DESC" start="instant">
+		
+            <onStarted notification="T_GAME_QUEST_SCEN3_2_DESC" />
+                         
+            <start_condition timeout="15"/>
+                        
+            <objectives timeout="1">
+				<building	type="building_well"	count="1" />
+            </objectives>
+			
+            <rewards>
+                <resource resource="coins" amount="70" />
+                <resource resource="wood" amount="15" />
+                <start-quest id="SCENARIO_3_QUEST_3" />
+            </rewards>        
+        </quest>
+                
+        <quest id="SCENARIO_3_QUEST_3" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_3_NAME" description="T_GAME_QUEST_SCEN3_3_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_3_DESC" />
+                        
+            <start_condition timeout="25"/>
+                                   
+            <objectives timeout="1">
+                <building	type="building_fishing_lodge"	count="2" />
+                <produce resource="fish" amount="15" />     
+            </objectives>
+                            
+            <rewards>
+                <resource resource="tools" amount="15" />
+                <resource resource="flour" amount="25" />
+                <start-quest id="SCENARIO_3_QUEST_4" />
+                <start-quest id="SCENARIO_3_QUEST_5" />
+            </rewards>       
+        </quest>		
+			
+        <quest id="SCENARIO_3_QUEST_4" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_4_NAME" description="T_GAME_QUEST_SCEN3_4_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_4_DESC" />
+                      
+            <start_condition timeout="35"/>
+                                   
+            <objectives timeout="1">
+                <building	type="building_farm"	count="2" />
+                <produce resource="corn" amount="15"/>  
+            </objectives>
+                            
+            <rewards>
+                <resource resource="prestige" amount="5" />
+                <resource resource="fabric" amount="10" />
+                <start-quest id="SCENARIO_3_QUEST_9" />
+                <start-quest id="SCENARIO_3_QUEST_8" />
+            </rewards>       
+        </quest>		
+		
+        <quest id="SCENARIO_3_QUEST_5" isKeyQuest="true"  title="T_GAME_QUEST_SCEN3_5_NAME" description="T_GAME_QUEST_SCEN3_5_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_5_DESC"/>
+                      
+            <start_condition timeout="20"/>
+			
+            <objectives timeout="1">
+                <building	type="building_mine"	count="1"/>
+            </objectives>                            
+                        
+            <rewards>
+                <resource resource="prestige" amount="5" />
+                <resource resource="nuggets" amount="30" />
+                <start-quest id="SCENARIO_3_QUEST_5_1" />
+                <start-quest id="SCENARIO_3_QUEST_6" />                               
+            </rewards>        
+        </quest>	
+                
+        <quest id="SCENARIO_3_QUEST_5_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_5_1_NAME" start="custom">
+			
+            <start_condition timeout="5"/>
+                        
+            <objectives timeout="1">
+                <building	type="building_mint"	count="1" />
+                <produce resource="iron" amount="15"/>
+            </objectives>                            
+                        
+            <rewards>           
+                <resource resource="prestige" amount="10" />
+                <resource resource="ore" amount="30" />
+                <start-quest id="SCENARIO_3_QUEST_10" />
+                <start-quest id="SCENARIO_3_QUEST_11" />
+            </rewards>        
+        </quest>	
+            
+        <quest id="SCENARIO_3_QUEST_6" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_6_NAME" description="T_GAME_QUEST_SCEN3_6_DESC" start="custom">
+			                        
+            <onStarted notification="T_GAME_QUEST_SCEN3_6_DESC"/>
+                       
+            <start_condition timeout="30"/>
+                        
+            <objectives timeout="1">
+                <construct    type="building_residence_00" count="3"/>
+            </objectives>         
+                        
+            <rewards>      
+                <resource resource="prestige" amount="5" />
+                <resource resource="wood" amount="35" />
+                <start-quest id="SCENARIO_3_QUEST_7"/>                               
+            </rewards>        
+        </quest>		
+                                
+        <quest id="SCENARIO_3_QUEST_7" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_7_NAME" description="T_GAME_QUEST_SCEN3_7_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_7_DESC"/>
+                      
+            <start_condition timeout="15"/>
+                        
+            <objectives timeout="2" >
+                <tax-collected amount="1500" />
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="5" />
+                <resource resource="juice" amount="20"/>  
+                <start-quest id="SCENARIO_3_QUEST_14" />
+            </rewards>        
+        </quest>
+				 
+        <quest id="SCENARIO_3_QUEST_8" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_8_NAME" description="T_GAME_QUEST_SCEN3_8_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_8_DESC"/>
+                        
+            <start_condition timeout="25"/>
+                        
+            <objectives timeout="1">
+                <construct	type="building_sheepwalk"   count="2" />
+                <produce resource="wool" amount="15" />
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="5" />
+                <resource resource="coal" amount="20" />
+                <start-quest id="SCENARIO_3_QUEST_12"/>
+            </rewards>        
+        </quest>		 
+                                
+        <quest id="SCENARIO_3_QUEST_9" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_9_NAME" description="T_GAME_QUEST_SCEN3_9_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_9_DESC" />
+                    
+            <start_condition timeout="15"/>
+                        
+            <objectives timeout="1">
+                <building	type="building_windmill" count="1"/>
+                <produce resource="flour" amount="15"/>  
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="10" />
+                <resource resource="fabric" amount="12" />
+                <start-quest id="SCENARIO_3_QUEST_13"/>
+            </rewards>
+     
+        </quest>        
+                
+        <quest id="SCENARIO_3_QUEST_10" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_10_NAME" description="T_GAME_QUEST_SCEN3_10_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_10_DESC" />
+                     
+            <start_condition timeout="5"/>
+                        
+            <objectives timeout="2">
+                <building	type="building_goldsmith" count="1"/>
+                <produce resource="jewelry" amount="15" />
+            </objectives>
+                        
+            <rewards>     
+                <resource resource="prestige" amount="10" />
+                <resource resource="fish" amount="25" />      
+            </rewards>
+     
+        </quest>        
+                
+        <quest id="SCENARIO_3_QUEST_11" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_11_NAME" description="T_GAME_QUEST_SCEN3_11_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_11_DESC"/>
+                      
+            <start_condition timeout="35"/>
+                        
+            <objectives timeout="1">
+	            <building	type="building_blacksmith" count="1"/>
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="10" />
+                <resource resource="coins" amount="225" />
+            </rewards>
+          
+        </quest>             
+           
+        <quest id="SCENARIO_3_QUEST_12" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_12_NAME" description="T_GAME_QUEST_SCEN3_12_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_12_DESC" />
+                      
+            <start_condition timeout="15"/>
+			
+            <objectives timeout="1">
+                <building	type="building_weaver" count="1"/>
+                <produce resource="fabric" amount="15"/>
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="10" />
+                <resource resource="iron" amount="15" />
+                <start-quest id="SCENARIO_3_QUEST_12_1"/>
+            </rewards>
+     
+        </quest>        
+           
+        <quest id="SCENARIO_3_QUEST_12_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_12_1_NAME" start="custom">
+			        
+            <start_condition timeout="5"/>
+                        
+            <objectives timeout="1" >
+                <building	type="building_tailor" count="1"/>
+                <produce resource="cloths" amount="15"/>
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="10" />
+                <resource resource="gold" amount="15" />
+            </rewards>
+     
+        </quest>        
+           
+        <quest id="SCENARIO_3_QUEST_13" isKeyQuest="true" title="T_GAME_QUEST_SCEN_3_2_NAME" description="T_GAME_QUEST_SCEN3_13_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_13_DESC"/>
+                                              
+            <start_condition timeout="45"/>
+			
+            <objectives timeout="1">
+                <building	type="building_bakery" count="2"/>
+                <produce resource="bread" amount="15"/>
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="15"/>
+                <resource resource="fish" amount="20" />
+            </rewards>
+          
+        </quest>        
+                
+        <quest id="SCENARIO_3_QUEST_14" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_14_NAME" description="T_GAME_QUEST_SCEN3_14_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_14_DESC" />
+                          
+            <start_condition timeout="15"/>
+                        
+            <objectives timeout="1">
+                <building	type="building_church" count="1"/>
+                <happyness type="religion" value="75"/>
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="10" />
+                <resource resource="jewelry" amount="10" />
+                <start-quest id="SCENARIO_3_QUEST_15" />  
+            </rewards>
+          
+        </quest>        
+              
+        <quest id="SCENARIO_3_QUEST_15" isKeyQuest="true" title="T_GAME_QUEST_SCEN3_15_NAME" description="T_GAME_QUEST_SCEN3_15_DESC" start="custom">
+			
+            <onStarted notification="T_GAME_QUEST_SCEN3_15_DESC" />
+                      
+                            
+            <start_condition timeout="15"/>
+			
+            <objectives timeout="1" >
+                <building type="building_tavern" count="1"/>
+                <happyness type="tavern" value="75" />
+            </objectives>
+                        
+            <rewards>
+                <resource resource="prestige" amount="10" />
+                <resource resource="tools" amount="10" />  
+            </rewards>
+     
+        </quest>
+                
+        <quest id="SCENARIO_3_FINISH" isKeyQuest="true" title="SCENARIOEND" start="instant" description="T_GAME_SCENARIOEND_SCEN3"  visible="false">
+            <start_condition timeout="5"/>
+            <onSuccess notification="T_GAME_SCENARIOEND_SCEN3"/> 
+            <objectives timeout="1">    
+                <quest-done id="SCENARIO_3_QUEST_11"/> 
+                <quest-done id="SCENARIO_3_QUEST_10"/> 
+                <quest-done id="SCENARIO_3_QUEST_1"/>
+                <quest-done id="SCENARIO_3_QUEST_13"/>
+                <quest-done id="SCENARIO_3_QUEST_12_1"/>
+                <quest-done id="SCENARIO_3_QUEST_15"/>           
+            </objectives>
+                        
+            <rewards >
+                <set-modifier name="mod_rest" tag="map" value="100"/>
+                <set-modifier name="mod_happiness"  tag="map" value="100"/>
+                <set-modifier name="mod_taxes" tag="map" value="100"/>
+                <set-enable-trade lock="false" resource="tools"/>
+                <set-enable-trade lock="false" resource="cloths"/>
+                <set-enable-trade lock="false" resource="jewelry"/>
+                <set-season season="summer"/>
+                <start-quest id="scenario-finished" />          
+            </rewards>
+        </quest>    
+                
+        <quest id="scenario-finished" start="custom" visible="false" >
+            <start_condition timeout="10"/>
+            <objectives timeout="1"/> 
+            <rewards>
+                <scenario-finished/>
+                <start-quest id="sandbox_start"/>	                                  
+            </rewards>
+        </quest>     
+                                
+        <quest id="sandbox_start" avatar="client" start="custom" description="T_GAME_SANDBOX_START" visible="false" >       
+            <start_condition timeout="10"/>     
+            <onSuccess notification="T_GAME_SANDBOX_START"/>       
+            <objectives timeout="1"/>  
+            <rewards>      
+                <start-quest id="SANDBOX_QUEST_META"/>
+                <start-quest id="SANDBOX_QUEST_META_DISASTER"/>	  
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />         
+            </rewards>    
+        </quest>         
+                
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" >
+                <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" />
+            <rewards>
+                <lightningstrike topLeftX="38" topLeftY="72" bottomRightX="66" bottomRightY="114" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->  
+
+    </group>
+</questdb>
+

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:be902380a4c2217f4a54ab86584074f9:e7b6fd2a5cc0e01a326cccc24f6c38c1:6f50b75ec8e6051a2285f9931f7f77ab$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="fonts.png" width="128" height="256">
+    <sprite n="bar_0" x="116" y="1" w="11" h="22" pX="0.5" pY="0.5"/>
+    <sprite n="bar_1" x="47" y="95" w="22" h="8" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_2" x="24" y="84" w="22" h="10" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_3" x="116" y="24" w="11" h="22" pX="0.5" pY="0.5"/>
+    <sprite n="bar_4" x="93" y="44" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_5" x="1" y="85" w="22" h="10" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_6" x="116" y="47" w="11" h="22" pX="0.5" pY="0.5"/>
+    <sprite n="bar_7" x="47" y="84" w="22" h="10" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_8" x="116" y="70" w="11" h="22" pX="0.5" pY="0.5"/>
+    <sprite n="bar_9" x="70" y="71" w="22" h="11" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_colon" x="17" y="182" w="14" h="7" pX="0.5" pY="0.5" oX="0" oY="4" oW="7" oH="22" r="y"/>
+    <sprite n="bar_comma" x="27" y="190" w="8" h="7" pX="0.5" pY="0.5" oX="0" oY="13" oW="7" oH="22" r="y"/>
+    <sprite n="bar_equal" x="1" y="175" w="15" h="12" pX="0.5" pY="0.5" oX="0" oY="3" oW="12" oH="22" r="y"/>
+    <sprite n="bar_infinite" x="111" y="152" w="16" h="16" pX="0.5" pY="0.5" oX="0" oY="4" oW="16" oH="22"/>
+    <sprite n="bar_minus" x="92" y="194" w="12" h="10" pX="0.5" pY="0.5" oX="0" oY="6" oW="12" oH="22"/>
+    <sprite n="bar_percent" x="24" y="16" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_period" x="27" y="198" w="7" h="7" pX="0.5" pY="0.5" oX="0" oY="13" oW="7" oH="22"/>
+    <sprite n="bar_plus" x="61" y="160" w="16" h="13" pX="0.5" pY="0.5" oX="0" oY="3" oW="13" oH="22" r="y"/>
+    <sprite n="bar_slash" x="93" y="57" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="bar_x" x="93" y="173" w="14" h="13" pX="0.5" pY="0.5" oX="0" oY="4" oW="13" oH="22" r="y"/>
+    <sprite n="gold_0" x="24" y="106" w="21" h="12" pX="0.5" pY="0.5" oX="0" oY="0" oW="12" oH="22" r="y"/>
+    <sprite n="gold_1" x="45" y="131" w="21" h="9" pX="0.5" pY="0.5" oX="0" oY="0" oW="9" oH="22" r="y"/>
+    <sprite n="gold_2" x="116" y="93" w="11" h="21" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22"/>
+    <sprite n="gold_3" x="23" y="119" w="21" h="11" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22" r="y"/>
+    <sprite n="gold_4" x="24" y="58" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="gold_5" x="1" y="107" w="21" h="12" pX="0.5" pY="0.5" oX="0" oY="0" oW="12" oH="22" r="y"/>
+    <sprite n="gold_6" x="92" y="95" w="21" h="12" pX="0.5" pY="0.5" oX="0" oY="0" oW="12" oH="22" r="y"/>
+    <sprite n="gold_7" x="70" y="83" w="22" h="11" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="gold_8" x="1" y="120" w="21" h="11" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22" r="y"/>
+    <sprite n="gold_9" x="45" y="119" w="21" h="11" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22" r="y"/>
+    <sprite n="gold_colon" x="71" y="174" w="6" h="13" pX="0.5" pY="0.5" oX="0" oY="4" oW="6" oH="22"/>
+    <sprite n="gold_comma" x="118" y="197" w="9" h="6" pX="0.5" pY="0.5" oX="0" oY="12" oW="6" oH="22" r="y"/>
+    <sprite n="gold_equal" x="1" y="188" w="13" h="12" pX="0.5" pY="0.5" oX="0" oY="4" oW="12" oH="22" r="y"/>
+    <sprite n="gold_infinite" x="111" y="134" w="16" h="17" pX="0.5" pY="0.5" oX="0" oY="2" oW="16" oH="22"/>
+    <sprite n="gold_minus" x="105" y="197" w="12" h="8" pX="0.5" pY="0.5" oX="0" oY="7" oW="12" oH="22"/>
+    <sprite n="gold_negative_0" x="92" y="108" w="21" h="12" pX="0.5" pY="0.5" oX="0" oY="0" oW="12" oH="22" r="y"/>
+    <sprite n="gold_negative_1" x="67" y="135" w="21" h="9" pX="0.5" pY="0.5" oX="0" oY="0" oW="9" oH="22" r="y"/>
+    <sprite n="gold_negative_2" x="67" y="123" w="21" h="11" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22" r="y"/>
+    <sprite n="gold_negative_3" x="89" y="134" w="21" h="11" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22" r="y"/>
+    <sprite n="gold_negative_4" x="1" y="59" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="gold_negative_5" x="23" y="131" w="21" h="11" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22" r="y"/>
+    <sprite n="gold_negative_6" x="69" y="110" w="21" h="12" pX="0.5" pY="0.5" oX="0" oY="0" oW="12" oH="22" r="y"/>
+    <sprite n="gold_negative_7" x="93" y="83" w="22" h="11" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="gold_negative_8" x="1" y="132" w="21" h="11" pX="0.5" pY="0.5" oX="0" oY="0" oW="11" oH="22" r="y"/>
+    <sprite n="gold_negative_9" x="91" y="121" w="21" h="12" pX="0.5" pY="0.5" oX="0" oY="0" oW="12" oH="22" r="y"/>
+    <sprite n="gold_negative_colon" x="92" y="187" w="13" h="6" pX="0.5" pY="0.5" oX="0" oY="4" oW="6" oH="22" r="y"/>
+    <sprite n="gold_negative_comma" x="118" y="204" w="9" h="6" pX="0.5" pY="0.5" oX="0" oY="12" oW="6" oH="22" r="y"/>
+    <sprite n="gold_negative_equal" x="78" y="187" w="13" h="12" pX="0.5" pY="0.5" oX="0" oY="4" oW="12" oH="22" r="y"/>
+    <sprite n="gold_negative_infinite" x="45" y="141" w="18" h="15" pX="0.5" pY="0.5" oX="0" oY="4" oW="18" oH="22"/>
+    <sprite n="gold_negative_minus" x="51" y="188" w="12" h="8" pX="0.5" pY="0.5" oX="0" oY="7" oW="12" oH="22"/>
+    <sprite n="gold_negative_percent" x="70" y="95" w="21" h="14" pX="0.5" pY="0.5" oX="0" oY="0" oW="14" oH="22" r="y"/>
+    <sprite n="gold_negative_period" x="36" y="190" w="8" h="6" pX="0.5" pY="0.5" oX="0" oY="12" oW="6" oH="22" r="y"/>
+    <sprite n="gold_negative_plus" x="108" y="183" w="14" h="13" pX="0.5" pY="0.5" oX="0" oY="4" oW="13" oH="22" r="y"/>
+    <sprite n="gold_negative_slash" x="47" y="16" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="gold_negative_x" x="78" y="161" w="15" h="11" pX="0.5" pY="0.5" oX="0" oY="3" oW="11" oH="22" r="y"/>
+    <sprite n="gold_percent" x="47" y="104" w="21" h="14" pX="0.5" pY="0.5" oX="0" oY="0" oW="14" oH="22" r="y"/>
+    <sprite n="gold_period" x="36" y="197" w="8" h="6" pX="0.5" pY="0.5" oX="0" oY="12" oW="6" oH="22" r="y"/>
+    <sprite n="gold_plus" x="56" y="174" w="14" h="13" pX="0.5" pY="0.5" oX="0" oY="4" oW="13" oH="22" r="y"/>
+    <sprite n="gold_slash" x="70" y="16" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="gold_x" x="94" y="161" w="15" h="11" pX="0.5" pY="0.5" oX="0" oY="3" oW="11" oH="22" r="y"/>
+    <sprite n="resources_0" x="93" y="16" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_1" x="24" y="95" w="22" h="10" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_2" x="47" y="58" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_3" x="24" y="30" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_4" x="1" y="1" w="22" h="14" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_5" x="70" y="58" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_6" x="1" y="31" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_7" x="93" y="70" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_8" x="47" y="30" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_9" x="70" y="30" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_colon" x="39" y="172" w="16" h="8" pX="0.5" pY="0.5" oX="0" oY="2" oW="8" oH="22" r="y"/>
+    <sprite n="resources_comma" x="36" y="181" w="14" h="8" pX="0.5" pY="0.5" oX="0" oY="8" oW="8" oH="22" r="y"/>
+    <sprite n="resources_equal" x="1" y="160" w="17" h="14" pX="0.5" pY="0.5" oX="0" oY="2" oW="14" oH="22" r="y"/>
+    <sprite n="resources_infinite" x="23" y="143" w="18" h="15" pX="0.5" pY="0.5" oX="0" oY="4" oW="18" oH="22"/>
+    <sprite n="resources_minus" x="110" y="169" w="14" h="13" pX="0.5" pY="0.5" oX="0" oY="4" oW="14" oH="22"/>
+    <sprite n="resources_negative_0" x="93" y="30" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_1" x="1" y="96" w="22" h="10" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_2" x="24" y="71" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_3" x="24" y="44" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_4" x="24" y="1" w="22" h="14" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_5" x="1" y="72" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_6" x="1" y="45" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_7" x="47" y="71" w="22" h="12" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_8" x="47" y="44" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_9" x="70" y="44" w="22" h="13" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_colon" x="19" y="173" w="16" h="8" pX="0.5" pY="0.5" oX="0" oY="2" oW="8" oH="22" r="y"/>
+    <sprite n="resources_negative_comma" x="101" y="146" w="9" h="14" pX="0.5" pY="0.5" oX="0" oY="8" oW="9" oH="22"/>
+    <sprite n="resources_negative_equal" x="83" y="146" w="17" h="14" pX="0.5" pY="0.5" oX="0" oY="2" oW="14" oH="22" r="y"/>
+    <sprite n="resources_negative_infinite" x="1" y="144" w="18" h="15" pX="0.5" pY="0.5" oX="0" oY="4" oW="18" oH="22"/>
+    <sprite n="resources_negative_minus" x="78" y="173" w="14" h="13" pX="0.5" pY="0.5" oX="0" oY="4" oW="14" oH="22"/>
+    <sprite n="resources_negative_percent" x="47" y="1" w="22" h="14" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_period" x="64" y="188" w="11" h="8" pX="0.5" pY="0.5" oX="0" oY="10" oW="8" oH="22" r="y"/>
+    <sprite n="resources_negative_plus" x="64" y="145" w="18" h="14" pX="0.5" pY="0.5" oX="0" oY="2" oW="14" oH="22" r="y"/>
+    <sprite n="resources_negative_slash" x="70" y="1" w="22" h="14" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_negative_x" x="114" y="115" w="13" h="18" pX="0.5" pY="0.5" oX="0" oY="2" oW="13" oH="22"/>
+    <sprite n="resources_percent" x="93" y="1" w="22" h="14" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_period" x="15" y="190" w="11" h="8" pX="0.5" pY="0.5" oX="0" oY="10" oW="8" oH="22" r="y"/>
+    <sprite n="resources_plus" x="42" y="157" w="18" h="14" pX="0.5" pY="0.5" oX="0" oY="2" oW="14" oH="22" r="y"/>
+    <sprite n="resources_slash" x="1" y="16" w="22" h="14" pX="0.5" pY="0.5" r="y"/>
+    <sprite n="resources_x" x="20" y="159" w="18" h="13" pX="0.5" pY="0.5" oX="0" oY="2" oW="13" oH="22" r="y"/>
+</TextureAtlas>

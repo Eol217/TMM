@@ -1,0 +1,68 @@
+[random_start]
+
+next:	cook1			1
+next:	walkin			0.5
+next:	walkout			0.5
+
+
+[cook1]
+frame:	ani_butcher_00.0.png		0.15
+
+
+next:	cook2			1
+
+[cook2]
+play_ambient: sfx_buildings_butcher_kettle_long
+frame:	ani_butcher_00.1.png		0.2
+frame:	ani_butcher_00.2.png		0.2
+frame:	ani_butcher_00.1.png		0.2
+frame:	ani_butcher_00.2.png		0.2
+frame:	ani_butcher_00.1.png		0.2
+frame:	ani_butcher_00.2.png		0.2
+
+next:	cook2			0.75
+next:	cook3			1
+
+[cook3]
+frame:	ani_butcher_00.3.png		0.15
+frame:	ani_butcher_00.4.png		0.15
+frame:	ani_butcher_00.5.png		0.15
+frame:	ani_butcher_00.6.png		0.15
+frame:	ani_butcher_00.0.png		0.2
+
+delay:	0.1		1.00
+
+next:	cook1			1
+next:	walkin			0.75
+
+
+[walkin]
+frame:	ani_butcher_00.7.png		0.15
+frame:	ani_butcher_00.8.png		0.15
+frame:	ani_butcher_00.9.png		0.15
+frame:	ani_butcher_00.10.png		0.15
+frame:	ani_butcher_00.11.png		0.15
+frame:	ani_butcher_00.12.png		0.15
+frame:	ani_butcher_00.13.png		0.15
+play_ambient: sfx_buildings_butcher_meatgrinder
+frame:	ani_butcher_00.19.png		3
+
+delay:	0.5	1
+
+next:	walkout			1
+
+[walkout]
+frame:	ani_butcher_00.14.png		0.15
+frame:	ani_butcher_00.15.png		0.15
+frame:	ani_butcher_00.16.png		0.15
+frame:	ani_butcher_00.17.png		0.15
+frame:	ani_butcher_00.18.png		0.15
+frame:	ani_butcher_00.0.png		0.5
+
+delay:	0.5		2
+
+next:	cook1			1
+next:	walkin			0.5
+
+
+

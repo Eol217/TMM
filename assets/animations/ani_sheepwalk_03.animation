@@ -1,0 +1,40 @@
+[start_random]
+
+next:	sheep_sit_0			1.00
+next:	sheep_sit_1			1.00
+next:	sheep_sit_2			1.00
+
+
+
+[sheep_sit_0]
+
+frame:	ani_sheepwalk_03.00.png		1.00
+
+delay:	0.50	10.00
+
+next:	sheep_sit_1			1.00
+next:	sheep_sit_2			1.00
+
+
+[sheep_sit_1]
+
+frame:	ani_sheepwalk_03.01.png		1.00
+
+delay:	1.00	20.00
+
+next:	sheep_sit_0			1.00
+
+
+[sheep_sit_2]
+
+frame:	ani_sheepwalk_03.02.png		1.00
+
+delay:	1.00	20.00
+
+next:	sheep_sit_0			1.00
+
+
+
+
+
+

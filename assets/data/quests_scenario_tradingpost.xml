@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+<!-- Trading post scenario
+	200 prestige earned
+-->
+
+<questdb>
+    
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+    
+	<group avatar="client">
+		<quest id="SCENARIO_5_QUEST_1" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_1_NAME" description="T_GAME_QUEST_SCEN5_1_DESC" start="instant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_1_DESC" >
+				<set-modifier name="mod_taxes" tag="quest" value="75" />
+			</onStarted>
+                        
+			<start_condition timeout="10" operator="and"/>
+                        
+			<objectives timeout="1" operator="and">
+				<produce resource="planks" amount="30"/>
+			</objectives>
+			
+			<rewards>
+
+				<resource resource="prestige" amount="15" />
+				<resource resource="cloths" amount="10" />
+				<start-quest id="SCENARIO_5_QUEST_2" />
+				<start-quest id="SCENARIO_5_QUEST_4" />
+			</rewards>
+		</quest>
+              
+		<quest id="SCENARIO_5_QUEST_2" isKeyQuest="true" title="T_GAME_QUEST_GENERIC_COMMUNITY_NAME" description="T_GAME_QUEST_SCEN5_2_DESC" start="custom" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_2_DESC" />
+                           
+			<start_condition timeout="45" operator="and"/>
+                              
+			<objectives timeout="1" operator="and">
+				<building type="building_tavern" count="1"/>
+				<happyness type="tavern"  value="75"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="brew" amount="15" />
+				<resource resource="coins" amount="200" />
+				<start-quest id="SCENARIO_5_QUEST_5" />
+				<start-quest id="SCENARIO_5_QUEST_3" />
+			</rewards>
+		</quest>
+              
+		<quest id="SCENARIO_5_QUEST_3" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_3_NAME" description="T_GAME_QUEST_SCEN5_3_DESC" start="custom" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_3_DESC" />
+                        
+			<start_condition timeout="20" operator="and"/>
+                        
+			<objectives timeout="1" operator="and">
+				<trade-profit amount="1500"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<resource resource="tools" amount="10"/>
+				<start-quest id="SCENARIO_5_QUEST_4" />
+			</rewards>
+		</quest>
+                
+		<quest id="SCENARIO_5_QUEST_4" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_4_NAME" description="T_GAME_QUEST_SCEN5_4_DESC" start="custom" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_4_DESC" />
+                       
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<stock resource="fabric" amount="35"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="15" />
+				<resource resource="jewelry" amount="10" />
+			</rewards>
+		</quest>
+                
+		<quest id="SCENARIO_5_QUEST_5" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_5_NAME" description="T_GAME_QUEST_SCEN5_5_DESC" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_5_DESC" />
+                            
+			<start_condition timeout="180" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="stone" amount="50"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="15"/>
+				<resource resource="coins" amount="300" />
+				<start-quest id="SCENARIO_5_QUEST_6" />
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_5_QUEST_6" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_6_NAME" description="T_GAME_QUEST_SCEN5_6_DESC" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_6_DESC" />
+
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="iron" amount="65"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="15" />
+				<resource resource="coins" amount="500" />
+				<start-quest id="SCENARIO_5_QUEST_7" />
+				<start-quest id="SCENARIO_5_QUEST_8"/>
+			</rewards>
+		</quest>
+   
+		<quest id="SCENARIO_5_QUEST_7" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_7_NAME" description="T_GAME_QUEST_SCEN5_7_DESC" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_7_DESC" />
+
+			<start_condition timeout="15" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<produce resource="tools" amount="25"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="10"/>
+				<resource resource="cloths" amount="15"/>
+			</rewards>
+		</quest>
+  
+		<quest id="SCENARIO_5_QUEST_8" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_8_NAME" description="T_GAME_QUEST_SCEN5_8_DESC" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_8_DESC" />
+
+			<start_condition timeout="20" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="fish" amount="25"/>
+				<tribute resource="bread" amount="25"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="20" />
+				<resource resource="jewelry" amount="10" />
+				<start-quest id="SCENARIO_5_QUEST_9"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_5_QUEST_9" isKeyQuest="true" title="T_GAME_QUEST_DESIRES_12_TITLE" description="T_GAME_QUEST_SCEN5_9_DESC" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_9_DESC" />
+
+			<start_condition timeout="30" operator="and"/>
+
+			<objectives timeout="10" operator="and">
+				<building type="building_jousting" count="1"/>
+				<happyness type="entertainment" value="75"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="10" />
+				<resource resource="cloths" amount="15" />
+				<start-quest id="SCENARIO_5_QUEST_10"/>
+			</rewards>
+		</quest>
+  
+		<quest id="SCENARIO_5_QUEST_10" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_10_NAME" description="T_GAME_QUEST_SCEN5_10_DESC" start="custom" avatar="knight">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_10_DESC" />
+
+			<start_condition timeout="40" operator="and"/>
+
+			<objectives timeout="1" operator="and">
+				<tribute resource="juice" amount="45"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="25"/>
+				<resource resource="tools" amount="15"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_5_QUEST_11" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_11_NAME" description="T_GAME_QUEST_SCEN5_11_DESC" start="instant" avatar="merchant">
+		
+			<onStarted notification="T_GAME_QUEST_SCEN5_11_DESC" />
+
+			<start_condition timeout="20" operator="and">
+				<quest-done id="SCENARIO_5_QUEST_4"/>
+				<quest-done id="SCENARIO_5_QUEST_7"/>
+				<quest-done id="SCENARIO_5_QUEST_10"/>
+			</start_condition>
+
+			<objectives timeout="1" operator="and">
+				<trade-profit amount="2500"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="20"/>
+			</rewards>
+		</quest>
+
+		<quest id="SCENARIO_END" isKeyQuest="true" title="T_GAME_QUEST_SCEN5_MAIN_NAME" visible="true" start="instant">
+
+			<onSuccess notification="T_GAME_QUEST_SCEN5_SUCESS"/>
+
+			<objectives timeout="1" operator="and">
+				<quest-done id="SCENARIO_5_QUEST_11"/>
+			</objectives>
+			
+			<rewards>
+				<resource resource="prestige" amount="75"/>
+				<start-quest id="SCENARIO_FINISHED" />
+                
+			</rewards>
+		</quest>
+                
+                
+		<quest visible="false" id="SCENARIO_FINISHED" title="T_GAME_QUEST_SCEN_FINISHED_NAME" description="T_GAME_QUEST_SCEN_FINISHED_DESC" start="custom">
+                       
+			<start_condition timeout="5" operator="and"/>
+			<onStarted >
+				<scenario-finished />
+				<remove-modifier-by-tag tag="quest" />
+			</onStarted>
+            
+			<objectives timeout="5" operator="and"/>
+
+			<onSuccess notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+                        
+			<rewards >
+				<start-quest id="SANDBOX_QUEST_META"/>
+				<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+				<set-season season="autumn"/>
+				<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+			</rewards>
+		</quest>
+        
+		<!-- STORM --> 
+		<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+			<objectives timeout="1" operator="and" >
+				<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+			</objectives>
+			<fail_condition timeout="2"  operator="and"/>
+			<rewards>
+				<lightningstrike topLeftX="38" topLeftY="45" bottomRightX="82" bottomRightY="83" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+			</rewards>
+		</quest>
+		<!-- STORM END -->  
+    
+	</group>
+</questdb>
+

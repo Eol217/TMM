@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<questdb>
+
+	<include file = "data/common-quests.xml"/>
+	<include file = "data/quests_sandbox.xml"/>
+
+    <group avatar="farmer">
+      
+        <quest id="SANDBOX_STARTQUEST" title="Welcome to sandbox mode." description="T_GAME_QUEST_SANDBOX_MAPSTART_GREETING_CANYON" start="instant" finish="instant" visible="false">
+            <start_condition timeout="2" operator="and"/>
+            <onSuccess  notification="T_GAME_QUEST_SANDBOX_MAPSTART_GREETING_CANYON"/>
+            <objectives timeout="2" operator="and"/>
+            <rewards>
+                <start-quest id="SANDBOX_QUEST_META"/>
+                <start-quest id="SANDBOX_QUEST_META_MILITARY_IF_ENABLED" />
+                <start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+            </rewards> 
+        </quest> 
+           
+        <quest id="SANDBOX_START_VALUES" start="instant" visible="false" finish="instant" repeatable="custom" >
+            <rewards>
+                <set-flag key="sandbox_map_has_avalanche" value="true" />
+                <set-flag key="sandbox_map_has_thunderstorm" value="true" />
+            </rewards>
+        </quest>
+        
+        <quest id="SANDBOX_AVALANCHE_LAUNCHER" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <onStarted >
+                <start-quest id="SANDBOX_AVALANCHE_TICKET" />
+            </onStarted>
+            <objectives timeout="1" operator="and" >
+                <random chance="50" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards >
+                <start-quest id="SANDBOX_AVALANCHE_1" />
+            </rewards>
+            <onFailed >
+                <start-quest id="SANDBOX_AVALANCHE_0" />
+            </onFailed>
+        </quest>
+        <quest id="SANDBOX_AVALANCHE_TICKET" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="10" operator="and" />
+            <ticket title="T_SANDBOX_AVALANCHE_TICKET" type="negative" />
+        </quest>
+        <quest id="SANDBOX_AVALANCHE_1" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and">
+                <random chance="50" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards>
+                <avalanche topLeftX="47" topLeftY="54" bottomRightX="57" bottomRightY="78" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="1" startOrientation="topRight" />
+            </rewards>
+            <onFailed>
+                <avalanche topLeftX="47" topLeftY="54" bottomRightX="57" bottomRightY="78" minValue="-30" maxValue="-20" destroyOnNoDurability="true" avalancheSize="1" startOrientation="topRight" />
+            </onFailed>
+        </quest>       
+        <quest id="SANDBOX_AVALANCHE_0" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+                <random chance="50" />
+            </objectives>
+            <fail_condition timeout="2" operator="and" />
+            <rewards>
+                <avalanche topLeftX="58" topLeftY="52" bottomRightX="78" bottomRightY="66" minValue="-60" maxValue="-50" destroyOnNoDurability="false" avalancheSize="1" startOrientation="topLeft" />
+            </rewards>
+            <onFailed>
+                <avalanche topLeftX="58" topLeftY="52" bottomRightX="78" bottomRightY="66" minValue="-30" maxValue="-20" destroyOnNoDurability="true" avalancheSize="1" startOrientation="topLeft" />
+            </onFailed>
+        </quest>
+        
+<!-- STORM --> 
+        <quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+            <objectives timeout="1" operator="and" >
+               <flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+            </objectives>
+            <fail_condition timeout="2" operator="and"/>
+            <rewards>
+                <lightningstrike topLeftX="29" topLeftY="42" bottomRightX="106" bottomRightY="86" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+            </rewards>
+        </quest>
+<!-- STORM END -->      
+
+    </group>
+  
+</questdb>

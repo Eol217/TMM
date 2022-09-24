@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:dd3739df31f91eb631ca85915e0b8403:7c413cb35423adf233c8da5a01d334ca:2e9837b65f55ef2a186d71ace9220a63$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="buildings_03.png" width="2048" height="2048">
+    <sprite n="ambient_1x1_b_armor" x="922" y="1802" w="26" h="38" pX="0.5" pY="0.5" oX="29" oY="15" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_bones" x="1659" y="412" w="17" h="42" pX="0.5" pY="0.5" oX="25" oY="27" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_club" x="590" y="389" w="20" h="23" pX="0.5" pY="0.5" oX="38" oY="20" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_crate" x="254" y="1657" w="30" h="45" pX="0.5" pY="0.5" oX="11" oY="12" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_flag" x="315" y="1763" w="61" h="38" pX="0.5" pY="0.5" oX="13" oY="12" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_helmet" x="590" y="413" w="20" h="18" pX="0.5" pY="0.5" oX="24" oY="25" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_loot_01" x="1135" y="440" w="22" h="41" pX="0.5" pY="0.5" oX="23" oY="17" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_loot_02" x="559" y="1541" w="38" h="37" pX="0.5" pY="0.5" oX="11" oY="14" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_loot_03" x="606" y="1697" w="34" h="28" pX="0.5" pY="0.5" oX="20" oY="6" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_loot_04" x="315" y="1726" w="45" h="36" pX="0.5" pY="0.5" oX="21" oY="13" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_loot_05" x="1135" y="379" w="23" h="30" pX="0.5" pY="0.5" oX="9" oY="19" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_loot_06" x="1337" y="1443" w="43" h="31" pX="0.5" pY="0.5" oX="19" oY="14" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_loot_07" x="314" y="1485" w="33" h="41" pX="0.5" pY="0.5" oX="8" oY="9" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_loot_08" x="885" y="1885" w="35" h="40" pX="0.5" pY="0.5" oX="32" oY="4" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_shield_01" x="929" y="1706" w="41" h="26" pX="0.5" pY="0.5" oX="24" oY="19" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_shield_02" x="590" y="263" w="21" h="26" pX="0.5" pY="0.5" oX="14" oY="18" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_shield_03" x="1135" y="552" w="18" h="40" pX="0.5" pY="0.5" oX="11" oY="28" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_sign" x="971" y="1698" w="35" h="29" pX="0.5" pY="0.5" oX="33" oY="0" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_b_spear_01" x="1659" y="455" w="13" h="37" pX="0.5" pY="0.5" oX="51" oY="0" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_spear_02" x="1647" y="636" w="24" h="39" pX="0.5" pY="0.5" oX="20" oY="7" oW="74" oH="79"/>
+    <sprite n="ambient_1x1_b_swords" x="790" y="1885" w="32" h="44" pX="0.5" pY="0.5" oX="19" oY="18" oW="74" oH="79" r="y"/>
+    <sprite n="ambient_1x1_dixi" x="529" y="1645" w="55" h="49" pX="0.5" pY="0.5" oX="9" oY="0" oW="64" oH="80"/>
+    <sprite n="ambient_1x1_dixi_snow" x="182" y="1802" w="47" h="48" pX="0.5" pY="0.5" oX="10" oY="0" oW="64" oH="80"/>
+    <sprite n="ambient_1x1_ruins_00" x="1522" y="1213" w="41" h="51" pX="0.5" pY="0.5" oX="13" oY="24" oW="64" oH="95" r="y"/>
+    <sprite n="ambient_1x1_ruins_00_snow" x="381" y="1485" w="47" h="37" pX="0.5" pY="0.5" oX="15" oY="25" oW="64" oH="95"/>
+    <sprite n="ambient_1x1_ruins_01" x="1010" y="1489" w="52" h="65" pX="0.5" pY="0.5" oX="11" oY="11" oW="76" oH="95" r="y"/>
+    <sprite n="ambient_1x1_ruins_01_snow" x="468" y="1645" w="60" h="49" pX="0.5" pY="0.5" oX="11" oY="11" oW="76" oH="95"/>
+    <sprite n="ambient_1x1_ruins_02" x="749" y="1885" w="40" h="46" pX="0.5" pY="0.5" oX="10" oY="23" oW="64" oH="95" r="y"/>
+    <sprite n="ambient_1x1_ruins_02_snow" x="1337" y="1404" w="43" h="38" pX="0.5" pY="0.5" oX="11" oY="23" oW="64" oH="95"/>
+    <sprite n="ambient_1x1_ruins_03" x="1012" y="1355" w="50" h="47" pX="0.5" pY="0.5" oX="8" oY="15" oW="64" oH="95"/>
+    <sprite n="ambient_1x1_ruins_03_snow" x="1337" y="1316" w="43" h="46" pX="0.5" pY="0.5" oX="9" oY="17" oW="64" oH="95" r="y"/>
+    <sprite n="ambient_1x1_ruins_04" x="555" y="1697" w="50" h="28" pX="0.5" pY="0.5" oX="6" oY="32" oW="64" oH="95"/>
+    <sprite n="ambient_1x1_ruins_04_snow" x="641" y="1885" w="26" h="45" pX="0.5" pY="0.5" oX="9" oY="32" oW="64" oH="95" r="y"/>
+    <sprite n="ambient_1x1_ruins_05" x="949" y="1802" w="27" h="31" pX="0.5" pY="0.5" oX="18" oY="3" oW="64" oH="66" r="y"/>
+    <sprite n="ambient_1x1_ruins_05_snow" x="921" y="1883" w="27" h="25" pX="0.5" pY="0.5" oX="19" oY="4" oW="64" oH="66"/>
+    <sprite n="ambient_1x1_ruins_06" x="1337" y="1249" w="43" h="66" pX="0.5" pY="0.5" oX="4" oY="2" oW="72" oH="70" r="y"/>
+    <sprite n="ambient_1x1_ruins_06_snow" x="946" y="1657" w="61" h="40" pX="0.5" pY="0.5" oX="7" oY="2" oW="72" oH="70"/>
+    <sprite n="ambient_1x1_skeleton" x="1647" y="676" w="24" h="34" pX="0.5" pY="0.5" oX="16" oY="3" oW="64" oH="64" r="y"/>
+    <sprite n="ambient_1x1_waypoint" x="627" y="1579" w="47" h="29" pX="0.5" pY="0.5" oX="23" oY="14" oW="64" oH="82" r="y"/>
+    <sprite n="ani_1x1_tent.0" x="1659" y="521" w="12" h="27" pX="0.5" pY="0.5" oX="62" oY="19" oW="128" oH="126" r="y"/>
+    <sprite n="ani_1x1_tent.1" x="1659" y="549" w="12" h="27" pX="0.5" pY="0.5" oX="62" oY="19" oW="128" oH="126" r="y"/>
+    <sprite n="ani_1x1_tent.2" x="1659" y="493" w="13" h="27" pX="0.5" pY="0.5" oX="62" oY="18" oW="128" oH="126" r="y"/>
+    <sprite n="ani_archery_contest_00.0" x="263" y="429" w="3" h="3" pX="0.5" pY="0.5" oX="0" oY="0" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.0" x="409" y="1802" w="29" h="48" pX="0.5" pY="0.5" oX="146" oY="160" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.1" x="263" y="730" w="48" h="32" pX="0.5" pY="0.5" oX="143" oY="159" oW="241" oH="267" r="y"/>
+    <sprite n="ani_archery_contest_01.2" x="826" y="1800" w="33" h="49" pX="0.5" pY="0.5" oX="142" oY="159" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.3" x="2018" y="1226" w="29" h="53" pX="0.5" pY="0.5" oX="146" oY="155" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.4" x="806" y="1148" w="78" h="69" pX="0.5" pY="0.5" oX="102" oY="139" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.5" x="782" y="1454" w="100" h="72" pX="0.5" pY="0.5" oX="75" oY="136" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.6" x="782" y="1454" w="100" h="72" pX="0.5" pY="0.5" oX="75" oY="136" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.7" x="781" y="1527" w="100" h="72" pX="0.5" pY="0.5" oX="75" oY="136" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.8" x="781" y="1600" w="100" h="72" pX="0.5" pY="0.5" oX="75" oY="136" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_01.9" x="409" y="1802" w="29" h="48" pX="0.5" pY="0.5" oX="146" oY="160" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_02.0" x="439" y="1802" w="28" h="48" pX="0.5" pY="0.5" oX="174" oY="143" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_02.1" x="860" y="1800" w="31" h="49" pX="0.5" pY="0.5" oX="171" oY="142" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_02.2" x="1008" y="1662" w="55" h="31" pX="0.5" pY="0.5" oX="173" oY="136" oW="241" oH="267" r="y"/>
+    <sprite n="ani_archery_contest_02.3" x="1803" y="1141" w="62" h="77" pX="0.5" pY="0.5" oX="133" oY="129" oW="241" oH="267" r="y"/>
+    <sprite n="ani_archery_contest_02.4" x="212" y="1078" w="103" h="64" pX="0.5" pY="0.5" oX="99" oY="127" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_02.5" x="507" y="1235" w="103" h="64" pX="0.5" pY="0.5" oX="99" oY="127" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_02.6" x="507" y="1235" w="103" h="64" pX="0.5" pY="0.5" oX="99" oY="127" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_02.7" x="507" y="1300" w="103" h="64" pX="0.5" pY="0.5" oX="99" oY="127" oW="241" oH="267"/>
+    <sprite n="ani_archery_contest_02.8" x="1272" y="1516" w="64" h="103" pX="0.5" pY="0.5" oX="99" oY="127" oW="241" oH="267" r="y"/>
+    <sprite n="ani_archery_contest_02.9" x="439" y="1802" w="28" h="48" pX="0.5" pY="0.5" oX="174" oY="143" oW="241" oH="267"/>
+    <sprite n="ani_armory_00.0" x="2021" y="1131" w="26" h="47" pX="0.5" pY="0.5" oX="99" oY="109" oW="192" oH="194"/>
+    <sprite n="ani_armory_00.1" x="2021" y="1179" w="26" h="46" pX="0.5" pY="0.5" oX="99" oY="110" oW="192" oH="194"/>
+    <sprite n="ani_armory_00.2" x="779" y="1802" w="46" h="47" pX="0.5" pY="0.5" oX="79" oY="110" oW="192" oH="194"/>
+    <sprite n="ani_armory_00.3" x="882" y="1706" w="46" h="26" pX="0.5" pY="0.5" oX="99" oY="110" oW="192" oH="194" r="y"/>
+    <sprite n="ani_banditcamp_00.0" x="590" y="234" w="21" h="28" pX="0.5" pY="0.5" oX="216" oY="1" oW="288" oH="201" r="y"/>
+    <sprite n="ani_banditcamp_00.1" x="1135" y="593" w="18" h="28" pX="0.5" pY="0.5" oX="216" oY="1" oW="288" oH="201" r="y"/>
+    <sprite n="ani_banditcamp_00.2" x="1135" y="522" w="19" h="29" pX="0.5" pY="0.5" oX="215" oY="0" oW="288" oH="201" r="y"/>
+    <sprite n="ani_banditcamp_00.3" x="1135" y="410" w="23" h="29" pX="0.5" pY="0.5" oX="215" oY="1" oW="288" oH="201" r="y"/>
+    <sprite n="ani_barracks_00.0" x="1659" y="521" w="12" h="27" pX="0.5" pY="0.5" oX="177" oY="11" oW="384" oH="280" r="y"/>
+    <sprite n="ani_barracks_00.1" x="1659" y="549" w="12" h="27" pX="0.5" pY="0.5" oX="177" oY="11" oW="384" oH="280" r="y"/>
+    <sprite n="ani_barracks_00.2" x="1659" y="493" w="13" h="27" pX="0.5" pY="0.5" oX="177" oY="10" oW="384" oH="280" r="y"/>
+    <sprite n="ani_barracks_01.0" x="1659" y="549" w="12" h="27" pX="0.5" pY="0.5" oX="222" oY="28" oW="384" oH="280" r="y"/>
+    <sprite n="ani_barracks_01.1" x="1659" y="493" w="13" h="27" pX="0.5" pY="0.5" oX="222" oY="27" oW="384" oH="280" r="y"/>
+    <sprite n="ani_barracks_01.2" x="1659" y="521" w="12" h="27" pX="0.5" pY="0.5" oX="222" oY="28" oW="384" oH="280" r="y"/>
+    <sprite n="ani_barracks_02.0" x="263" y="429" w="3" h="3" pX="0.5" pY="0.5" oX="0" oY="0" oW="384" oH="259"/>
+    <sprite n="ani_butcher_00.0" x="1008" y="1695" w="36" h="37" pX="0.5" pY="0.5" oX="54" oY="54" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.1" x="607" y="1610" w="34" h="34" pX="0.5" pY="0.5" oX="57" oY="56" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.2" x="571" y="1610" w="35" h="34" pX="0.5" pY="0.5" oX="56" oY="56" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.3" x="877" y="1851" w="35" h="33" pX="0.5" pY="0.5" oX="55" oY="56" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.4" x="913" y="1844" w="36" h="38" pX="0.5" pY="0.5" oX="53" oY="54" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.5" x="518" y="1541" w="40" h="37" pX="0.5" pY="0.5" oX="54" oY="50" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.6" x="2005" y="1435" w="42" h="36" pX="0.5" pY="0.5" oX="49" oY="54" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.7" x="377" y="1763" w="51" h="34" pX="0.5" pY="0.5" oX="59" oY="52" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.8" x="61" y="1695" w="50" h="30" pX="0.5" pY="0.5" oX="62" oY="52" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.9" x="1012" y="1450" w="50" h="38" pX="0.5" pY="0.5" oX="56" oY="51" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.10" x="468" y="1541" w="49" h="37" pX="0.5" pY="0.5" oX="62" oY="48" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.11" x="162" y="1695" w="46" h="30" pX="0.5" pY="0.5" oX="70" oY="51" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.12" x="823" y="1885" w="29" h="44" pX="0.5" pY="0.5" oX="72" oY="51" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.13" x="1135" y="482" w="22" h="39" pX="0.5" pY="0.5" oX="78" oY="52" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.14" x="892" y="1802" w="29" h="41" pX="0.5" pY="0.5" oX="73" oY="52" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.15" x="526" y="1610" w="44" h="34" pX="0.5" pY="0.5" oX="69" oY="52" oW="210" oH="173" r="y"/>
+    <sprite n="ani_butcher_00.16" x="375" y="1802" w="33" h="48" pX="0.5" pY="0.5" oX="70" oY="51" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.17" x="849" y="553" w="35" h="52" pX="0.5" pY="0.5" oX="63" oY="49" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.18" x="277" y="230" w="42" h="51" pX="0.5" pY="0.5" oX="52" oY="52" oW="210" oH="173"/>
+    <sprite n="ani_butcher_00.19" x="263" y="429" w="3" h="3" pX="0.5" pY="0.5" oX="0" oY="0" oW="210" oH="173"/>
+    <sprite n="ani_fairground_autumn_00.0" x="806" y="1074" w="78" h="73" pX="0.5" pY="0.5" oX="151" oY="131" oW="384" oH="300"/>
+    <sprite n="ani_fairground_autumn_00.1" x="1786" y="1448" w="79" h="74" pX="0.5" pY="0.5" oX="150" oY="130" oW="384" oH="300"/>
+    <sprite n="ani_fairground_autumn_00.2" x="1788" y="1280" w="75" h="79" pX="0.5" pY="0.5" oX="150" oY="129" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_autumn_00.3" x="570" y="1851" w="70" h="79" pX="0.5" pY="0.5" oX="150" oY="134" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_back_00.0" x="538" y="601" w="72" h="161" pX="0.5" pY="0.5" oX="106" oY="90" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_back_00.1" x="1088" y="796" w="65" h="160" pX="0.5" pY="0.5" oX="107" oY="97" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_back_00.2" x="1866" y="1197" w="151" h="72" pX="0.5" pY="0.5" oX="116" oY="90" oW="384" oH="300"/>
+    <sprite n="ani_fairground_back_00.3" x="1866" y="1131" w="154" h="65" pX="0.5" pY="0.5" oX="113" oY="97" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.0" x="611" y="606" w="206" h="86" pX="0.5" pY="0.5" oX="88" oY="164" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.1" x="1" y="647" w="215" h="85" pX="0.5" pY="0.5" oX="84" oY="164" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.2" x="1647" y="909" w="218" h="83" pX="0.5" pY="0.5" oX="82" oY="164" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.3" x="320" y="688" w="213" h="89" pX="0.5" pY="0.5" oX="84" oY="160" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.4" x="320" y="778" w="204" h="92" pX="0.5" pY="0.5" oX="89" oY="158" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.5" x="1381" y="807" w="218" h="88" pX="0.5" pY="0.5" oX="82" oY="161" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.6" x="1154" y="769" w="226" h="82" pX="0.5" pY="0.5" oX="77" oY="165" oW="384" oH="300"/>
+    <sprite n="ani_fairground_front_00.7" x="320" y="601" w="217" h="86" pX="0.5" pY="0.5" oX="82" oY="163" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.0" x="468" y="1726" w="117" h="123" pX="0.5" pY="0.5" oX="130" oY="98" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_spring_00.1" x="484" y="1365" w="126" h="119" pX="0.5" pY="0.5" oX="129" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.2" x="1643" y="1732" w="123" h="118" pX="0.5" pY="0.5" oX="130" oY="97" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.3" x="314" y="1527" w="114" h="117" pX="0.5" pY="0.5" oX="136" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.4" x="350" y="1932" w="97" h="115" pX="0.5" pY="0.5" oX="145" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.5" x="1517" y="1683" w="125" h="118" pX="0.5" pY="0.5" oX="135" oY="97" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.6" x="884" y="1355" w="127" h="120" pX="0.5" pY="0.5" oX="129" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.7" x="1646" y="1611" w="130" h="120" pX="0.5" pY="0.5" oX="126" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.8" x="194" y="1143" w="121" h="126" pX="0.5" pY="0.5" oX="128" oY="97" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_spring_00.9" x="610" y="1931" w="118" h="116" pX="0.5" pY="0.5" oX="135" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.10" x="789" y="1218" w="95" h="114" pX="0.5" pY="0.5" oX="145" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.11" x="120" y="1932" w="114" h="115" pX="0.5" pY="0.5" oX="136" oY="97" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.12" x="1145" y="1415" w="126" h="118" pX="0.5" pY="0.5" oX="129" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.13" x="1517" y="1563" w="128" h="119" pX="0.5" pY="0.5" oX="127" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.14" x="883" y="1476" w="126" h="119" pX="0.5" pY="0.5" oX="129" oY="97" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.15" x="235" y="1932" w="114" h="115" pX="0.5" pY="0.5" oX="136" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.16" x="946" y="1934" w="96" h="111" pX="0.5" pY="0.5" oX="144" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.17" x="1" y="1934" w="118" h="111" pX="0.5" pY="0.5" oX="137" oY="97" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_spring_00.18" x="1646" y="1490" w="132" h="120" pX="0.5" pY="0.5" oX="122" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.19" x="1381" y="1453" w="135" h="122" pX="0.5" pY="0.5" oX="120" oY="98" oW="384" oH="300"/>
+    <sprite n="ani_fairground_spring_00.20" x="194" y="1270" w="121" h="123" pX="0.5" pY="0.5" oX="131" oY="97" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_spring_00.21" x="729" y="1934" w="116" h="111" pX="0.5" pY="0.5" oX="137" oY="98" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_spring_00.22" x="1935" y="368" w="112" h="94" pX="0.5" pY="0.5" oX="146" oY="98" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_spring_00.23" x="493" y="1932" w="116" h="114" pX="0.5" pY="0.5" oX="136" oY="97" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_summer_00.0" x="1159" y="1" w="259" h="186" pX="0.5" pY="0.5" oX="61" oY="45" oW="384" oH="300"/>
+    <sprite n="ani_fairground_summer_00.1" x="1419" y="1" w="259" h="185" pX="0.5" pY="0.5" oX="61" oY="46" oW="384" oH="300"/>
+    <sprite n="ani_fairground_summer_00.2" x="1679" y="1" w="259" h="185" pX="0.5" pY="0.5" oX="61" oY="45" oW="384" oH="300"/>
+    <sprite n="ani_fairground_summer_00.3" x="1159" y="188" w="258" h="185" pX="0.5" pY="0.5" oX="61" oY="45" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.0" x="101" y="1851" w="98" h="80" pX="0.5" pY="0.5" oX="146" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.1" x="510" y="1073" w="100" h="80" pX="0.5" pY="0.5" oX="144" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.2" x="1767" y="1834" w="80" h="99" pX="0.5" pY="0.5" oX="146" oY="132" oW="384" oH="300" r="y"/>
+    <sprite n="ani_fairground_winter_00.3" x="285" y="1645" w="97" h="80" pX="0.5" pY="0.5" oX="147" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.4" x="200" y="1851" w="98" h="80" pX="0.5" pY="0.5" oX="147" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.5" x="299" y="1851" w="98" h="80" pX="0.5" pY="0.5" oX="146" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.6" x="510" y="1154" w="100" h="80" pX="0.5" pY="0.5" oX="144" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.7" x="398" y="1851" w="98" h="80" pX="0.5" pY="0.5" oX="146" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_fairground_winter_00.8" x="1" y="1851" w="99" h="80" pX="0.5" pY="0.5" oX="146" oY="132" oW="384" oH="300"/>
+    <sprite n="ani_jugglercamp_00.0" x="150" y="1726" w="38" h="75" pX="0.5" pY="0.5" oX="92" oY="47" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_00.1" x="849" y="421" w="35" h="74" pX="0.5" pY="0.5" oX="96" oY="48" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_00.2" x="1063" y="1541" w="81" h="38" pX="0.5" pY="0.5" oX="94" oY="41" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_00.3" x="1063" y="1580" w="81" h="38" pX="0.5" pY="0.5" oX="93" oY="41" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_01.0" x="571" y="1485" w="39" h="55" pX="0.5" pY="0.5" oX="89" oY="67" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_01.1" x="198" y="1657" w="55" h="37" pX="0.5" pY="0.5" oX="91" oY="67" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_01.2" x="285" y="1587" w="28" h="55" pX="0.5" pY="0.5" oX="100" oY="67" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_01.3" x="1" y="1695" w="59" h="30" pX="0.5" pY="0.5" oX="98" oY="63" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_01.4" x="1337" y="1179" w="43" h="69" pX="0.5" pY="0.5" oX="85" oY="53" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_01.5" x="524" y="1017" w="86" h="55" pX="0.5" pY="0.5" oX="73" oY="36" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_01.6" x="1767" y="1779" w="91" h="54" pX="0.5" pY="0.5" oX="74" oY="31" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_01.7" x="781" y="1673" w="100" h="59" pX="0.5" pY="0.5" oX="69" oY="22" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_01.8" x="1989" y="1755" w="58" h="101" pX="0.5" pY="0.5" oX="70" oY="21" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_01.9" x="571" y="1485" w="39" h="55" pX="0.5" pY="0.5" oX="89" oY="67" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_02.0" x="68" y="1802" w="61" h="48" pX="0.5" pY="0.5" oX="102" oY="60" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_02.1" x="1345" y="852" w="35" h="52" pX="0.5" pY="0.5" oX="113" oY="63" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_02.2" x="263" y="510" w="56" h="56" pX="0.5" pY="0.5" oX="101" oY="61" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_02.3" x="263" y="567" w="56" h="54" pX="0.5" pY="0.5" oX="101" oY="63" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_02.4" x="263" y="622" w="56" h="53" pX="0.5" pY="0.5" oX="101" oY="64" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_02.5" x="674" y="1609" w="46" h="35" pX="0.5" pY="0.5" oX="113" oY="64" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_02.6" x="263" y="429" w="3" h="3" pX="0.5" pY="0.5" oX="0" oY="0" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_03.0" x="263" y="429" w="3" h="3" pX="0.5" pY="0.5" oX="0" oY="0" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_03.1" x="674" y="1609" w="46" h="35" pX="0.5" pY="0.5" oX="113" oY="64" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_03.2" x="1085" y="957" w="68" h="58" pX="0.5" pY="0.5" oX="101" oY="49" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_03.3" x="263" y="676" w="56" h="53" pX="0.5" pY="0.5" oX="101" oY="64" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_03.4" x="1463" y="1576" w="53" h="56" pX="0.5" pY="0.5" oX="101" oY="64" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_03.5" x="2011" y="1336" w="36" h="52" pX="0.5" pY="0.5" oX="112" oY="61" oW="271" oH="222"/>
+    <sprite n="ani_jugglercamp_03.6" x="522" y="1579" w="53" h="29" pX="0.5" pY="0.5" oX="107" oY="66" oW="271" oH="222" r="y"/>
+    <sprite n="ani_jugglercamp_04.0" x="429" y="1747" w="28" h="54" pX="0.5" pY="0.5" oX="100" oY="67" oW="271" oH="222"/>
+    <sprite n="ani_monestary_00.0" x="1463" y="1633" w="53" h="47" pX="0.5" pY="0.5" oX="149" oY="101" oW="320" oH="264" r="y"/>
+    <sprite n="ani_monestary_01.0" x="729" y="1725" w="51" h="65" pX="0.5" pY="0.5" oX="64" oY="102" oW="320" oH="264"/>
+    <sprite n="ani_monestary_01.1" x="1085" y="1016" w="68" h="51" pX="0.5" pY="0.5" oX="64" oY="99" oW="320" oH="264" r="y"/>
+    <sprite n="ani_monestary_01.2" x="813" y="1022" w="71" h="51" pX="0.5" pY="0.5" oX="64" oY="96" oW="320" oH="264" r="y"/>
+    <sprite n="ani_monestary_01.3" x="727" y="1791" w="51" h="58" pX="0.5" pY="0.5" oX="64" oY="109" oW="320" oH="264"/>
+    <sprite n="ani_monestary_01.4" x="882" y="1654" w="62" h="51" pX="0.5" pY="0.5" oX="64" oY="105" oW="320" oH="264" r="y"/>
+    <sprite n="ani_monestary_02.0" x="1345" y="958" w="35" h="48" pX="0.5" pY="0.5" oX="160" oY="119" oW="320" oH="264"/>
+    <sprite n="ani_monestary_02.1" x="268" y="1802" w="35" h="48" pX="0.5" pY="0.5" oX="160" oY="119" oW="320" oH="264"/>
+    <sprite n="ani_monestary_02.2" x="304" y="1802" w="35" h="48" pX="0.5" pY="0.5" oX="160" oY="119" oW="320" oH="264"/>
+    <sprite n="ani_pigfarm_00.0" x="817" y="1850" w="29" h="34" pX="0.5" pY="0.5" oX="199" oY="102" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_00.1" x="847" y="1850" w="29" h="34" pX="0.5" pY="0.5" oX="199" oY="102" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_01.0" x="502" y="1695" w="26" h="30" pX="0.5" pY="0.5" oX="191" oY="111" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_01.1" x="529" y="1695" w="25" h="30" pX="0.5" pY="0.5" oX="191" oY="111" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_02.0" x="254" y="1703" w="30" h="35" pX="0.5" pY="0.5" oX="83" oY="107" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_02.1" x="1567" y="896" w="30" h="33" pX="0.5" pY="0.5" oX="84" oY="109" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_02.2" x="642" y="1610" w="31" h="34" pX="0.5" pY="0.5" oX="81" oY="109" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_02.3" x="785" y="1850" w="31" h="34" pX="0.5" pY="0.5" oX="81" oY="109" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_02.4" x="468" y="1695" w="33" h="30" pX="0.5" pY="0.5" oX="82" oY="110" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.0" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="158" oY="141" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.1" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="160" oY="140" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.2" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="162" oY="140" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.3" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="164" oY="139" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.4" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="166" oY="139" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.5" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="168" oY="138" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.6" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="170" oY="138" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.7" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="172" oY="135" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.8" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="170" oY="137" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.9" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="172" oY="136" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.10" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="170" oY="137" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.11" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="168" oY="137" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.12" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="166" oY="138" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.13" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="164" oY="138" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.14" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="162" oY="139" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.15" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="160" oY="139" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.16" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="158" oY="140" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.17" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="138" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.18" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="158" oY="141" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.19" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="139" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.20" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="140" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.21" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="142" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.22" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="143" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.23" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="145" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.24" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="146" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.25" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="148" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.26" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="158" oY="149" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.27" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="158" oY="150" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_03.28" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="147" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.29" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="145" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.30" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="144" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.31" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="142" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.32" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="141" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.33" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="139" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_03.34" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="160" oY="138" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.0" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="91" oY="133" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.1" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="130" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.2" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="91" oY="132" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.3" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="131" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.4" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="132" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.5" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="134" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.6" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="135" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.7" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="137" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.8" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="138" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.9" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="140" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.10" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="91" oY="141" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.11" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="139" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.12" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="91" oY="142" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.13" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="139" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.14" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="137" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.15" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="136" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.16" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="134" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.17" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="133" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.18" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="131" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.19" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="93" oY="130" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.20" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="93" oY="131" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.21" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="95" oY="130" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.22" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="97" oY="128" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.23" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="99" oY="127" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.24" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="101" oY="125" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.25" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="103" oY="124" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.26" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="105" oY="122" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.27" x="590" y="363" w="20" h="25" pX="0.5" pY="0.5" oX="107" oY="121" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.28" x="590" y="315" w="21" h="23" pX="0.5" pY="0.5" oX="109" oY="118" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.29" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="107" oY="120" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.30" x="590" y="339" w="21" h="23" pX="0.5" pY="0.5" oX="109" oY="119" oW="320" oH="224"/>
+    <sprite n="ani_pigfarm_04.31" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="105" oY="121" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.32" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="103" oY="123" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.33" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="101" oY="124" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.34" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="99" oY="126" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.35" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="95" oY="129" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_04.36" x="590" y="290" w="21" h="24" pX="0.5" pY="0.5" oX="93" oY="130" oW="320" oH="224" r="y"/>
+    <sprite n="ani_pigfarm_05.0" x="112" y="1695" w="49" h="30" pX="0.5" pY="0.5" oX="124" oY="88" oW="320" oH="224" r="y"/>
+    <sprite n="ani_tanner_00.0" x="1136" y="234" w="22" h="48" pX="0.5" pY="0.5" oX="139" oY="83" oW="255" oH="185"/>
+    <sprite n="ani_tanner_00.1" x="1136" y="283" w="22" h="47" pX="0.5" pY="0.5" oX="139" oY="84" oW="255" oH="185"/>
+    <sprite n="ani_tanner_00.2" x="1136" y="331" w="22" h="47" pX="0.5" pY="0.5" oX="139" oY="84" oW="255" oH="185"/>
+    <sprite n="ani_tanner_00.3" x="1061" y="1619" w="29" h="41" pX="0.5" pY="0.5" oX="132" oY="90" oW="255" oH="185"/>
+    <sprite n="ani_tanner_00.4" x="853" y="1885" w="31" h="41" pX="0.5" pY="0.5" oX="130" oY="90" oW="255" oH="185"/>
+    <sprite n="ani_tanner_00.5" x="348" y="1485" w="32" h="41" pX="0.5" pY="0.5" oX="129" oY="90" oW="255" oH="185"/>
+    <sprite n="ani_watchtower_00.0" x="1659" y="521" w="12" h="27" pX="0.5" pY="0.5" oX="115" oY="28" oW="236" oH="256" r="y"/>
+    <sprite n="ani_watchtower_00.1" x="1659" y="549" w="12" h="27" pX="0.5" pY="0.5" oX="115" oY="28" oW="236" oH="256" r="y"/>
+    <sprite n="ani_watchtower_00.2" x="1659" y="493" w="13" h="27" pX="0.5" pY="0.5" oX="115" oY="27" oW="236" oH="256" r="y"/>
+    <sprite n="ani_watchtower_01.0" x="1063" y="1354" w="86" h="34" pX="0.5" pY="0.5" oX="74" oY="66" oW="236" oH="218"/>
+    <sprite n="building_archery_contest_00" x="1" y="901" w="210" h="205" pX="0.5" pY="0.5" oX="12" oY="19" oW="241" oH="267"/>
+    <sprite n="building_archery_contest_decay_00.0" x="885" y="934" w="199" h="195" pX="0.5" pY="0.5" oX="20" oY="19" oW="241" oH="267"/>
+    <sprite n="building_archery_contest_decay_01.0" x="1154" y="1138" w="182" h="145" pX="0.5" pY="0.5" oX="35" oY="27" oW="241" oH="267" r="y"/>
+    <sprite n="building_archery_contest_snow" x="611" y="693" w="205" h="194" pX="0.5" pY="0.5" oX="21" oY="19" oW="241" oH="267" r="y"/>
+    <sprite n="building_armory_00.0" x="169" y="1455" w="144" h="131" pX="0.5" pY="0.5" oX="32" oY="28" oW="192" oH="194"/>
+    <sprite n="building_armory_decay_00.0" x="1866" y="1380" w="138" h="130" pX="0.5" pY="0.5" oX="32" oY="28" oW="192" oH="194"/>
+    <sprite n="building_armory_decay_01.0" x="789" y="1333" w="94" h="120" pX="0.5" pY="0.5" oX="37" oY="51" oW="192" oH="194" r="y"/>
+    <sprite n="building_armory_snow" x="1646" y="1356" w="139" h="133" pX="0.5" pY="0.5" oX="28" oY="26" oW="192" oH="194"/>
+    <sprite n="building_banditcamp_00.0" x="1403" y="636" w="243" h="170" pX="0.5" pY="0.5" oX="45" oY="0" oW="288" oH="201"/>
+    <sprite n="building_banditcamp_snow" x="1" y="733" w="214" h="167" pX="0.5" pY="0.5" oX="46" oY="3" oW="288" oH="201"/>
+    <sprite n="building_barracks_00.0" x="1" y="1" w="318" h="228" pX="0.5" pY="0.5" oX="66" oY="0" oW="384" oH="259"/>
+    <sprite n="building_barracks_decay_00.0" x="1" y="429" w="261" h="217" pX="0.5" pY="0.5" oX="66" oY="0" oW="384" oH="259"/>
+    <sprite n="building_barracks_decay_01.0" x="611" y="421" w="237" h="184" pX="0.5" pY="0.5" oX="70" oY="17" oW="384" oH="259"/>
+    <sprite n="building_barracks_snow" x="612" y="1" w="273" h="227" pX="0.5" pY="0.5" oX="64" oY="0" oW="384" oH="259"/>
+    <sprite n="building_butcher_00.0" x="1154" y="1000" w="184" h="137" pX="0.5" pY="0.5" oX="26" oY="0" oW="210" oH="173"/>
+    <sprite n="building_butcher_decay_00.0" x="1647" y="993" w="157" h="134" pX="0.5" pY="0.5" oX="29" oY="3" oW="210" oH="173"/>
+    <sprite n="building_butcher_decay_01.0" x="212" y="945" w="103" h="132" pX="0.5" pY="0.5" oX="45" oY="8" oW="210" oH="173" r="y"/>
+    <sprite n="building_butcher_snow" x="1866" y="990" w="181" h="140" pX="0.5" pY="0.5" oX="22" oY="24" oW="210" oH="200"/>
+    <sprite n="building_carpenter_00.0" x="1381" y="1048" w="182" h="164" pX="0.5" pY="0.5" oX="10" oY="6" oW="192" oH="201"/>
+    <sprite n="building_carpenter_decay_00.0" x="1" y="1519" w="163" h="137" pX="0.5" pY="0.5" oX="14" oY="12" oW="192" oH="201"/>
+    <sprite n="building_carpenter_decay_01.0" x="846" y="1934" w="99" h="111" pX="0.5" pY="0.5" oX="47" oY="17" oW="192" oH="201"/>
+    <sprite n="building_carpenter_snow" x="611" y="1188" w="177" h="165" pX="0.5" pY="0.5" oX="10" oY="5" oW="192" oH="201"/>
+    <sprite n="building_fairground_00.0" x="1678" y="398" w="255" h="145" pX="0.5" pY="0.5" oX="63" oY="118" oW="384" oH="300"/>
+    <sprite n="building_fairground_autumn" x="1381" y="1213" w="140" h="118" pX="0.5" pY="0.5" oX="126" oY="127" oW="384" oH="300"/>
+    <sprite n="building_fairground_snow" x="885" y="234" w="250" h="139" pX="0.5" pY="0.5" oX="66" oY="124" oW="384" oH="300"/>
+    <sprite n="building_fairground_spring" x="1646" y="1128" w="156" h="97" pX="0.5" pY="0.5" oX="151" oY="37" oW="384" oH="300" r="y"/>
+    <sprite n="building_fairground_summer" x="1866" y="1270" w="144" h="109" pX="0.5" pY="0.5" oX="125" oY="111" oW="384" oH="300"/>
+    <sprite n="building_fairground_winter" x="316" y="1331" w="167" h="153" pX="0.5" pY="0.5" oX="118" oY="57" oW="384" oH="300" r="y"/>
+    <sprite n="building_firewatch_00.0" x="1866" y="1511" w="136" h="135" pX="0.5" pY="0.5" oX="62" oY="24" oW="244" oH="192"/>
+    <sprite n="building_firewatch_decay_00.0" x="1145" y="1534" w="126" h="110" pX="0.5" pY="0.5" oX="66" oY="26" oW="244" oH="192" r="y"/>
+    <sprite n="building_firewatch_decay_01.0" x="1939" y="1" w="104" h="58" pX="0.5" pY="0.5" oX="91" oY="32" oW="244" oH="192" r="y"/>
+    <sprite n="building_firewatch_snow" x="1154" y="1284" w="136" h="130" pX="0.5" pY="0.5" oX="62" oY="21" oW="244" oH="192" r="y"/>
+    <sprite n="building_hopsfarm_00.0" x="1" y="230" w="275" h="198" pX="0.5" pY="0.5" oX="31" oY="8" oW="320" oH="248"/>
+    <sprite n="building_hopsfarm_decay_00.0" x="1672" y="544" w="247" h="179" pX="0.5" pY="0.5" oX="37" oY="17" oW="320" oH="248"/>
+    <sprite n="building_hopsfarm_decay_01.0" x="885" y="600" w="226" h="162" pX="0.5" pY="0.5" oX="41" oY="26" oW="320" oH="248"/>
+    <sprite n="building_hopsfarm_snow" x="612" y="229" w="272" h="191" pX="0.5" pY="0.5" oX="31" oY="7" oW="320" oH="248"/>
+    <sprite n="building_jugglercamp_00.0" x="1647" y="724" w="238" h="184" pX="0.5" pY="0.5" oX="33" oY="10" oW="271" oH="222"/>
+    <sprite n="building_jugglercamp_decay_00.0" x="611" y="1354" w="170" h="149" pX="0.5" pY="0.5" oX="59" oY="10" oW="271" oH="222"/>
+    <sprite n="building_jugglercamp_decay_01.0" x="1646" y="1226" w="141" h="129" pX="0.5" pY="0.5" oX="76" oY="14" oW="271" oH="222" r="y"/>
+    <sprite n="building_jugglercamp_snow" x="885" y="763" w="202" h="170" pX="0.5" pY="0.5" oX="34" oY="8" oW="271" oH="222"/>
+    <sprite n="building_monestary_00.0" x="320" y="1" w="291" h="232" pX="0.5" pY="0.5" oX="29" oY="4" oW="320" oH="264"/>
+    <sprite n="building_monestary_decay_00.0" x="1678" y="187" w="256" h="210" pX="0.5" pY="0.5" oX="32" oY="21" oW="320" oH="264"/>
+    <sprite n="building_monestary_decay_01.0" x="316" y="1178" w="190" h="152" pX="0.5" pY="0.5" oX="67" oY="29" oW="320" oH="264"/>
+    <sprite n="building_monestary_snow" x="886" y="1" w="272" h="232" pX="0.5" pY="0.5" oX="30" oY="8" oW="320" oH="264"/>
+    <sprite n="building_pigfarm_00.0" x="320" y="234" w="269" h="184" pX="0.5" pY="0.5" oX="35" oY="0" oW="320" oH="224"/>
+    <sprite n="building_pigfarm_decay_00.0" x="1154" y="598" w="248" h="170" pX="0.5" pY="0.5" oX="30" oY="10" oW="320" oH="224"/>
+    <sprite n="building_pigfarm_decay_01.0" x="1381" y="1332" w="136" h="120" pX="0.5" pY="0.5" oX="99" oY="33" oW="320" oH="224"/>
+    <sprite n="building_pigfarm_snow" x="320" y="419" w="268" h="181" pX="0.5" pY="0.5" oX="34" oY="3" oW="320" oH="224"/>
+    <sprite n="building_sign_00" x="1009" y="1610" w="51" h="51" pX="0.5" pY="0.5" oX="14" oY="4" oW="66" oH="95"/>
+    <sprite n="building_tanner_00.0" x="611" y="1041" w="194" h="146" pX="0.5" pY="0.5" oX="39" oY="2" oW="255" oH="185"/>
+    <sprite n="building_tanner_decay_00.0" x="885" y="1130" w="179" h="146" pX="0.5" pY="0.5" oX="39" oY="2" oW="255" oH="185"/>
+    <sprite n="building_tanner_decay_01.0" x="1065" y="1261" w="88" h="92" pX="0.5" pY="0.5" oX="64" oY="10" oW="255" oH="185" r="y"/>
+    <sprite n="building_tanner_snow" x="1154" y="852" w="190" h="147" pX="0.5" pY="0.5" oX="38" oY="0" oW="255" oH="185"/>
+    <sprite n="building_tradeguild_00.0" x="885" y="374" w="249" h="225" pX="0.5" pY="0.5" oX="48" oY="26" oW="309" oH="281"/>
+    <sprite n="building_tradeguild_decay_00.0" x="1159" y="374" w="249" h="223" pX="0.5" pY="0.5" oX="48" oY="26" oW="309" oH="281"/>
+    <sprite n="building_tradeguild_decay_01.0" x="1409" y="412" w="249" h="223" pX="0.5" pY="0.5" oX="48" oY="26" oW="309" oH="281"/>
+    <sprite n="building_tradeguild_snow" x="1419" y="187" w="258" h="224" pX="0.5" pY="0.5" oX="38" oY="25" oW="309" oH="281"/>
+    <sprite n="building_watchtower_00.0" x="1381" y="896" w="185" h="151" pX="0.5" pY="0.5" oX="64" oY="0" oW="236" oH="218" r="y"/>
+    <sprite n="building_watchtower_decay_00.0" x="885" y="1277" w="177" h="77" pX="0.5" pY="0.5" oX="75" oY="0" oW="236" oH="218" r="y"/>
+    <sprite n="building_watchtower_decay_01.0" x="818" y="606" w="66" h="144" pX="0.5" pY="0.5" oX="82" oY="25" oW="236" oH="218"/>
+    <sprite n="building_watchtower_snow" x="1920" y="605" w="127" h="182" pX="0.5" pY="0.5" oX="64" oY="3" oW="236" oH="218"/>
+    <sprite n="building_winefarm_00.0" x="320" y="871" w="203" h="160" pX="0.5" pY="0.5" oX="17" oY="15" oW="232" oH="226"/>
+    <sprite n="building_winefarm_decay_00.0" x="611" y="888" w="201" h="152" pX="0.5" pY="0.5" oX="17" oY="15" oW="232" oH="226"/>
+    <sprite n="building_winefarm_decay_01.0" x="1" y="1399" w="167" h="119" pX="0.5" pY="0.5" oX="32" oY="30" oW="232" oH="226"/>
+    <sprite n="building_winefarm_snow" x="1886" y="788" w="161" h="201" pX="0.5" pY="0.5" oX="17" oY="14" oW="232" oH="226" r="y"/>
+    <sprite n="cornfield_1x1_00.0" x="1805" y="993" w="60" h="73" pX="0.5" pY="0.5" oX="1" oY="15" oW="74" oH="105" r="y"/>
+    <sprite n="cornfield_1x1_00.1" x="1805" y="1067" w="60" h="73" pX="0.5" pY="0.5" oX="1" oY="15" oW="74" oH="105" r="y"/>
+    <sprite n="cornfield_1x1_00.2" x="211" y="1596" w="73" h="60" pX="0.5" pY="0.5" oX="1" oY="15" oW="74" oH="105"/>
+    <sprite n="cornfield_1x1_00.3" x="586" y="1726" w="73" h="60" pX="0.5" pY="0.5" oX="1" oY="15" oW="74" oH="105"/>
+    <sprite n="cornfield_1x1_00.4" x="211" y="1596" w="73" h="60" pX="0.5" pY="0.5" oX="1" oY="15" oW="74" oH="105"/>
+    <sprite n="cornfield_1x1_00.5" x="1805" y="1067" w="60" h="73" pX="0.5" pY="0.5" oX="1" oY="15" oW="74" oH="105" r="y"/>
+    <sprite n="cornfield_1x1_00_rotten.0" x="729" y="1654" w="51" h="70" pX="0.5" pY="0.5" oX="3" oY="0" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_02.0" x="1886" y="724" w="33" h="60" pX="0.5" pY="0.5" oX="7" oY="16" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_02_rotten.0" x="1886" y="724" w="33" h="60" pX="0.5" pY="0.5" oX="7" oY="16" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_03.0" x="585" y="1645" w="74" h="51" pX="0.5" pY="0.5" oX="0" oY="0" oW="74" oH="81"/>
+    <sprite n="cornfield_1x1_03.1" x="729" y="1504" w="51" h="74" pX="0.5" pY="0.5" oX="0" oY="0" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_03.2" x="676" y="1504" w="51" h="74" pX="0.5" pY="0.5" oX="0" oY="0" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_03.3" x="729" y="1579" w="51" h="74" pX="0.5" pY="0.5" oX="0" oY="0" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_03.4" x="676" y="1504" w="51" h="74" pX="0.5" pY="0.5" oX="0" oY="0" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_03.5" x="729" y="1504" w="51" h="74" pX="0.5" pY="0.5" oX="0" oY="0" oW="74" oH="81" r="y"/>
+    <sprite n="cornfield_1x1_03_rotten.0" x="729" y="1654" w="51" h="70" pX="0.5" pY="0.5" oX="3" oY="0" oW="74" oH="81" r="y"/>
+    <sprite n="deco_1x1_banner_lft01" x="2003" y="1523" w="44" h="115" pX="0.5" pY="0.5" oX="7" oY="0" oW="51" oH="156"/>
+    <sprite n="deco_1x1_banner_lft02" x="2003" y="1639" w="44" h="115" pX="0.5" pY="0.5" oX="7" oY="0" oW="51" oH="156"/>
+    <sprite n="deco_1x1_banner_lft03" x="448" y="1932" w="44" h="115" pX="0.5" pY="0.5" oX="7" oY="0" oW="51" oH="156"/>
+    <sprite n="deco_1x1_banner_rt01" x="217" y="647" w="45" h="115" pX="0.5" pY="0.5" oX="6" oY="0" oW="51" oH="156"/>
+    <sprite n="deco_1x1_banner_rt02" x="1291" y="1284" w="45" h="115" pX="0.5" pY="0.5" oX="6" oY="0" oW="51" oH="156"/>
+    <sprite n="deco_1x1_banner_rt03" x="1291" y="1400" w="45" h="115" pX="0.5" pY="0.5" oX="6" oY="0" oW="51" oH="156"/>
+    <sprite n="deco_1x1_birdhouse" x="383" y="1707" w="45" h="55" pX="0.5" pY="0.5" oX="51" oY="67" oW="128" oH="159"/>
+    <sprite n="deco_1x1_birdhouse_snow" x="675" y="1579" w="53" h="27" pX="0.5" pY="0.5" oX="51" oY="66" oW="128" oH="159" r="y"/>
+    <sprite n="deco_1x1_canal_corner" x="468" y="1579" w="53" h="29" pX="0.5" pY="0.5" oX="7" oY="9" oW="68" oH="71"/>
+    <sprite n="deco_1x1_canal_corner_snow" x="576" y="1579" w="50" h="29" pX="0.5" pY="0.5" oX="10" oY="10" oW="68" oH="71"/>
+    <sprite n="deco_1x1_canal_x" x="68" y="1657" w="65" h="37" pX="0.5" pY="0.5" oX="2" oY="4" oW="68" oH="71"/>
+    <sprite n="deco_1x1_canal_x_snow" x="429" y="1552" w="38" h="65" pX="0.5" pY="0.5" oX="2" oY="3" oW="68" oH="71" r="y"/>
+    <sprite n="deco_1x1_canal_y" x="1" y="1657" w="66" h="37" pX="0.5" pY="0.5" oX="1" oY="4" oW="68" oH="71"/>
+    <sprite n="deco_1x1_canal_y_snow" x="429" y="1485" w="38" h="66" pX="0.5" pY="0.5" oX="1" oY="3" oW="68" oH="71" r="y"/>
+    <sprite n="deco_1x1_dixi" x="529" y="1645" w="55" h="49" pX="0.5" pY="0.5" oX="9" oY="0" oW="64" oH="80"/>
+    <sprite n="deco_1x1_dixi_snow" x="182" y="1802" w="47" h="48" pX="0.5" pY="0.5" oX="10" oY="0" oW="64" oH="80"/>
+    <sprite n="deco_1x1_gothic_01" x="1779" y="1588" w="83" h="97" pX="0.5" pY="0.5" oX="17" oY="0" oW="100" oH="125"/>
+    <sprite n="deco_1x1_gothic_01_snow" x="813" y="923" w="71" h="98" pX="0.5" pY="0.5" oX="13" oY="3" oW="100" oH="130"/>
+    <sprite n="deco_1x1_gothic_02" x="1779" y="1523" w="84" h="64" pX="0.5" pY="0.5" oX="20" oY="0" oW="84" oH="118" r="y"/>
+    <sprite n="deco_1x1_gothic_02_snow" x="194" y="1394" w="121" h="60" pX="0.5" pY="0.5" oX="7" oY="17" oW="84" oH="138" r="y"/>
+    <sprite n="deco_1x1_hedge_x" x="429" y="1618" w="38" h="65" pX="0.5" pY="0.5" oX="7" oY="4" oW="72" oH="71" r="y"/>
+    <sprite n="deco_1x1_hedge_x_snow" x="134" y="1657" w="63" h="37" pX="0.5" pY="0.5" oX="9" oY="4" oW="72" oH="71"/>
+    <sprite n="deco_1x1_hedge_y" x="429" y="1684" w="38" h="62" pX="0.5" pY="0.5" oX="14" oY="0" oW="76" oH="68" r="y"/>
+    <sprite n="deco_1x1_hedge_y_snow" x="849" y="496" w="35" h="56" pX="0.5" pY="0.5" oX="14" oY="0" oW="76" oH="68" r="y"/>
+    <sprite n="deco_1x1_ruins_00" x="1522" y="1213" w="41" h="51" pX="0.5" pY="0.5" oX="13" oY="24" oW="64" oH="95" r="y"/>
+    <sprite n="deco_1x1_ruins_00_snow" x="381" y="1485" w="47" h="37" pX="0.5" pY="0.5" oX="15" oY="25" oW="64" oH="95"/>
+    <sprite n="deco_1x1_ruins_01" x="1010" y="1489" w="52" h="65" pX="0.5" pY="0.5" oX="11" oY="11" oW="76" oH="95" r="y"/>
+    <sprite n="deco_1x1_ruins_01_snow" x="468" y="1645" w="60" h="49" pX="0.5" pY="0.5" oX="11" oY="11" oW="76" oH="95"/>
+    <sprite n="deco_1x1_ruins_02" x="749" y="1885" w="40" h="46" pX="0.5" pY="0.5" oX="10" oY="23" oW="64" oH="95" r="y"/>
+    <sprite n="deco_1x1_ruins_02_snow" x="1337" y="1404" w="43" h="38" pX="0.5" pY="0.5" oX="11" oY="23" oW="64" oH="95"/>
+    <sprite n="deco_1x1_ruins_03" x="1012" y="1355" w="50" h="47" pX="0.5" pY="0.5" oX="8" oY="15" oW="64" oH="95"/>
+    <sprite n="deco_1x1_ruins_03_snow" x="1337" y="1316" w="43" h="46" pX="0.5" pY="0.5" oX="9" oY="17" oW="64" oH="95" r="y"/>
+    <sprite n="deco_1x1_ruins_04" x="555" y="1697" w="50" h="28" pX="0.5" pY="0.5" oX="6" oY="32" oW="64" oH="95"/>
+    <sprite n="deco_1x1_ruins_04_snow" x="641" y="1885" w="26" h="45" pX="0.5" pY="0.5" oX="9" oY="32" oW="64" oH="95" r="y"/>
+    <sprite n="deco_1x1_ruins_05" x="949" y="1802" w="27" h="31" pX="0.5" pY="0.5" oX="18" oY="3" oW="64" oH="66" r="y"/>
+    <sprite n="deco_1x1_ruins_05_snow" x="921" y="1883" w="27" h="25" pX="0.5" pY="0.5" oX="19" oY="4" oW="64" oH="66"/>
+    <sprite n="deco_1x1_ruins_06" x="1337" y="1249" w="43" h="66" pX="0.5" pY="0.5" oX="4" oY="2" oW="72" oH="70" r="y"/>
+    <sprite n="deco_1x1_ruins_06_snow" x="946" y="1657" w="61" h="40" pX="0.5" pY="0.5" oX="7" oY="2" oW="72" oH="70"/>
+    <sprite n="deco_1x1_scarecrow" x="1010" y="1555" w="52" h="54" pX="0.5" pY="0.5" oX="14" oY="0" oW="66" oH="93"/>
+    <sprite n="deco_1x1_scarecrow_snow" x="1463" y="1681" w="53" h="44" pX="0.5" pY="0.5" oX="13" oY="20" oW="66" oH="113" r="y"/>
+    <sprite n="deco_1x1_statue_01" x="1063" y="1470" w="81" h="70" pX="0.5" pY="0.5" oX="43" oY="45" oW="128" oH="159" r="y"/>
+    <sprite n="deco_1x1_statue_03_snow" x="1012" y="1403" w="50" h="46" pX="0.5" pY="0.5" oX="42" oY="73" oW="128" oH="159" r="y"/>
+    <sprite n="deco_1x1_tent" x="1" y="1726" w="74" h="75" pX="0.5" pY="0.5" oX="33" oY="19" oW="128" oH="126"/>
+    <sprite n="deco_1x1_tent_snow" x="263" y="433" w="56" h="76" pX="0.5" pY="0.5" oX="33" oY="19" oW="128" oH="126"/>
+    <sprite n="deco_1x1_torch.0" x="1085" y="1068" w="68" h="49" pX="0.5" pY="0.5" oX="39" oY="60" oW="128" oH="159" r="y"/>
+    <sprite n="deco_1x1_torch.1" x="1" y="1802" w="66" h="48" pX="0.5" pY="0.5" oX="40" oY="61" oW="128" oH="159" r="y"/>
+    <sprite n="deco_1x1_torch.2" x="817" y="824" w="67" h="49" pX="0.5" pY="0.5" oX="39" oY="61" oW="128" oH="159" r="y"/>
+    <sprite n="deco_1x1_torch.3" x="817" y="874" w="67" h="48" pX="0.5" pY="0.5" oX="40" oY="60" oW="128" oH="159" r="y"/>
+    <sprite n="deco_1x1_tree_01" x="525" y="837" w="85" h="93" pX="0.5" pY="0.5" oX="25" oY="13" oW="128" oH="122" r="y"/>
+    <sprite n="deco_1x1_tree_01_snow" x="524" y="931" w="86" h="85" pX="0.5" pY="0.5" oX="27" oY="11" oW="128" oH="122"/>
+    <sprite n="deco_1x1_tree_02" x="1065" y="1167" w="88" h="93" pX="0.5" pY="0.5" oX="25" oY="9" oW="128" oH="122" r="y"/>
+    <sprite n="deco_1x1_tree_02_snow" x="1786" y="1360" w="79" h="87" pX="0.5" pY="0.5" oX="27" oY="7" oW="128" oH="122"/>
+    <sprite n="deco_1x1_tree_03" x="1777" y="1686" w="83" h="92" pX="0.5" pY="0.5" oX="26" oY="15" oW="128" oH="122" r="y"/>
+    <sprite n="deco_1x1_tree_03_snow" x="1063" y="1389" w="81" h="80" pX="0.5" pY="0.5" oX="27" oY="14" oW="128" oH="122" r="y"/>
+    <sprite n="deco_1x1_wall_x" x="515" y="1485" w="55" h="33" pX="0.5" pY="0.5" oX="9" oY="8" oW="64" oH="74"/>
+    <sprite n="deco_1x1_wall_x_snow" x="1345" y="905" w="35" h="52" pX="0.5" pY="0.5" oX="11" oY="6" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_01" x="2011" y="1280" w="36" h="55" pX="0.5" pY="0.5" oX="9" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_01_snow" x="230" y="1802" w="37" h="48" pX="0.5" pY="0.5" oX="12" oY="2" oW="64" oH="78" r="y"/>
+    <sprite n="deco_1x1_wall_xy_02" x="1112" y="622" w="41" h="57" pX="0.5" pY="0.5" oX="7" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_02_snow" x="668" y="1885" w="40" h="44" pX="0.5" pY="0.5" oX="11" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_03" x="2005" y="1472" w="41" h="50" pX="0.5" pY="0.5" oX="7" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_03_snow" x="709" y="1885" w="39" h="44" pX="0.5" pY="0.5" oX="10" oY="1" oW="64" oH="78"/>
+    <sprite n="deco_1x1_wall_xy_04" x="1522" y="1265" w="41" h="45" pX="0.5" pY="0.5" oX="19" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_04_snow" x="1337" y="1363" w="43" h="40" pX="0.5" pY="0.5" oX="20" oY="2" oW="64" oH="78" r="y"/>
+    <sprite n="deco_1x1_wall_xy_05" x="1112" y="680" w="41" h="57" pX="0.5" pY="0.5" oX="7" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_05_snow" x="277" y="282" w="42" h="50" pX="0.5" pY="0.5" oX="10" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_06" x="1339" y="1123" w="41" h="55" pX="0.5" pY="0.5" oX="9" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_06_snow" x="277" y="384" w="42" h="48" pX="0.5" pY="0.5" oX="12" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_07" x="1112" y="738" w="41" h="57" pX="0.5" pY="0.5" oX="7" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_07_snow" x="1337" y="1526" w="41" h="49" pX="0.5" pY="0.5" oX="11" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_08" x="1339" y="1007" w="41" h="57" pX="0.5" pY="0.5" oX="7" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_08_snow" x="2005" y="1389" w="42" h="45" pX="0.5" pY="0.5" oX="10" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_09" x="1339" y="1065" w="41" h="57" pX="0.5" pY="0.5" oX="7" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_xy_09_snow" x="277" y="333" w="42" h="50" pX="0.5" pY="0.5" oX="10" oY="0" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wall_y" x="727" y="1851" w="57" h="33" pX="0.5" pY="0.5" oX="7" oY="8" oW="64" oH="74"/>
+    <sprite n="deco_1x1_wall_y_snow" x="340" y="1802" w="34" h="48" pX="0.5" pY="0.5" oX="11" oY="6" oW="64" oH="74" r="y"/>
+    <sprite n="deco_1x1_wanted" x="817" y="751" w="67" h="72" pX="0.5" pY="0.5" oX="16" oY="0" oW="88" oH="105" r="y"/>
+    <sprite n="deco_1x1_wanted_snow" x="76" y="1726" w="73" h="75" pX="0.5" pY="0.5" oX="15" oY="8" oW="88" oH="115"/>
+    <sprite n="deco_1x1_weapons_01" x="586" y="1802" w="57" h="47" pX="0.5" pY="0.5" oX="10" oY="0" oW="64" oH="90" r="y"/>
+    <sprite n="deco_1x1_weapons_01_snow" x="468" y="1485" w="46" h="55" pX="0.5" pY="0.5" oX="10" oY="1" oW="64" oH="90"/>
+    <sprite n="deco_1x1_weapons_02" x="130" y="1802" w="51" h="48" pX="0.5" pY="0.5" oX="5" oY="10" oW="64" oH="90"/>
+    <sprite n="deco_1x1_weapons_02_snow" x="1337" y="1475" w="41" h="50" pX="0.5" pY="0.5" oX="6" oY="17" oW="64" oH="90" r="y"/>
+    <sprite n="deco_1x2_bench_1" x="383" y="1645" w="45" h="61" pX="0.5" pY="0.5" oX="56" oY="2" oW="128" oH="85" r="y"/>
+    <sprite n="deco_1x2_bench_1_snow" x="209" y="1695" w="44" h="57" pX="0.5" pY="0.5" oX="58" oY="1" oW="128" oH="85" r="y"/>
+    <sprite n="deco_1x2_bench_5" x="189" y="1753" w="57" h="47" pX="0.5" pY="0.5" oX="57" oY="0" oW="128" oH="86"/>
+    <sprite n="deco_1x2_bench_5_snow" x="1600" y="873" w="46" h="56" pX="0.5" pY="0.5" oX="57" oY="0" oW="128" oH="86" r="y"/>
+    <sprite n="deco_1x2_gallows" x="497" y="1851" w="72" h="79" pX="0.5" pY="0.5" oX="43" oY="7" oW="128" oH="112" r="y"/>
+    <sprite n="deco_1x2_gallows_snow" x="534" y="763" w="76" h="73" pX="0.5" pY="0.5" oX="45" oY="6" oW="128" oH="112"/>
+    <sprite n="deco_2x1_bench_3" x="1600" y="807" w="46" h="65" pX="0.5" pY="0.5" oX="19" oY="0" oW="128" oH="85" r="y"/>
+    <sprite n="deco_2x1_bench_3_snow" x="1085" y="1118" w="68" h="48" pX="0.5" pY="0.5" oX="13" oY="0" oW="128" oH="85"/>
+    <sprite n="deco_2x1_bench_7" x="165" y="1587" w="45" h="69" pX="0.5" pY="0.5" oX="18" oY="0" oW="128" oH="82" r="y"/>
+    <sprite n="deco_2x1_bench_7_snow" x="468" y="1610" w="57" h="34" pX="0.5" pY="0.5" oX="17" oY="0" oW="128" oH="82"/>
+    <sprite n="deco_2x2_statue_01" x="1934" y="463" w="113" h="141" pX="0.5" pY="0.5" oX="33" oY="17" oW="190" oH="160" r="y"/>
+    <sprite n="deco_2x2_statue_01_snow" x="1935" y="242" w="112" h="125" pX="0.5" pY="0.5" oX="34" oY="17" oW="190" oH="160" r="y"/>
+    <sprite n="deco_3x3_fairy_fountain.0" x="1564" y="1053" w="81" h="128" pX="0.5" pY="0.5" oX="6" oY="0" oW="134" oH="119" r="y"/>
+    <sprite n="deco_3x3_fairy_fountain.1" x="1564" y="1182" w="81" h="128" pX="0.5" pY="0.5" oX="6" oY="0" oW="134" oH="119" r="y"/>
+    <sprite n="deco_3x3_fairy_fountain.2" x="1863" y="1647" w="128" h="81" pX="0.5" pY="0.5" oX="6" oY="0" oW="134" oH="119"/>
+    <sprite n="deco_3x3_fairy_fountain_snow" x="1567" y="930" w="79" h="122" pX="0.5" pY="0.5" oX="7" oY="4" oW="134" oH="124" r="y"/>
+    <sprite n="deco_3x3_plaza" x="1939" y="60" w="103" h="181" pX="0.5" pY="0.5" oX="4" oY="14" oW="192" oH="143" r="y"/>
+    <sprite n="deco_3x3_plaza_snow" x="216" y="763" w="103" h="181" pX="0.5" pY="0.5" oX="5" oY="13" oW="192" oH="143" r="y"/>
+    <sprite n="deco_3x3_poseidon.0" x="1522" y="1311" w="123" h="127" pX="0.5" pY="0.5" oX="15" oY="32" oW="150" oH="200"/>
+    <sprite n="deco_3x3_poseidon.1" x="1518" y="1439" w="127" h="123" pX="0.5" pY="0.5" oX="15" oY="32" oW="150" oH="200" r="y"/>
+    <sprite n="deco_3x3_poseidon.2" x="1861" y="1729" w="127" h="123" pX="0.5" pY="0.5" oX="15" oY="32" oW="150" oH="200" r="y"/>
+    <sprite n="deco_3x3_poseidon.3" x="1518" y="1439" w="127" h="123" pX="0.5" pY="0.5" oX="15" oY="32" oW="150" oH="200" r="y"/>
+    <sprite n="deco_3x3_poseidon_snow" x="1337" y="1576" w="125" h="120" pX="0.5" pY="0.5" oX="15" oY="32" oW="150" oH="200" r="y"/>
+    <sprite n="deco_3x3_washing.0" x="660" y="1645" w="66" h="119" pX="0.5" pY="0.5" oX="16" oY="89" oW="150" oH="200" r="y"/>
+    <sprite n="deco_3x3_washing.1" x="660" y="1765" w="66" h="119" pX="0.5" pY="0.5" oX="16" oY="89" oW="150" oH="200" r="y"/>
+    <sprite n="deco_3x3_washing.2" x="781" y="1733" w="119" h="66" pX="0.5" pY="0.5" oX="16" oY="89" oW="150" oH="200"/>
+    <sprite n="deco_3x3_washing.3" x="660" y="1765" w="66" h="119" pX="0.5" pY="0.5" oX="16" oY="89" oW="150" oH="200" r="y"/>
+    <sprite n="deco_3x3_washing_snow" x="901" y="1733" w="119" h="66" pX="0.5" pY="0.5" oX="16" oY="89" oW="150" oH="200"/>
+    <sprite n="hopfield_1x1_00.0" x="1272" y="1620" w="64" h="74" pX="0.5" pY="0.5" oX="16" oY="1" oW="90" oH="96" r="y"/>
+    <sprite n="hopfield_1x1_00_rotten.0" x="611" y="1504" w="64" h="74" pX="0.5" pY="0.5" oX="16" oY="1" oW="90" oH="96" r="y"/>
+    <sprite n="hopfield_1x1_02.0" x="950" y="1851" w="64" h="72" pX="0.5" pY="0.5" oX="16" oY="1" oW="90" oH="96" r="y"/>
+    <sprite n="hopfield_1x1_02_rotten.0" x="1015" y="1851" w="64" h="72" pX="0.5" pY="0.5" oX="16" oY="1" oW="90" oH="96" r="y"/>
+    <sprite n="hopfield_1x1_03.0" x="1043" y="1934" w="64" h="72" pX="0.5" pY="0.5" oX="16" oY="1" oW="90" oH="96" r="y"/>
+    <sprite n="hopfield_1x1_03_rotten.0" x="611" y="1504" w="64" h="74" pX="0.5" pY="0.5" oX="16" oY="1" oW="90" oH="96" r="y"/>
+    <sprite n="streets_waypoint_00.0" x="1" y="1107" w="192" h="145" pX="0.5" pY="0.5" oX="0" oY="39" oW="145" oH="231" r="y"/>
+    <sprite n="streets_waypoint_00.1" x="316" y="1032" w="193" h="145" pX="0.5" pY="0.5" oX="0" oY="29" oW="145" oH="231" r="y"/>
+    <sprite n="streets_waypoint_00.2" x="316" y="1032" w="193" h="145" pX="0.5" pY="0.5" oX="0" oY="19" oW="145" oH="231" r="y"/>
+    <sprite n="streets_waypoint_00.3" x="316" y="1032" w="193" h="145" pX="0.5" pY="0.5" oX="0" oY="9" oW="145" oH="231" r="y"/>
+    <sprite n="streets_waypoint_00.4" x="316" y="1032" w="193" h="145" pX="0.5" pY="0.5" oX="0" oY="3" oW="145" oH="231" r="y"/>
+    <sprite n="streets_waypoint_00.5" x="1" y="1253" w="192" h="145" pX="0.5" pY="0.5" oX="0" oY="0" oW="145" oH="231" r="y"/>
+    <sprite n="vinefield_1x1_00.0" x="1803" y="1219" w="62" h="60" pX="0.5" pY="0.5" oX="1" oY="0" oW="64" oH="91"/>
+    <sprite n="vinefield_1x1_00_rotten.0" x="882" y="1596" w="62" h="57" pX="0.5" pY="0.5" oX="1" oY="3" oW="64" oH="91"/>
+    <sprite n="vinefield_1x1_02.0" x="254" y="1739" w="60" h="62" pX="0.5" pY="0.5" oX="1" oY="0" oW="64" oH="91" r="y"/>
+    <sprite n="vinefield_1x1_02_rotten.0" x="882" y="1596" w="62" h="57" pX="0.5" pY="0.5" oX="1" oY="3" oW="64" oH="91"/>
+    <sprite n="vinefield_1x1_03.0" x="946" y="1596" w="62" h="60" pX="0.5" pY="0.5" oX="1" oY="0" oW="64" oH="91"/>
+    <sprite n="vinefield_1x1_03_rotten.0" x="882" y="1596" w="62" h="57" pX="0.5" pY="0.5" oX="1" oY="3" oW="64" oH="91"/>
+</TextureAtlas>

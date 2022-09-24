@@ -1,0 +1,51 @@
+[baker_idle]
+frame:	ani_bakery_01.0.png		2.00
+
+delay:	0.10	3.00
+
+next:	baker_schieb			1.00
+next:	baker_knet				1.00
+
+
+[baker_schieb]
+frame:	ani_bakery_01.1.png		0.50
+frame:	ani_bakery_01.2.png		0.20
+frame:	ani_bakery_01.3.png		0.10
+frame:	ani_bakery_01.4.png		0.20
+frame:	ani_bakery_01.1.png		0.10
+frame:	ani_bakery_01.2.png		0.10
+frame:	ani_bakery_01.3.png		0.10
+frame:	ani_bakery_01.4.png		0.20
+frame:	ani_bakery_01.1.png		0.10
+frame:	ani_bakery_01.2.png		0.10
+frame:	ani_bakery_01.3.png		0.10
+frame:	ani_bakery_01.4.png		0.20
+frame:	ani_bakery_01.1.png		0.20
+
+
+
+
+delay:	0.10	0.30
+
+next:	baker_schieb			1.00
+next:baker_idle					1.00
+
+[baker_knet]
+frame:	ani_bakery_01.5.png		0.10
+frame:	ani_bakery_01.6.png		0.10
+frame:	ani_bakery_01.7.png		0.10
+frame:	ani_bakery_01.6.png		0.10
+frame:	ani_bakery_01.5.png		0.10
+frame:	ani_bakery_01.6.png		0.10
+frame:	ani_bakery_01.7.png		0.10
+frame:	ani_bakery_01.6.png		0.10
+frame:	ani_bakery_01.5.png		0.10
+frame:	ani_bakery_01.6.png		0.10
+frame:	ani_bakery_01.7.png		0.10
+frame:	ani_bakery_01.6.png		0.10
+
+
+
+next:	baker_knet				1.00
+next:baker_idle					1.00
+

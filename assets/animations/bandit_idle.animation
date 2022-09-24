@@ -1,0 +1,23 @@
+[random_start]
+
+flip_x	0
+
+// frame-delay: 0.1
+
+bandit_stand_4.0.png	0.2
+bandit_stand_3.0.png	0.2
+bandit_stand_2.0.png	0.2
+bandit_stand_1.0.png	0.2
+bandit_stand_0.0.png	0.2
+
+flip_x	1
+
+bandit_stand_0.0.png	0.2
+bandit_stand_1.0.png	0.2
+bandit_stand_2.0.png	0.2
+bandit_stand_3.0.png	0.2
+bandit_stand_4.0.png	0.2
+play_ambient: sfx_bandit_laughing_var1
+delay:	1.00	4.00
+
+next: random_start	1

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:42fa715135c81d3863c7e9cd6eab35a3:5a85e87beabc2eab20655b66dde111f8:f7297df6cf702e2d0960eff8fb71b82c$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="hud_3.png" width="256" height="256">
+    <sprite n="popup_window_l" x="50" y="148" w="28" h="48" pX="0.5" pY="0.5" oX="0" oY="0" oW="48" oH="48"/>
+    <sprite n="popup_window_lo" x="1" y="1" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_lu" x="1" y="50" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_mid" x="1" y="99" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_o" x="79" y="148" w="28" h="48" pX="0.5" pY="0.5" oX="0" oY="0" oW="48" oH="48" r="y"/>
+    <sprite n="popup_window_r" x="50" y="197" w="28" h="48" pX="0.5" pY="0.5" oX="20" oY="0" oW="48" oH="48"/>
+    <sprite n="popup_window_ro" x="1" y="148" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_ru" x="1" y="197" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_seperator_hor" x="50" y="1" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_seperator_inner" x="99" y="1" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_seperator_outer" x="148" y="1" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_seperator_vert" x="197" y="1" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_seperator_vert_outer" x="50" y="50" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_seperator_vert_top_outer" x="50" y="99" w="48" h="48" pX="0.5" pY="0.5"/>
+    <sprite n="popup_window_u" x="79" y="197" w="28" h="48" pX="0.5" pY="0.5" oX="0" oY="20" oW="48" oH="48" r="y"/>
+</TextureAtlas>

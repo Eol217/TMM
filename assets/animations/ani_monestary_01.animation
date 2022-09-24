@@ -1,0 +1,51 @@
+[random_start]
+
+next:	hug1				1.00
+next:	hug2				2.00
+next:	hug3				3.00
+
+
+[hug1]
+play_ambient: sfx_townies_monk_praying_2
+play_ambient_chance: 0.2
+frame:	ani_monestary_01.0.png		0.2
+frame:	ani_monestary_01.1.png		0.2
+frame:	ani_monestary_01.2.png		0.2
+frame:	ani_monestary_01.3.png		0.2
+frame:	ani_monestary_01.4.png		0.2
+
+next:	hug2				1.00
+next:	hug3				0.50
+next:	hug1				0.50
+
+[hug2]
+frame-delay: 0.45
+play_ambient: sfx_townies_monk_praying_5
+play_ambient_chance: 0.2
+frame:	ani_monestary_01.0.png		0.2
+frame:	ani_monestary_01.1.png		0.2
+frame:	ani_monestary_01.2.png		0.2
+frame:	ani_monestary_01.3.png		0.2
+frame:	ani_monestary_01.4.png		0.2
+
+next:	hug3				1.00
+next:	hug1				2.00
+next:	hug2				3.00
+
+
+[hug3]
+frame-delay: 0.15
+play_ambient: sfx_townies_monk_in_love_w_barrel_7
+play_ambient_chance: 0.2
+frame:	ani_monestary_01.0.png		0.2
+frame:	ani_monestary_01.1.png		0.2
+frame:	ani_monestary_01.2.png		0.2
+frame:	ani_monestary_01.3.png		0.2
+frame:	ani_monestary_01.4.png		0.2
+
+next:	hug1				2.00
+next:	hug3				3.00
+next:	hug2				1.00
+
+
+

@@ -1,0 +1,1947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questdb SYSTEM ".quests.dtd">
+
+<!-- SCENARIO: THE BEAST -->
+<!--Max Prestige earned 200 -->
+
+<questdb>
+<group>
+
+<include file = "data/common-quests.xml"/>
+<include file = "data/quests_sandbox.xml"/>
+
+	<!--PRESENTATION OF THE SITUATION-->
+	<quest id="FEDERATIONS_THEBEAST_PRESENTATION" start="instant" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="5" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_PRESENTATION"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="FEDERATIONS_THEBEAST_PRESENTATION_001" />
+		</rewards>
+	</quest>	
+	
+	<quest id="FEDERATIONS_THEBEAST_PRESENTATION_001" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="5" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_PRESENTATION_001"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="FEDERATIONS_THEBEAST_PRESENTATION_002" />
+		</rewards>
+	</quest>
+	
+		<!--PRESENTATION OF THE SITUATION 002-->
+	<quest id="FEDERATIONS_THEBEAST_PRESENTATION_002" start="custom" visible="false" finish="instant"  isKeyQuest="true" 
+		   avatar="client">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_PRESENTATION_002"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="FEDERATIONS_THEBEAST_PRESENTATION_003" />
+		</rewards>
+	</quest>	
+	
+	<quest id="FEDERATIONS_THEBEAST_PRESENTATION_003" start="custom" visible="false" finish="instant"  isKeyQuest="true" 
+		   avatar="client">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_PRESENTATION_003"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="FEDERATIONS_THEBEAST_MAINQUEST" />
+		</rewards>
+	</quest>
+	
+	<!--MAIN QUEST-->
+	<!--The goal is to found out the Who/With/For-->
+	<quest id="FEDERATIONS_THEBEAST_MAINQUEST" start="custom" visible="true" finish="instant" isKeyQuest="true"
+		   title="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_MAINQUEST_TITLE" 
+		   description="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_MAINQUEST_STARTED" 
+		   avatar="client">
+		<start_condition timeout="3" operator="and" />
+		<onStarted>
+			<start-quest id="THEBEAST_ARTIST_FEDERATION_PRESENTATION" />
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="all_tasked_are_done" value="true"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_MAINQUEST_SUCCESS"/>
+		<fail_condition timeout="2" operator="and">
+			<flag-has-value key="scenario_failed" value="true"/>
+		</fail_condition>
+		<onFailed notification="T_QUESTS_SCENARIO_FEDERATIONS_THEBEAST_MAINQUEST_FAILED">
+			<start-quest id="SCENARIO_FAILED"/>
+		</onFailed>
+		<rewards>
+			<resource resource="prestige" amount="100"/>
+			<start-quest id="SCENARIO_FINISHED"/>
+		</rewards>
+	</quest>
+	
+	<!--Presentation of the artist federation-->
+	<quest id="THEBEAST_ARTIST_FEDERATION_PRESENTATION" start="custom" visible="false" finish="instant" isKeyQuest="true" 
+		   avatar="townie">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ARTIST_FEDERATION_INTRO"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ARTIST_FEDERATION_IDEAS" />
+		</rewards>
+	</quest>
+	
+	<!--The artist federation got some ideas to pleased the others federations-->
+	<quest id="THEBEAST_ARTIST_FEDERATION_IDEAS" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="townie">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ARTIST_FEDERATION_STARTED"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_A_TOWNIE_NEED_TO_EAT_PART_I" />
+		</rewards>
+	</quest>
+	
+	<!--The artist federation will bake some bread for the town-->
+	<quest id="THEBEAST_A_TOWNIE_NEED_TO_EAT_PART_I" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_GAME_QUEST_SCEN6_4_NAME" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_A_TOWNIE_NEED_TO_EAT_PART_I_STARTED"
+		   avatar="townie">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_A_TOWNIE_NEED_TO_EAT_PART_I_STARTED">
+			<start-quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_I" />
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<building type="building_bakery" count="1"/>
+			<!--TODO change the amount of bread-->
+			<produce resource="bread" amount="15"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_A_TOWNIE_NEED_TO_EAT_PART_I_SUCCESS"/>
+		<rewards>
+			<resource resource="coins" amount="200"/>
+			<resource resource="planks" amount="10"/>
+			<set-flag key="TOWNIE_NEED_EAT_PART_I" value="true"/>
+		</rewards>
+	</quest>
+	
+<!--build some roads-->
+	<quest id="THEBEAST_ROADS" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_SCENARIO_THEBEAST_ROADS_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ROADS_STARTED"
+		   avatar="client">
+		<start_condition timeout="7" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ROADS_STARTED"/>
+		<objectives timeout="3" operator="and">
+			<street type="stone" count="2"/>
+			<street type="dirt" count="5"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_ROADS_SUCCESS"/>
+		<rewards>
+			<resource resource="coins" amount="300"/>
+			<resource resource="wood" amount="30"/>
+			<set-flag key="TOWNIE_ROADS" value="true"/>
+		</rewards>
+	</quest>
+	
+	<!--Introduction of the miners federation-->
+	<quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_I" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="farmer">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_MINERS_FEDERATION_INTRO_PART_I"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_II" />
+		</rewards>
+	</quest>
+	
+	<!--Introduction of the miners federation_PART II-->
+	<quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_II" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="farmer">
+		<start_condition timeout="1" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_MINERS_FEDERATION_INTRO_PART_II"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_IIB" />
+		</rewards>
+	</quest>
+	
+	<quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_IIB" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="farmer">
+		<start_condition timeout="1" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_MINERS_FEDERATION_INTRO_PART_II_B"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_III" />
+		</rewards>
+	</quest>
+		
+		<!--Introduction of the miners federation_PART III-->
+	<quest id="THEBEAST_MINERS_FEDERATION_PRESENTATION_PART_III" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="farmer">
+		<start_condition timeout="1" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_MINERS_FEDERATION_INTRO_PART_III"/>
+		<objectives timeout="3" operator="and"/>
+		<onSuccess/>
+		<rewards>
+			<start-quest id="THEBEAST_BUILDING_FIRETOWERS"/>
+		</rewards>
+	</quest>
+	
+	<!--SIMPLE QUEST FIRE TOWER BUILDINGS-->
+	<quest id="THEBEAST_BUILDING_FIRETOWERS" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_SCENARIO_THEBEAST_BUILDING_FIRETOWER_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_BUILDING_FIRETOWER_STARTED" 
+		   avatar="farmer">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_BUILDING_FIRETOWER_STARTED"/>
+		<objectives timeout="3" operator="and">
+			<building type="building_firewatch" count="2"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_BUILDING_FIRETOWER_SUCCESS"/>
+		<rewards>
+			<start-quest id="THEBEAST_SET_FIRE"/>
+			<resource resource="coins" amount="500"/>
+			<resource resource="wood" amount="20"/>
+		</rewards>
+	</quest>
+	
+		<!--FIRE IS IN TOWN-->
+	<quest id="THEBEAST_SET_FIRE" start="custom" visible="false" finish="user" isKeyQuest="true"
+		   avatar="client">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_THEBEAST_SET_FIRE_STARTED">
+			<start-fire target="building_residence_00" amount="1" state="burning"/>
+			<start-fire target="building_market" amount="1" state="burning"/>
+			<start-fire target="building_farm" amount="1" state="burning"/>
+			<start-fire target="building_residence_01" amount="1" state="burning"/>
+		</onStarted>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ROADS" />
+			<start-quest id="THEBEAST_CHECK_QUEST_INTRO_ENDS"/>
+			<start-quest id="THEBEAST_CHECK_QUEST_INTRO_ENDS"/>
+			<set-flag key="MINERS_FEDERATION_PRESENTATION_ENDS" value="true"/>
+		</rewards>
+	</quest>
+
+	<!--CHECK QUEST FOR THE INTRO ENDS-->
+	<quest id="THEBEAST_CHECK_QUEST_INTRO_ENDS" start="custom" visible="false" finish="instant" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="MINERS_FEDERATION_PRESENTATION_ENDS" value="true"/>
+			<flag-has-value key="TOWNIE_NEED_EAT_PART_I" value="true"/>
+			<flag-has-value key="TOWNIE_ROADS" value="true"/>
+		</objectives>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_001_ADVISOR"/>
+		</rewards>
+	</quest>
+
+<!--______________________________________________________________________FIRST ACCIDENT_________________________________________________________________________-->
+
+<!--This is the first attacks of the beast, near the washing place, a woman was atk by something she is still alive and she was saved by her husband-->
+
+	<!--Advisor is telling the player that something happend-->
+	<quest id="THEBEAST_ATTACK_001_ADVISOR" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_STARTED">
+			<center-to-building target="test1"/>
+		</onStarted>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_001_ADVISOR_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="THEBEAST_ATTACK_001_ADVISOR_002" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_STARTED_002">
+			<center-to-building target="test1"/>
+		</onStarted>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_001_ADVISOR_002_B"/>
+		</rewards>
+	</quest>
+	
+	<quest id="THEBEAST_ATTACK_001_ADVISOR_002_B" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_STARTED_003"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_001_ADVISOR_EXPLANATIONS"/>
+		</rewards>
+	</quest>
+	
+	<!--Advisor is telling the player that he will need to solve the case-->
+	<quest id="THEBEAST_ATTACK_001_ADVISOR_EXPLANATIONS" start="custom" visible="false" finish="instant" isKeyQuest="true" avatar="client">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_EXPLANATIONS"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_EXPLANATIONS_01"/>
+		</rewards>
+	</quest>
+	
+	<quest id="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_EXPLANATIONS_01" start="custom" visible="false" finish="instant" isKeyQuest="true" avatar="client">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_EXPLANATIONS_01"/>
+		<objectives timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_CHOOSE_SCENE_OR_QUESTIONS"/>
+		</rewards>
+	</quest>
+	
+	<!--______________________________________________________________SCENE OR QUESTIONS 001______________________________________________________________-->
+	
+	<!--Each time an attack will occured (except for the 3rd attack) the player will have the choice between the questions to the victim and the analyse of the scene-->
+	<!--In each of the paths he will choose, he will have some clues that will help him to close the case-->
+	<!--The goals for us GD, is to lead the player slowly to the solution-->
+	
+	
+	<!--PLAYER NEED TO CHOOSE BETWEEN SCENE OR QUESTIONS-->
+	<quest id="THEBEAST_CHOOSE_SCENE_OR_QUESTIONS" visible="false" finish="user" start="custom" 
+		   avatar="client">
+		<start_condition timeout="1" operator="and"/>
+		<objectives timeout="1" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess/>
+		<rewards >
+			<!--TIME TO CHOOSE-->
+			<start-quest id="THEBEAST_CHOICE_ATK_001_QUESTIONS_001" />
+			<start-quest id="THEBEAST_CHOICE_ATK_001_SCENE_001" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+
+<!--PLAYER CHOOSE THE QUESTIONS-->
+	<quest id="THEBEAST_CHOICE_ATK_001_QUESTIONS_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_QUESTIONS_001" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_001_TITLE" 
+		   avatar="client" >
+		<start_condition timeout="2" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_scene_001" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_001_QUESTION_001"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen_questions_001" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen_scene_001" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--PLAYER CHOOSE THE SCENE-->
+	<quest id="THEBEAST_CHOICE_ATK_001_SCENE_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_SCENE_ANALYSE_SCENE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_001_TITLE"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_questions_001" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="THEBEAST_ATK_001_SCENE_ANALYSE_001"/>
+			<set-flag key="player_has_choosen_scene_001" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen_questions_001" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--PLAYER IS GOING TO ANALYSE THE SCENE-->
+	<quest id="THEBEAST_ATK_001_SCENE_ANALYSE_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_ANALYSE_SCENE_001"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATK_001_SCENE_ANALYSE_002"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--PLAYER IS GOING TO ANALYSE THE SCENE 002-->
+	<quest id="THEBEAST_ATK_001_SCENE_ANALYSE_002" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_ADVISOR_ANALYSE_SCENE_002"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_FISHING_MISSION"/>
+			<start-quest id="THEBEAST_SHEEP_MISSION"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--QUESTION DESCRIBE WHAT HAPPENED-->
+	<quest id="THEBEAST_ATK_001_QUESTION_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_001_QUESTION_001"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATK_001_ANSWER_001"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--THE ANSWER OF THE LADY-->	
+	<quest id="THEBEAST_ATK_001_ANSWER_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_001_ANSWER_001"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_001_CHOICE_HUSBAND_VICTIM_CHOOSE"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+		<!--NEW CHOICE AFTER THE ANSWER OF THE LADY-->	
+	<quest id="THEBEAST_ATK_001_CHOICE_HUSBAND_VICTIM_CHOOSE" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<start-quest id="THEBEAST_CHOOSE_HUSBAND_OR_VICTIM"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+
+<!--_________________________________________________________________END SCENE OR QUESTIONS 001______________________________________________________________-->
+
+<!--_______________________________________________________________HUSBAND OR ANOTHER QUESTION______________________________________________________________-->
+
+<!--In this part, the player got the choice between more questions to the victim or questions to his husband-->
+<!--At this point, the player CAN have some hints on who is gulty, that the woman was lying about the atk because she planned it with her father-->
+<!--The answer of the husband will give some doubts on the testimony of the girl-->
+<!--The other question to the wife will give the player some informations about the sister that was banish from this country-->
+
+<!--HUSBAND OR ANOTHER QUESTION-->
+	<quest id="THEBEAST_CHOOSE_HUSBAND_OR_VICTIM" visible="false" finish="user" start="custom" 
+		   avatar="client">
+		<start_condition timeout="2" operator="and"/>
+		<objectives timeout="1" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess/>
+		<rewards >
+			<!--TIME TO CHOOSE-->
+			<start-quest id="THEBEAST_CHOICE_ATK_001_QUESTIONS_HUSBAND" />
+			<start-quest id="THEBEAST_CHOICE_ATK_001_QUESTIONS_VICTIM" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+
+<!--PLAYER CHOOSE HUSBAND QUESTIONS-->
+	<quest id="THEBEAST_CHOICE_ATK_001_QUESTIONS_HUSBAND" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_HUSBAND" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_002_TITLE" 
+		   avatar="client" >
+		<start_condition timeout="2" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_husband_001" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_001_ANSWER_HUSBAND"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen_victim_001" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen_husband_001" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--PLAYER CHOOSE ANOTHER QUESTION FOR THE VICTIM-->
+	<quest id="THEBEAST_CHOICE_ATK_001_QUESTIONS_VICTIM" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_VICTIM" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_002_TITLE"
+		   avatar="client" >
+		<start_condition timeout="2" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_victim_001" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="THEBEAST_ATK_001_QUESTION_002"/>
+			<set-flag key="player_has_choosen_husband_001" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen_victim_001" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--THE ANSWER OF THE HUSBAND-->
+	<quest id="THEBEAST_ATK_001_ANSWER_HUSBAND" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="soldier" >
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_HUSBAND_ANSWER"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_001_ANSWER_HUSBAND_002"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+		<!--THE ANSWER OF THE HUSBAND 002-->
+	<quest id="THEBEAST_ATK_001_ANSWER_HUSBAND_002" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="soldier" >
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_HUSBAND_ANSWER_002"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<start-quest id="THEBEAST_FISHING_MISSION"/>
+			<start-quest id="THEBEAST_SHEEP_MISSION"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--ADVISOR IS ASKING THE LADY AGAIN-->
+	<quest id="THEBEAST_ATK_001_QUESTION_002" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_001_QUESTION_002_DETAILS"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATK_001_ANSWER_VICTIM_002"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+<!--THE SECOND ANSWER OF THE LADY--> 
+	<quest id="THEBEAST_ATK_001_ANSWER_VICTIM_002" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_VICTIM_ANSWER_002"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_001_CONCLUSION_ADVISOR_001"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--ADVISOR CONCLUSION-->
+	<quest id="THEBEAST_ATK_001_CONCLUSION_ADVISOR_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_001_CONCLUSION_ADVISOR_001"/>
+		<objectives timeout="1" operator="and">
+			<flag-has-value key="TOWNIE_ROADS" value="true"/>
+			<flag-has-value key="TOWNIE_NEED_EAT_PART_I" value="true"/>
+		</objectives>
+		<rewards >
+			<start-quest id="THEBEAST_FISHING_MISSION"/>
+			<start-quest id="THEBEAST_SHEEP_MISSION"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+	
+	<!--___________________________________________________________END HUSBAND OR ANOTHER QUESTION______________________________________________________________-->
+	
+	<!--_____________________________________________SMALL QUEST + CHECK THE OTHERS BEFORE GOING TO THE NEXT ONE___________________________________________-->
+	
+	<!--In order to keep some buildings task for the player, he will need to build another fishing lodge and catch some fish-->
+	<!--This quest is to have a transition before the second accident-->
+		
+	<!--QUEST FISHING 20 FISH FOR YOUR TOWNIES AND BUILD A 2ND FISHING LODGE-->
+	<quest id="THEBEAST_FISHING_MISSION" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_FISHING_MISSION_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_FISHING_MISSION_STARTED"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_FISHING_MISSION_STARTED"/>
+		<objectives timeout="1" operator="and">
+			<building type="building_hunters_cabin" count="2"/>
+			<produce resource="meat" amount="15"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_FISHING_MISSION_SUCCESS"/>
+		<rewards >
+			<resource resource="coins" amount="200"/>
+			<start-quest id="THEBEAST_CHECK_QUEST_SHEEP_AND_FISH_ENDS"/>
+			<set-flag key="fishing_is_done" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<quest id="THEBEAST_SHEEP_MISSION" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_SHEEP_MISSION_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_SHEEP_MISSION_STARTED"
+		   avatar="farmer" >
+		<start_condition timeout="10" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_SHEEP_MISSION_STARTED"/>
+		<objectives timeout="1" operator="and">
+			<!--TODO CHANGE AMOUNT OF WOOL-->
+			<building type="building_sheepwalk" count="1"/>
+			<produce resource="wool" amount="10"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_SHEEP_MISSION_SUCCESS"/>
+		<rewards >
+			<!--TODO CHANGE THE REWARD-->
+			<resource resource="coins" amount="100"/>
+			<start-quest id="THEBEAST_CHECK_QUEST_SHEEP_AND_FISH_ENDS"/>
+			<set-flag key="sheep_is_done" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--CHECK QUEST FOR THE SHEEP AND FISH ENDS-->
+	<quest id="THEBEAST_CHECK_QUEST_SHEEP_AND_FISH_ENDS" start="custom" visible="false" finish="instant" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="fishing_is_done" value="true"/>
+			<flag-has-value key="sheep_is_done" value="true"/>
+		</objectives>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_002_ADVISOR"/>
+		</rewards>
+	</quest>
+		
+	<!--_____________________________________________END SMALL QUEST + CHECK THE OTHERS BEFORE GOING TO THE NEXT ONE___________________________________________-->
+
+	<!--________________________________________________________________END_FIRST ACCIDENT_________________________________________________________________________-->
+
+	<!--___________________________________________________________________2ND ATTACK___________________________________________________________-->
+	
+	<!--In this part, the anxity of the townies is quite high, they are affraid of the first atk and the monk is asking for a cathedrale to calm the people-->
+	<!--A part from that, the player will continue the task of [A townie need to eat part II]-->
+	<!--The catedral need to be build in time [20minutes] otherwhise townies will go on strike-->
+	
+		<!--Advisor is telling the player that something happend AGAIN-->
+	<quest id="THEBEAST_ATTACK_002_ADVISOR" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_ADVISOR_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_002_ADVISOR_EXPLANATIONS"/>
+		</rewards>
+	</quest>
+	
+	<!--Advisor is telling the player that he will need to solve the case-->
+	<quest id="THEBEAST_ATTACK_002_ADVISOR_EXPLANATIONS" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_CHOOSE_SCENE_OR_QUESTIONS_002"/>
+		</rewards>
+	</quest>
+	
+	<!--______________________________________________________________SCENE OR QUESTIONS 002______________________________________________________________-->
+	
+	<!--Each time an attack will occured (except for the 3rd attack) the player will have the choice between the questions to the victim and the analyse of the scene-->
+	<!--In each of the paths he will choose, he will have some clues that will help him to close the case-->
+	<!--The goals for us GD, is to lead the player slowly to the solution-->
+		
+	<!--PLAYER NEED TO CHOOSE BETWEEN SCENE OR QUESTIONS-->
+	<quest id="THEBEAST_CHOOSE_SCENE_OR_QUESTIONS_002" visible="false" finish="user" start="custom" 
+		   avatar="client">
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess/>
+		<rewards >
+			<!--TIME TO CHOOSE-->
+			<start-quest id="THEBEAST_CHOICE_ATK_002_QUESTIONS_001" />
+			<start-quest id="THEBEAST_CHOICE_ATK_002_SCENE_001" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+
+<!--PLAYER CHOOSE THE QUESTIONS ATK 002-->
+	<quest id="THEBEAST_CHOICE_ATK_002_QUESTIONS_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_QUESTIONS_001" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_001_TITLE" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_scene_002" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_002_QUESTION_001"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen_questions_002" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen_scene_002" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--PLAYER CHOOSE THE SCENE ATK 002-->
+	<quest id="THEBEAST_CHOICE_ATK_002_SCENE_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_SCENE_ANALYSE_SCENE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_001_CHOICE_001_TITLE"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_questions_002" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="THEBEAST_ATK_002_SCENE_ANALYSE_001"/>
+			<set-flag key="player_has_choosen_scene_002" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen_questions_002" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	
+<!--	ASK THE QUESTIONS VICTIM 002-->
+	<quest id="THEBEAST_ATK_002_QUESTION_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_QUESTIONS_001_STARTED"/>
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" />
+		<rewards>
+			<start-quest id="THEBEAST_ATK_002_REPLY_001"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and" >
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--Reply of the victim-->
+	<quest id="THEBEAST_ATK_002_REPLY_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="miller" >
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_002_REPLY_001_STARTED"/>
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" />
+		<rewards>
+			<start-quest id="THEBEAST_ATK_002_CONCLUSION_ADVISOR_002"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and" >
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+		<!--CONCLUSION ADVISOR 002-->
+	<quest id="THEBEAST_ATK_002_CONCLUSION_ADVISOR_002" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_002_CONCLUSION_ADVISOR_002"/>
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" />
+		<rewards>
+			<start-quest id="THEBEAST_ADVISOR_INTERLUDE"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and" >
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--GO TO THE SCENE 002-->
+	<!--IN REWARD new choice of scene analyse-->
+	<quest id="THEBEAST_ATK_002_SCENE_ANALYSE_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_SCENE_001_STARTED"/>
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" />
+		<rewards >
+			<start-quest id="THEBEAST_CHOOSE_CLOTHS_OR_ITEMS_002_EXPLANATIONS" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--NEW CHOICE AFTER THE SCENE ANALYSE-->
+	<!--Advisor explaine to the player that they still have some time for this scene, he can choose another thing to analyse-->
+	<quest id="THEBEAST_CHOOSE_CLOTHS_OR_ITEMS_002_EXPLANATIONS" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_CHOICE_002_STARTED"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<start-quest id="THEBEAST_CHOOSE_CLOTHS_OR_ITEMS_002"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--___________________________________________________________END SCENE OR QUESTIONS 002______________________________________________________________-->
+	
+	<!--________________________________________________________SCENE_ATK_002_CLOTHS OR ITEM______________________________________________________________-->
+	
+	<!--SCENE CHOICE WHAT TO ANALYSE-->
+	<!--PLAYER NEED TO CHOOSE BETWEEN ANALSYING THE FOOTPRINTS OR CLOTHS-->
+	
+	<!--this time, for the two analyse, he will need to do a small quest-->
+	<!--To have the cloths of the miller he will need to give him new one with a tribute-->
+	<!--For the item analse, he will have to see the exert-->
+	<!--The expert will give him some details about the fingerprints and how is the person strong, one of the townie hurt the miller before the beast toook him, with a jar-->
+	
+	<quest id="THEBEAST_CHOOSE_CLOTHS_OR_ITEMS_002" visible="false" finish="user" start="custom" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_CLOTHS_OR_ITEMS_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_CLOTHS_OR_ITEMS_TITLE" 
+		   avatar="client">
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess/>
+		<rewards >
+			<!--TIME TO CHOOSE-->
+			<start-quest id="THEBEAST_CHOICE_ATK_002_SCENE_CLOTHS_001" />
+			<start-quest id="THEBEAST_CHOICE_ATK_002_SCENE_ITEMS_001" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+	
+	<!--PLAYER CHOOSE THE MILLER CLOTHS-->
+	<quest id="THEBEAST_CHOICE_ATK_002_SCENE_CLOTHS_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_CLOTHS_001_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_CLOTHS_OR_ITEMS_TITLE" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_cloths_002" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards>
+			<start-quest id="THEBEAST_ATK_002_MILLER_CLOTHS_BACK"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen_items_002" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen_cloths_002" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--PLAYER CHOOSE THE EXPERT ITEM QUEST-->
+	<quest id="THEBEAST_CHOICE_ATK_002_SCENE_ITEMS_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_SCENE_EXPERT_SCENE_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_002_CLOTHS_OR_ITEMS_TITLE"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_items_002" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_INTRO_EXPERT"/>
+			<set-flag key="player_has_choosen_cloths_002" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen_items_002" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+
+<!--_____________________________________________________________END_SCENE_ATK_002_CLOTHS OR ITEM______________________________________________________________-->
+
+	<!--You need to give new clothes to the miller and analyse his-->
+	<quest id="THEBEAST_ATK_002_MILLER_CLOTHS_BACK" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATK_002_MILLER_CLOTHS_BACK_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATK_002_MILLER_CLOTHS_BACK_STARTED"
+		   avatar="miller" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_002_MILLER_CLOTHS_BACK_STARTED"/>
+		<objectives timeout="1" operator="and">
+			<building type="building_tailor" count="1"/>
+			<tribute resource="cloths" amount="10"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_ATK_002_MILLER_CLOTHS_BACK_SUCCESS"/>
+		<rewards >
+			<resource resource="coins" amount="100"/>
+			<start-quest id="THEBEAST_ADVISOR_INTERLUDE"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+		<!--Advisor say that they found one item that could be helpful, and say that it will be good to take them to the expert-->
+		<!--just text-->
+	<quest id="THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_INTRO_EXPERT" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification=""/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_QUEST"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--EXPERT QUEST-->
+	<quest id="THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_QUEST" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_SCENARIO_2016_10_QUEST_14_NAME" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_QUEST_STARTED"
+		   avatar="medicus" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_QUEST_STARTED">
+			<start-quest id="THEBEAST_FATHER_MERCHANT"/>
+		</onStarted>
+		<objectives timeout="3" operator="and">
+			<building type="building_medicus" count="1"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_QUEST_SUCCESS"/>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_ANSWER"/>
+			<resource resource="coins" amount="300"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+		<!--EXPERT TALKING-->
+	<quest id="THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_ANSWER" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="medicus" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification=""/>
+		<objectives timeout="1" operator="and"/>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_THEBEAST_ATK_002_SCENE_ADVISOR_ITEMS_EXPERT_ANSWER_SUCCESS"/>
+		<rewards >
+			<start-quest id="THEBEAST_ATK_002_SCENE_ADVISOR_CONCLUSION"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+		
+	<!--ADVISOR CONCLUSION-->
+	<quest id="THEBEAST_ATK_002_SCENE_ADVISOR_CONCLUSION" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATK_002_SCENE_ADVISOR_CONCLUSION_STARTED"/>
+		<objectives timeout="1" operator="and"/>
+		<rewards >
+			<set-flag key="expert_is_done" value="true" />
+			<start-quest id="THEBEAST_CHECK_QUEST_TRADE_AND_EXPERT_ENDS"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+<!--	Playert is going to talk to the father, the merchand -->
+<!--the player need to have a profit of 1000-->
+	<quest id="THEBEAST_FATHER_MERCHANT" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_THEBEAST_FATHER_MERCHANT_QUEST_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_FATHER_MERCHANT_QUEST_STARTED"
+		   avatar="merchant" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_FATHER_MERCHANT_QUEST_STARTED"/>
+		<objectives timeout="3" operator="and">
+			<trade-profit amount="1000"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_FATHER_MERCHANT_QUEST_SUCCESS"/>
+		<rewards >
+			<resource resource="prestige" amount="5"/>
+			<resource resource="juice" amount="5"/>
+			<set-flag key="trade_are_done" value="true" />
+			<start-quest id="THEBEAST_CHECK_QUEST_TRADE_AND_EXPERT_ENDS"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--CHECK QUEST FOR THE TRADE AND EXPERT ENDS-->
+	<quest id="THEBEAST_CHECK_QUEST_TRADE_AND_EXPERT_ENDS" start="custom" visible="false" finish="instant" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="trade_are_done" value="true"/>
+			<flag-has-value key="expert_is_done" value="true"/>
+		</objectives>
+		<rewards>
+			<start-quest id="THEBEAST_ADVISOR_INTERLUDE"/>
+		</rewards>
+	</quest>
+	
+	
+	<!--________________________________________________________________END_2ND ATTACK___________________________________________________________-->
+	
+		<!--ADVISOR INTERLUDE-->
+		<!--Advisor says that one of the townie got a request-->
+		<!--Build something-->
+	<quest id="THEBEAST_ADVISOR_INTERLUDE" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_GAME_QUEST_SCEN8_10_NAME" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ADVISOR_INTERLUDE_STARTED"
+		   avatar="client" >
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ADVISOR_INTERLUDE_STARTED"/>
+		<objectives timeout="3" operator="and">
+			<building type="building_warehouse" count="1"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_ADVISOR_INTERLUDE_SUCCESS"/>
+		<rewards >
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR"/>
+			<resource resource="coins" amount="100"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--___________________________________________________________________3RD ATTACK___________________________________________________________-->
+	
+	<!--In this part, the anxity of the townies is quite high, they are affraid of the first atk and the monk is asking for a cathedrale to calm the people-->
+	<!--A part from that, the player will continue the task of [A townie need to eat part II]-->
+	<!--The catedral need to be build in time [20minutes] otherwhise townies will go on strike-->
+	
+		<!--Advisor is telling the player that something happend AGAIN-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_STARTED">
+			<center-to-building target="farm"/>
+		</onStarted>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_002"/>
+		</rewards>
+	</quest>
+	
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_002" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_STARTED_002">
+			<center-to-building target="farm"/>
+		</onStarted>
+		<objectives timeout="1" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_EXPLANATIONS"/>
+		</rewards>
+	</quest>
+	
+		
+	<!--Advisor is explaining why player need to choose a spot-->	
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_EXPLANATIONS" start="custom" visible="false" finish="instant" avatar="client" isKeyQuest="true">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_EXPLANATIONS_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<fail_condition timeout="3" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_CHOOSE_SPOTA_OR_SPOTB_003"/>
+		</rewards>
+	</quest>
+	
+	<!--_______________________________________________________________Gathering OR footprints 003______________________________________________________________-->
+	
+	<!--The player will have to choose between gathering all the people or following some footprints-->
+	
+	
+	<!--PLAYER NEED TO CHOOSE BETWEEN SPOT A OR SPOT B -->
+	<quest id="THEBEAST_CHOOSE_SPOTA_OR_SPOTB_003" visible="false" finish="user" start="custom" 
+		   avatar="client">
+		<start_condition timeout="2" operator="and"/>
+		<objectives timeout="1" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess/>
+		<rewards >
+			<!--TIME TO CHOOSE-->
+			<start-quest id="THEBEAST_CHOICE_ATK_003_SPOTA_001" />
+			<start-quest id="THEBEAST_CHOICE_ATK_003_SPOTB_001" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+
+	<!--PLAYER CHOOSE TO FOLLOW THE FOOTPRINTS ATK 003-->
+	<!--FOOTPRINTS--> 
+	<!--Client is following the footprints to see if he can find some new clues-->
+	<quest id="THEBEAST_CHOICE_ATK_003_SPOTA_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_CHOICE_SPOTS_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_CHOICE_SPOTS_DESC" 
+		   avatar="client" >
+		<start_condition timeout="2" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_spotB_003" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_001"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen_spotA_003" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen_spotB_003" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+	<!--PLAYER CHOOSE TO GATHER THE TOWNIES ATK 003-->
+	<!--Client gather all the townies-->
+	<quest id="THEBEAST_CHOICE_ATK_003_SPOTB_001" start="custom" visible="true" isKeyQuest="true" 
+		   title="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_QUESTIONS_001_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_GATHERING_TOWNIES_001_DESC"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen_spotA_003" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_001"/>
+			<set-flag key="player_has_choosen_spotB_003" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen_spotA_003" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	
+	<!--____________________________________________________________END SPOT A or SPOT B 003______________________________________________________________-->
+	
+	<!--_________________________________________________________________FOLLOW THE FOOTPRINTS________________________________________________________-->
+	
+	<!--The footprints leads you to the house of the woman, you encouter the father.-->
+	<!--Quest tissue to make a fil d Arianne-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_001" start="custom" visible="true" finish="user" isKeyQuest="true"
+		   title="T_QUESTS_SCENARIO_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_001_TITLE" 
+		   description="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_001_STARTED"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_001_STARTED"/>
+		<objectives timeout="2" operator="and">
+			<tribute resource="fabric" amount="10"/>
+		</objectives>
+		<rewards>
+			<resource resource="prestige" amount="10"/>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_002"/>
+		</rewards>
+		<fail_condition timeout="1" operator="and">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--Player found the father-->
+	<!--The father is a merchand. He explain you how they tretead his daughter who was just trying to help them.-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="merchant" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_MERCHANT_FOOTPRINTS_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+<!--He said that the farmer certainly did the attacks, because he hate them + atk the baker so it was unoticed.-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="merchant" >
+		<start_condition timeout="2" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_A"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--He said that the farmer certainly did the attacks, because he hate them + atk the baker so it was unoticed.-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_A" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="merchant" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_STARTED_001"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_B"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+		<!--He said that the farmer certainly did the attacks, because he hate them + atk the baker so it was unoticed.-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_B" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="merchant" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_STARTED_002"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_C"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--Conclusion of the merchand-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_C" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="merchant" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003_STARTED_003"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_TOWNIE_STILL_MISSING"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--______________________________________________________________END FOLLOW THE FOOTPRINTS________________________________________________________-->
+	
+	<!--_________________________________________________________________GATHER THE TOWNIES________________________________________________________-->
+	
+	<!--Advisor is asking last questions "Do you have an aliby?"-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_001" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_002_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_GIRL"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--Women "I was atk, can't be me"-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_GIRL" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_GIRL_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_MILLER"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--Miller "I almost died"-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_MILLER" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="miller" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_MILLER_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_FARMER"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--Farmer :" ok I don't like them so much, but with the music and new taven thanks to the artist, I'm started to like them"-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_FARMER" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="farmer" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_ALIBY_GATHERING_002_FARMER_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_FOLLOW_THE_FOOTPRINTS_003"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--________________________________________________________________END_GATHER THE TOWNIES________________________________________________________-->
+	
+	<!--	TOWNIE STILL MISSING-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_TOWNIE_STILL_MISSING" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_TOWNIE_STILL_MISSING_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="THEBEAST_ATTACK_003_ADVISOR_TOWNIE_STILL_MISSING_002"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--[ADVISOR] we need to find the townie really fast, make a suggestion, you only 
+	have one chance, think about all the clues that you have in your hands.-->
+	<quest id="THEBEAST_ATTACK_003_ADVISOR_TOWNIE_STILL_MISSING_002" start="custom" visible="false" finish="instant" isKeyQuest="true"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_ATTACK_003_ADVISOR_TOWNIE_STILL_MISSING_002_STARTED"/>
+		<objectives timeout="2" operator="and"/>
+		<rewards>
+			<start-quest id="CHOOSE_QUESTION"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--_________________________________________________________________END_3RD ATTACK___________________________________________________________-->
+	
+	<!--________________________________________________________________CHOICE MECHANICS_________________________________________________________________________-->
+
+	<!--THE PLAYER NEED TO CHOOSE THE COUPABLE-->
+	<quest id="CHOOSE_QUESTION" visible="false" finish="user" start="custom" 
+		   avatar="client">
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_MAKE_A_SUGGESTION_WHO"/>
+		<rewards >
+			<start-quest id="THEBEAST_CHOICE_A_COUPABLE" />
+			<start-quest id="THEBEAST_CHOICE_B_COUPABLE" />
+			<start-quest id="THEBEAST_CHOICE_C_COUPABLE" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+
+<!--THE COUPABLE IS THE GIRL-->
+	<quest id="THEBEAST_CHOICE_A_COUPABLE" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_A_COUPABLE_TITLE" 
+		   description="THEBEAST_CHOICE_A_COUPABLE_DESC" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<start-quest id="CHOOSE_QUESTION_ACOLYTE"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen" value="true" />
+			<set-flag key="COUPABLE_A" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--The coupable is the farmer-->
+	<quest id="THEBEAST_CHOICE_B_COUPABLE" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_B_COUPABLE_TITLE" 
+		   description="THEBEAST_CHOICE_B_COUPABLE_DESC"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="CHOOSE_QUESTION_ACOLYTE"/>
+			<set-flag key="player_has_choosen" value="true" />
+			<set-flag key="COUPABLE_B" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--The coupable is the miller-->
+	<quest id="THEBEAST_CHOICE_C_COUPABLE" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_C_COUPABLE_TITLE" 
+		   description="THEBEAST_CHOICE_C_COUPABLE_DESC"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="CHOOSE_QUESTION_ACOLYTE"/>
+			<set-flag key="player_has_choosen" value="true" />
+			<set-flag key="COUPABLE_C" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+
+	<!--_________________________________________________________END CHOICE MECHANICS_________________________________________________________________________-->
+
+<!--_________________________________________________________CHOICE FOR THE ACOLYTE_________________________________________________________________________-->
+
+<!--CHOOSE ACOLYTE-->
+	<quest id="CHOOSE_QUESTION_ACOLYTE" visible="false" finish="user" start="custom" 
+		   avatar="client">
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_MAKE_A_SUGGESTION_WITH"/>
+		<rewards >
+			<start-quest id="THEBEAST_CHOICE_A_ACOLYTE" />
+			<start-quest id="THEBEAST_CHOICE_B_ACOLYTE" />
+			<start-quest id="THEBEAST_CHOICE_C_ACOLYTE" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+
+<!--Was helped by the father and Hector-->
+	<quest id="THEBEAST_CHOICE_A_ACOLYTE" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_A_ACOLYTE_TITLE" 
+		   description="THEBEAST_CHOICE_A_ACOLYTE_DESC" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen1" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<start-quest id="CHOOSE_QUESTION_REASON"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen1" value="true" />
+			<set-flag key="ACOLYTE_A" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen1" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--Was helped by BASIL-->
+	<quest id="THEBEAST_CHOICE_B_ACOLYTE" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_B_ACOLYTE_TITLE" 
+		   description="THEBEAST_CHOICE_B_ACOLYTE_DESC"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen1" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="CHOOSE_QUESTION_REASON"/>
+			<set-flag key="player_has_choosen1" value="true" />
+			<set-flag key="ACOLYTE_B" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen1" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--Complot from the state, queen Frygith-->
+	<quest id="THEBEAST_CHOICE_C_ACOLYTE" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_C_ACOLYTE_TITLE" 
+		   description="THEBEAST_CHOICE_C_ACOLYTE_DESC"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen1" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="CHOOSE_QUESTION_REASON"/>
+			<set-flag key="player_has_choosen1" value="true" />
+			<set-flag key="ACOLYTE_C" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen1" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	
+	<!--______________________________________________________CHOOSE THE REASON_________________________________________________________________________-->
+
+<!--choose the reason-->
+	<quest id="CHOOSE_QUESTION_REASON" visible="false" finish="user" start="custom" 
+		   avatar="client">
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="3" operator="and">
+			<flag-has-value key="delete_quests" value="false"/>
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_MAKE_A_SUGGESTION_FOR"/>
+		<rewards >
+			<start-quest id="THEBEAST_CHOICE_A_REASON" />
+			<start-quest id="THEBEAST_CHOICE_B_REASON" />
+			<start-quest id="THEBEAST_CHOICE_C_REASON" />
+		</rewards>
+		<fail_condition operator="and" timeout="1">
+			<flag-has-value key="delete_quests" value="true"/>
+		</fail_condition>
+	</quest>
+
+<!--Vengeance for the daughter/sister-->
+	<quest id="THEBEAST_CHOICE_A_REASON" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_A_REASON_TITLE" 
+		   description="THEBEAST_CHOICE_A_REASON_DESC" 
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen2" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<start-quest id="CHECK_FOR_TRUE_001"/>
+			<resource resource="prestige" amount="1"/>
+			<set-flag key="player_has_choosen2" value="true" />
+			<set-flag key="REASON_A" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or" >
+			<flag-has-value key="player_has_choosen2" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+
+<!--Afraid the townies so they will leave-->
+	<quest id="THEBEAST_CHOICE_B_REASON" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_B_REASON_TITLE" 
+		   description="THEBEAST_CHOICE_B_REASON_DESC"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen2" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="CHECK_FOR_TRUE_001"/>
+			<set-flag key="player_has_choosen2" value="true" />
+			<set-flag key="REASON_B" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen2" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+	<!--No reason, just captured a beast and cant keep him quite-->
+	<quest id="THEBEAST_CHOICE_C_REASON" start="custom" visible="true" isKeyQuest="true" 
+		   title="THEBEAST_CHOICE_C_REASON_TITLE" 
+		   description="THEBEAST_CHOICE_C_REASON_DESC"
+		   avatar="client" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="player_has_choosen2" value="false" />
+			<flag-has-value key="the_beast_scenario_over" value="false" />
+			<tribute amount="1" resource="herbs" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="1"/>
+			<start-quest id="CHECK_FOR_TRUE_001"/>
+			<set-flag key="player_has_choosen2" value="true" />
+			<set-flag key="REASON_C" value="true" />
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="player_has_choosen2" value="true" />
+			<flag-has-value key="the_beast_scenario_over" value="true" />
+		</fail_condition>
+	</quest>
+	
+<!--CHECK THE RIGHT ANSWER-->
+<!--My spies got the answer,compare with your investigation"/>-->
+
+<quest id="CHECK_FOR_TRUE_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="queen" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_QUEEN_PRECONCLUSION"/>
+		<objectives timeout="2" operator="and" >
+			<flag-has-value key="COUPABLE_A" value="true" />
+			<flag-has-value key="ACOLYTE_A" value="true" />
+			<flag-has-value key="REASON_A" value="true" />
+		</objectives>
+		<rewards >
+			<resource resource="prestige" amount="2"/>
+			<start-quest id="THE_BEAST_A"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="COUPABLE_B" value="true" />
+			<flag-has-value key="COUPABLE_C" value="true" />
+			<flag-has-value key="ACOLYTE_B" value="true" />
+			<flag-has-value key="ACOLYTE_C" value="true" />
+			<flag-has-value key="REASON_B" value="true" />
+			<flag-has-value key="REASON_C" value="true" />
+		</fail_condition>
+		<onFailed>
+			<start-quest id="CHECK_FOR_TRUE_002"/>
+		</onFailed>
+	</quest>
+	
+	<!--AAB not the right reason-->
+	<quest id="CHECK_FOR_TRUE_002" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="queen" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="2" operator="and" >
+			<flag-has-value key="COUPABLE_A" value="true" />
+			<flag-has-value key="ACOLYTE_A" value="true" />
+			<flag-has-value key="REASON_B" value="true" />
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_NO_REASON"/>
+		<rewards >
+			<set-flag key="scenario_failed" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="COUPABLE_B" value="true" />
+			<flag-has-value key="COUPABLE_C" value="true" />
+			<flag-has-value key="ACOLYTE_B" value="true" />
+			<flag-has-value key="ACOLYTE_C" value="true" />
+<!--			<flag-has-value key="REASON_B" value="true" />-->
+			<flag-has-value key="REASON_C" value="true" />
+		</fail_condition>
+		<onFailed>
+			<start-quest id="CHECK_FOR_TRUE_003"/>
+		</onFailed>
+	</quest>
+	
+	<!--AAC not the right reason-->
+	<quest id="CHECK_FOR_TRUE_003" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="queen" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="2" operator="and" >
+			<flag-has-value key="COUPABLE_A" value="true" />
+			<flag-has-value key="ACOLYTE_A" value="true" />
+			<flag-has-value key="REASON_C" value="true" />
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_NO_REASON"/>
+		<rewards >
+			<set-flag key="scenario_failed" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="COUPABLE_B" value="true" />
+			<flag-has-value key="COUPABLE_C" value="true" />
+			<flag-has-value key="ACOLYTE_B" value="true" />
+			<flag-has-value key="ACOLYTE_C" value="true" />
+			<flag-has-value key="REASON_B" value="true" />
+<!--			<flag-has-value key="REASON_C" value="true" />-->
+		</fail_condition>
+		<onFailed>
+			<start-quest id="CHECK_FOR_TRUE_004"/>
+		</onFailed>
+	</quest>
+	
+	<!--BAA not the right guilty-->
+	<quest id="CHECK_FOR_TRUE_004" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="queen" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="2" operator="and" >
+			<flag-has-value key="COUPABLE_B" value="true" />
+			<flag-has-value key="ACOLYTE_A" value="true" />
+			<flag-has-value key="REASON_A" value="true" />
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_NO_SUSPECT"/>
+		<rewards >
+			<set-flag key="scenario_failed" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+<!--			<flag-has-value key="COUPABLE_B" value="true" />-->
+			<flag-has-value key="COUPABLE_C" value="true" />
+			<flag-has-value key="ACOLYTE_B" value="true" />
+			<flag-has-value key="ACOLYTE_C" value="true" />
+			<flag-has-value key="REASON_B" value="true" />
+			<flag-has-value key="REASON_C" value="true" />
+		</fail_condition>
+		<onFailed>
+			<start-quest id="CHECK_FOR_TRUE_005"/>
+		</onFailed>
+	</quest>
+	
+	<!--CAA not the right guily-->
+	<quest id="CHECK_FOR_TRUE_005" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="queen" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="2" operator="and" >
+			<flag-has-value key="COUPABLE_C" value="true" />
+			<flag-has-value key="ACOLYTE_A" value="true" />
+			<flag-has-value key="REASON_A" value="true" />
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_NO_SUSPECT"/>
+		<rewards >
+			<set-flag key="scenario_failed" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="COUPABLE_B" value="true" />
+<!--			<flag-has-value key="COUPABLE_C" value="true" />-->
+			<flag-has-value key="ACOLYTE_B" value="true" />
+			<flag-has-value key="ACOLYTE_C" value="true" />
+			<flag-has-value key="REASON_B" value="true" />
+			<flag-has-value key="REASON_C" value="true" />
+		</fail_condition>
+		<onFailed>
+			<start-quest id="CHECK_FOR_TRUE_006"/>
+		</onFailed>
+	</quest>
+	
+	<!--ABA combinaison, not the right acolyte-->
+	<quest id="CHECK_FOR_TRUE_006" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="queen" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="2" operator="and" >
+			<flag-has-value key="COUPABLE_A" value="true" />
+			<flag-has-value key="ACOLYTE_B" value="true" />
+			<flag-has-value key="REASON_A" value="true" />
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_NO_ACOLYTE"/>
+		<rewards >
+			<set-flag key="scenario_failed" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="COUPABLE_B" value="true" />
+			<flag-has-value key="COUPABLE_C" value="true" />
+<!--			<flag-has-value key="ACOLYTE_B" value="true" />-->
+			<flag-has-value key="ACOLYTE_C" value="true" />
+			<flag-has-value key="REASON_B" value="true" />
+			<flag-has-value key="REASON_C" value="true" />
+		</fail_condition>
+		<onFailed>
+			<start-quest id="CHECK_FOR_TRUE_007"/>
+		</onFailed>
+	</quest>
+	
+	
+	<!--ACA combinaison, not the right acolyte-->
+	<quest id="CHECK_FOR_TRUE_007" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="queen" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted/>
+		<objectives timeout="2" operator="and" >
+			<flag-has-value key="COUPABLE_A" value="true" />
+			<flag-has-value key="ACOLYTE_C" value="true" />
+			<flag-has-value key="REASON_A" value="true" />
+		</objectives>
+		<onSuccess notification="T_QUESTS_SCENARIO_THEBEAST_NO_ACOLYTE"/>
+		<rewards >
+			<set-flag key="scenario_failed" value="true"/>
+		</rewards>
+		<fail_condition timeout="1" operator="or">
+			<flag-has-value key="COUPABLE_B" value="true" />
+			<flag-has-value key="COUPABLE_C" value="true" />
+			<flag-has-value key="ACOLYTE_B" value="true" />
+<!--			<flag-has-value key="ACOLYTE_C" value="true" />-->
+			<flag-has-value key="REASON_B" value="true" />
+			<flag-has-value key="REASON_C" value="true" />
+		</fail_condition>
+		<onFailed>
+			<set-flag key="scenario_failed" value="true"/>
+		</onFailed>
+	</quest>
+	
+	<!--THE BEAST CHOICE A--> 
+		<quest id="THE_BEAST_A" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_GIRL_CONFESSION_SUCCESS"/>
+		<objectives timeout="1" operator="and"/>
+		<onSuccess >
+			<start-quest id="GIRL_CONFESSIONS_001"/>
+		</onSuccess>
+		<rewards >
+			<resource resource="prestige" amount="2"/>
+		</rewards>
+	</quest>
+
+		<quest id="GIRL_CONFESSIONS_001" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_GIRL_CONFESSION_001"/>
+		<objectives timeout="1" operator="and"/>
+		<onSuccess >
+			<start-quest id="GIRL_CONFESSIONS_002"/>
+		</onSuccess>
+		<rewards >
+			<resource resource="prestige" amount="2"/>
+		</rewards>
+	</quest>
+	
+	<quest id="GIRL_CONFESSIONS_002" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_GIRL_CONFESSION_002"/>
+		<objectives timeout="1" operator="and"/>
+		<onSuccess >
+			<start-quest id="GIRL_CONFESSIONS_003"/>
+		</onSuccess>
+		<rewards >
+			<resource resource="prestige" amount="2"/>
+		</rewards>
+	</quest>
+	
+	<quest id="GIRL_CONFESSIONS_003" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_GIRL_CONFESSION_003"/>
+		<objectives timeout="1" operator="and"/>
+		<onSuccess >
+			<start-quest id="GIRL_CONFESSIONS_004"/>
+		</onSuccess>
+		<rewards >
+			<resource resource="prestige" amount="2"/>
+		</rewards>
+	</quest>
+	
+	<quest id="GIRL_CONFESSIONS_004" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_GIRL_CONFESSION_004"/>
+		<objectives timeout="1" operator="and"/>
+		<onSuccess >
+			<start-quest id="GIRL_CONFESSIONS_005"/>
+		</onSuccess>
+		<rewards >
+			<resource resource="prestige" amount="2"/>
+		</rewards>
+	</quest>
+	
+	<quest id="GIRL_CONFESSIONS_005" start="custom" visible="false" isKeyQuest="true" 
+		   avatar="girl" >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_GIRL_CONFESSION_005"/>
+		<objectives timeout="1" operator="and"/>
+		<onSuccess >
+<!--			<start-quest id="GIRL_CONFESSIONS_001"/>-->
+		</onSuccess>
+		<rewards >
+			<set-flag key="all_tasked_are_done" value="true"/>
+			<resource resource="prestige" amount="2"/>
+		</rewards>
+	</quest>
+			
+		<quest visible="false" id="SCENARIO_FAILED" 
+		   avatar="queen">
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_QUESTS_SCENARIO_THEBEAST_QUEEN_FAILED_SCENARIO"/>
+		<objectives timeout="2" operator="and">
+			<flag-has-value key="scenario_failed" value="true"/>
+		</objectives>
+		<onSuccess>
+			<scenario-failed/>
+		</onSuccess>
+		<rewards >
+			<start-quest id="METASTART"/>
+		</rewards>
+	</quest>
+
+	<!--___________________________________________________________END OF THE SCENARIO_________________________________________________________________________-->
+
+	<quest visible="false" id="SCENARIO_FINISHED" 
+		   title="T_GAME_QUEST_SCEN_FINISHED_NAME" 
+		   description="T_GAME_QUEST_SCEN_FINISHED_DESC" start="custom" 
+		   avatar="queen">
+		<start_condition timeout="2" operator="and"/>
+		<onStarted >
+			<scenario-finished />
+		</onStarted>
+		<objectives timeout="2" operator="and"/>
+		<onSuccess/>
+		<rewards >
+			<start-quest id="METASTART"/>
+		</rewards>
+	</quest>
+
+	<quest id="METASTART" start="custom" visible="false"   >
+		<start_condition timeout="3" operator="and"/>
+		<onStarted notification="T_GAME_SCEN_TO_SANDBOX_TXT"/>
+		<start_condition timeout="2"/>
+		<objectives timeout="1"/>
+		<rewards>
+			<allow key="building_tradeguild"/>
+			<start-quest id="SANDBOX_QUEST_META"/>
+			<start-quest id="SANDBOX_QUEST_META_MILITARY"/>
+			<start-quest id="SANDBOX_QUEST_META_DISASTER"/>
+			<set-flag key="sandbox_map_has_thunderstorm" value="true" />
+		</rewards>
+	</quest>
+
+	<!-- STORM -->
+	<quest id="SANDBOX_LIGHTNING_STRIKE" start="custom" visible="false" finish="instant" repeatable="custom" >
+		<start_condition timeout="3" operator="and"/>
+		<objectives timeout="1" operator="and" >
+			<flag-has-value key="sandbox_enable_lightningstrikes" value="true" />
+		</objectives>
+		<fail_condition timeout="2"  operator="and"/>
+		<rewards>
+			<lightningstrike topLeftX="38" topLeftY="45" bottomRightX="82" bottomRightY="83" minValue="-30" maxValue="-10" destroyOnNoDurability="true" produceFire="true" targetCountMin="1" targetCountMax="1"/>
+		</rewards>
+	</quest>
+	<!-- STORM END -->
+
+</group>
+</questdb>

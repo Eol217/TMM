@@ -1,0 +1,15 @@
+[smoke]
+
+play_ambient: sfx_buildings_coaler
+ani_coaler_00.0.png		0.1
+ani_coaler_00.1.png		0.1	
+ani_coaler_00.2.png		0.1
+ani_coaler_00.3.png		0.1
+ani_coaler_00.4.png		0.1
+ani_coaler_00.5.png		0.1
+ani_coaler_00.6.png		0.1
+ani_coaler_00.7.png		0.1
+
+
+
+next:	smoke
